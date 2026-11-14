@@ -1,0 +1,140 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  height: var(--topbar-height);
+  padding: 0 var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface-solid);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex: none;
+  width: calc(var(--sidepanel-width) - var(--space-4) - var(--space-5));
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.brandSub {
+  color: var(--color-text-subtle);
+  font-weight: 500;
+}
+
+.conditions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+}
+
+.metrics {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-5);
+  margin: 0;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+  min-width: 0;
+}
+
+.metric dt {
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  font-weight: 550;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.metric dd {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.metricEmpty dd {
+  color: var(--color-text-subtle);
+}
+
+.dateMetric {
+  padding-right: var(--space-5);
+  border-right: 1px solid var(--color-border);
+}
+
+.notice {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 var(--space-3);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+}
+
+.synthetic {
+  background: rgba(224, 168, 79, 0.14);
+  color: var(--color-warn);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: auto;
+  flex: none;
+}
+
+@media (max-width: 1400px) {
+  .secondaryMetric {
+    display: none;
+  }
+}
+
+@media (max-width: 1080px) {
+  .notice {
+    display: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .brand {
+    width: auto;
+  }
+
+  .brandSub,
+  .notice {
+    display: none;
+  }
+
+  .metrics > :not(.dateMetric) {
+    display: none;
+  }
+
+  .dateMetric {
+    padding-right: 0;
+    border-right: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .homeLabel,
+  .conditions {
+    display: none;
+  }
+}

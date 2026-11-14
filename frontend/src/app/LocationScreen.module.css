@@ -1,0 +1,80 @@
+.layout {
+  display: grid;
+  grid-template-columns: 380px minmax(0, 1fr);
+  height: 100%;
+  min-height: 0;
+}
+
+.mapArea {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+}
+
+.centered {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  padding: var(--space-5);
+}
+
+.basemapSwitch {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: 2;
+  display: inline-flex;
+  padding: 2px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  backdrop-filter: blur(8px);
+}
+
+.basemapNote {
+  position: absolute;
+  top: 48px;
+  left: var(--space-3);
+  z-index: 2;
+  max-width: 280px;
+  margin: 0;
+  padding: 4px var(--space-2);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+.basemapSwitch button {
+  padding: 4px var(--space-3);
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--color-text-muted);
+  font: inherit;
+  font-size: var(--text-xs);
+  cursor: pointer;
+}
+
+.basemapSwitch button[aria-pressed='true'] {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.basemapSwitch button:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(320px, 55vh) auto;
+    height: auto;
+    min-height: 100%;
+  }
+
+  .mapArea {
+    grid-row: 1;
+  }
+}

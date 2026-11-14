@@ -1,0 +1,10 @@
+dist
+coverage
+test-results
+playwright-report
+blob-report
+package-lock.json
+# Assets descargados y generados (make assets)
+.asset-cache
+asset-library
+asset-pipeline/sources.lock.json

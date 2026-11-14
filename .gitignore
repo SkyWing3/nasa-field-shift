@@ -1,0 +1,43 @@
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Editores
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Variables de entorno locales (los .env.example sí se versionan)
+.env
+.env.*
+!.env.example
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/coverage/
+frontend/test-results/
+frontend/playwright-report/
+frontend/blob-report/
+frontend/playwright/.cache/
+# Assets: originales descargados y biblioteca procesada (se regeneran con `make assets`)
+frontend/.asset-cache/
+frontend/asset-library/
+*.tsbuildinfo
+
+# Backend
+backend/.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+backend/data/*.sqlite3
+# Nomenclátor GeoNames descargado y generado (make geodata)
+backend/data/geonames/
+backend/data/world/
+
+# Logs
+*.log
+npm-debug.log*
