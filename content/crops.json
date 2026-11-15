@@ -1,0 +1,432 @@
+{
+  "schema": "p6-v3-draft",
+  "generated": "2026-11-14",
+  "zone": "altiplano-oruro",
+  "rules": [
+    "Desconocido = null",
+    "Kc FAO-56 no calibrado para el Altiplano salvo quinua (Garcia 2003)",
+    "Sin promesas de N, rendimiento ni dinero",
+    "Cañahua, papa amarga y hortalizas fuera del comparador"
+  ],
+  "sources": {
+    "productor_oruro": {
+      "citation": "Productor del Altiplano, departamento de Oruro. Comunicación personal por WhatsApp a C. Muñoz (P6), 14-nov-2026, 16:53–17:58",
+      "url": null,
+      "kind": "local_personal_communication",
+      "accessed": "2026-11-14"
+    },
+    "fao56_t11": {
+      "citation": "Allen et al. 1998. FAO-56, Tabla 11",
+      "url": "https://www.fao.org/4/X0490e/x0490e0b.htm",
+      "kind": "primary",
+      "accessed": "2026-11-14"
+    },
+    "fao56_t12": {
+      "citation": "Allen et al. 1998. FAO-56, Tabla 12 (Kc ini en blanco para papa: valor de grupo)",
+      "url": "https://www.fao.org/4/X0490e/x0490e0b.htm",
+      "kind": "primary",
+      "accessed": "2026-11-14"
+    },
+    "fao56_t22": {
+      "citation": "Allen et al. 1998. FAO-56, Tabla 22 (Zr y p)",
+      "url": "https://www.fao.org/3/x0490e/x0490e0e.htm",
+      "kind": "primary",
+      "accessed": "2026-11-14"
+    },
+    "garcia2003": {
+      "citation": "Garcia, Raes y Jacobsen 2003. Agric. Water Manage. 60(2):119-134. Kc de quinua por lisímetro, Altiplano boliviano",
+      "url": "https://ideas.repec.org/a/eee/agiwat/v60y2003i2p119-134.html",
+      "kind": "primary",
+      "accessed": "2026-11-14"
+    },
+    "garciaparra2020": {
+      "citation": "García-Parra et al. 2020. Chilean J. Agric. Res. 80(2). Raíz pivotante, ocasionalmente hasta 1,5 m",
+      "url": "https://oes.chileanjar.cl/files/V80i2Y2020id4717.pdf",
+      "kind": "secondary_review",
+      "accessed": "2026-11-14"
+    },
+    "chen_li1980": {
+      "citation": "Chen y Li 1980. Plant Physiology 66:414-421",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC440645",
+      "kind": "primary",
+      "accessed": "2026-11-14"
+    },
+    "jacobsen2000": {
+      "citation": "Jacobsen et al. 2000. Respuesta de la quinua a la helada en tres etapas (AGRIS)",
+      "url": "https://agris.fao.org/search/zh/records/6878df965d9ad5f58d604635",
+      "kind": "primary",
+      "accessed": "2026-11-14"
+    },
+    "monteros_jacobsen": {
+      "citation": "Monteros y Jacobsen. Response of quinoa to frost (INIAP)",
+      "url": "https://rraae.cedia.edu.ec/Record/INIAP_b5a08289a0da2b7f56dc0dcb0b6010d9",
+      "kind": "primary",
+      "accessed": "2026-11-14"
+    },
+    "ciren_haba": {
+      "citation": "CIREN (Chile). Ficha de zonificación del haba",
+      "url": "https://www.ciren.cl/wp-content/uploads/2017/12/Haba.pdf",
+      "kind": "secondary_other_country",
+      "accessed": "2026-11-14"
+    },
+    "valdivia2002": {
+      "citation": "Valdivia, Kohashi y Castillo 2002. Rev. Fitotec. Mex. 25(3)",
+      "url": "https://www.redalyc.org/pdf/610/61025309.pdf",
+      "kind": "primary_other_country",
+      "accessed": "2026-11-14"
+    },
+    "umsa_haba": {
+      "citation": "UMSA. Comercialización del haba en La Paz (tesis): tolerancia a bajas temperaturas; rotación, abono verde, fijador de N",
+      "url": "https://repositorio.umsa.bo/handle/123456789/6181",
+      "kind": "secondary_thesis_bolivia",
+      "accessed": "2026-11-14"
+    },
+    "oliver2017": {
+      "citation": "Oliver Cortez 2017. Apthapi 3(1):39-49 (UMSA). Haba como abono verde",
+      "url": "https://apthapi.umsa.bo/index.php/ATP/article/download/158/345/643",
+      "kind": "primary_bolivia",
+      "accessed": "2026-11-14"
+    },
+    "dfid_haba": {
+      "citation": "DFID R7584. Haba en la rotación: fijación de N y rastrojo para animales",
+      "url": "https://assets.publishing.service.gov.uk/media/57a08d2be5274a31e00016ba/R7584Rep3.pdf",
+      "kind": "technical_report",
+      "accessed": "2026-11-14"
+    },
+    "proinpa_gorgojo": {
+      "citation": "Mamani y Barrantes (PROINPA). Gorgojo de los Andes en el Altiplano Centro: pérdidas de 30 a 70 %",
+      "url": "https://revistas.usfx.bo/index.php/bs/article/download/689/479",
+      "kind": "primary_bolivia",
+      "accessed": "2026-11-14"
+    },
+    "fontagro_barreras": {
+      "citation": "FONTAGRO. Barreras plásticas contra el gorgojo: mayor eficiencia en campos con descanso",
+      "url": "https://fontagro.org/new/exportartech/verPDF/40/es",
+      "kind": "technical_report",
+      "accessed": "2026-11-14"
+    },
+    "ird_descanso": {
+      "citation": "IBTA–ORSTOM/IRD. Control del nematodo quiste de la papa (Globodera pallida) por descanso largo",
+      "url": "https://core.ac.uk/download/39856958.pdf",
+      "kind": "primary_bolivia",
+      "accessed": "2026-11-14"
+    },
+    "cipycos_botrytis": {
+      "citation": "CIPyCOS-UMSA 2022. Mancha de chocolate (Botrytis fabae) en haba",
+      "url": "https://cipycos.umsa.bo/index.php/1/article/download/3/3",
+      "kind": "primary_bolivia",
+      "accessed": "2026-11-14"
+    },
+    "genin_descanso": {
+      "citation": "Anderson, Troche y Fugal 2010 (Biotecnia), citando a Genin 1994: pastoreo en tierras en descanso con residuos agrícolas",
+      "url": "https://www.redalyc.org/pdf/6729/672971159005.pdf",
+      "kind": "primary",
+      "accessed": "2026-11-14"
+    },
+    "thulares": {
+      "citation": "RIIARn-UMSA 2021. Th'ulares: fertilización, protección contra erosión eólica, forraje",
+      "url": "https://riiarn.umsa.bo/index.php/RIIARn/article/download/191/170/569",
+      "kind": "primary_bolivia",
+      "accessed": "2026-11-14"
+    },
+    "cebada_cola": {
+      "citation": "Cebada como cola de rotación tras papa y quinua, Altiplano central (CIF-UMSS)",
+      "url": "https://cifumss.netlify.app/canapas2006/134.pdf",
+      "kind": "technical_report",
+      "accessed": "2026-11-14"
+    },
+    "scielo_papa": {
+      "citation": "Índice de N en papa de Bolivia (Agrociencia): rotación papa–cereales–barbecho en gran altitud",
+      "url": "https://www.scielo.org.mx/pdf/agro/v48n7/v48n7a1.pdf",
+      "kind": "primary",
+      "accessed": "2026-11-14"
+    },
+    "nrcs_awc": {
+      "citation": "USDA NRCS NEH Irrigation Guide cap. 2, vía U. Minnesota Extension: agua disponible por textura",
+      "url": "https://extension.umn.edu/irrigation/basics-irrigation-scheduling",
+      "kind": "secondary_generic",
+      "accessed": "2026-11-14"
+    },
+    "garcia_eto": {
+      "citation": "Garcia, Raes, Allen y Herbas 2004. ETo en el Altiplano: suelos con baja retención de agua",
+      "url": "https://manuscript.isc.ac/Inventory/10/959605.htm",
+      "kind": "primary",
+      "accessed": "2026-11-14"
+    },
+    "ecured_oruro": {
+      "citation": "EcuRed: ciudad de Oruro 3.706 msnm, 17°58' S, 67°6' O",
+      "url": "https://www.ecured.cu/Departamento_de_Oruro_(Bolivia)",
+      "kind": "secondary_encyclopedia",
+      "accessed": "2026-11-14"
+    },
+    "kiddle_oruro": {
+      "citation": "Enciclopedia Kiddle: Oruro 3.735 msnm, -17,9667 / -67,1167",
+      "url": "https://ninos.kiddle.co/Oruro",
+      "kind": "secondary_encyclopedia",
+      "accessed": "2026-11-14"
+    }
+  },
+  "crops": [
+    {
+      "id": "papa",
+      "name": "Papa",
+      "scientific": "Solanum tuberosum",
+      "calendar": {
+        "sowing_months": [
+          9,
+          10
+        ],
+        "harvest_months": [
+          4
+        ],
+        "irrigation": "pozo + lluvia (productor, 14-nov-2026 20:58)",
+        "sources": [
+          "productor_oruro"
+        ]
+      },
+      "duration_days": {
+        "total": [
+          180,
+          210
+        ],
+        "derived_from": "calendario local",
+        "stages": null,
+        "sources": [
+          "productor_oruro"
+        ],
+        "note": "Etapas null: FAO-56 no tiene filas para el Altiplano."
+      },
+      "kc": {
+        "ini": 0.5,
+        "mid": 1.15,
+        "end": 0.75,
+        "sources": [
+          "fao56_t12"
+        ],
+        "calibrated_local": false
+      },
+      "root_depth_m": [
+        0.4,
+        0.6
+      ],
+      "depletion_p": 0.35,
+      "root_sources": [
+        "fao56_t22"
+      ],
+      "thresholds": {
+        "frost_lethal_c": -2.5,
+        "heat_c": null,
+        "sources": [
+          "chen_li1980"
+        ],
+        "note": "Temperatura de la planta sin aclimatar; no es la del aire a 2 m."
+      },
+      "management": {
+        "residues": "por confirmar con el productor",
+        "soil": "Cabeza de rotación en el Altiplano (Agrociencia; CIF-UMSS).",
+        "sanity": "Gorgojo de los Andes, principal plaga en el Altiplano (pérdidas 30–70 %, PROINPA); el descanso favorece su control (FONTAGRO). Nematodo quiste (Globodera) controlado con descanso largo (IRD).",
+        "forage": null,
+        "legume": false,
+        "sources": [
+          "scielo_papa",
+          "cebada_cola",
+          "proinpa_gorgojo",
+          "fontagro_barreras",
+          "ird_descanso"
+        ]
+      },
+      "validation": "calendario del productor; orden en parcela y riego pendientes",
+      "producer_notes": [
+        "Principales pérdidas según el productor: helada en floración y granizo; plagas y sequía 'se pueden controlar' (con riego)."
+      ]
+    },
+    {
+      "id": "quinua",
+      "name": "Quinua",
+      "scientific": "Chenopodium quinoa",
+      "calendar": {
+        "sowing_months": [
+          9,
+          10,
+          11
+        ],
+        "harvest_months": [
+          2,
+          3,
+          4
+        ],
+        "irrigation": "secano (según productor)",
+        "sources": [
+          "productor_oruro"
+        ]
+      },
+      "duration_days": {
+        "total": [
+          150,
+          210
+        ],
+        "derived_from": "calendario local",
+        "stages": null,
+        "sources": [
+          "productor_oruro"
+        ]
+      },
+      "kc": {
+        "ini": 0.5,
+        "mid": 1.0,
+        "end": 0.7,
+        "sources": [
+          "garcia2003"
+        ],
+        "calibrated_local": true,
+        "note": "Lisímetro en el Altiplano boliviano."
+      },
+      "root_depth_m": {
+        "max_reference": 1.5,
+        "sources": [
+          "garciaparra2020"
+        ],
+        "note": "Ocasional, revisión de Colombia; no calibrado. Usar solo como referencia."
+      },
+      "depletion_p": null,
+      "thresholds": {
+        "frost_tolerated_2leaf_c": -8,
+        "frost_lethal_anthesis_tolerant_c": -4,
+        "frost_lethal_anthesis_susceptible_c": -2,
+        "heat_c": null,
+        "sources": [
+          "jacobsen2000",
+          "monteros_jacobsen"
+        ],
+        "note": "-8 °C por 4 h; en antesis -4 °C por 4 h (tolerante) y -2 °C (susceptible). Más daño con baja humedad."
+      },
+      "management": {
+        "residues": "por confirmar",
+        "soil": "Quinua sigue a papa en la rotación tradicional del Altiplano central (CIF-UMSS).",
+        "sanity": null,
+        "forage": null,
+        "legume": false,
+        "sources": [
+          "cebada_cola"
+        ]
+      },
+      "validation": "calendario del productor; parámetros por revisar",
+      "producer_notes": [
+        "Principales pérdidas según el productor: helada en floración y granizo; plagas y sequía 'se pueden controlar' (con riego)."
+      ]
+    },
+    {
+      "id": "haba",
+      "name": "Haba",
+      "scientific": "Vicia faba",
+      "calendar": {
+        "sowing_months": [
+          7,
+          8,
+          9,
+          10
+        ],
+        "harvest_months": [
+          1,
+          2,
+          3
+        ],
+        "irrigation": "pozo + lluvia (productor, 14-nov-2026 20:58)",
+        "sources": [
+          "productor_oruro"
+        ],
+        "note": "Hortalizas sembradas junto: solo contexto, fuera del comparador."
+      },
+      "duration_days": {
+        "total": [
+          150,
+          210
+        ],
+        "derived_from": "calendario local",
+        "stages": null,
+        "sources": [
+          "productor_oruro"
+        ]
+      },
+      "kc": {
+        "ini": 0.5,
+        "mid": 1.15,
+        "end": 0.3,
+        "sources": [
+          "fao56_t12"
+        ],
+        "calibrated_local": false,
+        "note": "Haba seca/semilla. Haba verde: Kc end 1,10."
+      },
+      "root_depth_m": [
+        0.5,
+        0.7
+      ],
+      "depletion_p": 0.45,
+      "root_sources": [
+        "fao56_t22"
+      ],
+      "thresholds": {
+        "frost_damage_flowering_c": -1,
+        "frost_lethal_leaf_c": -5,
+        "base_c": 5,
+        "optimum_c": [
+          15,
+          20
+        ],
+        "max_c": 28,
+        "sources": [
+          "ciren_haba",
+          "valdivia2002"
+        ],
+        "note": "Fuentes de Chile y México (fisiología del cultivo). Floración es la etapa más sensible."
+      },
+      "management": {
+        "residues": "Rastrojo usado para animales (DFID).",
+        "soil": "Leguminosa usada en rotación y como abono verde en Bolivia; fijación de N no cuantificada aquí.",
+        "sanity": "Mancha de chocolate (Botrytis fabae) (CIPyCOS-UMSA).",
+        "forage": "rastrojo para ganado (cualitativo)",
+        "legume": true,
+        "sources": [
+          "dfid_haba",
+          "umsa_haba",
+          "oliver2017",
+          "cipycos_botrytis"
+        ]
+      },
+      "validation": "calendario del productor; riego y orden pendientes",
+      "producer_notes": [
+        "Principales pérdidas según el productor: helada en floración y granizo; plagas y sequía 'se pueden controlar' (con riego)."
+      ]
+    },
+    {
+      "id": "descanso",
+      "name": "Descanso",
+      "scientific": null,
+      "calendar": {
+        "period": "abril a julio/septiembre (entre campañas, según productor)",
+        "sources": [
+          "productor_oruro"
+        ]
+      },
+      "duration_days": null,
+      "kc": null,
+      "root_depth_m": null,
+      "depletion_p": null,
+      "thresholds": null,
+      "management": {
+        "residues": "entran animales de vecinos a comer la maleza (productor); cobertura parcial, no desnudo total ni cobertura completa",
+        "soil": "No equivale siempre a suelo desnudo: puede tener vegetación nativa, residuos o pastoreo. La vegetación nativa (th'ulares) protege de la erosión eólica.",
+        "sanity": "El descanso largo controla el nematodo quiste de la papa.",
+        "forage": "pastoreo en tierras en descanso (cualitativo)",
+        "legume": false,
+        "sources": [
+          "thulares",
+          "ird_descanso",
+          "genin_descanso"
+        ]
+      },
+      "cover_assumption": "Desconocida: el KPI de cobertura debe declarar el supuesto (desnudo / residuos / vegetación) y mostrarlo."
+    }
+  ]
+}

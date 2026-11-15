@@ -1,0 +1,62 @@
+{
+  "task": "P6-4",
+  "date": "2026-11-14",
+  "point_published": {
+    "lat": -17.83,
+    "lon": -67.0
+  },
+  "sources": [
+    {
+      "id": "chirps_v2_daily",
+      "role": "contraste_principal",
+      "status": "unavailable",
+      "coverage": "ERDDAP 1984-01-01..2026-06-30; IRI respaldo desde 1981",
+      "resolution_deg": 0.05,
+      "license": "public domain (CC0)",
+      "account_required": false,
+      "access": "https://coastwatch.pfeg.noaa.gov/erddap/griddap/chirps20GlobalDailyP05",
+      "limits": "no NASA; no totalmente independiente de POWER (ambos usan estaciones)",
+      "attempts": [
+        {
+          "source": "NOAA ERDDAP chirps20GlobalDailyP05",
+          "date": "2026-11-14",
+          "result": "serie incompleta: 4481 dias en 1984-01..2026-03 (esperado ~15 400); 0 campanas con >=140 dias"
+        },
+        {
+          "source": "IRI Data Library CHIRPS v2p0 daily-improved",
+          "date": "2026-11-14",
+          "result": "devuelve pagina HTML, no CSV"
+        }
+      ],
+      "next_step": "despues de la hackaton: descarga desde data.chc.ucsb.edu o Google Earth Engine (UCSB-CHG/CHIRPS/DAILY)"
+    },
+    {
+      "id": "imerg_final_daily_v07",
+      "role": "sensibilidad_opcional",
+      "status": "optional",
+      "coverage": "2000-06..presente (latencia ~4 meses)",
+      "resolution_deg": 0.1,
+      "account_required": true,
+      "limits": "sobreestima hasta 75% en Altiplano (Remote Sensing 2024)"
+    },
+    {
+      "id": "senamhi_oruro",
+      "role": "estacion_local",
+      "status": "unavailable",
+      "reason": "sin descarga diaria abierta a tiempo; pedir por canal oficial despues de la hackaton"
+    },
+    {
+      "id": "mswep_v2",
+      "status": "discarded",
+      "reason": "licencia restringida"
+    },
+    {
+      "id": "era5_land",
+      "status": "discarded",
+      "reason": "menor desempeno en Altiplano; requiere cuenta"
+    }
+  ],
+  "comparison_rules": "campanas nov-mar, >=140 dias validos, mismo periodo comun, correlacion + sesgo medio + 4 de 5 con normal propia",
+  "result": "CHIRPS unavailable al corte 22:00; el 4 de 5 se sostiene solo con NASA POWER (reproducido por P6 y Dev 1)",
+  "core_blocked": false
+}

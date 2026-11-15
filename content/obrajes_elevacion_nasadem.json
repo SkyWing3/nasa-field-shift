@@ -1,0 +1,28 @@
+{
+  "name": "Obrajes",
+  "elevation_m": 3809.0,
+  "method": "nearest native NASADEM grid point (PixelIsPoint)",
+  "pixel_size_deg": [
+    0.0002777777777777778,
+    0.0002777777777777778
+  ],
+  "tiles_read": [
+    "NASADEM_HGT_s18w068",
+    "NASADEM_HGT_s18w067"
+  ],
+  "tiles_missing": [],
+  "void_fraction": 0.0,
+  "vertical_datum": "EGM96",
+  "source": "https://opentopography.s3.sdsc.edu/raster/NASADEM/NASADEM_be/NASADEM_HGT_s18w068.tif",
+  "citation": "NASA JPL (2020). NASADEM Merged DEM Global 1 arc second V001. NASA EOSDIS Land Processes DAAC. https://doi.org/10.5067/MEASURES/NASADEM/NASADEM_HGT.001. Distribuido por OpenTopography (https://opentopography.org).",
+  "retrieved_at": "2026-11-15T00:36:24.845068+00:00",
+  "power_download": {
+    "status": "not_performed",
+    "reason": "No se proporcionaron el período y los parámetros de D1-2."
+  },
+  "four_of_five": {
+    "status": "pending_external_execution",
+    "reason": "El usuario aclaró que la otra persona debe crear y ejecutar el cuaderno de Colab."
+  },
+  "location_note": "Coordenadas exactas omitidas por privacidad del productor (punto publicado: -17,83; -67,00)."
+}
