@@ -1,0 +1,67 @@
+{
+  "schema_version": "3.0",
+  "build_id": "fixture-dev2-v3-initial",
+  "mode": "fixture",
+  "generated_at": null,
+  "data_as_of": null,
+  "model_version": null,
+  "sources": [],
+  "assumptions": [
+    "Secuencias candidatas del alcance v3; no confirmadas en una parcela"
+  ],
+  "warnings": [
+    "FIXTURE: demostración estructural, no resultados NASA ni recomendaciones reales"
+  ],
+  "data": {
+    "records": [
+      {
+        "result_id": "fixture-papa-quinua-descanso",
+        "build_id": "fixture-dev2-v3-initial",
+        "analysis_point_id": "oruro-pilot",
+        "rotation_id": "papa-quinua-descanso",
+        "period_id": null,
+        "enso_initial_phase": null,
+        "water_budget_id": null,
+        "soil_profile_id": null,
+        "n_windows": 0,
+        "windows": [],
+        "kpis": null,
+        "ranking": null,
+        "sensitivity_status": "not_evaluated",
+        "missing_reason": "Registro de contrato sin evaluación científica; esperar paquete D1/P6"
+      },
+      {
+        "result_id": "fixture-papa-quinua-haba",
+        "build_id": "fixture-dev2-v3-initial",
+        "analysis_point_id": "oruro-pilot",
+        "rotation_id": "papa-quinua-haba",
+        "period_id": null,
+        "enso_initial_phase": null,
+        "water_budget_id": null,
+        "soil_profile_id": null,
+        "n_windows": 0,
+        "windows": [],
+        "kpis": null,
+        "ranking": null,
+        "sensitivity_status": "not_evaluated",
+        "missing_reason": "Registro de contrato sin evaluación científica; esperar paquete D1/P6"
+      },
+      {
+        "result_id": "fixture-papa-haba-descanso",
+        "build_id": "fixture-dev2-v3-initial",
+        "analysis_point_id": "oruro-pilot",
+        "rotation_id": "papa-haba-descanso",
+        "period_id": null,
+        "enso_initial_phase": null,
+        "water_budget_id": null,
+        "soil_profile_id": null,
+        "n_windows": 0,
+        "windows": [],
+        "kpis": null,
+        "ranking": null,
+        "sensitivity_status": "not_evaluated",
+        "missing_reason": "Registro de contrato sin evaluación científica; esperar paquete D1/P6"
+      }
+    ]
+  }
+}

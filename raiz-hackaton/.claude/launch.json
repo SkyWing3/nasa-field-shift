@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "raiz-agricola",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "raiz_delivery", "serve", "--site-root", "build/agricultural-site", "--port", "8790"],
+      "port": 8790
+    }
+  ]
+}

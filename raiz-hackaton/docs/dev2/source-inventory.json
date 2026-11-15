@@ -1,0 +1,45 @@
+{
+  "source_directory": "C:\\Users\\milae\\Documents\\raiz-hackathon",
+  "scope": "Archivos de referencia inspeccionados antes del incremento Dev 2",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "9616c8246c91e481362e7ea56f4f3793c0181506e16a4cab2ff8c0d058e10bd0",
+      "bytes": 4944
+    },
+    {
+      "path": "plan-equipo.json",
+      "sha256": "20f16610e6f816142547b0b944600e39b92847fc1c8ba553025050a8d80aa8a9",
+      "bytes": 23931
+    },
+    {
+      "path": "contracts/README.md",
+      "sha256": "3fd1c76d3815e7336352fa586371fbc0aa2974b8fe298dca90d19d88fafa643a",
+      "bytes": 9161
+    },
+    {
+      "path": "server.py",
+      "sha256": "bc10576debde50892c48852263d4b45b1f285deef6bd2a89168960d8a7fb1992",
+      "bytes": 6114
+    },
+    {
+      "path": "dist/index.html",
+      "sha256": "a90df3b9ec059e0cb874c903e839363e227b787b39a7306367bb4903233eb49b",
+      "bytes": 69041
+    },
+    {
+      "path": "dist/app.js",
+      "sha256": "956ef327718b5278ef6b268f3a7b607b83d217253eff79a2d285823e507f2d16",
+      "bytes": 11736
+    },
+    {
+      "path": "dist/style.css",
+      "sha256": "3a85d73d6b6f38162c9ef4f80a9dc5904626969f9247956bdff293f126f1d2ed",
+      "bytes": 14169
+    }
+  ],
+  "excluded": [
+    "team.sqlite3: base activa del centro, no copiada"
+  ],
+  "source_modified": false
+}

@@ -1,42 +1,37 @@
+# Reglas generales del monorepo (aplican en todas las subcarpetas).
+# Las reglas propias de cada proyecto viven en simulacion/.gitignore y raiz-hackaton/.gitignore.
+
 # Sistema
 .DS_Store
 Thumbs.db
+desktop.ini
 
 # Editores
 .idea/
 .vscode/*
 !.vscode/extensions.json
+.claude/settings.local.json
 
 # Variables de entorno locales (los .env.example sí se versionan)
 .env
 .env.*
 !.env.example
 
-# Frontend
-frontend/node_modules/
-frontend/dist/
-frontend/coverage/
-frontend/test-results/
-frontend/playwright-report/
-frontend/blob-report/
-frontend/playwright/.cache/
-# Assets: originales descargados y biblioteca procesada (se regeneran con `make assets`)
-frontend/.asset-cache/
-frontend/asset-library/
-*.tsbuildinfo
+# Dependencias y entornos (en cualquier carpeta)
+node_modules/
+.venv/
+.venv-*/
 
-# Backend
-backend/.venv/
+# Python
 __pycache__/
 *.py[cod]
 *.egg-info/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
-backend/data/*.sqlite3
-# Nomenclátor GeoNames descargado y generado (make geodata)
-backend/data/geonames/
-backend/data/world/
+
+# TypeScript
+*.tsbuildinfo
 
 # Logs
 *.log

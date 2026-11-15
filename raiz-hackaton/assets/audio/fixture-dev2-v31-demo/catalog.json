@@ -1,0 +1,1299 @@
+{
+  "schema_version": "1.0",
+  "build_id": "fixture-dev2-v31-demo",
+  "mode": "fixture",
+  "generated_at": "2026-11-15T01:16:51.648354+00:00",
+  "generator": "scripts/generate_audio_mms.py",
+  "items": [
+    {
+      "kind": "message",
+      "communication_id": "message-fixture-a-1",
+      "result_id": "fixture-a-1",
+      "case_id": "A-1",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-01.mp3",
+      "sha256": "e9701d4a18954f75c5d2641e8e75768e03047648c910f908e461e99e76b9d4af",
+      "bytes": 280152,
+      "duration_seconds": 46.692,
+      "source_pcm_rms": 3638.097,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-spa",
+        "language": "es",
+        "model_revision": "833b96c0278c85cf09776d565ba8f1cb2819f7ec",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "text_sha256": "2689df27adbfea0417b65435283f28d8e27209019eab580128b13cbb5bcbec0e",
+      "spoken_text_sha256": "a518c16cb59b2ccf052067768cb52dcef11db2edebb71e8700128500c6948080",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message",
+      "communication_id": "message-fixture-a-2",
+      "result_id": "fixture-a-2",
+      "case_id": "A-2",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-02.mp3",
+      "sha256": "04fa584dbb04b6d977783bc0c215d3b751f148813441c940483fe28e1237dd74",
+      "bytes": 281664,
+      "duration_seconds": 46.944,
+      "source_pcm_rms": 3606.655,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-spa",
+        "language": "es",
+        "model_revision": "833b96c0278c85cf09776d565ba8f1cb2819f7ec",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "text_sha256": "ed5086c34fd50fb2ef17742263441e192b1f650184fae8cc8d6c91d8a7f79657",
+      "spoken_text_sha256": "2489db731e5ed70e5c7d1f65532d0b0238cb8e94f71df6d8bdea427689dddabc",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message",
+      "communication_id": "message-fixture-a-3",
+      "result_id": "fixture-a-3",
+      "case_id": "A-3",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-03.mp3",
+      "sha256": "890217bec9378a978f2db52d6810fa26599fe2196cef2c52e69d17eaafde06a7",
+      "bytes": 286200,
+      "duration_seconds": 47.7,
+      "source_pcm_rms": 3600.958,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-spa",
+        "language": "es",
+        "model_revision": "833b96c0278c85cf09776d565ba8f1cb2819f7ec",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "text_sha256": "5e741773c2fc72ca78d79139d7bb95e6458b5464a0469590a2000316c5de614d",
+      "spoken_text_sha256": "861984d504f0ef5a830985411f71bf3c93f4d2f9c67c452aef474ad17943aaab",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message",
+      "communication_id": "message-fixture-b-1",
+      "result_id": "fixture-b-1",
+      "case_id": "B-1",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-04.mp3",
+      "sha256": "be274dd2aa7d9556310dc85a91dc9e463a7f1a57e8ef87d479f8e28198aae025",
+      "bytes": 278640,
+      "duration_seconds": 46.44,
+      "source_pcm_rms": 3643.255,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-spa",
+        "language": "es",
+        "model_revision": "833b96c0278c85cf09776d565ba8f1cb2819f7ec",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "text_sha256": "589c560e256e62ccb2a5e734a178fe6e4ebd325a2c9891e8ffc43d360ff7baf9",
+      "spoken_text_sha256": "e86c6ec4293d2ffa562e11b6b0340606d361653e85437bed657c49573f703387",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message",
+      "communication_id": "message-fixture-b-2",
+      "result_id": "fixture-b-2",
+      "case_id": "B-2",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-05.mp3",
+      "sha256": "ee7258b785155ce0f4012b90323e7f45f0cddee6476fa2f7e0d3c38d1bfffab7",
+      "bytes": 277992,
+      "duration_seconds": 46.332,
+      "source_pcm_rms": 3646.108,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-spa",
+        "language": "es",
+        "model_revision": "833b96c0278c85cf09776d565ba8f1cb2819f7ec",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "text_sha256": "5a06ad4c8cb2933334943decae122c3532d0f6f9b2d4dad6304fb92a2637b63a",
+      "spoken_text_sha256": "ccb2075c4b418c771d3a293ee4b1321cca372a43a67d2b01ef9bb1ce52ff90d7",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message",
+      "communication_id": "message-fixture-b-3",
+      "result_id": "fixture-b-3",
+      "case_id": "B-3",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-06.mp3",
+      "sha256": "a9e00a5fd7a5881781cf158fc0708e3dbc6baec326bbb838896b8c8b3b39b01b",
+      "bytes": 279504,
+      "duration_seconds": 46.584,
+      "source_pcm_rms": 3665.333,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-spa",
+        "language": "es",
+        "model_revision": "833b96c0278c85cf09776d565ba8f1cb2819f7ec",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "text_sha256": "30b6dcb6480ef23d2978160a9556ba948651ce27f1ca780244ec7725e82fc030",
+      "spoken_text_sha256": "67d727fb48192cb8c596130e68dd4c52f27e4a40b77001d0fa3899ad3cbb293d",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message",
+      "communication_id": "message-fixture-c-1",
+      "result_id": "fixture-c-1",
+      "case_id": "C-1",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-07.mp3",
+      "sha256": "08cf5cc29f2515a47b4842ef9a531b694d15088fd37b531c72000f7b9809d4a3",
+      "bytes": 282528,
+      "duration_seconds": 47.088,
+      "source_pcm_rms": 3628.551,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-spa",
+        "language": "es",
+        "model_revision": "833b96c0278c85cf09776d565ba8f1cb2819f7ec",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "text_sha256": "db29a331c8afcd2229a48727b43c7a7603858959fdfa0830a8a91d1c39f32ff1",
+      "spoken_text_sha256": "743b2a3e73fa84955b2ff8931e5144e2882548718c8d17e8e0a0fb83b1b7a46a",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message",
+      "communication_id": "message-fixture-c-2",
+      "result_id": "fixture-c-2",
+      "case_id": "C-2",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-08.mp3",
+      "sha256": "79f8a5433a9aaa9492415468433a7f6d7e9eb9ef8ed0e6ef53fef636d35e9117",
+      "bytes": 281232,
+      "duration_seconds": 46.872,
+      "source_pcm_rms": 3660.952,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-spa",
+        "language": "es",
+        "model_revision": "833b96c0278c85cf09776d565ba8f1cb2819f7ec",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "text_sha256": "393de132fdf66bef204e7b571ff4d206c6791ed4420d17e0d6b45a67a7e52f47",
+      "spoken_text_sha256": "524d863c6bb4d9eb416d009af4219c487e9f5b676bee9713616f4a1bb1053515",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message",
+      "communication_id": "message-fixture-c-3",
+      "result_id": "fixture-c-3",
+      "case_id": "C-3",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-09.mp3",
+      "sha256": "c12437fd56f477487208b5cd537a00eaa097c0fe0b0a5eb6f3fd10eb2b8a3559",
+      "bytes": 286848,
+      "duration_seconds": 47.808,
+      "source_pcm_rms": 3606.0,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-spa",
+        "language": "es",
+        "model_revision": "833b96c0278c85cf09776d565ba8f1cb2819f7ec",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "text_sha256": "7dcecfd7687755ef3cfcb574af056c598073e9c57ef9d57a91a531db4eecc201",
+      "spoken_text_sha256": "e84506e5a9c9a3704d03229541406a7d1e27349b19831e362aa92647b071a406",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "regional_bulletin",
+      "communication_id": "regional-bulletin",
+      "result_id": null,
+      "case_id": null,
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/regional-bulletin.mp3",
+      "sha256": "32c1bbf0fce55efcbacf122ae2efada580e0ddc46d5d9e227b18a4c54a3c968c",
+      "bytes": 281016,
+      "duration_seconds": 46.836,
+      "source_pcm_rms": 3981.243,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-spa",
+        "language": "es",
+        "model_revision": "833b96c0278c85cf09776d565ba8f1cb2819f7ec",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "text_sha256": "96e17415e1a400678627b42b60c1ec9412d7f1d1233831b73a21a17a1c8b5d9b",
+      "spoken_text_sha256": "cc16b9e57561d748b4800f6ef5ec4714d2766623205912e0c722ebb4e99b3afb",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message_translation",
+      "communication_id": "message-fixture-a-1",
+      "result_id": "fixture-a-1",
+      "case_id": "A-1",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-01.quh.mp3",
+      "sha256": "dce85cb1f6b67f53c19bd107e43269d7fb1f0df59732714d6ae154c6d2ce9308",
+      "bytes": 292248,
+      "duration_seconds": 48.708,
+      "source_pcm_rms": 4357.253,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-quh",
+        "language": "quh",
+        "model_revision": "dd06e694a0e4c0871acab500e5876eba380d5403",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "language": "quh",
+      "language_name": "Quechua (voz sudboliviana)",
+      "text": "Ejemplopi qawachinapaq. Chayqa manan hunt'akunchu. Oruro. Rurana antacha Yapasqa: papo, quinoa, descanso Qhapaq kamachiq: papa. Ñawpaq lugar. Manan taripay p'anqapis, manataq suyunpaq presupuestopas. Chhaynapin, chhaynapi, jallp'api ima, llimp'aypi ima. Rurana antacha Yapasqa: cf. Manan yuyaychasunmanchu nitaq contrankunataqa kamachiyta atisunmanchu. Manaraq decidispaykiqa, yakuta, huñunakunata, horariota, equipo técnico-kunawan qhawarikuy. Kay textoqa manam prediccionchu.",
+      "text_sha256": "e1b3eee9b8b1b6ad2d9c6aee69dfb50e7b820f39321a0073ce0fa460d6b5f1f7",
+      "source_text_sha256": "2689df27adbfea0417b65435283f28d8e27209019eab580128b13cbb5bcbec0e",
+      "translation": {
+        "method": "machine",
+        "model": "facebook/nllb-200-distilled-600M",
+        "model_revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+        "source_language": "spa_Latn",
+        "target_language": "quy_Latn",
+        "input": "texto español normalizado para voz (números y siglas en palabras)",
+        "notes": "NLLB-200 no incluye quechua sudboliviano: el texto automático sale en quechua sureño de Ayacucho (inteligible, pero con diferencias). Un hablante de Oruro debe adaptarlo y revisarlo."
+      },
+      "speaker_review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message_translation",
+      "communication_id": "message-fixture-a-2",
+      "result_id": "fixture-a-2",
+      "case_id": "A-2",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-02.quh.mp3",
+      "sha256": "24a2a1eaf572e40ca55067aa0bc5bfc13e0bfe0077870936a3d55558c7486427",
+      "bytes": 282960,
+      "duration_seconds": 47.16,
+      "source_pcm_rms": 4272.358,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-quh",
+        "language": "quh",
+        "model_revision": "dd06e694a0e4c0871acab500e5876eba380d5403",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "language": "quh",
+      "language_name": "Quechua (voz sudboliviana)",
+      "text": "Ejemplopi qawachinapaq. Chayqa manan hunt'akunchu. Oruro. Qhapaq kaq: quinoa, descanso, papa. Qhapaqchasqa: quinoa. Iskay p'anqa. Manan taripay p'anqapis, manataq suyunpaq presupuestopas. Chhaynapin, chhaynapi, jallp'api ima, llimp'aypi ima. Rurana antacha Yapasqa: cf. Manan yuyaychasunmanchu nitaq contrankunataqa kamachiyta atisunmanchu. Manaraq decidispaykiqa, yakuta, huñunakunata, horariota, equipo técnico-kunawan qhawarikuy. Kay textoqa manam prediccionchu.",
+      "text_sha256": "05cd69f42e3d020187239b8fd7370aa7f75dec91dd9745556cecee7ac3aec95e",
+      "source_text_sha256": "ed5086c34fd50fb2ef17742263441e192b1f650184fae8cc8d6c91d8a7f79657",
+      "translation": {
+        "method": "machine",
+        "model": "facebook/nllb-200-distilled-600M",
+        "model_revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+        "source_language": "spa_Latn",
+        "target_language": "quy_Latn",
+        "input": "texto español normalizado para voz (números y siglas en palabras)",
+        "notes": "NLLB-200 no incluye quechua sudboliviano: el texto automático sale en quechua sureño de Ayacucho (inteligible, pero con diferencias). Un hablante de Oruro debe adaptarlo y revisarlo."
+      },
+      "speaker_review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message_translation",
+      "communication_id": "message-fixture-a-3",
+      "result_id": "fixture-a-3",
+      "case_id": "A-3",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-03.quh.mp3",
+      "sha256": "76d338ddae93d720e95ca0de023b5c56bf48e2d7e3ad680623957579da3c0faf",
+      "bytes": 303696,
+      "duration_seconds": 50.616,
+      "source_pcm_rms": 4289.021,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-quh",
+        "language": "quh",
+        "model_revision": "dd06e694a0e4c0871acab500e5876eba380d5403",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "language": "quh",
+      "language_name": "Quechua (voz sudboliviana)",
+      "text": "Ejemplopi qawachinapaq. Chayqa manan hunt'akunchu. Oruro. Rurana antacha Yapasqa: ct:Rust, Papa, Quinoa Imaynatapas yuyaymanakuy: samarikunapaq. Kimsa kaq lugar. Manan taripay p'anqapis, manataq suyunpaq presupuestopas. Chhaynapin, chhaynapi, jallp'api ima, llimp'aypi ima. Rurana antacha Yapasqa: cf. Manan yuyaychasunmanchu nitaq contrankunataqa kamachiyta atisunmanchu. Manaraq decidispaykiqa, yakuta, huñunakunata, horariota, equipo técnico-kunawan qhawarikuy. Kay textoqa manam prediccionchu.",
+      "text_sha256": "8be8c326824cd3390e15f773b77d6bfdd73ad589ee69b36819e15023c0ca9318",
+      "source_text_sha256": "5e741773c2fc72ca78d79139d7bb95e6458b5464a0469590a2000316c5de614d",
+      "translation": {
+        "method": "machine",
+        "model": "facebook/nllb-200-distilled-600M",
+        "model_revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+        "source_language": "spa_Latn",
+        "target_language": "quy_Latn",
+        "input": "texto español normalizado para voz (números y siglas en palabras)",
+        "notes": "NLLB-200 no incluye quechua sudboliviano: el texto automático sale en quechua sureño de Ayacucho (inteligible, pero con diferencias). Un hablante de Oruro debe adaptarlo y revisarlo."
+      },
+      "speaker_review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message_translation",
+      "communication_id": "message-fixture-b-1",
+      "result_id": "fixture-b-1",
+      "case_id": "B-1",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-04.quh.mp3",
+      "sha256": "cf445dac56899ff142f689954ed5fd6128476ff05b00bbc3a8d4f9fad9d5da5d",
+      "bytes": 295704,
+      "duration_seconds": 49.284,
+      "source_pcm_rms": 4246.856,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-quh",
+        "language": "quh",
+        "model_revision": "dd06e694a0e4c0871acab500e5876eba380d5403",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "language": "quh",
+      "language_name": "Quechua (voz sudboliviana)",
+      "text": "Ejemplopi qawachinapaq. Chayqa manan hunt'akunchu. Oruro. Rurana antacha Yapasqa: ct:papa, quinoa, haba. Qhapaq kamachiq: papa. Ñawpaq lugar. Manan taripay p'anqapis, manataq suyunpaq presupuestopas. Chhaynapin, chhaynapi, jallp'api ima, llimp'aypi ima. Rurana antacha Yapasqa: cf. Manan yuyaychasunmanchu nitaq contrankunataqa kamachiyta atisunmanchu. Manaraq decidispaykiqa, yakuta, huñunakunata, horariota, equipo técnico-kunawan qhawarikuy. Kay textoqa manam prediccionchu.",
+      "text_sha256": "56b7815995e448ce9f1233fe2a3204744765206d4e2f6dce9b524008545258dc",
+      "source_text_sha256": "589c560e256e62ccb2a5e734a178fe6e4ebd325a2c9891e8ffc43d360ff7baf9",
+      "translation": {
+        "method": "machine",
+        "model": "facebook/nllb-200-distilled-600M",
+        "model_revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+        "source_language": "spa_Latn",
+        "target_language": "quy_Latn",
+        "input": "texto español normalizado para voz (números y siglas en palabras)",
+        "notes": "NLLB-200 no incluye quechua sudboliviano: el texto automático sale en quechua sureño de Ayacucho (inteligible, pero con diferencias). Un hablante de Oruro debe adaptarlo y revisarlo."
+      },
+      "speaker_review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message_translation",
+      "communication_id": "message-fixture-b-2",
+      "result_id": "fixture-b-2",
+      "case_id": "B-2",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-05.quh.mp3",
+      "sha256": "8f048c801b264c693f7ec4acfe9a1f77eb429be20e27fab240910784823870a3",
+      "bytes": 285120,
+      "duration_seconds": 47.52,
+      "source_pcm_rms": 4190.843,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-quh",
+        "language": "quh",
+        "model_revision": "dd06e694a0e4c0871acab500e5876eba380d5403",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "language": "quh",
+      "language_name": "Quechua (voz sudboliviana)",
+      "text": "Ejemplopi qawachinapaq. Chayqa manan hunt'akunchu. Oruro. Qhapaq qillqasqa: quinoa, haba, papa. Qhapaqchasqa: quinoa. Iskay p'anqa. Manan taripay p'anqapis, manataq suyunpaq presupuestopas. Chhaynapin, chhaynapi, jallp'api ima, llimp'aypi ima. Rurana antacha Yapasqa: cf. Manan yuyaychasunmanchu nitaq contrankunataqa kamachiyta atisunmanchu. Manaraq decidispaykiqa, yakuta, huñunakunata, horariota, equipo técnico-kunawan qhawarikuy. Kay textoqa manam prediccionchu.",
+      "text_sha256": "f4e9f038efc42dce0b9244f445baf04671b32f86f5e91f0b1455303a6b19ccaa",
+      "source_text_sha256": "5a06ad4c8cb2933334943decae122c3532d0f6f9b2d4dad6304fb92a2637b63a",
+      "translation": {
+        "method": "machine",
+        "model": "facebook/nllb-200-distilled-600M",
+        "model_revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+        "source_language": "spa_Latn",
+        "target_language": "quy_Latn",
+        "input": "texto español normalizado para voz (números y siglas en palabras)",
+        "notes": "NLLB-200 no incluye quechua sudboliviano: el texto automático sale en quechua sureño de Ayacucho (inteligible, pero con diferencias). Un hablante de Oruro debe adaptarlo y revisarlo."
+      },
+      "speaker_review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message_translation",
+      "communication_id": "message-fixture-b-3",
+      "result_id": "fixture-b-3",
+      "case_id": "B-3",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-06.quh.mp3",
+      "sha256": "85e5a111bf4fd98e51f9a0024be5c431bc4ac5920aeb5e4b2223ea52f30b6451",
+      "bytes": 287280,
+      "duration_seconds": 47.88,
+      "source_pcm_rms": 4280.914,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-quh",
+        "language": "quh",
+        "model_revision": "dd06e694a0e4c0871acab500e5876eba380d5403",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "language": "quh",
+      "language_name": "Quechua (voz sudboliviana)",
+      "text": "Ejemplopi qawachinapaq. Chayqa manan hunt'akunchu. Oruro. Qhapaq qillqasqa: haba, papa, quinoa. Qhapaq yuyayniyoq: ha-ha. Kimsa kaq lugar. Manan taripay p'anqapis, manataq suyunpaq presupuestopas. Chhaynapin, chhaynapi, jallp'api ima, llimp'aypi ima. Rurana antacha Yapasqa: cf. Manan yuyaychasunmanchu nitaq contrankunataqa kamachiyta atisunmanchu. Manaraq decidispaykiqa, yakuta, huñunakunata, horariota, equipo técnico-kunawan qhawarikuy. Kay textoqa manam prediccionchu.",
+      "text_sha256": "0cba1da34676d6c3b0b00effa71f39eb8e74892355364460afe40a47c422ba86",
+      "source_text_sha256": "30b6dcb6480ef23d2978160a9556ba948651ce27f1ca780244ec7725e82fc030",
+      "translation": {
+        "method": "machine",
+        "model": "facebook/nllb-200-distilled-600M",
+        "model_revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+        "source_language": "spa_Latn",
+        "target_language": "quy_Latn",
+        "input": "texto español normalizado para voz (números y siglas en palabras)",
+        "notes": "NLLB-200 no incluye quechua sudboliviano: el texto automático sale en quechua sureño de Ayacucho (inteligible, pero con diferencias). Un hablante de Oruro debe adaptarlo y revisarlo."
+      },
+      "speaker_review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message_translation",
+      "communication_id": "message-fixture-c-1",
+      "result_id": "fixture-c-1",
+      "case_id": "C-1",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-07.quh.mp3",
+      "sha256": "83e4a8a00dd315eff7fd7317af7c49ea7c53a0191e0d5d7e8dff5b65a4b17604",
+      "bytes": 287712,
+      "duration_seconds": 47.952,
+      "source_pcm_rms": 4419.659,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-quh",
+        "language": "quh",
+        "model_revision": "dd06e694a0e4c0871acab500e5876eba380d5403",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "language": "quh",
+      "language_name": "Quechua (voz sudboliviana)",
+      "text": "Ejemplopi qawachinapaq. Chayqa manan hunt'akunchu. Oruro. Rurana antacha Yapasqa: papo, haba, descanso Qhapaq kamachiq: papa. Ñawpaq lugar. Manan taripay p'anqapis, manataq suyunpaq presupuestopas. Chhaynapin, chhaynapi, jallp'api ima, llimp'aypi ima. Rurana antacha Yapasqa: cf. Manan yuyaychasunmanchu nitaq contrankunataqa kamachiyta atisunmanchu. Manaraq decidispaykiqa, yakuta, huñunakunata, horariota, equipo técnico-kunawan qhawarikuy. Kay textoqa manam prediccionchu.",
+      "text_sha256": "4340bcb4392abf9dc03926741790acac3a5d182f825f26e3fe4aa6b60cb4ef9e",
+      "source_text_sha256": "db29a331c8afcd2229a48727b43c7a7603858959fdfa0830a8a91d1c39f32ff1",
+      "translation": {
+        "method": "machine",
+        "model": "facebook/nllb-200-distilled-600M",
+        "model_revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+        "source_language": "spa_Latn",
+        "target_language": "quy_Latn",
+        "input": "texto español normalizado para voz (números y siglas en palabras)",
+        "notes": "NLLB-200 no incluye quechua sudboliviano: el texto automático sale en quechua sureño de Ayacucho (inteligible, pero con diferencias). Un hablante de Oruro debe adaptarlo y revisarlo."
+      },
+      "speaker_review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message_translation",
+      "communication_id": "message-fixture-c-2",
+      "result_id": "fixture-c-2",
+      "case_id": "C-2",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-08.quh.mp3",
+      "sha256": "d4aec8d64fff4bcac74ae8354dba11200208a410a3ec7b24f4f40f4b8175f3f9",
+      "bytes": 294624,
+      "duration_seconds": 49.104,
+      "source_pcm_rms": 4345.397,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-quh",
+        "language": "quh",
+        "model_revision": "dd06e694a0e4c0871acab500e5876eba380d5403",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "language": "quh",
+      "language_name": "Quechua (voz sudboliviana)",
+      "text": "Ejemplopi qawachinapaq. Chayqa manan hunt'akunchu. Oruro. candidato secuencia: haba, descanso, papa. Qhapaq yuyayniyoq: ha-ha. Iskay p'anqa. Manan taripay p'anqapis, manataq suyunpaq presupuestopas. Chhaynapin, chhaynapi, jallp'api ima, llimp'aypi ima. Rurana antacha Yapasqa: cf. Manan yuyaychasunmanchu nitaq contrankunataqa kamachiyta atisunmanchu. Manaraq decidispaykiqa, yakuta, huñunakunata, horariota, equipo técnico-kunawan qhawarikuy. Kay textoqa manam prediccionchu.",
+      "text_sha256": "849efeb5f9ba988d60df59f9fcf236f2c932f3eb73d9e32857d673ce880b2b75",
+      "source_text_sha256": "393de132fdf66bef204e7b571ff4d206c6791ed4420d17e0d6b45a67a7e52f47",
+      "translation": {
+        "method": "machine",
+        "model": "facebook/nllb-200-distilled-600M",
+        "model_revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+        "source_language": "spa_Latn",
+        "target_language": "quy_Latn",
+        "input": "texto español normalizado para voz (números y siglas en palabras)",
+        "notes": "NLLB-200 no incluye quechua sudboliviano: el texto automático sale en quechua sureño de Ayacucho (inteligible, pero con diferencias). Un hablante de Oruro debe adaptarlo y revisarlo."
+      },
+      "speaker_review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message_translation",
+      "communication_id": "message-fixture-c-3",
+      "result_id": "fixture-c-3",
+      "case_id": "C-3",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-09.quh.mp3",
+      "sha256": "5e34f50ed3f864d5664b38500be795bce3d9e779586ff32a056b9f496f439866",
+      "bytes": 299160,
+      "duration_seconds": 49.86,
+      "source_pcm_rms": 4387.299,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-quh",
+        "language": "quh",
+        "model_revision": "dd06e694a0e4c0871acab500e5876eba380d5403",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "language": "quh",
+      "language_name": "Quechua (voz sudboliviana)",
+      "text": "Ejemplopi qawachinapaq. Chayqa manan hunt'akunchu. Oruro. candidato secuencia: chawpi, papa, ha. Imaynatapas yuyaymanakuy: samarikunapaq. Kimsa kaq lugar. Manan taripay p'anqapis, manataq suyunpaq presupuestopas. Chhaynapin, chhaynapi, jallp'api ima, llimp'aypi ima. Rurana antacha Yapasqa: cf. Manan yuyaychasunmanchu nitaq contrankunataqa kamachiyta atisunmanchu. Manaraq decidispaykiqa, yakuta, huñunakunata, horariota, equipo técnico-kunawan qhawarikuy. Kay textoqa manam prediccionchu.",
+      "text_sha256": "be2fc8d8b8a45caf5cf2e9994462b42dbde7baa833a14adddf39103885e93621",
+      "source_text_sha256": "7dcecfd7687755ef3cfcb574af056c598073e9c57ef9d57a91a531db4eecc201",
+      "translation": {
+        "method": "machine",
+        "model": "facebook/nllb-200-distilled-600M",
+        "model_revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+        "source_language": "spa_Latn",
+        "target_language": "quy_Latn",
+        "input": "texto español normalizado para voz (números y siglas en palabras)",
+        "notes": "NLLB-200 no incluye quechua sudboliviano: el texto automático sale en quechua sureño de Ayacucho (inteligible, pero con diferencias). Un hablante de Oruro debe adaptarlo y revisarlo."
+      },
+      "speaker_review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "bulletin_translation",
+      "communication_id": "regional-bulletin",
+      "result_id": null,
+      "case_id": null,
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/regional-bulletin.quh.mp3",
+      "sha256": "b12756094478814423aa3aa7281d166082baade5cfac1238cd266c5ee8090fcd",
+      "bytes": 275616,
+      "duration_seconds": 45.936,
+      "source_pcm_rms": 4784.456,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-quh",
+        "language": "quh",
+        "model_revision": "dd06e694a0e4c0871acab500e5876eba380d5403",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "language": "quh",
+      "language_name": "Quechua (voz sudboliviana)",
+      "text": "Oruro suyupi Rurana antacha Qullusqa: Kay folletoqa ejemplopi rikch'akunmi: manam imachus ruwasqasninchismantapas, imachus chaymantapas willanchu. Qhawarichis patata, quinoa, haba, y descanso nisqata. Rurana antacha Yapasqa: cf. Manaraq decidisqaykimantaqa, ruwaq yakuta, allpata, horariota qhawariy. Chayqa manam prediccionchu. Rurana antacha Yapasqa: ct:Borador pendente de revisión, no emisión de radio comprobada. Manan publicacionta churasqachu, manataq llank'asqachu.",
+      "text_sha256": "45bd67c723e263d81a4ef36c4818163352ab15f3ba434ee980d4c8ea67427c4f",
+      "source_text_sha256": "96e17415e1a400678627b42b60c1ec9412d7f1d1233831b73a21a17a1c8b5d9b",
+      "translation": {
+        "method": "machine",
+        "model": "facebook/nllb-200-distilled-600M",
+        "model_revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+        "source_language": "spa_Latn",
+        "target_language": "quy_Latn",
+        "input": "texto español normalizado para voz (números y siglas en palabras)",
+        "notes": "NLLB-200 no incluye quechua sudboliviano: el texto automático sale en quechua sureño de Ayacucho (inteligible, pero con diferencias). Un hablante de Oruro debe adaptarlo y revisarlo."
+      },
+      "speaker_review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message_translation",
+      "communication_id": "message-fixture-a-1",
+      "result_id": "fixture-a-1",
+      "case_id": "A-1",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-01.ayr.mp3",
+      "sha256": "d5d0606784309886ad1771ab408491d91dcd4d4b16de214dbd87cca35b27a725",
+      "bytes": 298512,
+      "duration_seconds": 49.752,
+      "source_pcm_rms": 1326.366,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-ayr",
+        "language": "ayr",
+        "model_revision": "8e79a97785a908d9e84bf7784e03671227d8bb91",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "language": "ayr",
+      "language_name": "Aymara (voz central)",
+      "text": "uñacht'äwi uñacht'ayañataki. Akax janiw chiqpach yapuchäwïkiti. Oruro. Ch'amachasïwi: papa, quinoa, samart'aña. Ch'amañchasïwi: papa. Nayrïr postura. Janiw kuna jan walt'añanakas uñakipkiti, janirakiw kuna umatakis qullqix utjapkiti. Uka pachparakix uraqiru, jawiranakampirux jan walt'añanakaw utji. Ch'amañchäwinaka, uka pachpanaka janiw jikxatapkiti; janiw yaqhanakarux iwxt'añjamäkiti. Umanakaña, ch'axwaña, urutak uñakipapxañani equipo técnico ukampi janïr amtapktan ukapacha. Aka qillqatax janiw profecía arunakarjamäkiti.",
+      "text_sha256": "0e270b180f50c0e6f43d40e5a67e229c052cf7381746dd10baf107b0006be414",
+      "source_text_sha256": "2689df27adbfea0417b65435283f28d8e27209019eab580128b13cbb5bcbec0e",
+      "translation": {
+        "method": "machine",
+        "model": "facebook/nllb-200-distilled-600M",
+        "model_revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+        "source_language": "spa_Latn",
+        "target_language": "ayr_Latn",
+        "input": "texto español normalizado para voz (números y siglas en palabras)",
+        "notes": "Traducción automática de NLLB-200 al aymara central; calidad no verificada. Requiere revisión de hablante."
+      },
+      "speaker_review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message_translation",
+      "communication_id": "message-fixture-a-2",
+      "result_id": "fixture-a-2",
+      "case_id": "A-2",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-02.ayr.mp3",
+      "sha256": "7900434fccd90b8cb9d46510ff7d48a6a084b48eaa65a039cc943fa9b61587de",
+      "bytes": 298944,
+      "duration_seconds": 49.824,
+      "source_pcm_rms": 1346.141,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-ayr",
+        "language": "ayr",
+        "model_revision": "8e79a97785a908d9e84bf7784e03671227d8bb91",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "language": "ayr",
+      "language_name": "Aymara (voz central)",
+      "text": "uñacht'äwi uñacht'ayañataki. Akax janiw chiqpach yapuchäwïkiti. Oruro. Yaqha qillqatanaka: quinoa, descanso, papa. Ch'amañchasïwi: quinua. Kimsa posición. Janiw kuna jan walt'añanakas uñakipkiti, janirakiw kuna umatakis qullqix utjapkiti. Uka pachparakix uraqiru, jawiranakampirux jan walt'añanakaw utji. Ch'amañchäwinaka, uka pachpanaka janiw jikxatapkiti; janiw yaqhanakarux iwxt'añjamäkiti. Umanakaña, ch'axwaña, urutak uñakipapxañani equipo técnico ukampi janïr amtapktan ukapacha. Aka qillqatax janiw profecía arunakarjamäkiti.",
+      "text_sha256": "8ff3a36142bfcfecbf85b09d64635d97115c048989417244a26bd7056d8f3c05",
+      "source_text_sha256": "ed5086c34fd50fb2ef17742263441e192b1f650184fae8cc8d6c91d8a7f79657",
+      "translation": {
+        "method": "machine",
+        "model": "facebook/nllb-200-distilled-600M",
+        "model_revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+        "source_language": "spa_Latn",
+        "target_language": "ayr_Latn",
+        "input": "texto español normalizado para voz (números y siglas en palabras)",
+        "notes": "Traducción automática de NLLB-200 al aymara central; calidad no verificada. Requiere revisión de hablante."
+      },
+      "speaker_review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message_translation",
+      "communication_id": "message-fixture-a-3",
+      "result_id": "fixture-a-3",
+      "case_id": "A-3",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-03.ayr.mp3",
+      "sha256": "b75b03248ac7870336a3eeef71c927d7edda4649c2ee81cd24b05849aaa8ad12",
+      "bytes": 300888,
+      "duration_seconds": 50.148,
+      "source_pcm_rms": 1323.429,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-ayr",
+        "language": "ayr",
+        "model_revision": "8e79a97785a908d9e84bf7784e03671227d8bb91",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "language": "ayr",
+      "language_name": "Aymara (voz central)",
+      "text": "uñacht'äwi uñacht'ayañataki. Akax janiw chiqpach yapuchäwïkiti. Oruro. Ch'amachasïwi: samart'aña, papa, quinoa. Ch'amañchasïwi: samart'aña. Kimsa posición. Janiw kuna jan walt'añanakas uñakipkiti, janirakiw kuna umatakis qullqix utjapkiti. Uka pachparakix uraqiru, jawiranakampirux jan walt'añanakaw utji. Ch'amañchäwinaka, uka pachpanaka janiw jikxatapkiti; janiw yaqhanakarux iwxt'añjamäkiti. Umanakaña, ch'axwaña, urutak uñakipapxañani equipo técnico ukampi janïr amtapktan ukapacha. Aka qillqatax janiw profecía arunakarjamäkiti.",
+      "text_sha256": "16ba7618b3c6fbc0d1405614d87f6e3ac4a3d652f5a803e948ed1660b8eb82f0",
+      "source_text_sha256": "5e741773c2fc72ca78d79139d7bb95e6458b5464a0469590a2000316c5de614d",
+      "translation": {
+        "method": "machine",
+        "model": "facebook/nllb-200-distilled-600M",
+        "model_revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+        "source_language": "spa_Latn",
+        "target_language": "ayr_Latn",
+        "input": "texto español normalizado para voz (números y siglas en palabras)",
+        "notes": "Traducción automática de NLLB-200 al aymara central; calidad no verificada. Requiere revisión de hablante."
+      },
+      "speaker_review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message_translation",
+      "communication_id": "message-fixture-b-1",
+      "result_id": "fixture-b-1",
+      "case_id": "B-1",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-04.ayr.mp3",
+      "sha256": "c7ac032166f8a1cacc865c09c003ae998d85bbad5969867829e7bddb93bd1ed7",
+      "bytes": 297216,
+      "duration_seconds": 49.536,
+      "source_pcm_rms": 1339.558,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-ayr",
+        "language": "ayr",
+        "model_revision": "8e79a97785a908d9e84bf7784e03671227d8bb91",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "language": "ayr",
+      "language_name": "Aymara (voz central)",
+      "text": "uñacht'äwi uñacht'ayañataki. Akax janiw chiqpach yapuchäwïkiti. Oruro. Yaqha qillqatanaka: papa, quinoa, haba. Ch'amañchasïwi: papa. Nayrïr postura. Janiw kuna jan walt'añanakas uñakipkiti, janirakiw kuna umatakis qullqix utjapkiti. Uka pachparakix uraqiru, jawiranakampirux jan walt'añanakaw utji. Ch'amañchäwinaka, uka pachpanaka janiw jikxatapkiti; janiw yaqhanakarux iwxt'añjamäkiti. Umanakaña, ch'axwaña, urutak uñakipapxañani equipo técnico ukampi janïr amtapktan ukapacha. Aka qillqatax janiw profecía arunakarjamäkiti.",
+      "text_sha256": "310a0ab33da8df523cc8a66c153ffaec6700a317e91bc4fd28c7ee229d7bc016",
+      "source_text_sha256": "589c560e256e62ccb2a5e734a178fe6e4ebd325a2c9891e8ffc43d360ff7baf9",
+      "translation": {
+        "method": "machine",
+        "model": "facebook/nllb-200-distilled-600M",
+        "model_revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+        "source_language": "spa_Latn",
+        "target_language": "ayr_Latn",
+        "input": "texto español normalizado para voz (números y siglas en palabras)",
+        "notes": "Traducción automática de NLLB-200 al aymara central; calidad no verificada. Requiere revisión de hablante."
+      },
+      "speaker_review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message_translation",
+      "communication_id": "message-fixture-b-2",
+      "result_id": "fixture-b-2",
+      "case_id": "B-2",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-05.ayr.mp3",
+      "sha256": "722ad3be969ebc41b8a4c1ab6d0a14568747c268ce5b632a6d09b1ce5bf32749",
+      "bytes": 296136,
+      "duration_seconds": 49.356,
+      "source_pcm_rms": 1353.394,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-ayr",
+        "language": "ayr",
+        "model_revision": "8e79a97785a908d9e84bf7784e03671227d8bb91",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "language": "ayr",
+      "language_name": "Aymara (voz central)",
+      "text": "uñacht'äwi uñacht'ayañataki. Akax janiw chiqpach yapuchäwïkiti. Oruro. Yaqha qillqatanaka: quinoa, haba, papa. Ch'amañchasïwi: quinua. Kimsa posición. Janiw kuna jan walt'añanakas uñakipkiti, janirakiw kuna umatakis qullqix utjapkiti. Uka pachparakix uraqiru, jawiranakampirux jan walt'añanakaw utji. Ch'amañchäwinaka, uka pachpanaka janiw jikxatapkiti; janiw yaqhanakarux iwxt'añjamäkiti. Umanakaña, ch'axwaña, urutak uñakipapxañani equipo técnico ukampi janïr amtapktan ukapacha. Aka qillqatax janiw profecía arunakarjamäkiti.",
+      "text_sha256": "df568984580311a505c87070c8c5c6f2ad45ed0448a27bbcdb9de2b84258fcfb",
+      "source_text_sha256": "5a06ad4c8cb2933334943decae122c3532d0f6f9b2d4dad6304fb92a2637b63a",
+      "translation": {
+        "method": "machine",
+        "model": "facebook/nllb-200-distilled-600M",
+        "model_revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+        "source_language": "spa_Latn",
+        "target_language": "ayr_Latn",
+        "input": "texto español normalizado para voz (números y siglas en palabras)",
+        "notes": "Traducción automática de NLLB-200 al aymara central; calidad no verificada. Requiere revisión de hablante."
+      },
+      "speaker_review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message_translation",
+      "communication_id": "message-fixture-b-3",
+      "result_id": "fixture-b-3",
+      "case_id": "B-3",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-06.ayr.mp3",
+      "sha256": "c48d3dae3ded68ebc098d77fbd7bc8bec90037218fbe8eba41305e1268d99fac",
+      "bytes": 297648,
+      "duration_seconds": 49.608,
+      "source_pcm_rms": 1341.205,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-ayr",
+        "language": "ayr",
+        "model_revision": "8e79a97785a908d9e84bf7784e03671227d8bb91",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "language": "ayr",
+      "language_name": "Aymara (voz central)",
+      "text": "uñacht'äwi uñacht'ayañataki. Akax janiw chiqpach yapuchäwïkiti. Oruro. Yaqha qillqatanaka: haba, papa, quinoa. Ch'amañchasïwi: haba. Kimsa posición. Janiw kuna jan walt'añanakas uñakipkiti, janirakiw kuna umatakis qullqix utjapkiti. Uka pachparakix uraqiru, jawiranakampirux jan walt'añanakaw utji. Ch'amañchäwinaka, uka pachpanaka janiw jikxatapkiti; janiw yaqhanakarux iwxt'añjamäkiti. Umanakaña, ch'axwaña, urutak uñakipapxañani equipo técnico ukampi janïr amtapktan ukapacha. Aka qillqatax janiw profecía arunakarjamäkiti.",
+      "text_sha256": "58823a7e87ed3da79d9d2312b9a09a7c51380764d780d17766e147b47a6c9a47",
+      "source_text_sha256": "30b6dcb6480ef23d2978160a9556ba948651ce27f1ca780244ec7725e82fc030",
+      "translation": {
+        "method": "machine",
+        "model": "facebook/nllb-200-distilled-600M",
+        "model_revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+        "source_language": "spa_Latn",
+        "target_language": "ayr_Latn",
+        "input": "texto español normalizado para voz (números y siglas en palabras)",
+        "notes": "Traducción automática de NLLB-200 al aymara central; calidad no verificada. Requiere revisión de hablante."
+      },
+      "speaker_review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message_translation",
+      "communication_id": "message-fixture-c-1",
+      "result_id": "fixture-c-1",
+      "case_id": "C-1",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-07.ayr.mp3",
+      "sha256": "766ce7af5d1d0dc69aa6b33807cfac3c8c3963100aa0f0e2f09b037295b80b02",
+      "bytes": 301752,
+      "duration_seconds": 50.292,
+      "source_pcm_rms": 1330.534,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-ayr",
+        "language": "ayr",
+        "model_revision": "8e79a97785a908d9e84bf7784e03671227d8bb91",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "language": "ayr",
+      "language_name": "Aymara (voz central)",
+      "text": "uñacht'äwi uñacht'ayañataki. Akax janiw chiqpach yapuchäwïkiti. Oruro. Yaqha qillqatanaka: papa, haba, descanso. Ch'amañchasïwi: papa. Nayrïr postura. Janiw kuna jan walt'añanakas uñakipkiti, janirakiw kuna umatakis qullqix utjapkiti. Uka pachparakix uraqiru, jawiranakampirux jan walt'añanakaw utji. Ch'amañchäwinaka, uka pachpanaka janiw jikxatapkiti; janiw yaqhanakarux iwxt'añjamäkiti. Umanakaña, ch'axwaña, urutak uñakipapxañani equipo técnico ukampi janïr amtapktan ukapacha. Aka qillqatax janiw profecía arunakarjamäkiti.",
+      "text_sha256": "e497e04c3c4bb403d5d0d55f6e10fdb5473e5b51df7ad31a7707081bd661db6c",
+      "source_text_sha256": "db29a331c8afcd2229a48727b43c7a7603858959fdfa0830a8a91d1c39f32ff1",
+      "translation": {
+        "method": "machine",
+        "model": "facebook/nllb-200-distilled-600M",
+        "model_revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+        "source_language": "spa_Latn",
+        "target_language": "ayr_Latn",
+        "input": "texto español normalizado para voz (números y siglas en palabras)",
+        "notes": "Traducción automática de NLLB-200 al aymara central; calidad no verificada. Requiere revisión de hablante."
+      },
+      "speaker_review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message_translation",
+      "communication_id": "message-fixture-c-2",
+      "result_id": "fixture-c-2",
+      "case_id": "C-2",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-08.ayr.mp3",
+      "sha256": "f573d969ff5dd080d5b7cfd535d85ca0274774a28ac7f9b0062dfe74470ba0ed",
+      "bytes": 302184,
+      "duration_seconds": 50.364,
+      "source_pcm_rms": 1332.243,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-ayr",
+        "language": "ayr",
+        "model_revision": "8e79a97785a908d9e84bf7784e03671227d8bb91",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "language": "ayr",
+      "language_name": "Aymara (voz central)",
+      "text": "uñacht'äwi uñacht'ayañataki. Akax janiw chiqpach yapuchäwïkiti. Oruro. Yaqha qillqatanaka: haba, descanso, papa. Ch'amañchasïwi: haba. Kimsa posición. Janiw kuna jan walt'añanakas uñakipkiti, janirakiw kuna umatakis qullqix utjapkiti. Uka pachparakix uraqiru, jawiranakampirux jan walt'añanakaw utji. Ch'amañchäwinaka, uka pachpanaka janiw jikxatapkiti; janiw yaqhanakarux iwxt'añjamäkiti. Umanakaña, ch'axwaña, urutak uñakipapxañani equipo técnico ukampi janïr amtapktan ukapacha. Aka qillqatax janiw profecía arunakarjamäkiti.",
+      "text_sha256": "2b754dd03c133ee44713e475adf7e5d5a999ba5bc5f63d712f274e05faf7360e",
+      "source_text_sha256": "393de132fdf66bef204e7b571ff4d206c6791ed4420d17e0d6b45a67a7e52f47",
+      "translation": {
+        "method": "machine",
+        "model": "facebook/nllb-200-distilled-600M",
+        "model_revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+        "source_language": "spa_Latn",
+        "target_language": "ayr_Latn",
+        "input": "texto español normalizado para voz (números y siglas en palabras)",
+        "notes": "Traducción automática de NLLB-200 al aymara central; calidad no verificada. Requiere revisión de hablante."
+      },
+      "speaker_review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "message_translation",
+      "communication_id": "message-fixture-c-3",
+      "result_id": "fixture-c-3",
+      "case_id": "C-3",
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/message-09.ayr.mp3",
+      "sha256": "125f169402dec5d7dea9f6c63127219cd258d027aaf8dbb1c26a158e31c46a62",
+      "bytes": 298296,
+      "duration_seconds": 49.716,
+      "source_pcm_rms": 1330.463,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-ayr",
+        "language": "ayr",
+        "model_revision": "8e79a97785a908d9e84bf7784e03671227d8bb91",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "language": "ayr",
+      "language_name": "Aymara (voz central)",
+      "text": "uñacht'äwi uñacht'ayañataki. Akax janiw chiqpach yapuchäwïkiti. Oruro. Ch'amachasïwi: samart'aña, papa, haba. Ch'amañchasïwi: samart'aña. Kimsa posición. Janiw kuna jan walt'añanakas uñakipkiti, janirakiw kuna umatakis qullqix utjapkiti. Uka pachparakix uraqiru, jawiranakampirux jan walt'añanakaw utji. Ch'amañchäwinaka, uka pachpanaka janiw jikxatapkiti; janiw yaqhanakarux iwxt'añjamäkiti. Umanakaña, ch'axwaña, urutak uñakipapxañani equipo técnico ukampi janïr amtapktan ukapacha. Aka qillqatax janiw profecía arunakarjamäkiti.",
+      "text_sha256": "f349b7b3e395d65c5c2b181f6454a824a78ca32c52bafd9177c2403d1d39887e",
+      "source_text_sha256": "7dcecfd7687755ef3cfcb574af056c598073e9c57ef9d57a91a531db4eecc201",
+      "translation": {
+        "method": "machine",
+        "model": "facebook/nllb-200-distilled-600M",
+        "model_revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+        "source_language": "spa_Latn",
+        "target_language": "ayr_Latn",
+        "input": "texto español normalizado para voz (números y siglas en palabras)",
+        "notes": "Traducción automática de NLLB-200 al aymara central; calidad no verificada. Requiere revisión de hablante."
+      },
+      "speaker_review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "kind": "bulletin_translation",
+      "communication_id": "regional-bulletin",
+      "result_id": null,
+      "case_id": null,
+      "build_id": "fixture-dev2-v31-demo",
+      "path": "audio/regional-bulletin.ayr.mp3",
+      "sha256": "03bc98c634eb3a2f1c3710bd915bf791a04af5664f56ccea1e0bfd0a5f723ed4",
+      "bytes": 314280,
+      "duration_seconds": 52.38,
+      "source_pcm_rms": 1427.509,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-ayr",
+        "language": "ayr",
+        "model_revision": "8e79a97785a908d9e84bf7784e03671227d8bb91",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [],
+      "language": "ayr",
+      "language_name": "Aymara (voz central)",
+      "text": "Raíz ukan uñacht'äwipa Oruro markanakataki. Aka yatiyawinx mä uñacht'äwjam uñt'ayatawa: janiw kuna chiqpach yapuchäwi uñjatanakas utjkiti, janirakiw kuna jan walt'añanakatsa jikxataskiti. Patata, quinoa, haba, descanso uka kimsa uñtasitanak uñch'ukiskaraki. Ch'amañchirinakax janiw jichhakamaw jakthapitäpkiti. Janïr amuyt'kasajja, yatxatir jilatampiw yatxatañama, kawkharutix umax utjki uksa, laq'a ch'uqt'atäki uksa. Ukax janiw nayratpach yatiyatäkänti. Jan walt'añanakan uñjaski uka jan walt'ayiri, janiw radiot uñt'ayaskiti. Janiraki kuna qillqatanakasa, janiraki kunanakasa.",
+      "text_sha256": "a5d75b9bd5bd55eab1918d46be004480350b1fde1619886871c3d2d24b38fde7",
+      "source_text_sha256": "96e17415e1a400678627b42b60c1ec9412d7f1d1233831b73a21a17a1c8b5d9b",
+      "translation": {
+        "method": "machine",
+        "model": "facebook/nllb-200-distilled-600M",
+        "model_revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+        "source_language": "spa_Latn",
+        "target_language": "ayr_Latn",
+        "input": "texto español normalizado para voz (números y siglas en palabras)",
+        "notes": "Traducción automática de NLLB-200 al aymara central; calidad no verificada. Requiere revisión de hablante."
+      },
+      "speaker_review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    }
+  ]
+}
