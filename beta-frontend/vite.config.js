@@ -10,6 +10,13 @@ export default defineConfig({
     port: 5173,
     allowedHosts: ['front-nasa.los5furiosos.cloud'],
   },
+  // Versión compilada servida por el túnel (npm run publicar): un solo paquete, carga más rápida.
+  preview: {
+    host: true,
+    port: 5175,
+    strictPort: true,
+    allowedHosts: ['front-nasa.los5furiosos.cloud'],
+  },
   // La integración usa node:test y se ejecuta por separado, sin mezclar runners.
   test: { environment: 'node', include: ['src/**/*.test.{js,jsx}'] },
 })

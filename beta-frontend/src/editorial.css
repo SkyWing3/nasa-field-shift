@@ -178,3 +178,6 @@
 .recorrido-tarjeta footer .boton:disabled { opacity:.4; }
 @media (prefers-reduced-motion:reduce) { .recorrido-foco,.recorrido-foco::after,.boton-voz.grande.activa { animation:none!important; transition:none!important; } }
 @media (max-width:520px) { .bienvenida { padding:24px 18px 20px; } .boton-voz.grande { width:80px; height:80px; } .idiomas-rejilla { grid-template-columns:1fr 1fr; } }
+.fallo-app { max-width:640px; margin:15vh auto; padding:24px; }
+.fallo-app h1 { font:600 2rem/1.2 var(--titulo); color:var(--forest); }
+.fallo-detalle { font-size:.85rem; color:var(--tinta-2); overflow-wrap:anywhere; }

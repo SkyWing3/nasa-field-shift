@@ -10,6 +10,7 @@
     "dev": "node scripts/preparar-paquete.mjs --si-falla-continuar && vite",
     "build": "node scripts/preparar-paquete.mjs && vite build",
     "preview": "vite preview --host 0.0.0.0 --port 4173",
+    "publicar": "vite build && vite preview --port 5175 --strictPort",
     "test": "vitest run",
     "test:integration": "node scripts/integracion.test.mjs",
     "idioma": "node scripts/idiomas.mjs"

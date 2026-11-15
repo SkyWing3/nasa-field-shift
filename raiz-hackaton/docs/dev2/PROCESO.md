@@ -353,3 +353,13 @@ python -m raiz_delivery publish --package build\package-real --site-root build\a
   - El manifiesto registra en cada audio su motor, modelo y voz. Las apps muestran «Voz sintética: requiere revisión de pares (ElevenLabs)» o «(Meta MMS)».
   - El inglés ahora tiene MP3 propio en lugar de la voz del navegador.
 - **Verificado por internet:** en el 3D y en beta-frontend suenan es/en con ElevenLabs y qu con MMS, y el recorrido lee cada paso.
+
+### 15-nov 11:35 · beta-frontend en blanco al abrirlo desde el 3D
+
+- **Causa:** el beta-frontend se servía por el túnel en modo desarrollo de Vite, con ~60 archivos sueltos sin compilar. En conexiones lentas o con caché vieja, la página quedaba en blanco más de 10 s, y la app no mostraba nada mientras cargaba ni si fallaba.
+- **Arreglo:**
+  - `npm run publicar` compila y sirve la versión de producción en el puerto 5175 (`vite preview`, `preview.allowedHosts` con `front-nasa.los5furiosos.cloud`): un solo JS de 337 KB.
+  - `index.html` muestra «Cargando Raíz…» desde el primer instante.
+  - `components/Fallo.jsx` muestra un aviso con «Volver a cargar» si la app falla al dibujarse.
+- **Medido desde internet** (`/?idioma=es&voz=no`, sin datos guardados): HTML+JS ~0,1 s; datos ~1 s (`climate.json` viaja con brotli: 701 KB en lugar de 11,6 MB); 19 recursos; sin errores.
+- **Nota:** con `vite preview`, los cambios de código requieren volver a correr `npm run publicar`. Para preparar el paquete (`npm run paquete`) hay que detener antes el servidor.

@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
+import Fallo from './components/Fallo.jsx'
 // Fuentes libres autoalojadas; el CSS de marca licenciado se puede integrar sin recompilar los componentes.
 import './fonts.css'
 import './styles.css'
@@ -21,6 +22,8 @@ if (brandStylesheet) {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <Fallo>
+      <App />
+    </Fallo>
   </StrictMode>,
 )
