@@ -1,0 +1,19 @@
+{
+  "schema_version": "3.0",
+  "build_id": "fixture-dev2-v3-initial",
+  "mode": "fixture",
+  "generated_at": null,
+  "data_as_of": null,
+  "model_version": null,
+  "sources": [],
+  "assumptions": [
+    "Secuencias candidatas del alcance v3; no confirmadas en una parcela"
+  ],
+  "warnings": [
+    "FIXTURE: demostración estructural, no resultados NASA ni recomendaciones reales"
+  ],
+  "data": {
+    "series": [],
+    "missing_reason": "No hay descargas POWER ni ONI en el proyecto inspeccionado"
+  }
+}

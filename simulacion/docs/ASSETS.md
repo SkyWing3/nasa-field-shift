@@ -101,7 +101,7 @@ las vías pavimentadas), los 13 modelos de vegetación y rocas y los 5 HDRI. Son
 ## Catálogo generado
 
 <!-- asset-catalog:start -->
-> Generado automáticamente por `asset-pipeline` 0.1.0 el 2026-11-14. No editar a mano: ejecuta `make assets`.
+> Generado automáticamente por `asset-pipeline` 0.1.0 el 2026-11-15. No editar a mano: ejecuta `make assets`.
 
 **Resumen:** 42 disponibles · 4 faltantes · 0 con errores · 136.9 MB procesados.
 

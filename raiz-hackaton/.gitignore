@@ -1,0 +1,18 @@
+# Raíz (rutas relativas a raiz-hackaton/). Lo general está en ../.gitignore.
+
+# Salidas generadas: se reconstruyen con `python scripts/check_dev2.py --audio-assets ...`
+build/
+.raiz-stage-*/
+.publish-*/
+
+# Base viva del tablero de coordinación (respaldar aparte, no versionar)
+team.sqlite3*
+
+# Entorno de voz Meta MMS (~1 GB; ver docs/dev2/AUDIO.md)
+.venv/
+.venv-tts/
+
+__pycache__/
+*.py[cod]
+
+# assets/audio/ SÍ se versiona: son los MP3 entregables (~9 MB) y regenerarlos tarda ~20 min.

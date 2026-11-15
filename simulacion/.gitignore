@@ -1,0 +1,21 @@
+# TerraLab 3D (rutas relativas a simulacion/). Lo general está en ../.gitignore.
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/coverage/
+frontend/test-results/
+frontend/playwright-report/
+frontend/blob-report/
+frontend/playwright/.cache/
+# Assets: originales descargados y biblioteca procesada (se regeneran con `make assets`)
+frontend/.asset-cache/
+frontend/asset-library/
+
+# Backend
+backend/.venv/
+backend/data/*.sqlite3
+# Nomenclátor GeoNames descargado y generado (make geodata)
+backend/data/geonames/
+# Relieve, cobertura y OSM de la región demostrativa (make worlddata)
+backend/data/world/
