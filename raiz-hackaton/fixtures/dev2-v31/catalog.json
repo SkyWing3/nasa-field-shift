@@ -1,0 +1,159 @@
+{
+  "schema_version": "3.0",
+  "build_id": "fixture-dev2-v31-demo",
+  "mode": "fixture",
+  "generated_at": null,
+  "data_as_of": null,
+  "model_version": null,
+  "sources": [],
+  "assumptions": [
+    "Secuencias candidatas del alcance v3; no confirmadas en una parcela"
+  ],
+  "warnings": [
+    "FIXTURE: demostración de nueve casos; sin datos NASA/NOAA, coordenadas ni resultados científicos reales"
+  ],
+  "data": {
+    "analysis_point": {
+      "analysis_point_id": "oruro-pilot",
+      "region": "Oruro",
+      "latitude": null,
+      "longitude": null,
+      "location_status": "unconfirmed",
+      "missing_reason": "P6 debe confirmar el punto y su representatividad"
+    },
+    "rotations": [
+      {
+        "rotation_id": "papa-quinua-descanso",
+        "campaigns": [
+          "papa",
+          "quinua",
+          "descanso"
+        ],
+        "baseline_status": "assumed"
+      },
+      {
+        "rotation_id": "papa-quinua-haba",
+        "campaigns": [
+          "papa",
+          "quinua",
+          "haba"
+        ],
+        "baseline_status": "assumed"
+      },
+      {
+        "rotation_id": "papa-haba-descanso",
+        "campaigns": [
+          "papa",
+          "haba",
+          "descanso"
+        ],
+        "baseline_status": "assumed"
+      }
+    ],
+    "water_budgets": [],
+    "missing_reason": "Sin presupuestos precalculados; no habilitar controles",
+    "periods": [],
+    "soil_profiles": [],
+    "cases": [
+      {
+        "case_id": "A-1",
+        "rotation_id": "papa-quinua-descanso",
+        "position_id": 1,
+        "campaigns": [
+          "papa",
+          "quinua",
+          "descanso"
+        ],
+        "decision_crop": "papa"
+      },
+      {
+        "case_id": "A-2",
+        "rotation_id": "papa-quinua-descanso",
+        "position_id": 2,
+        "campaigns": [
+          "quinua",
+          "descanso",
+          "papa"
+        ],
+        "decision_crop": "quinua"
+      },
+      {
+        "case_id": "A-3",
+        "rotation_id": "papa-quinua-descanso",
+        "position_id": 3,
+        "campaigns": [
+          "descanso",
+          "papa",
+          "quinua"
+        ],
+        "decision_crop": "descanso"
+      },
+      {
+        "case_id": "B-1",
+        "rotation_id": "papa-quinua-haba",
+        "position_id": 1,
+        "campaigns": [
+          "papa",
+          "quinua",
+          "haba"
+        ],
+        "decision_crop": "papa"
+      },
+      {
+        "case_id": "B-2",
+        "rotation_id": "papa-quinua-haba",
+        "position_id": 2,
+        "campaigns": [
+          "quinua",
+          "haba",
+          "papa"
+        ],
+        "decision_crop": "quinua"
+      },
+      {
+        "case_id": "B-3",
+        "rotation_id": "papa-quinua-haba",
+        "position_id": 3,
+        "campaigns": [
+          "haba",
+          "papa",
+          "quinua"
+        ],
+        "decision_crop": "haba"
+      },
+      {
+        "case_id": "C-1",
+        "rotation_id": "papa-haba-descanso",
+        "position_id": 1,
+        "campaigns": [
+          "papa",
+          "haba",
+          "descanso"
+        ],
+        "decision_crop": "papa"
+      },
+      {
+        "case_id": "C-2",
+        "rotation_id": "papa-haba-descanso",
+        "position_id": 2,
+        "campaigns": [
+          "haba",
+          "descanso",
+          "papa"
+        ],
+        "decision_crop": "haba"
+      },
+      {
+        "case_id": "C-3",
+        "rotation_id": "papa-haba-descanso",
+        "position_id": 3,
+        "campaigns": [
+          "descanso",
+          "papa",
+          "haba"
+        ],
+        "decision_crop": "descanso"
+      }
+    ]
+  }
+}

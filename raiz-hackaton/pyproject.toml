@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "raiz-delivery"
+version = "1.0.0"
+description = "Publicación por lotes de resultados precalculados de Raíz"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+raiz-delivery = "raiz_delivery.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["raiz_delivery*"]
