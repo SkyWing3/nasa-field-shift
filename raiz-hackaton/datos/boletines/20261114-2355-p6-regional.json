@@ -1,0 +1,47 @@
+{
+ "boletin_id": "20261114-2355-p6-regional",
+ "creado": "2026-11-14T21:55:00-04:00",
+ "tipo": "regional-p6",
+ "autoria": "P6 (contenido), P5 (revisión)",
+ "estado": "aprobado_por_p5",
+ "revision": {
+  "por": "P5",
+  "fecha": "2026-11-14T23:55:00-04:00",
+  "evidencia": "content/actas/P5-2_acta_revision_audio.pdf"
+ },
+ "aprobacion_lider_quechua": {
+  "estado": "aprobado",
+  "aprobado_por": "Líder del equipo",
+  "fecha": "2026-11-15T02:21:16-04:00",
+  "via": "Confirmación escrita de la líder en la sesión de trabajo con el asistente (respuesta «Sí, aprobado»)",
+  "evidencia": "content/actas/aprobacion_lider_quechua.json"
+ },
+ "nota_quechua": "Leído y grabado por un productor de la comunidad (sin nombre, con su autorización). El audio incluye repeticiones breves propias del habla.",
+ "difusion": "preparado_no_difundido",
+ "audios": [
+  {
+   "idioma": "es",
+   "audio": "content/audio/boletin_es.mp3",
+   "texto_archivo": "content/audio/boletin_es.txt",
+   "texto": "Mensaje para las comunidades de Soracachi.\nRevisamos 45 años de datos de la NASA sobre lluvia y heladas en esta zona.\nEn los años del Niño fuerte, cuatro de cada cinco veces llovió menos de lo normal entre noviembre y marzo.\nLa helada en la floración puede dañar la papa y el haba. El granizo no lo podemos medir con estos datos.\nEsto no es una orden ni una promesa de cosecha: es la experiencia de años pasados.\nAntes de decidir qué sembrar y dónde regar, converse con su técnico y con su comunidad.\nProyecto Raíz, con datos de NASA POWER y NOAA.",
+   "sha256": "307625bcd4c5f38b88bd92f6a8d10bf907c88c86a4833baa5e0a579ceb1a4107",
+   "duracion_s": 46.6,
+   "voz": "Voz sintética Meta MMS-TTS (facebook/mms-tts-spa), CC BY-NC 4.0"
+  },
+  {
+   "idioma": "quz",
+   "audio": "content/audio/boletin_qu_productor.mp3",
+   "texto_archivo": "content/audio/boletin_qu_productor.txt",
+   "texto": "Soracachi ayllukunapaq willakuy.\nNiño watakunapiqa, kaypi pisillata paran.\nPichqa sinchi Niño watakunamanta, tawapi pisillata pararqa.\nQasaqa papata, hawastawan t'ikasqa kaqtin waqllichinman.\nImata tarpunaykita manaraq akllaspa, técnicoykiwan rimariy.",
+   "sha256": "0d6086174b51a5c3e613b9433f09fa98c8f25503c6f75b48873868784ec1d87c",
+   "duracion_s": 49.3,
+   "voz": "Voz de un productor de Obrajes (sin nombre, con autorización escrita)"
+  }
+ ],
+ "cifra_verificada": {
+  "frase": "4 de cada 5 Niños fuertes con menos lluvia nov–mar que lo normal",
+  "reproduccion_raiz": "4 de 5",
+  "coincide": true,
+  "detalle": "datos/verificacion/verificacion.json → nino_fuerte_4de5"
+ }
+}

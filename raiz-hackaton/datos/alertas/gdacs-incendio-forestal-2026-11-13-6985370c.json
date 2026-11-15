@@ -1,0 +1,47 @@
+{
+ "alert_id": "gdacs-incendio-forestal-2026-11-13-6985370c",
+ "creada": "2026-11-15T00:19:13-04:00",
+ "estado": "pendiente_aprobacion",
+ "aprobada_por": null,
+ "aprobada_en": null,
+ "difusion": "no_difundida",
+ "tipo": "gdacs-incendio-forestal",
+ "nivel": "informativa",
+ "fecha_evento": "2026-11-13T05:06:42-04:00",
+ "zonas": [
+  {
+   "localidad": "Oruro",
+   "distancia_km": 337.6,
+   "direccion": "noreste",
+   "poblacion": 208684
+  },
+  {
+   "localidad": "Huanuni",
+   "distancia_km": 341.6,
+   "direccion": "noreste",
+   "poblacion": 15492
+  },
+  {
+   "localidad": "Machacamarca",
+   "distancia_km": 346.4,
+   "direccion": "noreste",
+   "poblacion": 2044
+  }
+ ],
+ "n_evidencias": 1,
+ "evidencia": [
+  {
+   "titulo": "Green forest fire notification in Bolivia",
+   "pais": "Bolivia",
+   "nivel_gdacs": "Green",
+   "lat": -16.04340221135372,
+   "lon": -64.64087960920678,
+   "link": "http://www.gdacs.org/report.aspx?eventtype=WF&eventid=1033775",
+   "archivo": "20261115T0418Z-gdacs-rss.xml"
+  }
+ ],
+ "fuente": "GDACS",
+ "confirmar_con": "SENAMHI y VIDECI",
+ "texto": "Aviso preliminar de Raíz. El sistema internacional GDACS informa una alerta verde por incendio forestal en Bolivia: Green forest fire notification in Bolivia. Consulte a SENAMHI y a Defensa Civil antes de actuar. Información pendiente de confirmación oficial.",
+ "regla": "Evento GDACS a ≤500 km de Oruro; naranja/roja también más lejos si es en Bolivia"
+}

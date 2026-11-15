@@ -1,7 +1,7 @@
 {
-  "version": "2026-11-14-altiplano-fusion-v3",
+  "version": "2026-11-14-altiplano-fusion-v3.1",
   "timezone": "America/La_Paz",
-  "scope": "Oruro; POWER + ONI; historia/reciente y ENSO inicial; tres rotaciones anuales; JSON precalculado, ficha, audio y radio. Sin pronóstico, observaciones agrícolas ni Santa Cruz.",
+  "scope": "Oruro; POWER + ONI; historia/reciente y ENSO de la campaña de decisión; tres secuencias por tres posiciones cíclicas (9 casos); KPI de decisión y ciclo separados; JSON, ficha, audio y radio. Pronóstico estacional externo solo como contexto fechado; sin pronóstico propio a 24 h ni observaciones agrícolas.",
   "tasks": [
     {
       "code": "D1-1",
@@ -10,7 +10,7 @@
       "due": "Sáb 19:00",
       "deliverable": "Contrato v3, inventario de código y fixture identificado.",
       "acceptance": [
-        "Dev 1, Dev 2 y Dev 3 acuerdan IDs, unidades, versiones y rutas de archivos; fixture no se presenta como NASA real.",
+        "Dev 1, Dev 2 y Dev 3 acuerdan IDs de secuencia/posición/caso, campaña de decisión, unidades, versiones y rutas; fixture identificado, sin presentarlo como NASA real.",
         "Registrar qué calcula realmente el código; no construir pronóstico ni ML como requisito."
       ],
       "dependencies": "Puede empezar ahora"
@@ -23,7 +23,7 @@
       "deliverable": "Originales, series diarias, comando de descarga y manifiesto.",
       "acceptance": [
         "Un punto de Oruro con coordenadas y representatividad documentadas por P6-1; no reutilizar Patacamaya como si fuera Oruro.",
-        "Objetivo 1981–2025, campañas completas; 2026 solo hasta la última fecha realmente disponible y nunca como campaña futura completa.",
+        "Objetivo de descarga 1981-01-01 a 2026-11-10, sujeto a disponibilidad real; separar 2026 parcial. Para ventanas iniciadas en 2023 hacen falta campañas 2023, 2024 y 2025 completas hasta marzo de 2026; no fabricar campañas futuras.",
         "Tmin, Tmax, precipitación y variables de ET0 según método; viento si se usa ese indicador. Registrar unidades, calendario, QA y faltantes.",
         "Archivos versionados en servidor; no consultar proveedores al pulsar la demo."
       ],
@@ -45,29 +45,31 @@
     {
       "code": "D1-4",
       "role": "Dev 1",
-      "title": "Clasificar campañas Normal, Niño y Niña con ONI",
+      "title": "Clasificar ENSO de la campaña de decisión y Niño fuerte",
       "due": "Sáb 23:30",
-      "deliverable": "enso_campaigns.json y script de clasificación.",
+      "deliverable": "enso_campaigns.json, ONI NDJ por campaña y script reproducible de clasificación.",
       "acceptance": [
-        "Guardar serie ONI de NOAA, versión, regla, umbral, persistencia y ventana temporal antes de agrupar campañas.",
-        "Indicar años incluidos/excluidos y tamaño de cada grupo; si falta muestra, mostrar insuficiente y no inventar un ranking.",
-        "Para ciclos de tres campañas, el escenario corresponde a la campaña inicial; las siguientes conservan su clima histórico real.",
-        "Los cinco episodios y porcentajes del PDF solo se publican como resultado cuando el cuaderno y cálculo se reproduzcan."
+        "Guardar oni.ascii.txt de NOAA, versión y regla ONI NDJ con YR=y: Niño >=0,5; Niña <=-0,5; Normal entre umbrales; Niño fuerte >=1,5. Es clasificación operativa de campaña, no sustituye la definición de evento con persistencia.",
+        "Campaña y = noviembre y a marzo y+1. Ventana de rotación = campañas y, y+1, y+2 completas; última campaña de decisión posible y=2023 con el corte aportado. Registrar incluidos, excluidos, n de ventanas y campañas únicas.",
+        "Fase de la ventana = ONI de la campaña de decisión y. Las campañas segunda y tercera conservan su meteorología histórica real; no repetir ENSO ni el clima de y.",
+        "Evaluar el subgrupo Niño fuerte: n=5 es lo reportado por P6, pendiente de reproducción en punto final y conjunto de ventanas válidas. Mostrar n recalculado; sin conclusión si n<3; sin ventanas, KPI/ranking null con motivo.",
+        "Reproducir prueba_descarte_oruro.ipynb con el punto P6-1: normal = media de campañas Normales; lluvia nov-mar, excluir menos de 140 días válidos para esa estadística. Este filtro no convierte una ventana incompleta en válida para el balance de tres campañas."
       ],
       "dependencies": "D1-2 y P6-3"
     },
     {
       "code": "D1-5",
       "role": "Dev 1",
-      "title": "Precalcular tres rotaciones con agua y suelo descubierto",
+      "title": "Precalcular nueve casos: tres secuencias y tres posiciones",
       "due": "Sáb 23:30",
-      "deliverable": "results.json con ventanas históricas de tres campañas y KPI.",
+      "deliverable": "results.json con 9 casos cíclicos, KPI de campaña de decisión y KPI de ciclo separados.",
       "acceptance": [
-        "Base candidata papa/quinua/descanso; alternativas papa/quinua/haba y papa/haba/descanso; marcar supuesto hasta confirmar orden en una parcela.",
-        "Igual horizonte de tres campañas, fase inicial, suelo y manejo comparable; transferir humedad entre cultivos y declarar inicialización de cada ventana.",
-        "Balance diario conserva agua: lluvia, escorrentía, ET, riego y drenaje con límites físicos; no asignar Kc inventado.",
-        "KPI: riego neto, estrés, cobertura, exposición térmica, suelo descubierto coincidente con lluvia/viento y frecuencia de cumplimiento con denominador.",
-        "Comparar periodos y grupos ENSO sin mezclarlos; presupuestos precalculados explícitos. Rendimiento, dinero y carbono quedan fuera."
+        "A: papa/quinua/descanso, quinua/descanso/papa, descanso/papa/quinua. B: papa/quinua/haba, quinua/haba/papa, haba/papa/quinua. C: papa/haba/descanso, haba/descanso/papa, descanso/papa/haba. Nueve casos; secuencias candidatas hasta confirmación local.",
+        "Horizonte de tres campañas completas y meteorología, suelo, manejo e inicialización comparables; variar la posición inicial del cultivo explícitamente. Transferir humedad entre campañas y declarar inicialización por ventana.",
+        "Separar decision_kpis de la campaña y y cycle_kpis de y..y+2; incluir secuencia, posición, caso, cultivo de decisión, n de ventanas y campañas únicas. No mezclar ambos horizontes en un ranking.",
+        "Balance diario conserva lluvia, escorrentía, ET, riego, drenaje y almacenamiento; límites físicos y Kc con fuente, nunca inventado.",
+        "KPI: demanda/aplicación de riego neto, estrés, cobertura, exposición térmica, suelo descubierto con lluvia/viento y frecuencia de cumplimiento con denominador. Comparar periodos y ENSO por separado; presupuestos precalculados. Rendimiento, dinero y carbono fuera.",
+        "Integrar con Dev 3 los 9 casos antes del control Sáb 23:30. Un empate o ranking estable es válido; la corrección no exige forzar diferencias."
       ],
       "dependencies": "D1-1, D1-2, D1-4 y P6-2"
     },
@@ -78,7 +80,7 @@
       "due": "Sáb 23:30",
       "deliverable": "catalog.json, climate.json, results.json y manifest.json.",
       "acceptance": [
-        "Un build_id común, unidades, fuentes, supuestos y limitaciones por salida; null con motivo para faltantes.",
+        "Un build_id común, IDs de secuencia/posición/caso, KPI de decisión/ciclo separados, unidades, fuentes, supuestos y limitaciones por salida; null con motivo para faltantes.",
         "Prioridad reordena resultados existentes; límite de agua selecciona un presupuesto precalculado, sin fingir una nueva simulación.",
         "No se generan /forecast, /verification ni observaciones para este MVP."
       ],
@@ -117,7 +119,7 @@
       "due": "Sáb 23:30",
       "deliverable": "communications.json y plantillas revisadas.",
       "acceptance": [
-        "Mensaje enlazado a build_id y result_id, zona, periodos, escenario, presupuesto y rotación; no alertas meteorológicas a 24 h.",
+        "Mensaje enlazado a build_id y result_id, caso/posición, cultivo de decisión, zona, periodos, ENSO, presupuesto y rotación; distinguir KPI de campaña y ciclo, sin alertas a 24 h.",
         "Explicar riesgo y acción prudente de revisión con técnico; distinguir escenarios históricos de futuro y riego desconocido.",
         "issued_at y valid_until son vigencia editorial; fecha de datos separada. Una vigencia no convierte historia en pronóstico."
       ],
@@ -143,7 +145,7 @@
       "due": "Dom 08:30",
       "deliverable": "Datos de ficha con resumen, evidencia y texto imprimible.",
       "acceptance": [
-        "Incluye tres alternativas, selección, escenario inicial, periodos, muestra, suelo, presupuesto y límites.",
+        "Incluye tres secuencias y sus posiciones (9 casos), selección y cultivo de decisión, KPI de campaña/ciclo separados, ENSO inicial, periodos, muestra, suelo, presupuesto y límites.",
         "Comparte result_id con pantalla y audio; si no existe audio para esa selección, indicarlo sin usar otro mensaje.",
         "Formato de impresión desde la web, sin añadir motor PDF obligatorio ni captura de observaciones."
       ],
@@ -170,7 +172,7 @@
       "deliverable": "Web y archivos accesibles por HTTPS; respaldo del paquete final.",
       "acceptance": [
         "La demo sirve JSON y MP3 ya guardados; sin llamadas en vivo a NASA, NOAA o TTS.",
-        "Comprobar esquema, build_id, integridad, rutas y enlace entre resultado/ficha/audio; fixture nunca se hace pasar por real.",
+        "Comprobar esquema, build_id, integridad, rutas y enlace resultado/caso/posición/ficha/audio; distinguir campaña y ciclo. Fixture nunca se hace pasar por real.",
         "Un comando documentado publica el paquete y un error de proveedor no impide mostrar la última versión fechada."
       ],
       "dependencies": "D1-6, D2-4, D2-5 y Dev 3"
@@ -182,7 +184,7 @@
       "due": "Sáb 21:00",
       "deliverable": "Web adaptable: Clima, Rotaciones y Ficha/audio.",
       "acceptance": [
-        "Una zona Altiplano/Oruro; Normal/Niño/Niña sobre la campaña inicial, periodos y años evaluados visibles.",
+        "Una zona Oruro; Normal/Niño/Niña en la campaña de decisión, posiciones cíclicas, periodos y años visibles; Niño fuerte con n recalculado y sin conclusión si n<3.",
         "Leer JSON con fixture identificado hasta disponer del paquete real; no selección Santa Cruz ni pantalla ¿Acertamos?."
       ],
       "dependencies": "D1-1 y D2-1"
@@ -202,13 +204,15 @@
     {
       "code": "D3-3",
       "role": "Dev 3",
-      "title": "Conectar las tres rotaciones y prioridades",
+      "title": "Conectar nueve casos y decisión de cultivo este año",
       "due": "Sáb 23:30",
-      "deliverable": "Comparador con KPI, orden y restricciones.",
+      "deliverable": "Vista de campaña de decisión con papa/quinua/haba/descanso, sus KPI y n; debajo, ciclo completo por caso.",
       "acceptance": [
-        "Cambiar escenario filtra ventanas válidas; prioridad reordena y explica normalización, pesos y empates.",
-        "Presupuesto de agua selecciona opciones precalculadas; no ofrecer valores que el modelo no evaluó.",
-        "Mostrar línea base candidata, periodo, n, delta comparable y faltantes; un ranking igual es resultado válido."
+        "Mostrar: Si la campaña de decisión es Niño, ¿qué conviene en la parcela este año? Identificar secuencia, posición, caso y cultivo; permitir los 9 casos sin confundirlos con nueve secuencias distintas.",
+        "Mostrar KPI y n de la campaña de decisión arriba y del ciclo completo debajo. No fusionar casos que comparten cultivo inicial sin una regla documentada.",
+        "Escenario filtra ventanas válidas; prioridad reordena con normalización, pesos y empates explícitos. Niño fuerte muestra n; si n<3, no concluir.",
+        "Presupuesto selecciona corridas precalculadas; línea base candidata, periodo, muestra, delta comparable y faltantes visibles. Un ranking igual es válido.",
+        "Integrar los 9 casos con D1-5 antes del control Sáb 23:30."
       ],
       "dependencies": "D1-5 y D1-6"
     },
@@ -231,7 +235,7 @@
       "due": "Dom 08:30",
       "deliverable": "Vista imprimible, reproductor y descarga de texto/MP3.",
       "acceptance": [
-        "result_id coincide entre resultado y ficha/audio; mensajes sin coincidencia no se reproducen como específicos.",
+        "result_id, caso y posición coinciden entre resultado/ficha/audio; se distingue campaña de decisión del ciclo. Un mensaje sin coincidencia no se reproduce como específico.",
         "Distinguir audio de ficha de boletín regional general; emisión de radio no confirmada visible."
       ],
       "dependencies": "D2-3, D2-4 y D2-5"
@@ -266,12 +270,14 @@
       "code": "P4-2",
       "role": "Persona 4",
       "title": "Escribir pitch con evidencia reproducible",
-      "due": "Sáb 23:30 borrador · Dom 08:30 final",
-      "deliverable": "Guion adaptable al formato confirmado.",
+      "due": "Sáb 21:00 afirmaciones/pitch · Dom 08:30 final",
+      "deliverable": "Guion con apertura 0:00-0:30, fuentes fechadas y cifra 4 de 5 solo si reproducida.",
       "acceptance": [
-        "No usar Niño más fuerte en décadas ni anomalía +5 °C sin fuente vigente verificable.",
-        "4 de 5 episodios y porcentajes solo si D1-4 reproduce y muestra muestra/periodo; sin ello usar problema y comparación real.",
-        "Audio/radio como cierre accesible; no prometer ranking cambiante, impacto medido ni premios."
+        "Citar como pronóstico externo NOAA/IRI, con emisión y enlace verificados; IRI 19-oct-2026 y NOAA CPC 12-nov-2026. Describir intensidad y horizonte como probables, no sequía asegurada en Oruro.",
+        "Apertura: NOAA e IRI prevén un Niño de fuerte a muy fuerte para el verano 2026-27. En el Altiplano los años Niño tienden a ser más secos. Un productor de Oruro decide anualmente qué sembrar; Raíz compara opciones en Niños pasados con datos NASA.",
+        "Niño 1+2 >+5 °C solo con fuente/fecha IRI y aclaración de que no es ONI. No decir todos los Niños son secos, habrá sequía en Oruro ni el más fuerte en décadas sin confirmación específica NOAA CPC.",
+        "Agregar 4 de 5 Niños fuertes desde 1981 con menos lluvia que Normal solo si D1 reproduce el cuaderno con el punto final; mostrar n=5 y frecuencia histórica, no probabilidad.",
+        "Audio/radio como salida accesible; no prometer ranking cambiante, impacto medido ni premios."
       ],
       "dependencies": "P6-3 y D1-6"
     },
@@ -282,7 +288,7 @@
       "due": "Dom 08:30",
       "deliverable": "Guion Clima → Rotaciones → Suelo → Ficha/audio/radio.",
       "acceptance": [
-        "Mostrar antes/ahora y escenario ENSO como ejes distintos; fuente NASA con uso concreto.",
+        "Mostrar antes/ahora y ENSO de decisión como ejes distintos; 9 casos, KPI de campaña arriba y ciclo debajo, con fuente NASA y n visibles.",
         "Cambiar prioridades y presupuesto válido; si ranking no cambia explicarlo.",
         "Solo recorrido integrado, con alternativa grabada."
       ],
@@ -381,7 +387,7 @@
       "due": "Sáb 23:30 y Dom 08:30",
       "deliverable": "Matriz pasa/falla con responsable y evidencia.",
       "acceptance": [
-        "Cubrir tres escenarios, tres rotaciones, años excluidos, muestra escasa, null, presupuesto, pesos y ranking igual.",
+        "Cubrir Normal/Niño/Niña, subgrupo Niño fuerte con n<3, tres secuencias por tres posiciones (9 casos), KPI de campaña/ciclo, exclusiones, null, presupuesto, pesos y ranking igual.",
         "Verificar suelo descubierto, texto/ficha/audio/result_id, boletín general, vencido y archivo ausente.",
         "Teclado, celular, texto ampliado, fallo de red explícito y cero llamadas a proveedores durante demo."
       ],
@@ -416,27 +422,30 @@
     {
       "code": "P6-2",
       "role": "Persona 6",
-      "title": "Curar papa, quinua, haba y tres secuencias anuales",
+      "title": "Curar cultivos y tres posiciones por secuencia",
       "due": "Sáb 21:00",
-      "deliverable": "crops.json, soils.json y rotations.json con fuentes.",
+      "deliverable": "crops.json, soils.json y rotations.json: 3 secuencias x 3 posiciones, cultivo de decisión y fuentes.",
       "acceptance": [
         "Priorizar tres cultivos más descanso; hortalizas del calendario solo contexto. Cañahua/papa amarga requieren validación y quedan fuera.",
         "Duración, calendario, Kc por etapa, profundidad y umbrales con fuente o null; no tolerancia genérica convertida en parámetro calibrado.",
         "Manejo de residuos, suelo, sanidad, forraje y potencial de leguminosa explicados sin prometer N, rendimiento o dinero.",
-        "Confirmar que las tres secuencias comparten horizonte de tres campañas; descanso no equivale siempre a suelo desnudo."
+        "rotations.json define las 3 posiciones cíclicas de A, B y C (9 casos), campañas y/y+1/y+2 y cultivo de decisión. Igual horizonte y supuestos comparables; descanso no equivale siempre a suelo desnudo."
       ],
       "dependencies": "P6-1 y acuerdo con D1-5"
     },
     {
       "code": "P6-3",
       "role": "Persona 6",
-      "title": "Auditar POWER, ONI y cifras del relato",
+      "title": "Verificar contexto NOAA/IRI y entregar cuaderno 4 de 5",
       "due": "Sáb 21:00",
-      "deliverable": "Registro de fuentes y afirmaciones permitidas.",
+      "deliverable": "Registro de afirmaciones fechadas y prueba_descarte_oruro.ipynb entregado a Dev 1; reproducción con punto final documentada.",
       "acceptance": [
-        "NASA POWER es base climática; ONI de NOAA es clasificación externa; guardar metodología y separar Niño 1+2 de ONI.",
-        "Recuperar cuaderno/datos del análisis 4/5, normal de referencia y criterio de selección; sin reproducción no usar porcentajes como conclusión.",
-        "No repetir pronóstico 2026–27 ni puntuaciones de los informes como hechos verificados o rúbrica oficial."
+        "NASA POWER es la base climática; ONI NOAA NDJ clasifica campañas. Separar ONI, Niño 1+2 y pronóstico estacional externo; conservar fechas, versión y fuentes.",
+        "Citar solo como pronóstico NOAA/IRI con fecha y enlace verificados: IRI Quick Look 19-oct-2026; NOAA CPC 12-nov-2026. No garantizar sequía local ni un evento récord sin confirmación específica.",
+        "Entregar a Dev 1 el cuaderno prueba_descarte_oruro.ipynb y datos antes de Sáb 21:00. P6 reporta punto ciudad Oruro (-17,97; -67,11), no finca validada; repetir con punto final P6-1.",
+        "Método aportado: POWER AG diario PRECTOTCORR/T2M_MIN 1981-01-01..2026-11-10; lluvia nov-mar con >=140 días válidos; ONI NDJ YR=y; umbrales +/-0,5 y Niño fuerte >=1,5; normal de referencia = media de campañas Normales.",
+        "Normal 365 mm (n=13), cinco episodios, medias Niño 305 mm (n=15)/Niña 340 mm (n=17) son cifras reportadas, pendientes de reproducción final. Publicar 4 de 5 solo tras D1; frecuencia histórica con n=5, no probabilidad.",
+        "P6 verifica bibliografía regional (Garreaud/Aceituno 2001, Vuille/Keimig 2004) y entrega afirmaciones a P4 Sáb 21:00. No adoptar puntuaciones de informes como rúbrica oficial."
       ],
       "dependencies": "Puede empezar ahora"
     },
@@ -479,5 +488,15 @@
       ],
       "dependencies": "P6-3, P4 y entregables"
     }
-  ]
+  ],
+  "revision": {
+    "source": "correcciones_raiz_v3_compacto.md · P6 · 14-nov-2026 19:10 Bolivia",
+    "library_file_id": "libfile_ab11f4f3b7748191ac40fec575200c70",
+    "changes": [
+      "9 casos y KPI de campaña/ciclo",
+      "Contexto NOAA/IRI con fecha y fuente",
+      "Reproducción del cuaderno 4 de 5 con punto final"
+    ],
+    "scientific_results_reproduced": false
+  }
 }

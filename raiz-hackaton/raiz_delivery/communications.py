@@ -68,6 +68,24 @@ def _spoken_editorial(dates):
     return f" Emisión editorial: {short(dates['issued_at'])}. Válido hasta {short(dates['valid_until'])}."
 
 
+UNITS_ES = {'days': 'días', 'mm': 'mm', '%': '%'}
+
+
+def _num(value):
+    """Número legible en español: entero si lo es, si no un decimal con coma."""
+    if isinstance(value, float) and abs(value - round(value)) > 1e-9:
+        return f'{value:.1f}'.replace('.', ',')
+    return str(int(round(value)))
+
+
+def _metric_text(metric):
+    if metric.get('unit') == 'fraction':
+        if type(metric.get('numerator')) is int and type(metric.get('denominator')) is int:
+            return f"{metric['numerator']} de {metric['denominator']} años"
+        return f"{_num(100 * metric['value'])} % de los años"
+    return f"{_num(metric['value'])} {UNITS_ES.get(metric.get('unit', ''), metric.get('unit', ''))}".rstrip()
+
+
 def _kpi_text(group):
     if not group:
         return 'sin KPI disponibles'
@@ -78,8 +96,42 @@ def _kpi_text(group):
             reason = metric.get('missing_reason', 'dato ausente') if isinstance(metric, dict) else 'dato ausente'
             parts.append(f'{label}: no disponible ({reason})')
         else:
-            parts.append(f"{label}: {metric['value']} {metric.get('unit', '')}".rstrip())
+            parts.append(f'{label}: {_metric_text(metric)}')
     return '; '.join(parts)
+
+
+DECISION_KEYS = ('water_stress_days', 'net_irrigation_requirement_mm', 'bare_rain_exposure_days', 'bare_wind_exposure_days', 'thermal_exposure_days')
+CYCLE_KEYS = ('water_stress_days', 'net_irrigation_requirement_mm')
+
+
+def _key(group, keys):
+    """Indicadores clave en orden fijo; si el grupo no trae ninguno, se dicen todos."""
+    if not group:
+        return group
+    picked = {k: group[k] for k in keys if k in group}
+    return picked or group
+
+
+def _summary(record, crop, budget):
+    """Resumen en lenguaje claro para productores y radio, con rango y sensibilidad si existen."""
+    d = record.get('decision_kpis') or {}
+    stress, irr, ok = d.get('water_stress_days') or {}, d.get('net_irrigation_requirement_mm') or {}, d.get('constraint_pass_frequency') or {}
+    years = [str(w['campaign_years'][0]) for w in record.get('windows', [])]
+    parts = [f"En los años analizados ({', '.join(years)}), con {budget}:"]
+    if stress.get('value') is not None:
+        rango = f" (entre {_num(stress['min'])} y {_num(stress['max'])})" if 'min' in stress and 'max' in stress else ''
+        parts.append(f"la {crop} tuvo en promedio {_num(stress['value'])} días de estrés severo por falta de agua{rango}")
+    elif crop == 'descanso':
+        parts.append('el terreno en descanso no tiene cultivo que sufra estrés')
+    if irr.get('value') is not None and crop != 'descanso':
+        parts.append(f"habría necesitado {_num(irr['value'])} mm de riego")
+    if type(ok.get('numerator')) is int:
+        parts.append(f"y la campaña resultó aceptable en {ok['numerator']} de {ok['denominator']} años")
+    text = ' '.join([parts[0], ', '.join(parts[1:])]) + '.'
+    alt = ((record.get('sensitivity') or {}).get('decision_kpis_alt') or {}).get('water_stress_days')
+    if alt is not None and stress.get('value') is not None:
+        text += f" Con la lluvia corregida según SENAMHI serían {_num(alt)} días de estrés."
+    return text + ' '
 
 
 def _message(record, source, catalog):
@@ -101,13 +153,16 @@ def _message(record, source, catalog):
             'Los KPI de campaña y ciclo no están disponibles; no se puede recomendar ni ordenar alternativas. '
             'Revisar agua, cobertura y calendario con el equipo técnico antes de decidir. Este texto no es un pronóstico.'
         )
+    budget = _lookup(catalog.get('water_budgets', []), 'water_budget_id', record.get('water_budget_id'))
+    budget_label = (budget or {}).get('label', '').split(':')[0].lower() or (record.get('water_budget_id') or 'presupuesto desconocido')
+    # Texto y audio deben ser equivalentes: se dicen los indicadores clave; la tabla completa va en la ficha.
     text = (
         'EVALUACIÓN HISTÓRICA SIMULADA, no observación de parcela ni pronóstico. '
-        + heading + f" Periodo {record.get('period_id') or 'no disponible'}; ENSO de la campaña inicial: {record.get('enso_initial_phase') or 'no disponible'}. "
-        f"Presupuesto de agua: {record.get('water_budget_id') or 'desconocido'}. Ventanas históricas válidas: {n}; "
-        f"campañas únicas: {record.get('n_unique_campaigns', 'no disponible')}. "
-        'Campaña de decisión: ' + _kpi_text(record.get('decision_kpis')) + '. '
-        'Ciclo completo de tres campañas: ' + _kpi_text(record.get('cycle_kpis')) + '. '
+        + heading + (' ' + _summary(record, crop, budget_label) if n > 0 and record.get('decision_kpis') else ' ')
+        + f"Escenario: periodo {record.get('period_id') or 'no disponible'}, ENSO de la campaña inicial {record.get('enso_initial_phase') or 'no disponible'}, "
+        f"{budget_label}, {n} ventanas históricas. "
+        'Campaña de decisión: ' + _kpi_text(_key(record.get('decision_kpis'), DECISION_KEYS)) + '. '
+        'Ciclo completo de tres campañas: ' + _kpi_text(_key(record.get('cycle_kpis'), CYCLE_KEYS)) + '. '
     )
     if n < 3:
         text += 'Muestra insuficiente: no se concluye una preferencia ni robustez. '

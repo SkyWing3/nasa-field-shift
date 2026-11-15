@@ -17,7 +17,7 @@ def display(value):
     return str(value)
 
 
-STYLE = '''body{font:17px/1.6 system-ui;margin:0;background:#f3f3ed;color:#193b30}main{max-width:68rem;margin:auto;padding:2rem}h1,h2,h3{line-height:1.2}a{color:#176247}a:focus-visible,button:focus-visible,audio:focus-visible{outline:3px solid #a55232;outline-offset:4px}.banner,article{padding:1rem;background:#fffef9;border:1px solid #c7cfc5;border-radius:.6rem;margin:1rem 0}.banner{border-left:5px solid #a55232}table{width:100%;border-collapse:collapse}th,td{padding:.55rem;text-align:left;border-bottom:1px solid #c7cfc5;vertical-align:top}.table-wrap{overflow-x:auto}dt{font-weight:bold}dd{margin:0 0 .8rem}audio{display:block;max-width:100%;margin:.8rem 0}small{display:block}.selected{font-weight:bold;background:#e4ecdf}button{font:inherit;padding:.5rem 1rem}.translation{border-left:5px solid #a55232;padding-left:.8rem;margin:1rem 0}@media print{body{background:white}main{padding:0}.no-print,audio{display:none}article{break-inside:avoid}a{color:inherit;text-decoration:none}}'''
+STYLE = '''body{font:17px/1.6 system-ui;margin:0;background:#f3f3ed;color:#193b30}main{max-width:68rem;margin:auto;padding:2rem}h1,h2,h3{line-height:1.2}a{color:#176247}a:focus-visible,button:focus-visible,audio:focus-visible{outline:3px solid #a55232;outline-offset:4px}.banner,article{padding:1rem;background:#fffef9;border:1px solid #c7cfc5;border-radius:.6rem;margin:1rem 0}.banner{border-left:5px solid #a55232}table{width:100%;border-collapse:collapse}th,td{padding:.55rem;text-align:left;border-bottom:1px solid #c7cfc5;vertical-align:top}.table-wrap{overflow-x:auto}dt{font-weight:bold}dd{margin:0 0 .8rem}audio{display:block;max-width:100%;margin:.8rem 0}small{display:block}.selected{font-weight:bold;background:#e4ecdf}button{font:inherit;padding:.5rem 1rem}.translation{border-left:5px solid #a55232;padding-left:.8rem;margin:1rem 0}li,dd,p,td{overflow-wrap:anywhere}@media print{body{background:white}main{padding:0}.no-print,audio{display:none}article{break-inside:avoid}a{color:inherit;text-decoration:none}}'''
 
 # Se comprueba al abrir el archivo y durante la visita, incluso en HTML estático.
 EDITORIAL_SCRIPT = '''<script>
@@ -53,7 +53,8 @@ def _voice_credit(audio):
 def _audio(item, prefix='..'):
     audio = item.get('audio') or {}
     path = audio.get('path') or item.get('audio_path')
-    allowed = audio.get('status') in ('available', 'available_fixture') and isinstance(path, str)
+    # El borrador se puede escuchar (para revisarlo y aprobarlo), rotulado; producción exige «available».
+    allowed = audio.get('status') in ('available', 'available_fixture', 'available_draft') and isinstance(path, str)
     if audio.get('status') == 'available' and item.get('review_status') != 'approved':
         allowed = False
     for field in ('build_id', 'result_id', 'case_id'):
@@ -66,7 +67,9 @@ def _audio(item, prefix='..'):
             return '<p>Audio preparado, con reproducción pendiente de coincidencia de IDs, licencia y revisión editorial/de escucha.</p>'
         return '<p>Audio de este resultado: no disponible. '+esc(audio.get('reason', 'No hay MP3 coincidente para esta selección.'))+'</p>'
     href = prefix + path
-    demo = '<p><strong>Audio de demostración con fixture; revisión humana pendiente.</strong></p>' if audio.get('status') == 'available_fixture' else ''
+    demo = ('<p><strong>Audio de demostración con fixture; revisión humana pendiente.</strong></p>' if audio.get('status') == 'available_fixture' else
+            '<p><strong>Audio en borrador: revisión de escucha pendiente (P5). Voz sintética; el texto escrito es la referencia.</strong></p>'
+            if audio.get('status') == 'available_draft' else '')
     return demo+'<audio controls preload="none" src="'+esc(href)+'" aria-label="Escuchar texto equivalente en español"></audio><a data-audio-download href="'+esc(href)+'" download>Descargar MP3</a><small>Reproducción solo al pulsar. Revisión: '+esc(audio.get('review_status', item.get('review_status', 'pendiente')))+'.</small>'+_voice_credit(audio)
 
 
@@ -85,6 +88,18 @@ def _translations(item, prefix='..'):
             player = '<audio controls preload="none" src="'+esc(href)+'" aria-label="Escuchar versión en '+esc(entry.get('language_name', language))+'"></audio><a data-audio-download href="'+esc(href)+'" download>Descargar MP3 ('+esc(language)+')</a>'+_voice_credit(entry)
         blocks.append('<div class="translation"><h3>'+esc(entry.get('language_name', language))+'</h3>'+warning+'<p lang="'+esc(language)+'">'+esc(entry.get('text', ''))+'</p>'+player+'</div>')
     return '<h2>Otros idiomas</h2>'+''.join(blocks) if blocks else ''
+
+
+def _source_text(item):
+    """Fuente legible: agencia, producto, periodo, consulta, licencia, enlace corto y huella."""
+    if not isinstance(item, dict) or 'agency' not in item:
+        return esc(display(item))
+    period = item.get('period') or {}
+    url = str(item.get('url', ''))
+    short = url.split('?')[0]
+    return (f"<strong>{esc(item['agency'])}</strong>: {esc(item.get('product', ''))} ({esc(item.get('version', ''))}). "
+            f"Periodo {esc(period.get('start', '?'))} a {esc(period.get('end', '?'))}; consultado {esc(str(item.get('queried_at', ''))[:10])}; "
+            f"licencia: {esc(item.get('license', ''))}. <a href=\"{esc(url)}\">{esc(short)}</a> · SHA-256 {esc(str(item.get('sha256', ''))[:12])}…")
 
 
 def _editorial_attrs(item):
@@ -116,7 +131,7 @@ def render_sheet(message):
     alternatives = ''.join('<li>'+esc(' / '.join(item['campaigns']))+(' (seleccionada)' if item['rotation_id'] == message['rotation_id'] else '')+'</li>' for item in sheet['alternatives'])
     cases = ''.join('<tr'+(' class="selected"' if case['case_id'] == message.get('case_id') else '')+'><th scope="row">'+esc(case['case_id'])+'</th><td>'+esc(' → '.join(case['campaigns']))+'</td><td>'+esc(case['decision_crop'])+'</td></tr>' for case in sheet.get('cases', []))
     cases_table = '<h2>Nueve casos: tres posiciones por secuencia</h2><div class="table-wrap"><table><thead><tr><th>Caso</th><th>Ciclo completo</th><th>Cultivo de decisión</th></tr></thead><tbody>'+cases+'</tbody></table></div>' if cases else ''
-    sources = '<ul>'+''.join('<li>'+esc(display(item))+'</li>' for item in sheet['sources'])+'</ul>' if sheet['sources'] else '<p>Fuentes científicas cargadas: ninguna.</p>'
+    sources = '<ul>'+''.join('<li>'+_source_text(item)+'</li>' for item in sheet['sources'])+'</ul>' if sheet['sources'] else '<p>Fuentes científicas cargadas: ninguna.</p>'
     limits = '<ul>'+''.join('<li>'+esc(display(item))+'</li>' for item in sheet.get('limitations', [])+sheet.get('assumptions', []))+'</ul>'
     return '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Raíz · ficha '+esc(message['result_id'])+'</title><style>'+STYLE+'</style></head><body><main><h1>Raíz · Oruro</h1><p class="banner"><strong>'+title+'</strong></p><p class="no-print"><a href="../index.html">Volver al catálogo</a> · Imprimir desde el navegador (Ctrl+P).</p><section'+_editorial_attrs(message)+'><h2>Mensaje equivalente</h2><p>'+esc(message['text'])+'</p><p data-editorial-status>Vigencia editorial: consultar fechas; no es horizonte meteorológico.</p>'+_audio(message)+_translations(message)+'<h2>Selección y evidencia</h2>'+_facts(message)+'<h2>Tres secuencias candidatas</h2><ol>'+alternatives+'</ol>'+cases_table+'<h2>KPI de campaña de decisión</h2>'+_kpis(sheet.get('decision_kpis'))+'<h2>KPI del ciclo completo</h2>'+_kpis(sheet.get('cycle_kpis'))+'<p>'+esc(sheet.get('missing_reason') or 'No se informa un motivo general de falta de datos.')+'</p><h2>Fuentes, supuestos y límites</h2>'+sources+limits+'<p>Boletín regional general separado; sin emisión comprobada. Ninguna ficha recomienda por sí sola una siembra.</p></section></main>'+EDITORIAL_SCRIPT+'</body></html>'
 

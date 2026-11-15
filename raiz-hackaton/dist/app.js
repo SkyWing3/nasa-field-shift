@@ -138,10 +138,11 @@ function roleContext(role) {
     '## Fuentes y procesamiento\n' + read($('#datos')),
     '## Rotaciones e indicadores\n' + read($('#estrategias')),
     '## Validez y límites\n' + read($('#consideraciones')),
+    '## Contexto fechado, afirmaciones y reproducción\n' + read($('#ganar')),
     '## MVP, tecnologías y contrato resumido\n' + read($('#mvp')),
     '## Hitos y recortes\n' + read($('#hitos-plan')),
     '## Mis tareas y criterios de aceptación\n' + read(role),
-    '## Instrucción de inicio\nEmpieza por la primera tarea de mi ficha. Plan vigente v3: una zona Oruro, POWER + ONI, periodos históricos/recientes, ENSO de la campaña inicial y tres secuencias anuales. Resultados precalculados; FastAPI solo si ya está integrado. Sin pronóstico a 24 h, ¿Acertamos?, POST de observaciones, Santa Cruz, Telegram ni modo offline en este MVP. Ficha, audio y boletín comparten evidencia. No inventes datos ni una validación del productor. No declares terminada una tarea sin demostrar sus criterios. Envío interno domingo 10:30–11:00, hora oficial por confirmar con organización.'
+    '## Instrucción de inicio\nEmpieza por la primera tarea de mi ficha. Plan vigente v3.1: una zona Oruro, POWER + ONI, periodos históricos/recientes, ENSO de la campaña de decisión y tres secuencias por tres posiciones (9 casos). Separar KPI de campaña y ciclo; Niño fuerte con n y sin conclusión si n<3. Contexto NOAA/IRI solo como pronóstico externo fechado; 4 de 5 solo tras reproducción D1 con punto final. Resultados precalculados; FastAPI solo si ya está integrado. Sin pronóstico a 24 h, ¿Acertamos?, POST de observaciones, Santa Cruz, Telegram ni modo offline en este MVP. Ficha, audio y boletín comparten evidencia. No inventes datos ni una validación del productor. No declares terminada una tarea sin demostrar sus criterios. Envío interno domingo 10:30–11:00, hora oficial por confirmar con organización.'
   ].join('\n\n') + '\n';
 }
 for (const role of document.querySelectorAll('.persona')) {
@@ -149,7 +150,7 @@ for (const role of document.querySelectorAll('.persona')) {
   const copy = document.createElement('button'); copy.type = 'button'; copy.className = 'button secondary'; copy.textContent = 'Copiar contexto';
   const download = document.createElement('button'); download.type = 'button'; download.className = 'button secondary'; download.textContent = 'Descargar .md';
   const feedback = document.createElement('p'); feedback.className = 'small'; feedback.setAttribute('role', 'status'); feedback.setAttribute('aria-live', 'polite');
-  feedback.textContent = 'Incluye tu ficha v3, el alcance integrado, los datos NASA/ONI, los hitos y el contrato resumido. Adjunta el .md a ChatGPT o Claude si no pueden abrir el enlace.';
+  feedback.textContent = 'Incluye tu ficha v3.1, el alcance integrado, los datos NASA/ONI, los hitos y el contrato resumido. Adjunta el .md a ChatGPT o Claude si no pueden abrir el enlace.';
   copy.addEventListener('click', async () => {
     try {
       await navigator.clipboard.writeText(roleContext(role));

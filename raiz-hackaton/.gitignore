@@ -16,3 +16,11 @@ __pycache__/
 *.py[cod]
 
 # assets/audio/ SÍ se versiona: son los MP3 entregables (~9 MB) y regenerarlos tarda ~20 min.
+
+# Datos (raiz_data): los originales descargados en datos/raw/ SÍ se versionan (evidencia, ~40 MB).
+# La base SQLite se regenera sin red con `python -m raiz_data procesar` (~20 s).
+datos/raiz_oruro.sqlite3*
+# Instantáneas de eventos: crecen en cada revisión; cada alerta guarda su evidencia en datos/alertas/.
+datos/raw/nasa-firms/
+datos/raw/usgs-sismos/
+datos/raw/gdacs/

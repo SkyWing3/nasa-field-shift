@@ -233,13 +233,13 @@ def voice_info(voice, language, rate):
             'encoder': 'LAME (lameenc) MP3 48 kbps mono 16 kHz'}
 
 
-def generate(communications, assets, languages, *, seed=1234, human=None):
+def generate(communications, assets, languages, *, seed=1234, human=None, only=None):
     import torch
     torch.set_num_threads(max(1, torch.get_num_threads()))
     assets = Path(assets).resolve()
     for folder in ('audio', 'source'):
         (assets / folder).mkdir(parents=True, exist_ok=True)
-    outputs = [(False, m) for m in communications['data']['messages']]
+    outputs = [(False, m) for m in communications['data']['messages'] if not only or only in m['result_id']]
     bulletin = communications['data']['regional_bulletin']
     if bulletin.get('text'):
         outputs.append((True, bulletin))
@@ -250,7 +250,7 @@ def generate(communications, assets, languages, *, seed=1234, human=None):
         print(f'· {config["name"]}: cargando {config["tts"]}', flush=True)
         voice = Voice(config['tts'], seed)
         for index, (is_bulletin, message) in enumerate(outputs):
-            name = 'regional-bulletin' if is_bulletin else f'message-{index + 1:02d}'
+            name = 'regional-bulletin' if is_bulletin else message['result_id']
             spoken_es = spoken_spanish(message['text'])
             base = {
                 'communication_id': message.get('communication_id'),
@@ -316,15 +316,35 @@ def main():
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument('--input', help='Carpeta de entrada (catalog/climate/results.json); calcula los mensajes')
     source.add_argument('--communications', help='communications.json ya construido')
+    source.add_argument('--texto-archivo', help='Modo texto suelto: un .txt (boletín o alerta) → un MP3 de ≤60 s')
     parser.add_argument('--editorial', help='JSON editorial usado en el build (cambia el texto del boletín)')
-    parser.add_argument('--output', required=True, help='Carpeta de salida: catalog.json, audio/*.mp3, source/*.txt')
+    parser.add_argument('--output', help='Carpeta de salida: catalog.json, audio/*.mp3, source/*.txt')
+    parser.add_argument('--salida', help='Modo texto suelto: ruta del MP3 a crear')
     parser.add_argument('--languages', default='es', help='Lista separada por comas: es,quh,ayr')
     parser.add_argument('--translations', help='JSON de traducción humana: {"quh": {"translator": "...", "texts": {communication_id: texto}}}')
     parser.add_argument('--seed', type=int, default=1234)
+    parser.add_argument('--filtro', help='Solo mensajes cuyo result_id contenga este texto (el boletín siempre se incluye)')
     parser.add_argument('--overwrite', action='store_true', help='Reemplazar un catálogo existente en --output')
     args = parser.parse_args()
     languages = [code.strip() for code in args.languages.split(',') if code.strip()]
+    if args.texto_archivo:
+        try:
+            require(bool(args.salida), 'El modo texto suelto requiere --salida')
+            text = Path(args.texto_archivo).read_text(encoding='utf-8').strip()
+            said = spoken_spanish(text)
+            voice = Voice(LANGUAGES['es']['tts'], args.seed)
+            out = Path(args.salida)
+            out.parent.mkdir(parents=True, exist_ok=True)
+            rms, duration, rate = speak(voice, said, out, True)
+            meta = {'texto_sha256': text_sha256(text), 'texto_hablado': said, 'duracion_s': duration, 'velocidad': rate, 'rms': rms,
+                    'voz': voice_info(voice, 'es', rate), 'licencia': LICENSE, 'revision_escucha': 'pendiente'}
+            out.with_name(out.stem + '.audio.json').write_text(json.dumps(meta, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+        except (ValueError, OSError) as error:
+            parser.exit(1, f'ERROR AUDIO MMS: {error}\n')
+        print(f'OK · {out} · {duration:.1f} s')
+        return
     try:
+        require(bool(args.output), '--output es obligatorio salvo en modo --texto-archivo')
         require(languages and all(code in LANGUAGES for code in languages), f'Idiomas admitidos: {", ".join(LANGUAGES)}')
         require(args.overwrite or not (Path(args.output) / 'catalog.json').exists(), 'Ya existe catalog.json en la salida; usar --overwrite u otra carpeta')
         if args.input:
@@ -332,7 +352,7 @@ def main():
         else:
             communications = read_json(args.communications)
         human = read_json(args.translations) if args.translations else None
-        catalog = generate(communications, args.output, languages, seed=args.seed, human=human)
+        catalog = generate(communications, args.output, languages, seed=args.seed, human=human, only=args.filtro)
     except (ValueError, OSError, KeyError) as error:
         parser.exit(1, f'ERROR AUDIO MMS: {error}\n')
     print(f"OK · {len(catalog['items'])} MP3 · build {catalog['build_id']} · mode={catalog['mode']} · revisión de escucha pendiente")

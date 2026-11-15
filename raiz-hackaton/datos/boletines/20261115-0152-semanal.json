@@ -1,0 +1,61 @@
+{
+ "boletin_id": "20261115-0152-semanal",
+ "creado": "2026-11-15T01:52:16-04:00",
+ "tipo": "semanal",
+ "estado": "borrador_pendiente_revision",
+ "emitido": null,
+ "vigente_hasta": "2026-11-22T01:52:16-04:00",
+ "difusion": "preparado_no_difundido",
+ "texto": "Boletín agroclimático de Raíz para Oruro, del 5 de noviembre de 2026 al 11 de noviembre de 2026. Según datos satelitales de la NASA, llovieron 10 milímetros, más que lo normal para estas fechas, que es 6. Hubo 0 noches con helada; la mínima fue de 6 grados. El océano Pacífico está en fase Niño fuerte, con índice de 2.5, y la NOAA considera probable un Niño de fuerte a muy fuerte hasta enero–marzo de 2027. En los 3 años de Niño fuerte recientes, la papa en secano tuvo en promedio 113 días de estrés severo por falta de agua. Conserve el rastrojo para cubrir el suelo, aproveche la humedad para sembrar y consulte a su técnico. Esto no es un pronóstico del tiempo. Borrador pendiente de revisión.",
+ "caracteres": 699,
+ "detalle": {
+  "semana": [
+   "2026-11-05",
+   "2026-11-11"
+  ],
+  "lluvia_mm": 10.4,
+  "normal_1991_2020_mm": 6.5,
+  "noches_helada_tmin_0C": 0,
+  "tmin_c": 5.8,
+  "oni": {
+   "temporada": "ASO 2026",
+   "anomalia": 2.46,
+   "fase": "Niño fuerte"
+  },
+  "perspectiva": {
+   "texto": "la NOAA considera probable un Niño de fuerte a muy fuerte hasta enero–marzo de 2027",
+   "fuente": "NOAA CPC, discusión ENSO del 12-nov-2026",
+   "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml"
+  },
+  "analogos": {
+   "papa": {
+    "estres_dias": 113,
+    "n": 3,
+    "riego_mm": 471.0,
+    "result_id": "p2001-2025.nino-fuerte.secano.A-1",
+    "sensibilidad_estres": 117.3
+   },
+   "quinua": {
+    "estres_dias": 78,
+    "n": 3,
+    "riego_mm": 329.0,
+    "result_id": "p2001-2025.nino-fuerte.secano.A-2",
+    "sensibilidad_estres": 86
+   },
+   "haba": {
+    "estres_dias": 120.7,
+    "n": 3,
+    "riego_mm": 499.7,
+    "result_id": "p2001-2025.nino-fuerte.secano.B-3",
+    "sensibilidad_estres": 128
+   }
+  },
+  "fuentes": [
+   "nasa-power-daily",
+   "noaa-cpc-oni",
+   "resultados Raíz"
+  ],
+  "limites": "POWER celda ~50 km (subestima heladas locales); análogos históricos, no pronóstico"
+ },
+ "audio": null
+}

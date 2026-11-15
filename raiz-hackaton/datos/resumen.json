@@ -1,0 +1,109 @@
+{
+ "build_id": "raiz-oruro-power-20261111-v1",
+ "datos_hasta": "2026-11-11T23:59:59-04:00",
+ "registros": 288,
+ "dataset": {
+  "fuentes": 14,
+  "descargas": 21,
+  "clima_diario": 265762,
+  "et0_diaria": 16751,
+  "oni": 921,
+  "campanas_simuladas": 2322,
+  "resultados": 288,
+  "ine_oruro": 378,
+  "verificaciones": 18,
+  "localidades": 10
+ },
+ "escenario_actual": {
+  "periodo": "2001-2025",
+  "enso": "Niño fuerte",
+  "presupuesto": "secano",
+  "ventanas": 3,
+  "orden": [
+   {
+    "puesto": 1,
+    "caso": "A-2",
+    "rotacion": "papa-quinua-descanso",
+    "cultivo_decision": "quinua",
+    "puntaje": 0.6705
+   },
+   {
+    "puesto": 2,
+    "caso": "A-1",
+    "rotacion": "papa-quinua-descanso",
+    "cultivo_decision": "papa",
+    "puntaje": 0.6691
+   },
+   {
+    "puesto": 3,
+    "caso": "A-3",
+    "rotacion": "papa-quinua-descanso",
+    "cultivo_decision": "descanso",
+    "puntaje": 0.668
+   },
+   {
+    "puesto": 4,
+    "caso": "C-3",
+    "rotacion": "papa-haba-descanso",
+    "cultivo_decision": "descanso",
+    "puntaje": 0.5401
+   },
+   {
+    "puesto": 5,
+    "caso": "C-2",
+    "rotacion": "papa-haba-descanso",
+    "cultivo_decision": "haba",
+    "puntaje": 0.5146
+   },
+   {
+    "puesto": 6,
+    "caso": "B-1",
+    "rotacion": "papa-quinua-haba",
+    "cultivo_decision": "papa",
+    "puntaje": 0.4736
+   },
+   {
+    "puesto": 7,
+    "caso": "B-3",
+    "rotacion": "papa-quinua-haba",
+    "cultivo_decision": "haba",
+    "puntaje": 0.4005
+   },
+   {
+    "puesto": 8,
+    "caso": "C-1",
+    "rotacion": "papa-haba-descanso",
+    "cultivo_decision": "papa",
+    "puntaje": 0.3925
+   },
+   {
+    "puesto": 9,
+    "caso": "B-2",
+    "rotacion": "papa-quinua-haba",
+    "cultivo_decision": "quinua",
+    "puntaje": 0.3543
+   }
+  ]
+ },
+ "verificacion": {
+  "senamhi": {
+   "normal_nov_mar_senamhi_mm": 320.5,
+   "normal_nov_mar_power_mm": 331.3,
+   "sesgo_power_pct": 3,
+   "coincidencia_signo": "4/6 periodos con anomalía del mismo signo"
+  },
+  "ine_spearman": {
+   "papa": 0.25,
+   "quinua": 0.42,
+   "haba": 0.02
+  },
+  "eventos": [
+   "1982 sequía: coincide; sequía: lluvia nov–mar en el tercio más seco",
+   "2015 sequía: coincide; sequía: lluvia nov–mar en el tercio más seco",
+   "2022 sequía: coincide; sequía: lluvia nov–mar en el tercio más seco",
+   "2023 helada/sequía: no coincide; sequía: lluvia en percentil 56, no en el tercio más seco; helada: POWER (celda ~50 km) no registra Tmin ≤ −2 °C; subestima heladas locales",
+   "2025 helada: no coincide; helada: POWER (celda ~50 km) no registra Tmin ≤ −2 °C; subestima heladas locales"
+  ],
+  "merra2_spearman": 0.9
+ }
+}

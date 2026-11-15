@@ -1,0 +1,23 @@
+{
+  "texto_sha256": "f7a1b6751788da3a89bc4c56197f403d3d56890d93f8d4668721acafb8f3d854",
+  "texto_hablado": "Boletín agroclimático de Raíz para Oruro, del cinco de noviembre de dos mil veintiséis al once de noviembre de dos mil veintiséis. Según datos satelitales de la nasa, llovieron diez milímetros, más que lo normal para estas fechas, que es seis. Hubo cero noches con helada; la mínima fue de seis grados. El océano Pacífico está en fase Niño fuerte, con índice de dos coma cinco, y la ene o a a considera probable un Niño de fuerte a muy fuerte hasta enero–marzo de dos mil veintisiete. En los tres años de Niño fuerte recientes, la papa en secano tuvo en promedio ciento trece días de estrés severo por falta de agua. Conserve el rastrojo para cubrir el suelo, aproveche la humedad para sembrar y consulte a su técnico. Esto no es un pronóstico del tiempo. Borrador pendiente de revisión.",
+  "duracion_s": 58.5,
+  "velocidad": 1.2,
+  "rms": 4035.664,
+  "voz": {
+    "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+    "name": "facebook/mms-tts-spa",
+    "language": "es",
+    "model_revision": "833b96c0278c85cf09776d565ba8f1cb2819f7ec",
+    "seed": 1234,
+    "speaking_rate": 1.2,
+    "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+  },
+  "licencia": {
+    "status": "licensed",
+    "spdx": "CC-BY-NC-4.0",
+    "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+    "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+  },
+  "revision_escucha": "pendiente"
+}

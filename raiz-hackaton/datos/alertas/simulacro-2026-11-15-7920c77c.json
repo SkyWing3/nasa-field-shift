@@ -1,0 +1,37 @@
+{
+ "alert_id": "simulacro-2026-11-15-7920c77c",
+ "creada": "2026-11-15T00:19:13-04:00",
+ "estado": "pendiente_aprobacion",
+ "aprobada_por": null,
+ "aprobada_en": null,
+ "difusion": "no_difundida",
+ "tipo": "simulacro",
+ "nivel": "informativa",
+ "fecha_evento": "2026-11-15",
+ "zonas": [
+  {
+   "localidad": "Huanuni",
+   "distancia_km": 0.5,
+   "direccion": "oeste",
+   "poblacion": 15492
+  },
+  {
+   "localidad": "Poopó",
+   "distancia_km": 16.9,
+   "direccion": "noreste",
+   "poblacion": 1720
+  },
+  {
+   "localidad": "Machacamarca",
+   "distancia_km": 23.2,
+   "direccion": "sureste",
+   "poblacion": 2044
+  }
+ ],
+ "n_evidencias": 0,
+ "evidencia": [],
+ "fuente": "Simulacro interno de Raíz (no es un dato)",
+ "confirmar_con": "n/a",
+ "texto": "SIMULACRO. ESTO ES UNA PRÁCTICA, NO ES UN EVENTO REAL. Aviso preliminar de Raíz: se simula una helada fuerte esta noche en Huanuni y alrededores. En un caso real: cubra almácigos, riegue ligeramente al atardecer y proteja al ganado. Fin del simulacro.",
+ "regla": "Práctica del flujo de aprobación"
+}

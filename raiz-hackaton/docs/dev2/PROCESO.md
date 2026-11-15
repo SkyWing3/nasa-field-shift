@@ -177,3 +177,40 @@ copia Codex tiene la actualización v3.1 sin aplicar al tablero en vivo.
 - Todo es fixture: el texto dice que no hay resultados reales. Con el paquete de D1
   hay que regenerar el audio con `--input` real (el hash del texto cambia).
 - La pronunciación de siglas y nombres no se verificó de oído.
+
+## Bitácora 2026-11-15 00:00–00:50 · Dev 2 asume D1: datos reales, KPI, verificación, alertas y boletines
+
+Trabajo hecho en `nasa-field-shift/raiz-hackaton` (Claude Code). Detalle en `docs/datos/METODOLOGIA.md`;
+cifras en `docs/datos/RESULTADOS.md` (se genera desde los datos).
+
+- **Módulo nuevo `raiz_data/`** (solo biblioteca estándar):
+  - registro de fuentes por capas;
+  - descarga con respaldo y hash;
+  - modelo FAO-56 (ET0, Kc, balance diario);
+  - escenarios ENSO × periodo × presupuesto × 9 casos;
+  - KPI con media, mínimo, máximo y desviación, y ranking con reglas explícitas;
+  - sensibilidad con SENAMHI y verificación externa (SENAMHI, INE, VIDECI/prensa, calendario, MERRA-2);
+  - dataset SQLite local, alertas (FIRMS, USGS, GDACS) con aprobación humana, y boletines manuales y periódicos.
+- **Paquete real** `datos/` (build `raiz-oruro-power-20261111-v1`, 144 resultados): el validador Dev 2 lo
+  acepta (`structurally_valid_precalculated_inputs`). Se publicó localmente con 9 MP3 del escenario
+  actual (2001–2025, Niño fuerte, secano) y el boletín regional (38 s).
+- **Cambios en `raiz_delivery`:**
+  - mensajes reales en lenguaje claro (resumen, rango y sensibilidad) con indicadores clave, de ~80–110 s de audio;
+  - el audio en borrador se puede escuchar, rotulado (producción sigue exigiendo aprobación);
+  - fuentes legibles en la ficha, sin desbordar en móvil.
+- **Generador de audio:** modo texto suelto (boletines y alertas, ≤60 s), filtro por escenario, MP3 nombrados por `result_id`.
+- **Pruebas:** 77 en total (63 de Dev 2 y 14 de datos), todas OK. Incluyen los ejemplos 8 y 18 de FAO-56 y el cierre del balance de agua.
+- **Fallos encontrados y corregidos:**
+  - unidades de SoilGrids (factor 100, no 1000);
+  - umbral de viento que nunca se alcanzaba;
+  - KPI de estrés y regla de cumplimiento que no distinguían nada;
+  - frecuencia redondeada que rompía el contrato;
+  - títulos desfasados en la web del INE;
+  - metadatos de audio que pisaban el JSON del boletín;
+  - conexiones SQLite sin cerrar.
+- **Pendiente humano:**
+  - P6 confirma el punto y revisa los supuestos;
+  - P5 escucha los audios y aprueba;
+  - alguien aprueba o descarta las alertas borrador en `datos/alertas/`;
+  - pedir series diarias a SENAMHI (dirmethi@senamhi.gob.bo);
+  - cuenta Earthdata para GPM, SMAP y MODIS.
