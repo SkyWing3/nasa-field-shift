@@ -4,6 +4,8 @@ import { Aviso } from './components/Comunes.jsx'
 import Escenario from './components/Escenario.jsx'
 import EditorialIntro from './components/EditorialIntro.jsx'
 import Alertas from './components/Alertas.jsx'
+import TuParcela from './components/TuParcela.jsx'
+import { leerParcela, olvidarParcela } from './lib/parcela.js'
 import { Bienvenida, Recorrido, useLector, useTutorialDatos } from './components/Tutorial.jsx'
 import useEditorialMotion, { useReduccionSistema } from './lib/useEditorialMotion.js'
 import { useTraductorPantalla } from './lib/traductor.js'
@@ -60,6 +62,7 @@ export default function App() {
   })
   const [bienvenidaAbierta, setBienvenidaAbierta] = useState(() => !inicio.configurado)
   const [voz, setVoz] = useState(inicio.voz)
+  const [parcela, setParcela] = useState(leerParcela)
   const [conTutorial, setConTutorial] = useState(true)
   const [recorridoActivo, setRecorridoActivo] = useState(inicio.tutorial)
   const datosTutorial = useTutorialDatos()
@@ -147,10 +150,11 @@ export default function App() {
         {estado.error && <div className="error-state"><Aviso tipo="peligro" titulo="No pudimos cargar los datos"><p>{estado.error.message}</p><div className="acciones"><button type="button" className="boton primario" onClick={() => setRevision((r) => r + 1)}>Volver a intentar</button><button type="button" className="boton secundario" onClick={() => setFuentesAbiertas(true)}>Revisar fuente de datos</button></div></Aviso></div>}
         {paquete && <>
           {(naturaleza.tipo === 'ejemplo' || naturaleza.tipo === 'fixture') && <Aviso tipo="alerta" titulo={naturaleza.titulo}>{naturaleza.texto}</Aviso>}
+          <TuParcela parcela={parcela} paquete={paquete} idioma={idioma} olvidar={() => { olvidarParcela(); setParcela(null) }} />
           <Escenario opciones={opciones} escenario={escenario} setEscenario={setEscenario} registros={registros} />
           <div className="view-content">
             {paso === 'clima' && <VistaClima paquete={paquete} escenario={escenario} registros={registros} />}
-            {paso === 'rotaciones' && <VistaRotaciones paquete={paquete} escenario={escenario} registros={registros} alVerFicha={verCaso('ficha')} alVerSuelo={verCaso('suelo')} />}
+            {paso === 'rotaciones' && <VistaRotaciones paquete={paquete} escenario={escenario} registros={registros} alVerFicha={verCaso('ficha')} alVerSuelo={verCaso('suelo')} parcela={parcela} />}
             {paso === 'suelo' && <VistaSuelo paquete={paquete} registros={registros} casoId={casoId} setCasoId={setCasoId} />}
             {paso === 'ficha' && <VistaFicha paquete={paquete} escenario={escenario} registros={registros} casoId={casoId} setCasoId={setCasoId} />}
           </div>

@@ -280,7 +280,14 @@
     "Días en que el suelo está descubierto y llueve sobre el umbral. Es un conteo, no toneladas de erosión.": "Days when the soil is uncovered and rain exceeds the threshold. It is a count, not tonnes of erosion.",
     "Días en que el suelo está descubierto y el viento supera el umbral.": "Days when the soil is uncovered and wind exceeds the threshold.",
     "Días con temperatura mínima bajo el umbral declarado para floración. Dato regional, no helada medida en tu chacra.": "Days with minimum temperature below the declared flowering threshold. Regional data, not frost measured in your field.",
-    "Lo que se podría aplicar sin pasar el límite de agua elegido.": "What could be applied without exceeding the chosen water limit."
+    "Lo que se podría aplicar sin pasar el límite de agua elegido.": "What could be applied without exceeding the chosen water limit.",
+    "Tu parcela": "Your plot",
+    "Elegida en la simulación 3D": "Chosen in the 3D simulation",
+    "Olvidar parcela": "Forget plot",
+    "Elegir parcela": "Choose plot",
+    "Está dentro de la zona de los datos: estos resultados te sirven como referencia regional.": "It is inside the data area: these results work as a regional reference for you.",
+    "Está lejos de la zona de los datos: los resultados son de Obrajes y pueden no parecerse a tu parcela.": "It is far from the data area: the results are for Obrajes and may not resemble your plot.",
+    "Elige tu parcela en la simulación 3D y aquí verás el agua en metros cúbicos para tu terreno.": "Choose your plot in the 3D simulation and you will see the water in cubic metres for your land here."
   },
   "patrones": {
     "{n} días": "{n} days",
@@ -292,6 +299,10 @@
     "Ocultar detalles del caso {t}": "Hide details of case {t}",
     "Secuencia: {a}, luego {b}, luego {c}": "Sequence: {a}, then {b}, then {c}",
     "{a} → {b} → {c}": "{a} → {b} → {c}",
-    "Escuchar en español: {t}": "Listen in Spanish: {t}"
+    "Escuchar en español: {t}": "Listen in Spanish: {t}",
+    "Superficie: {n} ha": "Area: {n} ha",
+    "A {n} km del punto de los datos (Obrajes).": "{n} km from the data point (Obrajes).",
+    "En tu parcela, 1 mm de riego son {n} m³ de agua.": "On your plot, 1 mm of irrigation is {n} m³ of water.",
+    "≈ {n} m³ en tu parcela": "≈ {n} m³ on your plot"
   }
 }

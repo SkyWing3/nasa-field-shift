@@ -181,3 +181,16 @@
 .fallo-app { max-width:640px; margin:15vh auto; padding:24px; }
 .fallo-app h1 { font:600 2rem/1.2 var(--titulo); color:var(--forest); }
 .fallo-detalle { font-size:.85rem; color:var(--tinta-2); overflow-wrap:anywhere; }
+
+/* Tu parcela (desde la simulación 3D) */
+.tu-parcela { display:flex; gap:14px; align-items:flex-start; max-width:1260px; margin:0 auto 20px; padding:16px 20px; border-radius:16px; background:var(--ok-f); color:var(--ok-t); box-sizing:border-box; }
+.tu-parcela.lejos { background:var(--prec-f); color:var(--prec-t); }
+.tu-parcela.vacia { align-items:center; background:var(--agua-f); color:var(--agua-t); }
+.tu-parcela.vacia p { margin:0; flex:1; }
+.tu-parcela > div { flex:1; min-width:0; }
+.tu-parcela h2 { margin:0 0 6px; font-size:1.15rem; }
+.tu-parcela ul { margin:0 0 6px; padding-left:18px; }
+.tu-parcela-origen { margin:0; font-size:.74rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; opacity:.85; }
+.tu-parcela-estado { margin:0; font-weight:600; }
+.metrica-parcela { display:block; font-size:.78rem; font-weight:700; color:var(--ok-t); }
+@media (max-width:760px) { .tu-parcela { margin:0 18px 18px; flex-wrap:wrap; } }

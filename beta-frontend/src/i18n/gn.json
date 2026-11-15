@@ -280,7 +280,14 @@
     "Días en que el suelo está descubierto y llueve sobre el umbral. Es un conteo, no toneladas de erosión.": "Ára yvy nandi ha oky hetaitereíva. Ha'e papapy, ndaha'éi yvy oñehundíva tonelada.",
     "Días en que el suelo está descubierto y el viento supera el umbral.": "Ára yvy nandi ha yvytu hatãiterei.",
     "Días con temperatura mínima bajo el umbral declarado para floración. Dato regional, no helada medida en tu chacra.": "Ára ro'y ohasáva yvoty jave rechaukaha. Tetã'ỹi mba'ekuaa, ndaha'éi ro'y ojeipapáva nekokuépe.",
-    "Lo que se podría aplicar sin pasar el límite de agua elegido.": "Ikatúva ojepuru ohasa'ỹre y ipahaha reiporavova'ekue."
+    "Lo que se podría aplicar sin pasar el límite de agua elegido.": "Ikatúva ojepuru ohasa'ỹre y ipahaha reiporavova'ekue.",
+    "Tu parcela": "Nekokue",
+    "Elegida en la simulación 3D": "Ojeporavo simulación 3D-pe",
+    "Olvidar parcela": "Hesarái kokuégui",
+    "Elegir parcela": "Eiporavo kokue",
+    "Está dentro de la zona de los datos: estos resultados te sirven como referencia regional.": "Oĩ mba'ekuaa tetã'ỹime: ko tembiapo ikatu reipuru tetã'ỹi techapyrãrõ.",
+    "Está lejos de la zona de los datos: los resultados son de Obrajes y pueden no parecerse a tu parcela.": "Mombyry mba'ekuaa tetã'ỹigui: tembiapo ha'e Obrajes-gua ha ikatu ndojoguái nekokuépe.",
+    "Elige tu parcela en la simulación 3D y aquí verás el agua en metros cúbicos para tu terreno.": "Eiporavo nekokue simulación 3D-pe ha ko'ápe rehecháta y metro cúbico-pe nde yvy-rã."
   },
   "patrones": {
     "{n} días": "{n} ára",
@@ -292,6 +299,10 @@
     "Ocultar detalles del caso {t}": "Emokañy ñeiporavo {t}",
     "Secuencia: {a}, luego {b}, luego {c}": "Ñembojoapy: {a}, upéi {b}, upéi {c}",
     "{a} → {b} → {c}": "{a} → {b} → {c}",
-    "Escuchar en español: {t}": "Ehendu castellano-pe: {t}"
+    "Escuchar en español: {t}": "Ehendu castellano-pe: {t}",
+    "Superficie: {n} ha": "Tuichakue: {n} ha",
+    "A {n} km del punto de los datos (Obrajes).": "{n} km mombyry mba'ekuaa rendágui (Obrajes).",
+    "En tu parcela, 1 mm de riego son {n} m³ de agua.": "Nekokuépe, 1 mm y ñemboy ha’e {n} m³ y.",
+    "≈ {n} m³ en tu parcela": "≈ {n} m³ nekokuépe"
   }
 }

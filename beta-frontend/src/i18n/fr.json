@@ -280,7 +280,14 @@
     "Días en que el suelo está descubierto y llueve sobre el umbral. Es un conteo, no toneladas de erosión.": "Jours où le sol est découvert et où la pluie dépasse le seuil. C'est un comptage, pas des tonnes d'érosion.",
     "Días en que el suelo está descubierto y el viento supera el umbral.": "Jours où le sol est découvert et où le vent dépasse le seuil.",
     "Días con temperatura mínima bajo el umbral declarado para floración. Dato regional, no helada medida en tu chacra.": "Jours où la température minimale passe sous le seuil déclaré pour la floraison. Donnée régionale, pas un gel mesuré dans votre champ.",
-    "Lo que se podría aplicar sin pasar el límite de agua elegido.": "Ce qui pourrait être appliqué sans dépasser la limite d'eau choisie."
+    "Lo que se podría aplicar sin pasar el límite de agua elegido.": "Ce qui pourrait être appliqué sans dépasser la limite d'eau choisie.",
+    "Tu parcela": "Votre parcelle",
+    "Elegida en la simulación 3D": "Choisie dans la simulation 3D",
+    "Olvidar parcela": "Oublier la parcelle",
+    "Elegir parcela": "Choisir la parcelle",
+    "Está dentro de la zona de los datos: estos resultados te sirven como referencia regional.": "Elle est dans la zone des données : ces résultats vous servent de référence régionale.",
+    "Está lejos de la zona de los datos: los resultados son de Obrajes y pueden no parecerse a tu parcela.": "Elle est loin de la zone des données : les résultats concernent Obrajes et peuvent différer de votre parcelle.",
+    "Elige tu parcela en la simulación 3D y aquí verás el agua en metros cúbicos para tu terreno.": "Choisissez votre parcelle dans la simulation 3D et vous verrez ici l'eau en mètres cubes pour votre terrain."
   },
   "patrones": {
     "{n} días": "{n} jours",
@@ -292,6 +299,10 @@
     "Ocultar detalles del caso {t}": "Masquer les détails du cas {t}",
     "Secuencia: {a}, luego {b}, luego {c}": "Séquence : {a}, puis {b}, puis {c}",
     "{a} → {b} → {c}": "{a} → {b} → {c}",
-    "Escuchar en español: {t}": "Écouter en espagnol : {t}"
+    "Escuchar en español: {t}": "Écouter en espagnol : {t}",
+    "Superficie: {n} ha": "Surface : {n} ha",
+    "A {n} km del punto de los datos (Obrajes).": "À {n} km du point des données (Obrajes).",
+    "En tu parcela, 1 mm de riego son {n} m³ de agua.": "Sur votre parcelle, 1 mm d'irrigation représente {n} m³ d'eau.",
+    "≈ {n} m³ en tu parcela": "≈ {n} m³ sur votre parcelle"
   }
 }

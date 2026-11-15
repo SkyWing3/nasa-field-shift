@@ -17,6 +17,10 @@ export interface SavedSiteSummary {
   readonly name: string;
   readonly area: string;
   readonly center: string;
+  /** Para personalizar el comparador (beta-frontend): ubicación y superficie. */
+  readonly latitude?: number;
+  readonly longitude?: number;
+  readonly areaHa?: number;
 }
 
 interface StartScreenProps {
@@ -58,6 +62,20 @@ function CheckRow({ name, detail, value, tone, action, testId }: CheckRowProps) 
       </span>
     </li>
   );
+}
+
+/**
+ * Parcela para el comparador: nombre, superficie y ubicación redondeada a 0,01° (≈1 km),
+ * igual que el punto publicado de Raíz; no se envían coordenadas exactas.
+ */
+function siteParams(site: SavedSiteSummary | null): Record<string, string> {
+  if (site?.latitude === undefined || site.longitude === undefined) return {};
+  return {
+    parcela: site.name,
+    lat: site.latitude.toFixed(2),
+    lon: site.longitude.toFixed(2),
+    ...(site.areaHa === undefined ? {} : { ha: site.areaHa.toFixed(2) }),
+  };
 }
 
 /** Abanico de surcos en perspectiva que convergen en el horizonte (decorativo). */
@@ -208,6 +226,7 @@ export function StartScreen({
               size="large"
               href={withLanguage(comparatorUrl, language, {
                 voz: voice ? 'si' : 'no',
+                ...siteParams(savedSite),
                 ...(tutorialChosen ? { tutorial: 'si' } : {}),
               })}
               target="_blank"

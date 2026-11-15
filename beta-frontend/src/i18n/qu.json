@@ -279,7 +279,14 @@
     "Días en que el suelo está descubierto y llueve sobre el umbral. Es un conteo, no toneladas de erosión.": "Allpa mana qatasqa kachkaptin sinchi paraq p'unchawkuna. Yupaymi, manam allpa chinkaypa toneladankunachu.",
     "Días en que el suelo está descubierto y el viento supera el umbral.": "Allpa mana qatasqa kachkaptin sinchi wayraq p'unchawkuna.",
     "Días con temperatura mínima bajo el umbral declarado para floración. Dato regional, no helada medida en tu chacra.": "T'ikay pachapi tupumanta aswan chiri p'unchawkuna. Suyu willakuy, manam chakraykipi tupusqa qasachu.",
-    "Lo que se podría aplicar sin pasar el límite de agua elegido.": "Akllasqa yaku tuputa mana yallispa qarpay atikunman."
+    "Lo que se podría aplicar sin pasar el límite de agua elegido.": "Akllasqa yaku tuputa mana yallispa qarpay atikunman.",
+    "Tu parcela": "Chakrayki",
+    "Elegida en la simulación 3D": "3D chakrapi akllasqa",
+    "Olvidar parcela": "Chakrata qunqay",
+    "Elegir parcela": "Chakrata akllay",
+    "Está dentro de la zona de los datos: estos resultados te sirven como referencia regional.": "Willakuykunapa suyunpim kachkan: kay tukuykunaqa suyu qhawarinapaq allinmi.",
+    "Está lejos de la zona de los datos: los resultados son de Obrajes y pueden no parecerse a tu parcela.": "Willakuykunapa suyunmanta karupim: tukuykunaqa Obrajesmantam, chakraykiman mana rikch’akunmanchu.",
+    "Elige tu parcela en la simulación 3D y aquí verás el agua en metros cúbicos para tu terreno.": "3D chakrapi chakraykita akllay, kaypitaq allpaykipaq yakuta metros cúbicospi rikunki."
   },
   "patrones": {
     "{n} días": "{n} p'unchaw",
@@ -291,6 +298,10 @@
     "Ocultar detalles del caso {t}": "{t} akllanata pakay",
     "Secuencia: {a}, luego {b}, luego {c}": "Qatiq: {a}, chaymanta {b}, chaymanta {c}",
     "{a} → {b} → {c}": "{a} → {b} → {c}",
-    "Escuchar en español: {t}": "Castellanopi uyariy: {t}"
+    "Escuchar en español: {t}": "Castellanopi uyariy: {t}",
+    "Superficie: {n} ha": "Hatun kaynin: {n} ha",
+    "A {n} km del punto de los datos (Obrajes).": "Willakuykunapa chiqanmanta (Obrajes) {n} km karupi.",
+    "En tu parcela, 1 mm de riego son {n} m³ de agua.": "Chakraykipi, 1 mm qarpayqa {n} m³ yakum.",
+    "≈ {n} m³ en tu parcela": "≈ {n} m³ chakraykipi"
   }
 }

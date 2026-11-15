@@ -363,3 +363,16 @@ python -m raiz_delivery publish --package build\package-real --site-root build\a
   - `components/Fallo.jsx` muestra un aviso con «Volver a cargar» si la app falla al dibujarse.
 - **Medido desde internet** (`/?idioma=es&voz=no`, sin datos guardados): HTML+JS ~0,1 s; datos ~1 s (`climate.json` viaja con brotli: 701 KB en lugar de 11,6 MB); 19 recursos; sin errores.
 - **Nota:** con `vite preview`, los cambios de código requieren volver a correr `npm run publicar`. Para preparar el paquete (`npm run paquete`) hay que detener antes el servidor.
+
+### 15-nov 11:55 · La parcela del 3D personaliza beta-frontend
+
+- **Ya se compartía:** idioma, voz, preferencia de tutorial y alarmas (el mismo `alertas.json`).
+- **Faltaba:** la parcela elegida en TerraLab 3D. Ahora «Comparar rotaciones» envía `parcela`, `lat`/`lon` redondeadas a 0,01° (~1 km, como el punto publicado; no se envían coordenadas exactas) y `ha`.
+- **beta-frontend** (`lib/parcela.js`, `components/TuParcela.jsx`): guarda la parcela en el navegador y muestra la tarjeta «Tu parcela», con:
+  - la superficie;
+  - la distancia al punto de los datos (Obrajes, −17,83; −67,00), y si está dentro de la zona (≤25 km, media celda NASA POWER) o lejos (aviso de que los resultados son de Obrajes);
+  - la conversión del riego: 1 mm × 10 m³/ha × superficie. Cada tarjeta de rotación muestra «≈ N m³ en tu parcela».
+- No se recalcula clima ni suelo para otra ubicación: eso exigiría correr el pipeline con NASA POWER para ese punto.
+- Sin parcela, la tarjeta invita a elegirla en el 3D. Traducida a 6 idiomas (IA).
+- **Pruebas:** beta-frontend 18 unitarias (3 nuevas) y 7 de integración; 3D 180.
+- **Verificado por internet:** la parcela a 1 km da «dentro de la zona» y 0,49 ha → ≈2.237 m³ para 457 mm. La parcela en La Paz da 192 km y el aviso, también en quechua.

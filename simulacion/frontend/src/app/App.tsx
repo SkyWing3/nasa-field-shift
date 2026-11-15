@@ -75,6 +75,9 @@ export function App() {
             name: saved.name,
             area: formatArea(saved.region.widthM * saved.region.lengthM),
             center: `${formatDegrees(saved.region.center.latitude, 4)}, ${formatDegrees(saved.region.center.longitude, 4)}`,
+            latitude: saved.region.center.latitude,
+            longitude: saved.region.center.longitude,
+            areaHa: (saved.region.widthM * saved.region.lengthM) / 10_000,
           },
     [saved],
   );

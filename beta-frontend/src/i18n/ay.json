@@ -279,7 +279,14 @@
     "Días en que el suelo está descubierto y llueve sobre el umbral. Es un conteo, no toneladas de erosión.": "Uraqi jan imt'atäkipan ch'amani jalluñ urunaka. Jakhuwa, janiw uraqi tukusxañan toneladanakapäkiti.",
     "Días en que el suelo está descubierto y el viento supera el umbral.": "Uraqi jan imt'atäkipan ch'amani thayañ urunaka.",
     "Días con temperatura mínima bajo el umbral declarado para floración. Dato regional, no helada medida en tu chacra.": "Panqarañ pachan tuput juk'amp thaya urunaka. Suyu yatiyawi, janiw yapuman tuputa juyphïkiti.",
-    "Lo que se podría aplicar sin pasar el límite de agua elegido.": "Ajllita uma tupu jan pasasa qarpañjama."
+    "Lo que se podría aplicar sin pasar el límite de agua elegido.": "Ajllita uma tupu jan pasasa qarpañjama.",
+    "Tu parcela": "Yapuma",
+    "Elegida en la simulación 3D": "3D yapun ajllita",
+    "Olvidar parcela": "Yapu armaña",
+    "Elegir parcela": "Yapu ajlliña",
+    "Está dentro de la zona de los datos: estos resultados te sirven como referencia regional.": "Yatiyawinakan suyupankiwa: aka tukuyanakax suyu uñakipañatakix askiwa.",
+    "Está lejos de la zona de los datos: los resultados son de Obrajes y pueden no parecerse a tu parcela.": "Yatiyawinakan suyupat jayankiwa: tukuyanakax Obrajes markatwa, yapumarux janiw kikpakaspati.",
+    "Elige tu parcela en la simulación 3D y aquí verás el agua en metros cúbicos para tu terreno.": "3D yapun yapum ajllim, akanx uraqimatak uma metros cúbicos ukan uñjäta."
   },
   "patrones": {
     "{n} días": "{n} uru",
@@ -291,6 +298,10 @@
     "Ocultar detalles del caso {t}": "{t} ajlli imt'aña",
     "Secuencia: {a}, luego {b}, luego {c}": "Arkt'awi: {a}, ukat {b}, ukat {c}",
     "{a} → {b} → {c}": "{a} → {b} → {c}",
-    "Escuchar en español: {t}": "Castellano arut ist'aña: {t}"
+    "Escuchar en español: {t}": "Castellano arut ist'aña: {t}",
+    "Superficie: {n} ha": "Jach’apa: {n} ha",
+    "A {n} km del punto de los datos (Obrajes).": "Yatiyawinakan chiqapat (Obrajes) {n} km jayana.",
+    "En tu parcela, 1 mm de riego son {n} m³ de agua.": "Yapuman, 1 mm qarpañax {n} m³ umawa.",
+    "≈ {n} m³ en tu parcela": "≈ {n} m³ yapuman"
   }
 }
