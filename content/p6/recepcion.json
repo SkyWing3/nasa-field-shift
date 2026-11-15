@@ -1,0 +1,76 @@
+{
+  "source": "P6_entregas_v3.zip",
+  "sha256": "ab79ddce8572b935f78de46d728105157e50449c755d6ca85f8a4ebbf8600c82",
+  "files": [
+    {
+      "path": "D1-2_especificacion_POWER.md",
+      "sha256": "ab48a44ea1e2d628bd9bdf3bee7fff3f2b8a5a38c1693594a5e87ec9c698d5a5"
+    },
+    {
+      "path": "P6-4_contraste_CHIRPS.py",
+      "sha256": "675d9721045120f28c24e0d109ba5f538206dc7dbe18935bd9bb71984d92e471"
+    },
+    {
+      "path": "P6-4_estado.json",
+      "sha256": "923693714c5d745d56677b561434437513a5a4ae5ec5f776e02bcdf02e17c0d0"
+    },
+    {
+      "path": "P6-4_segunda_fuente.md",
+      "sha256": "1c522a5c174aab4900ed5ee99ea9be9ed27b3d7db771c31598648536e1915829"
+    },
+    {
+      "path": "P6-5_boletin.md",
+      "sha256": "b4cd1f1e8a3b3e5d8f0f0c510818d9b4356c077f37c82d47bd52a1b581967ed3"
+    },
+    {
+      "path": "P6-6_fuentes_licencias_IA.md",
+      "sha256": "e4acb0a15b74eea54e534e5dcaa06b7745b6e78de9bfceffba15e80802695c52"
+    },
+    {
+      "path": "audio/boletin_qu_productor.mp3",
+      "sha256": "0d6086174b51a5c3e613b9433f09fa98c8f25503c6f75b48873868784ec1d87c"
+    },
+    {
+      "path": "audio/boletin_qu_productor.txt",
+      "sha256": "7afde6a1dd2a837a4cfcc7fa35f1659bb012c8c2a45d70876d5053a4835d208e"
+    },
+    {
+      "path": "crops.json",
+      "sha256": "e887ad0667eb4925cde6bb00f8406bd6004063c27e9541ddeb728cd4728f3b1e"
+    },
+    {
+      "path": "nota_productor.md",
+      "sha256": "87f7de400428b562ca15340f457115d1ecb9b031bd15b1d9104cad777d2a5190"
+    },
+    {
+      "path": "obrajes_elevacion_nasadem.json",
+      "sha256": "f0ab22c2dd2bcbc69bf0ed33251479ea7c33541d543354ae7f4a3b61db79548b"
+    },
+    {
+      "path": "point.json",
+      "sha256": "f3e16de753faea790352265c08cb4b6b0a83fe3962a97490b4d5bd7c233d26dc"
+    },
+    {
+      "path": "prueba_4de5_obrajes.ipynb",
+      "sha256": "2f7c82cb3322d3da58d8bdcfced3672265ed3da5ac22724ebdb3c60256eac0e7"
+    },
+    {
+      "path": "prueba_4de5_obrajes_P6-4.ipynb",
+      "sha256": "71ce9deb4b12695b5023c46a976d3a9fb0720ced5f922bf26f3d3f8c7cd39edc"
+    },
+    {
+      "path": "registro_fuentes_afirmaciones.md",
+      "sha256": "0e68682d3e5bc0f726d209dd11f1be0b390acaf8a4c7920f6366432e31a86c17"
+    },
+    {
+      "path": "rotations.json",
+      "sha256": "dc6073e94b8bcd49b05efc679d6318bb4804a4aeb8fad69e291325883a105e5d"
+    },
+    {
+      "path": "soils.json",
+      "sha256": "9d4eafbd7c75683e5f3221d907ff965f9a84e91117a368df795ad554459c38ce"
+    }
+  ],
+  "private_consent_file": "evidencia conservada fuera del repo; original en el ZIP de P6",
+  "spanish_audio": "not_supplied_user_requested_skip"
+}

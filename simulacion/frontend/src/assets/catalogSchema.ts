@@ -47,7 +47,7 @@ export type AssetGroup =
   | 'sky';
 
 /**
- * - `available`: descargado, procesado y validado.
+ * - `available`: descargado, procesado y comprobado.
  * - `missing`: no existe un recurso gratuito con licencia compatible descargable sin intervención.
  * - `error`: seleccionado, pero falló la descarga, el procesado o la validación.
  */

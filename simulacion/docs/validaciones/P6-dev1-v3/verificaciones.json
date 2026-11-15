@@ -1,0 +1,21 @@
+{
+  "build_id": "raiz-p6-v3-59c8f1646809",
+  "source_receipt_hashes": "pass",
+  "agronomy_copies": "pass",
+  "published_manifest_hashes": "pass",
+  "build_reproducible": "pass",
+  "quechua_bytes_unchanged": "pass",
+  "spanish_mp3": "omitted_by_user",
+  "private_permission_in_public_repo": false,
+  "privacy": {
+    "owned_text_and_public_build_files_scanned": 524,
+    "matches": 0,
+    "scientific_zip_members_scanned": 27,
+    "zip_matches": 0,
+    "git_revisions_scanned": 7,
+    "history_matches": 0,
+    "scope": "Versionados y no ignorados, datos POWER de Obrajes y dist. Se excluyen dependencias, caches y respaldos privados."
+  },
+  "forbidden_copy_in_frontend_src": 0,
+  "scientific_zip_sha256": "2b75d03c73d9467b148280d0709e54e640a5a69a2f455615ecd25cb4fe135d57"
+}

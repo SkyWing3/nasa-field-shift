@@ -13,7 +13,7 @@ def test_rotation_request_preserves_explicit_start_position() -> None:
     assert request.start_position == 2
 
 
-@pytest.mark.parametrize("position", [-1, True])
+@pytest.mark.parametrize("position", [-1, True, 3])
 def test_rotation_request_rejects_invalid_positions(position: int) -> None:
     with pytest.raises(ValueError, match="start_position"):
         prepare_rotation_request("A", start_position=position)

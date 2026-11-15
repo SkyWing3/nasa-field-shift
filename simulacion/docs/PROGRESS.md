@@ -346,3 +346,14 @@ Registro cronológico de fases completadas. Cada entrada incluye cambios, verifi
 - Se crearon borradores `backend/data/agronomy/crops.json` y `rotations.json` a partir del mensaje de P6: `ready_for_simulation: false`, parámetros faltantes en `null`, supuestos identificados. Deben validarlos P6 o la líder.
 - Entrada del motor preparada con `start_position`; sin simulación ni enumeración de los nueve casos pendientes de aprobación. CHIRPS/P6-4 queda `unavailable`; D1-2b cancelado según P6.
 - Evidencia y entrega: `backend/data/power/obrajes/2026-11-14/RESUMEN_P6.md` y su paquete público de validación.
+
+
+---
+
+## Integración P6 v3 / Dev 1 · 2026-11-15
+
+Se recibió P6 v3 en `content/p6/`, con originales y hashes conservados. El generador offline evalúa los nueve casos aprobados en 40 ventanas consecutivas completas (360 registros), con KPI de campaña de decisión y ciclo, y publica el comparador `/raiz.html` y los créditos `/creditos.html`. Conserva el audio quechua humano; el usuario indicó omitir el MP3 español ausente.
+
+El motor estima ET0×Kc menos lluvia efectiva diaria, con supuestos explícitos. No implementa balance continuo de suelo ni una pauta de riego. Floración, factor de cobertura y umbrales de viento/lluvia siguen sin datos numéricos; sus KPI permanecen null. La reproducción «4 de 5» no certifica estos escenarios nuevos, pendientes de revisión agronómica de P6.
+
+Verificación: 130 pruebas backend, 190 frontend, compilación/TypeScript, Ruff/mypy del motor y 3 pruebas de navegador P6 correctas; comprobador P6 ACEPTADO. Privacidad y hashes correctos, salida determinista. Revisión visual acotada ship. No se avanzan las fases del simulador 3D ni se hizo push/despliegue. Informe, fuentes, supuestos y capturas en [ENTREGA_P6_V3.md](ENTREGA_P6_V3.md).

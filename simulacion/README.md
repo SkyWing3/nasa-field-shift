@@ -1,5 +1,7 @@
 # TerraLab 3D
 
+La entrada principal actual es Raíz 2D; TerraLab 3D se conserva en `/terralab.html`. Los créditos están en `/?vista=creditos`; las direcciones anteriores `/raiz.html` y `/creditos.html` redirigen ahí. Ver [entrega, supuestos y evidencia](docs/ENTREGA_P6_V3.md). Para regenerar los nueve casos con los insumos locales: `make raiz-data`.
+
 Plataforma web de simulación agrícola en 3D para el apoyo a decisiones: preparar parcelas,
 cultivar, regar, cosechar, avanzar el tiempo y comparar estrategias de rotación con modelos
 agronómicos explícitos y datos científicos de la NASA.

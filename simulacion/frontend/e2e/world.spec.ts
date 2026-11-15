@@ -202,7 +202,7 @@ async function openWorld(page: Page, site: object = SITE): Promise<void> {
     },
     [site],
   );
-  await page.goto('/');
+  await page.goto('/terralab.html');
   await page.getByTestId('continue-site').click();
   await expect(page.getByTestId('farm-screen')).toBeVisible();
   await page.getByTestId('generate-world').click();

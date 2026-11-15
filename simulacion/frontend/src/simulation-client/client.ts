@@ -73,7 +73,7 @@ function bboxParams(bbox: BBoxQuery, extra: Record<string, string> = {}): string
 
 /**
  * Cliente HTTP de la API de simulación. No conoce React ni el estado global:
- * devuelve datos validados o lanza `ApiError`.
+ * devuelve datos comprobados o lanza `ApiError`.
  */
 export function createSimulationClient(options: SimulationClientOptions): SimulationClient {
   const fetchFn = options.fetchFn ?? globalThis.fetch.bind(globalThis);

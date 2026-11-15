@@ -46,6 +46,14 @@ export default defineConfig({
     // mayor para detectar cualquier otro crecimiento (ver docs/DECISIONS.md, ADR-011 y ADR-033).
     chunkSizeWarningLimit: 1100,
     rolldownOptions: {
+      input: {
+        main: path.resolve(import.meta.dirname, 'index.html'),
+        // TerraLab 3D queda archivado en /terralab.html; Raíz 2D es la entrada principal.
+        terralab: path.resolve(import.meta.dirname, 'terralab.html'),
+        // Direcciones anteriores: redirigen a Raíz 2D (el prototipo de /raiz.html se retiró, ADR-043).
+        raiz: path.resolve(import.meta.dirname, 'raiz.html'),
+        creditos: path.resolve(import.meta.dirname, 'creditos.html'),
+      },
       output: {
         codeSplitting: {
           // Three.js cambia mucho menos que el código de la aplicación: en un chunk

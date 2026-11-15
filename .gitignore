@@ -36,3 +36,6 @@ __pycache__/
 # Logs
 *.log
 npm-debug.log*
+
+# Autorización del productor: evidencia privada, fuera del código y del sitio público.
+content/p6/permiso_productor.png

@@ -221,6 +221,9 @@ export function StartScreen({
       </div>
       <footer className={styles.footer}>
         <span>TerraLab 3D · v{appVersion}</span>
+        <a className={styles.devLink} href="/">
+          Raíz · comparar nueve casos
+        </a>
         {import.meta.env.DEV ? (
           // Herramienta de desarrollo: no existe en el build de producción.
           <a className={styles.devLink} href="/asset-viewer.html">

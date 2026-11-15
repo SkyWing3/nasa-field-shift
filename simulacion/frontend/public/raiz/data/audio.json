@@ -1,0 +1,12 @@
+{
+  "schema_version": "3.2-d1",
+  "build_id": "raiz-p6-v3-9fca0936a1d2",
+  "data_as_of": "2026-11-11",
+  "model_version": "fao56-balance-1",
+  "generated_at": null,
+  "quechua_text": "Soracachi ayllukunapaq willakuy.\nNiño watakunapiqa, kaypi pisillata paran.\nPichqa sinchi Niño watakunamanta, tawapi pisillata pararqa.\nQasaqa papata, hawastawan t'ikasqa kaqtin waqllichinman.\nImata tarpunaykita manaraq akllaspa, técnicoykiwan rimariy.\n",
+  "spanish_text": "Mensaje para las comunidades de Soracachi.\nRevisamos 45 años de datos de la NASA sobre lluvia y heladas en esta zona.\nEn los años del Niño fuerte, cuatro de cada cinco veces llovió menos de lo normal entre noviembre y marzo.\nLa helada en la floración puede dañar la papa y el haba. El granizo no lo podemos medir con estos datos.\nEsto no es una orden ni una promesa de cosecha: es la experiencia de años pasados.\nAntes de decidir qué sembrar y dónde regar, converse con su técnico y con su comunidad.\nProyecto Raíz, con datos de NASA POWER y NOAA.",
+  "spanish_mp3": null,
+  "quechua_mp3": "/raiz/audio/boletin_qu_productor.mp3",
+  "distribution_status": "prepared_not_broadcast"
+}

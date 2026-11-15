@@ -1,7 +1,7 @@
-"""Entrada preparada para D1-5; no ejecuta simulaciones ni enumera los nueve casos.
+"""Entrada de D1-5: secuencia y posición inicial, sin E/S ni generación de ciencia.
 
-P6 mantiene pendiente la aprobación de la líder. Las secuencias y los parámetros
-agronómicos del borrador tampoco están completos. El motor se implementará en su fase.
+Las tres posiciones están aprobadas en PROMPT_DEV1_IA.md y content/p6/rotations.json.
+El generador por lotes conserva los parámetros ausentes como null.
 """
 
 from dataclasses import dataclass
@@ -16,12 +16,12 @@ class RotationRequest:
     def __post_init__(self) -> None:
         if self.sequence_id not in ("A", "B", "C"):
             raise ValueError("La secuencia debe ser A, B o C")
-        if type(self.start_position) is not int or self.start_position < 0:
-            raise ValueError("start_position debe ser un entero no negativo")
+        if type(self.start_position) is not int or not 0 <= self.start_position <= 2:
+            raise ValueError("start_position debe ser un entero de 0 a 2")
 
 
 def prepare_rotation_request(
     sequence_id: Literal["A", "B", "C"], *, start_position: int = 0
 ) -> RotationRequest:
-    """Conserva la posición solicitada para el futuro evaluador, sin ejecutarlo."""
+    """Conserva la posición solicitada, sin ejecutar el evaluador."""
     return RotationRequest(sequence_id=sequence_id, start_position=start_position)

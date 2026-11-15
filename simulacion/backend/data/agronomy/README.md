@@ -1,21 +1,13 @@
-# Parámetros de cultivos y rotaciones · borrador para P6
+# Parámetros agronómicos de P6 v3
 
-`crops.json` y `rotations.json` son configuraciones propias del proyecto. **No son descargas de NASA POWER**. Se crearon a partir de `PARA_DEV1_correcciones.md` porque P6 refería esos archivos, pero no se entregaron ni se encontraron en el repo o las fuentes conectadas.
+La fuente de verdad es `content/p6/` en la raíz del monorepo. Estas copias sustituyen los borradores anteriores y conservan los bytes de P6. No se completan valores desconocidos con ceros.
 
-Solo se consignan los datos expresamente comunicados por P6. Ambos archivos tienen `ready_for_simulation: false`: no hay cálculo agronómico activo a partir de estos borradores.
+`PROMPT_DEV1_IA.md` y `rotations.json` aprueban los nueve casos: tres secuencias y tres posiciones cíclicas. El generador por lotes está en `simulacion/scripts/build_raiz.py`; no se añadieron cálculos en vivo ni llamadas de proveedores desde la UI.
 
-P6 o la líder deben proporcionar o validar:
+Siguen ausentes el factor numérico de cobertura parcial del descanso, las fechas precisas de floración y los umbrales numéricos de exposición a viento/lluvia. Esos KPI son null. Los umbrales térmicos suministrados se conservan, sin convertir todo el ciclo o todo Kc_mid en floración.
 
-- Orden de los cultivos de las secuencias A, B y C. La secuencia A es un escenario; no acredita la práctica del productor.
-- Factor numérico de cobertura del descanso con maleza pastoreada. No se lo considera suelo desnudo.
-- Zr y coeficientes de cultivo; ventanas de floración/antesis y fechas concretas de siembra/cosecha.
-- Fila de FAO-56 Tabla 11 y adaptación de sus proporciones por cultivo; cualquier duración escalada se marcará `kind: assumption`, `source: assumption_fao56_t11`. Las etapas de coeficiente de cultivo no definen por sí solas la ventana de floración.
-- Interpretación de los dos umbrales de quinua comunicados por P6 (−4/−2 °C en antesis).
-- Umbrales de viento y lluvia fuerte, siempre marcados como `assumption`.
-- Valor asumido de agua disponible dentro del rango 0,14–0,16 m/m; no hay medición ni profundidad de suelo. La política prevista usa la Zr del cultivo cuando esté validada.
+Las duraciones de etapas se suponen desde FAO-56 Tabla 11 y se escalan al calendario: papa 25/30/45/30; haba seca de noviembre 90/45/40/60. No hay quinua en Tabla 11: el proxy de cereales pequeños 20/30/60/40 se marca como supuesto explícito, no como parámetro local. Fechas concretas 1-oct a 15-abr: supuesto dentro del calendario indicado.
 
-Papa y haba: pozo + lluvia; KPI hídrico central previsto, **riego neto requerido (mm)**. Quinua: secano. Exposición a heladas: contar en floración/antesis, sin convertir todo el ciclo en floración. Granizo: límite declarado, sin KPI inventado.
+La estimación de agua es demanda ET0×Kc menos lluvia efectiva diaria acotada a la demanda. No acredita reserva de suelo entre días, no estima escorrentía ni es un balance continuo de suelo o una pauta de riego. Los rangos NRCS de retención y Zr se muestran como referencias no medidas; no se inventa una profundidad efectiva.
 
-La entrada `prepare_rotation_request(..., start_position=0)` está preparada para el futuro motor. **Los nueve casos siguen deshabilitados y pendientes de la líder**; no hay simulación ni enumeración de esos casos.
-
-CHIRPS / P6-4: `unavailable` según P6. D1-2b cancelado.
+CHIRPS continúa unavailable. La líder aprobó los nueve casos, no una calibración agronómica de este modelo.

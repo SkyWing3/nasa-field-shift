@@ -1,0 +1,108 @@
+{
+  "schema": "p6-v3-draft",
+  "generated": "2026-11-14",
+  "campaign_rule": "Una campaña por año (nov–mar), horizonte común de 3 campañas.",
+  "positions_note": "APROBADA por la líder el 14-nov 22:45 (corrección 1): evaluar cada secuencia en sus 3 posiciones para que el año ENSO de la campaña de decisión caiga en papa, quinua, haba o descanso.",
+  "local_validation": {
+    "status": "answered_differs_from_baseline",
+    "producer_practice": {
+      "irrigated_plots": "Rota cada año: cebolla → zanahoria → cebolla, papa o haba. No repite el mismo cultivo seguido. Riego por pozo + lluvia.",
+      "rainfed_plots": "Quinua en parcelas sin riego (solo lluvia).",
+      "fallow": "Tras la cosecha entran animales de los vecinos a comer la maleza.",
+      "source": "productor_oruro (14-nov-2026 20:58)"
+    },
+    "implication": "La base 'papa → quinua → descanso' NO es la práctica del productor: es un escenario de comparación. Las hortalizas (cebolla, zanahoria) quedan fuera del MVP por falta de parámetros. Decisión de la líder: mantener las 3 secuencias como escenarios o reemplazar la base.",
+    "sources": [
+      "productor_oruro"
+    ]
+  },
+  "sequences": [
+    {
+      "id": "A",
+      "label": "Base candidata",
+      "campaigns": [
+        "papa",
+        "quinua",
+        "descanso"
+      ],
+      "horizon_campaigns": 3,
+      "baseline_status": "scenario_not_producer_practice",
+      "positions_proposed": [
+        [
+          "papa",
+          "quinua",
+          "descanso"
+        ],
+        [
+          "quinua",
+          "descanso",
+          "papa"
+        ],
+        [
+          "descanso",
+          "papa",
+          "quinua"
+        ]
+      ],
+      "review": "Orden real en parcela por confirmar; descanso puede tener residuos o pastoreo."
+    },
+    {
+      "id": "B",
+      "label": "Alternativa 1",
+      "campaigns": [
+        "papa",
+        "quinua",
+        "haba"
+      ],
+      "horizon_campaigns": 3,
+      "baseline_status": "scenario",
+      "positions_proposed": [
+        [
+          "papa",
+          "quinua",
+          "haba"
+        ],
+        [
+          "quinua",
+          "haba",
+          "papa"
+        ],
+        [
+          "haba",
+          "papa",
+          "quinua"
+        ]
+      ],
+      "review": "Agua y sanidad de la haba; N no garantizado."
+    },
+    {
+      "id": "C",
+      "label": "Alternativa 2",
+      "campaigns": [
+        "papa",
+        "haba",
+        "descanso"
+      ],
+      "horizon_campaigns": 3,
+      "baseline_status": "scenario",
+      "positions_proposed": [
+        [
+          "papa",
+          "haba",
+          "descanso"
+        ],
+        [
+          "haba",
+          "descanso",
+          "papa"
+        ],
+        [
+          "descanso",
+          "papa",
+          "haba"
+        ]
+      ],
+      "review": "Comparar agua de la cobertura viva frente al descanso."
+    }
+  ]
+}

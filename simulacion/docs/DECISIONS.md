@@ -446,3 +446,30 @@ Las decisiones no se borran: si cambian, se añade una nueva ADR que reemplaza a
   - **Niebla:** la niebla lineal se ajusta para ser total antes del borde del contexto. Su color es el horizonte del HDRI tras el mismo tone mapping ACES de Three.js.
   - El cielo es ambientación visual seleccionable, no el clima del lugar.
 - **Consecuencias:** Durante la fase se detectó que la luz creada con `ref` nunca se orientaba, porque el componente se volvía a suspender al limpiar la caché del HDR. La luz pasó a ser un objeto propio y la liberación del HDR es diferida y con recuento de usos.
+
+## ADR-043 — Raíz 2D reemplaza a TerraLab 3D como interfaz principal
+- **Fecha:** 2026-11-15
+- **Estado:** Aceptada por el usuario (Dev 1). El 15-nov-2026 se retiró el prototipo de `/raiz.html` (`src/raiz/`, `e2e/raiz.spec.ts`); sus direcciones redirigen a Raíz 2D.
+- **Contexto:** El plan del equipo (`raiz-hackaton/plan-equipo.json`, tareas D3-1 a D3-6 y P4-3) define un recorrido web de cuatro pasos sobre JSON precalculado: Clima → Rotaciones → Suelo y confianza → Ficha/audio/radio. El 3D queda fuera de alcance («nuevo 3D» y mapas son lo primero que se corta). El producto no necesita una escena 3D para su propósito.
+- **Decisión:**
+  - `/` (`index.html`) monta `frontend/src/raiz2d/`. TerraLab 3D queda archivado en `/terralab.html`, sin borrar código; sus pruebas e2e apuntan a esa ruta.
+  - Sin dependencias nuevas: React, SVG propio y CSS. Tipografías Alegreya y Alegreya Sans (OFL) servidas desde `public/raiz/fonts/`; cero peticiones externas durante la demo.
+  - Toda cifra se deriva en `analysis.ts` de los JSON publicados. `analysis.test.ts` comprueba que la agregación reproduce los 81 agregados de `results.json`; con ese mismo método se calculan los subconjuntos que el paquete no trae (Niño fuerte, un año concreto).
+  - Niño fuerte (ONI ≥ 1,5) es un escenario más, con su propio n; con n < 3 se muestran valores sin orden ni conclusión.
+  - Prioridades: normalización mín–máx entre los casos mostrados, puntaje entero 0–100, empates por puntaje igual y exclusión explicada del caso sin el KPI con peso (omitir un dato no mejora un puntaje). Peso inicial: agua de pozo 1, déficit en secano 0, para comparar las tres secuencias desde el inicio.
+  - El presupuesto de agua se declara «no evaluado»: el paquete no trae corridas con límite y no se ofrece un control que simule un cálculo inexistente.
+  - La selección vive en la URL (`?paso=…&escenario=…&caso=…`); el identificador de resultado de la ficha se compone de `build_id/caso/escenario/periodo/ventana`. El boletín se rotula como general, no ligado a ese identificador, y su emisión como no confirmada.
+- **Consecuencias:** `docs/RAIZ_2D.md` describe la interfaz. `docs/RAIZ_UI.md` describe el prototipo oscuro de `/raiz.html`, que sigue montando `src/raiz/`. Si se adopta Raíz 2D como única interfaz, retirar `src/raiz/`, `raiz.html`, `creditos.html` y `e2e/raiz.spec.ts`, y redirigir esas rutas a `/`.
+
+## ADR-044 — Balance hídrico diario FAO-56 y presupuestos de agua precalculados (D1-5, D1-6)
+- **Fecha:** 2026-11-15
+- **Estado:** Aceptada por el usuario (Dev 1); supuestos pendientes de revisión agronómica de P6.
+- **Contexto:** El motor `fao56-demand-screening-1` restaba lluvia acotada a la demanda, sin suelo. No cumplía D1-5 (balance que conserve agua, humedad entre cultivos, estrés, cobertura, exposición, frecuencia de cumplimiento) ni D1-6 (presupuestos precalculados), y bloqueaba el guion de P4-3 («presupuesto válido»).
+- **Decisión:**
+  - `backend/app/engine/raiz.py` → `fao56-balance-1`: balance diario de la zona radicular (FAO-56 cap. 8, ec. 81-88) con Ks y p ajustado por ETc; evaporación de suelo desnudo en dos etapas (cap. 7, REW 8 mm / TEW 18 mm, Tabla 19); escorrentía por curva número TR-55 (grupo C: cultivo 85, descanso 86, desnudo 91); drenaje sobre capacidad de campo; sin ascenso capilar.
+  - Volumen de control común (0,6 m × 0,15 m/m = 90 mm): la humedad pasa entre campañas y el cierre se comprueba por ventana (error máximo 0,00 mm en 4 320 corridas). Cada ventana corre 36 meses desde el 1 de julio con 50 % de agotamiento inicial.
+  - p de papa (0,35) y haba (0,45) desde `content/p6/crops.json` (FAO-56 T22); quinua usa p de cereales pequeños (0,55) como proxy. Umbrales de helada de P6; lluvia erosiva 12,7 mm/día (Wischmeier y Smith 1978) y viento 5 m/s a 2 m (Fryrear et al. 1998, RWEQ) como supuestos con cita.
+  - Presupuestos: requerimiento (sin límite), cupos hipotéticos de 200 y 100 mm por campaña con riego (⅔ y ⅓ de la mediana del requerimiento central, 291 mm) y secano. La quinua es de secano en todos.
+  - Sensibilidad por supuestos: corridas «suelo bajo» (0,4 m, 0,14 m/m, inicio seco) y «suelo alto» (1,0 m, 0,16 m/m, inicio húmedo); se publica el rango de las medias. La sensibilidad entre fuentes sigue `not_evaluated`.
+  - Contrato: `result_id`, `water_budget_id`, `enso_initial_phase`, `kpi_units`, `sources`, `warnings`, `null_reasons`, `constraint_pass` y `enso_campaigns.json` (D1-4). `results.json` compacto y redondeado a 0,01; clima y ONI se publican sin redondear.
+- **Consecuencias:** 1 440 registros (9 casos × 40 ventanas × 4 presupuestos), 4,2 MB (207 kB gzip). Pruebas: 39 del motor (conservación paramétrica, cupos, estrés, traslado de humedad, CN, umbrales) y verificación del paquete publicado. Límites declarados en `catalog.model_limits`: profundidad común que subrepresenta la quinua, descanso sin transpiración de maleza, helada del aire contra umbrales de tejido, exposición sin toneladas de erosión.
