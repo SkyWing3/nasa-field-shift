@@ -3,7 +3,7 @@
 // El color nunca va solo: cada nivel lleva forma (●▲■) y palabra.
 import Icono from '../components/Icono.jsx'
 import { Aviso, EtiquetaEstado, NoDisponible, Secuencia } from '../components/Comunes.jsx'
-import { formatoKpi, nombreCultivo, textoCalendario } from '../lib/dominio.js'
+import { formatoKpi, formatoNumero, nombreCultivo, textoCalendario } from '../lib/dominio.js'
 
 const MESES = { 1: 'Ene', 2: 'Feb', 3: 'Mar', 4: 'Abr', 5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Ago', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dic' }
 const COBERTURA = {
@@ -62,10 +62,22 @@ function Calendario({ registro }) {
               <span className="mes-nombre">{MESES[m.month]}</span>
               <span className="mes-marca"><Icono nombre={c.icono} tam={20} /></span>
               <span className="mes-texto">{c.texto}</span>
+              {Number.isFinite(m.mean_coverage_pct) && <span className="mes-texto">Cobertura media: {formatoNumero(m.mean_coverage_pct, 1)} %</span>}
             </li>
           )
         })}
       </ol>
+      {registro.coverage_calendar_method && <p className="texto-secundario">{registro.coverage_calendar_method} Calendario supuesto; no es una observación satelital.</p>}
+      {meses.some((m) => Number.isFinite(m.bare_days_mean)) && (
+        <details className="detalle">
+          <summary>Conteos y cobertura por mes</summary>
+          <div className="tabla-scroll"><table className="tabla">
+            <thead><tr><th scope="col">Mes</th><th scope="col">Cobertura media</th><th scope="col">Días bajo el umbral de cobertura</th><th scope="col">Campañas (n)</th></tr></thead>
+            <tbody>{meses.map((m) => <tr key={m.month}><th scope="row">{MESES[m.month]}</th><td>{formatoNumero(m.mean_coverage_pct, 1)} %</td><td>{formatoNumero(m.bare_days_mean, 1)}</td><td>{m.n_campaigns}</td></tr>)}</tbody>
+          </table></div>
+          <p className="texto-secundario">Promedios por campaña; un mes con cultivo puede incluir preparación y rastrojo. Son días con cobertura insuficiente, sin exigir lluvia ni viento.</p>
+        </details>
+      )}
       <p className="leyenda">
         {Object.values(COBERTURA).map((c) => (
           <span key={c.clase} className={`leyenda-item ${c.clase}`}><Icono nombre={c.icono} tam={16} /> {c.texto}</span>
@@ -96,7 +108,7 @@ export default function VistaSuelo({ paquete, registros, casoId, setCasoId }) {
         <select value={registro?.case_id ?? ''} onChange={(e) => setCasoId(e.target.value)}>
           {casos.map((c) => (
             <option key={c.case_id} value={c.case_id}>
-              {c.case_id} · este año {nombreCultivo(c.decision_crop)} ({c.campaigns.map(nombreCultivo).join(' → ')})
+              {c.case_id} · este año {nombreCultivo(c.decision_crop)}
             </option>
           ))}
         </select>
@@ -113,7 +125,7 @@ export default function VistaSuelo({ paquete, registros, casoId, setCasoId }) {
           </section>
 
           <section className="tarjeta" aria-labelledby="titulo-sem">
-            <h3 id="titulo-sem" className="h-sub">Semáforo de suelo descubierto</h3>
+            <h3 id="titulo-sem" className="h-sub">Suelo descubierto con lluvia y viento</h3>
             <Semaforo registro={registro} umbral={umbral} />
             {umbral ? (
               <p className="texto-secundario">
@@ -163,7 +175,7 @@ export default function VistaSuelo({ paquete, registros, casoId, setCasoId }) {
                 </dd>
               </div>
               <div><dt>Ventanas históricas (n)</dt><dd>{registro.n_windows} (campañas distintas: {registro.n_unique_campaigns}). Las ventanas se solapan.</dd></div>
-              <div><dt>Punto de análisis</dt><dd>{punto?.region} · {punto?.location_status === 'validated_plot' ? 'parcela validada' : 'punto regional sin confirmar'} {punto?.missing_reason && `(${punto.missing_reason})`}</dd></div>
+              <div><dt>Punto de análisis</dt><dd>{punto?.label ?? punto?.region} · {punto?.location_status === 'validated_plot' ? 'parcela validada' : 'dato climático regional'} {punto?.missing_reason && `(${punto.missing_reason})`}</dd></div>
               <div><dt>Suelo</dt><dd>{suelo ? <>{suelo.label ?? suelo.soil_profile_id} <EtiquetaEstado estado={suelo.nature} /></> : 'No disponible'}</dd></div>
               <div><dt>Inicio del balance</dt><dd>{registro.initialization ?? 'No declarado'}</dd></div>
               <div><dt>Revisión de campo</dt><dd><EtiquetaEstado estado="not_evaluated" texto="Sin validación de campo" /></dd></div>
@@ -174,4 +186,3 @@ export default function VistaSuelo({ paquete, registros, casoId, setCasoId }) {
     </div>
   )
 }
-

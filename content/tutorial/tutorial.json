@@ -1,0 +1,602 @@
+{
+  "schema": "raiz-tutorial-v1",
+  "nota": "Fuente única de la bienvenida y del tutorial de beta-frontend y de la simulación 3D. Español: referencia. qu, ay, gn, en, pt, fr: traducción automática con IA (Claude), pendiente de revisión por hablantes. Audios es/qu/ay/gn: voz sintética Meta MMS, requieren revisión de pares. Regenerar audio: python scripts/generar_audio_tutorial.py (en raiz-hackaton).",
+  "idiomas_con_audio": [
+    "es",
+    "qu",
+    "ay",
+    "gn"
+  ],
+  "idiomas": [
+    {
+      "id": "es",
+      "nombre": "Español",
+      "voz_navegador": "es-ES"
+    },
+    {
+      "id": "qu",
+      "nombre": "Runasimi (quechua)",
+      "voz_navegador": null
+    },
+    {
+      "id": "ay",
+      "nombre": "Aymar aru (aymara)",
+      "voz_navegador": null
+    },
+    {
+      "id": "gn",
+      "nombre": "Avañe'ẽ (guaraní)",
+      "voz_navegador": null
+    },
+    {
+      "id": "en",
+      "nombre": "English",
+      "voz_navegador": "en-US"
+    },
+    {
+      "id": "pt",
+      "nombre": "Português",
+      "voz_navegador": "pt-BR"
+    },
+    {
+      "id": "fr",
+      "nombre": "Français",
+      "voz_navegador": "fr-FR"
+    }
+  ],
+  "ui": {
+    "bienvenida_titulo": {
+      "es": "Te damos la bienvenida a Raíz",
+      "qu": "Raízman allinlla hamuy",
+      "ay": "Raíz ukar aski jutawi",
+      "gn": "Eg̃uahẽporãite Raíz-pe",
+      "en": "Welcome to Raíz",
+      "pt": "Boas-vindas ao Raíz",
+      "fr": "Bienvenue sur Raíz"
+    },
+    "bienvenida_texto": {
+      "es": "Elige tu idioma. Con el botón del altavoz, la aplicación te lee los pasos en voz alta. Si quieres, te mostramos un tutorial corto.",
+      "qu": "Simiykita akllay. Altavoz botónwan, aplicaciónqa kunkawan ñawinchasunki. Munaspaqa, huk tutorialta rikuchisqayki.",
+      "ay": "Arum ajllim. Altavoz botónampix, aplicaciónax kunkampiw liyt'arapxätam. Munstaxa, mä jisk'a tutorial uñacht'ayapxsma.",
+      "gn": "Eiporavo ne ñe'ẽ. Altavoz botón ndive, aplicación omoñe'ẽta ndéve hatãme. Reipotáramo, rohechaukáta peteĩ tutorial mbykymi.",
+      "en": "Choose your language. With the speaker button, the app reads the steps aloud. If you like, we'll show you a short tutorial.",
+      "pt": "Escolha seu idioma. Com o botão do alto-falante, o aplicativo lê os passos em voz alta. Se quiser, mostramos um tutorial curto.",
+      "fr": "Choisissez votre langue. Avec le bouton haut-parleur, l'application lit les étapes à voix haute. Si vous voulez, nous vous montrons un court tutoriel."
+    },
+    "elige_idioma": {
+      "es": "Elige tu idioma",
+      "qu": "Simiykita akllay",
+      "ay": "Arum ajllim",
+      "gn": "Eiporavo ne ñe'ẽ",
+      "en": "Choose your language",
+      "pt": "Escolha seu idioma",
+      "fr": "Choisissez votre langue"
+    },
+    "voz": {
+      "es": "Lectura en voz alta",
+      "qu": "Kunkawan ñawinchay",
+      "ay": "Kunkamp liyiña",
+      "gn": "Moñe'ẽ hatãme",
+      "en": "Read aloud",
+      "pt": "Leitura em voz alta",
+      "fr": "Lecture à voix haute"
+    },
+    "voz_activada": {
+      "es": "Activada: te leemos cada paso",
+      "qu": "Kachkan: sapa puriyta ñawinchasqayki",
+      "ay": "Utjiwa: sapa thakhi liyt'apxäma",
+      "gn": "Oñemboguatáma: romoñe'ẽta opa jehupyty",
+      "en": "On: we read each step to you",
+      "pt": "Ativada: lemos cada passo para você",
+      "fr": "Activée : nous vous lisons chaque étape"
+    },
+    "voz_desactivada": {
+      "es": "Desactivada: toca el altavoz para activarla",
+      "qu": "Mana kanchu: altavozta llamiy",
+      "ay": "Janiw utjkiti: altavoz ch'iqt'am",
+      "gn": "Ndoikói: ejopy altavoz",
+      "en": "Off: tap the speaker to turn it on",
+      "pt": "Desativada: toque no alto-falante para ativar",
+      "fr": "Désactivée : touchez le haut-parleur pour l'activer"
+    },
+    "quiero_tutorial": {
+      "es": "Quiero ver el tutorial",
+      "qu": "Tutorialta qhawayta munani",
+      "ay": "Tutorial uñjañ munta",
+      "gn": "Ahechaséa tutorial",
+      "en": "I want to see the tutorial",
+      "pt": "Quero ver o tutorial",
+      "fr": "Je veux voir le tutoriel"
+    },
+    "empezar": {
+      "es": "Empezar",
+      "qu": "Qallariy",
+      "ay": "Qalltaña",
+      "gn": "Ñepyrũ",
+      "en": "Start",
+      "pt": "Começar",
+      "fr": "Commencer"
+    },
+    "saltar": {
+      "es": "Saltar tutorial",
+      "qu": "Tutorialta saqiy",
+      "ay": "Tutorial jaytaña",
+      "gn": "Ehejá tutorial",
+      "en": "Skip tutorial",
+      "pt": "Pular tutorial",
+      "fr": "Passer le tutoriel"
+    },
+    "anterior": {
+      "es": "Anterior",
+      "qu": "Ñawpaqman",
+      "ay": "Nayrar",
+      "gn": "Tenondegua",
+      "en": "Back",
+      "pt": "Anterior",
+      "fr": "Précédent"
+    },
+    "siguiente": {
+      "es": "Siguiente",
+      "qu": "Qatiqnin",
+      "ay": "Arkiri",
+      "gn": "Upéi",
+      "en": "Next",
+      "pt": "Próximo",
+      "fr": "Suivant"
+    },
+    "terminar": {
+      "es": "Terminar",
+      "qu": "Tukuy",
+      "ay": "Tukuyaña",
+      "gn": "Opa",
+      "en": "Finish",
+      "pt": "Concluir",
+      "fr": "Terminer"
+    },
+    "paso": {
+      "es": "Paso {n} de {total}",
+      "qu": "{n} kaq puriy, {total} ukhupi",
+      "ay": "{n} thakhi, {total} taypita",
+      "gn": "Jehupyty {n} {total} apytégui",
+      "en": "Step {n} of {total}",
+      "pt": "Passo {n} de {total}",
+      "fr": "Étape {n} sur {total}"
+    },
+    "para_que": {
+      "es": "Para qué sirve",
+      "qu": "Imapaq",
+      "ay": "Kunatakisa",
+      "gn": "Mba'erã",
+      "en": "What it is for",
+      "pt": "Para que serve",
+      "fr": "À quoi ça sert"
+    },
+    "ejemplo": {
+      "es": "Ejemplo",
+      "qu": "Kay hina",
+      "ay": "Uñacht'awi",
+      "gn": "Techapyrã",
+      "en": "Example",
+      "pt": "Exemplo",
+      "fr": "Exemple"
+    },
+    "ejemplo_voz": {
+      "es": "Por ejemplo",
+      "qu": "Kay hina",
+      "ay": "Akham",
+      "gn": "Techapyrãrõ",
+      "en": "For example",
+      "pt": "Por exemplo",
+      "fr": "Par exemple"
+    },
+    "escuchar": {
+      "es": "Escuchar este paso",
+      "qu": "Kay puriyta uyariy",
+      "ay": "Aka thakhi ist'aña",
+      "gn": "Ehendu ko jehupyty",
+      "en": "Listen to this step",
+      "pt": "Ouvir este passo",
+      "fr": "Écouter cette étape"
+    },
+    "ver_tutorial": {
+      "es": "Ver tutorial",
+      "qu": "Tutorialta qhaway",
+      "ay": "Tutorial uñjaña",
+      "gn": "Ehecha tutorial",
+      "en": "Show tutorial",
+      "pt": "Ver tutorial",
+      "fr": "Voir le tutoriel"
+    },
+    "aviso_audio": {
+      "es": "Voz sintética (Meta MMS): requiere revisión de pares.",
+      "qu": "Máquina kunka (Meta MMS): masikuna qhawarinanku tiyan.",
+      "ay": "Máquina kunka (Meta MMS): masinakaw uñakipapxañapa.",
+      "gn": "Ñe'ẽ máquina (Meta MMS): irũnguéra ohecha va'erã.",
+      "en": "Synthetic voice (Meta MMS): needs peer review.",
+      "pt": "Voz sintética (Meta MMS): requer revisão por pares.",
+      "fr": "Voix de synthèse (Meta MMS) : doit être relue par des pairs."
+    },
+    "aviso_navegador": {
+      "es": "Voz de tu navegador.",
+      "qu": "Navegadorniykipa kunkan.",
+      "ay": "Navegadoraman kunkapa.",
+      "gn": "Ne navegador ñe'ẽ.",
+      "en": "This language has no recorded audio: we use your browser's voice.",
+      "pt": "Este idioma não tem áudio gravado: usamos a voz do seu navegador.",
+      "fr": "Cette langue n'a pas d'audio enregistré : nous utilisons la voix de votre navigateur."
+    },
+    "aviso_ia": {
+      "es": "Quechua, aymara, guaraní, inglés, portugués y francés: traducción automática con IA, pendiente de revisión por hablantes.",
+      "qu": "IA nisqawan tikrasqa: rimaqkuna manaraq qhawarinkuchu.",
+      "ay": "IA ukamp jaqukipata: aru parlirinakax janïraw uñakipapkiti.",
+      "gn": "IA omoambue ñe'ẽ: ñe'ẽhára ndohechái gueteri.",
+      "en": "AI machine translation, not yet reviewed by speakers.",
+      "pt": "Tradução automática com IA, ainda não revisada por falantes.",
+      "fr": "Traduction automatique par IA, pas encore relue par des locuteurs."
+    },
+    "aqui": {
+      "es": "Toca aquí",
+      "qu": "Kaypi llamiy",
+      "ay": "Akan ch'iqt'am",
+      "gn": "Ejopy ko'ápe",
+      "en": "Tap here",
+      "pt": "Toque aqui",
+      "fr": "Touchez ici"
+    },
+    "cerrar": {
+      "es": "Cerrar",
+      "qu": "Wisq'ay",
+      "ay": "Jist'antaña",
+      "gn": "Mboty",
+      "en": "Close",
+      "pt": "Fechar",
+      "fr": "Fermer"
+    }
+  },
+  "pasos": {
+    "idioma": {
+      "titulo": {
+        "es": "Cambia el idioma",
+        "qu": "Simita tikray",
+        "ay": "Aru mayjt'ayma",
+        "gn": "Emoambue ñe'ẽ",
+        "en": "Change the language",
+        "pt": "Mude o idioma",
+        "fr": "Changez de langue"
+      },
+      "para": {
+        "es": "Elige en qué idioma quieres leer la aplicación.",
+        "qu": "Ima simipi aplicaciónta ñawinchayta munasqaykita akllay.",
+        "ay": "Kuna arunsa aplicación liyiñ munta, uk ajllim.",
+        "gn": "Eiporavo mba'e ñe'ẽme remoñe'ẽse aplicación.",
+        "en": "Choose the language you want to read the app in.",
+        "pt": "Escolha em que idioma você quer ler o aplicativo.",
+        "fr": "Choisissez la langue dans laquelle lire l'application."
+      },
+      "ejemplo": {
+        "es": "Elige Runasimi para leer en quechua.",
+        "qu": "Runasimita akllay, runasimipi ñawinchanaykipaq.",
+        "ay": "Aymar aru ajllim, aymar arun liyiñataki.",
+        "gn": "Eiporavo Avañe'ẽ remoñe'ẽ hag̃ua guaraníme.",
+        "en": "Choose English to read in English.",
+        "pt": "Escolha Português para ler em português.",
+        "fr": "Choisissez Français pour lire en français."
+      }
+    },
+    "alarmas": {
+      "titulo": {
+        "es": "Señales de esta semana",
+        "qu": "Kay semanapi willakuykuna",
+        "ay": "Aka semanan yatiyawinaka",
+        "gn": "Ko semana marandu",
+        "en": "This week's signals",
+        "pt": "Sinais desta semana",
+        "fr": "Signaux de la semaine"
+      },
+      "para": {
+        "es": "Avisos con datos de la NASA y la NOAA sobre lluvia, heladas y El Niño. Puedes leerlos o escucharlos.",
+        "qu": "NASA, NOAA willakuykunawan para, qasa, El Niñomanta willakuykuna. Ñawinchayta utaq uyariyta atinki.",
+        "ay": "NASA, NOAA yatiyawinakampi jallu, juyphi, El Niño tuqit yatiyawinaka. Liyiñaw jan ukax ist'añaw puedisma.",
+        "gn": "Marandu NASA ha NOAA mba'ekuaa reheve ama, ro'y ha El Niño rehegua. Ikatu remoñe'ẽ térã rehendu.",
+        "en": "Alerts with NASA and NOAA data on rain, frost and El Niño. You can read them or listen to them.",
+        "pt": "Avisos com dados da NASA e da NOAA sobre chuva, geada e El Niño. Você pode lê-los ou ouvi-los.",
+        "fr": "Des alertes avec les données de la NASA et de la NOAA sur la pluie, le gel et El Niño. Vous pouvez les lire ou les écouter."
+      },
+      "ejemplo": {
+        "es": "Si dice que El Niño fuerte está en curso, planifica el agua de riego con tu técnico.",
+        "qu": "Sinchi Niño kachkan nispaqa, técnicoykiwan qarpana yakuta yuyaykuy.",
+        "ay": "Ch'amani Niño utji sistixa, técnicomampi qarpañ uma amuyt'asim.",
+        "gn": "He'írõ El Niño mbarete oikoha, eñembosako'i y ñemboyrã ne técnico ndive.",
+        "en": "If it says a strong El Niño is under way, plan your irrigation water with your technician.",
+        "pt": "Se disser que um El Niño forte está em curso, planeje a água de irrigação com seu técnico.",
+        "fr": "S'il indique qu'un El Niño fort est en cours, prévoyez l'eau d'irrigation avec votre technicien."
+      }
+    },
+    "escenario": {
+      "titulo": {
+        "es": "Elige tu escenario",
+        "qu": "Akllanaykita akllay",
+        "ay": "Ajllitam ajllim",
+        "gn": "Eiporavo nde rembiaporã",
+        "en": "Choose your scenario",
+        "pt": "Escolha seu cenário",
+        "fr": "Choisissez votre scénario"
+      },
+      "para": {
+        "es": "Elige qué años quieres mirar y qué tipo de año: normal, El Niño o La Niña.",
+        "qu": "Ima watakunata qhawayta munasqaykita akllay: normal, El Niño utaq La Niña.",
+        "ay": "Kuna maranaksa uñjañ munta uk ajllim: normal, El Niño jan ukax La Niña.",
+        "gn": "Eiporavo mba'e arypa rehechase: jepivegua, El Niño térã La Niña.",
+        "en": "Choose which years to look at and the type of year: normal, El Niño or La Niña.",
+        "pt": "Escolha quais anos quer ver e o tipo de ano: normal, El Niño ou La Niña.",
+        "fr": "Choisissez les années à regarder et le type d'année : normale, El Niño ou La Niña."
+      },
+      "ejemplo": {
+        "es": "Elige El Niño para ver cómo les fue a las rotaciones en años de El Niño.",
+        "qu": "El Niñota akllay, El Niño watakunapi tarpuy muyuykuna imayna rirqa chayta qhawanaykipaq.",
+        "ay": "El Niño ajllim, El Niño maranakan yapu muyunakax kunjams sarnaqäna uk uñjañataki.",
+        "gn": "Eiporavo El Niño rehecha hag̃ua mba'éichapa oho ñemitỹ jere El Niño arýpe.",
+        "en": "Choose El Niño to see how the rotations did in El Niño years.",
+        "pt": "Escolha El Niño para ver como as rotações se saíram em anos de El Niño.",
+        "fr": "Choisissez El Niño pour voir comment les rotations se sont comportées les années El Niño."
+      }
+    },
+    "casos": {
+      "titulo": {
+        "es": "Compara las rotaciones",
+        "qu": "Tarpuy muyuykunata tupachiy",
+        "ay": "Yapu muyunak chikachma",
+        "gn": "Embojoja ñemitỹ jere",
+        "en": "Compare the rotations",
+        "pt": "Compare as rotações",
+        "fr": "Comparez les rotations"
+      },
+      "para": {
+        "es": "Cada tarjeta es una forma de rotar tu parcela durante tres años, con el agua que necesitó y los días de helada.",
+        "qu": "Sapa tarjetaqa kimsa watapi chakraykita muyuchinapaq huk ñanmi, munasqan yakuwan, qasa p'unchawkunawan.",
+        "ay": "Sapa tarjetax kimsa maran yapum muyuyañatak mä thakhiwa, munat umampi, juyphi urunakampi.",
+        "gn": "Peteĩteĩ tarjeta ha'e peteĩ tape remitỹ jere hag̃ua nekokue mbohapy ary, y oikotevẽva'ekue ha ára ro'ýva ndive.",
+        "en": "Each card is one way to rotate your plot over three years, with the water it needed and the frost days.",
+        "pt": "Cada cartão é uma forma de rotacionar sua parcela durante três anos, com a água que precisou e os dias de geada.",
+        "fr": "Chaque carte est une façon de faire tourner votre parcelle sur trois ans, avec l'eau nécessaire et les jours de gel."
+      },
+      "ejemplo": {
+        "es": "A-1 es papa, luego quinua, luego descanso. Pulsa Ver detalles para ver más.",
+        "qu": "A-1 nisqaqa papa, chaymanta kinuwa, chaymanta samay. Aswanta qhaway nisqata ñit'iy.",
+        "ay": "A-1 ukax ch'uqi, ukat jupha, ukat samaña. Juk'amp uñjaña ch'iqt'am.",
+        "gn": "A-1 ha'e papa, upéi kinúa, upéi pytu'u. Ejopy Ehechave.",
+        "en": "A-1 is potato, then quinoa, then fallow. Tap Show details to see more.",
+        "pt": "A-1 é batata, depois quinoa, depois pousio. Toque em Ver detalhes para ver mais.",
+        "fr": "A-1, c'est pomme de terre, puis quinoa, puis jachère. Touchez Voir les détails pour en savoir plus."
+      }
+    },
+    "secciones": {
+      "titulo": {
+        "es": "Clima, suelo y ficha",
+        "qu": "Pacha, allpa, qillqa",
+        "ay": "Pacha, uraqi, qillqata",
+        "gn": "Ára, yvy ha kuatia",
+        "en": "Climate, soil and sheet",
+        "pt": "Clima, solo e ficha",
+        "fr": "Climat, sol et fiche"
+      },
+      "para": {
+        "es": "En estas pestañas ves el clima de antes y de ahora, el suelo y la ficha para imprimir o escuchar.",
+        "qu": "Kay pestañakunapi ñawpaq kunan pachata, allpata, imprimínapaq uyarinapaq qillqatapas rikunki.",
+        "ay": "Aka pestañanakan nayra jichha pacha, uraqi, imprimiñatak ist'añatak qillqatsa uñjta.",
+        "gn": "Ko pestaña-kuérape rehecha ára yma ha ko'ág̃agua, yvy ha kuatia remboheta térã rehendu hag̃ua.",
+        "en": "In these tabs you see the climate before and now, the soil, and the sheet to print or listen to.",
+        "pt": "Nestas abas você vê o clima de antes e de agora, o solo e a ficha para imprimir ou ouvir.",
+        "fr": "Ces onglets montrent le climat d'avant et d'aujourd'hui, le sol et la fiche à imprimer ou écouter."
+      },
+      "ejemplo": {
+        "es": "En Ficha y audio puedes imprimir el resultado y llevarlo a tu técnico.",
+        "qu": "Qillqa, uyarina nisqapi tukuyta imprimiyta, técnicoykiman apaytapas atinki.",
+        "ay": "Qillqata, ist'aña ukan tukuy imprimiñaw, técnicomar apañaw puedisma.",
+        "gn": "Kuatia ha ñe'ẽ-pe ikatu remboheta tembiapo ha regueraha ne técnico-pe.",
+        "en": "In Sheet and audio you can print the result and take it to your technician.",
+        "pt": "Em Ficha e áudio você pode imprimir o resultado e levar ao seu técnico.",
+        "fr": "Dans Fiche et audio, vous pouvez imprimer le résultat et l'apporter à votre technicien."
+      }
+    },
+    "simulacion": {
+      "titulo": {
+        "es": "Simulación 3D",
+        "qu": "3D chakra",
+        "ay": "3D yapu",
+        "gn": "Simulación 3D",
+        "en": "3D simulation",
+        "pt": "Simulação 3D",
+        "fr": "Simulation 3D"
+      },
+      "para": {
+        "es": "Abre el laboratorio 3D para preparar una parcela y probar rotaciones.",
+        "qu": "3D yachana wasita kichay, huk chakrata wakichinaykipaq, tarpuy muyuykunata pruebanaykipaq.",
+        "ay": "3D yatxatañ uta jist'aram, mä yapu wakichañataki, yapu muyunak yant'añataki.",
+        "gn": "Eipe'a ñemoha'ãnga renda 3D embosako'i hag̃ua peteĩ kokue ha eha'ã hag̃ua ñemitỹ jere.",
+        "en": "Open the 3D lab to prepare a plot and try out rotations.",
+        "pt": "Abra o laboratório 3D para preparar uma parcela e testar rotações.",
+        "fr": "Ouvrez le laboratoire 3D pour préparer une parcelle et essayer des rotations."
+      },
+      "ejemplo": {
+        "es": "Busca Oruro en el mapa y mira tu parcela en 3D.",
+        "qu": "Mapapi Orurota maskay, chakraykita 3Dpi qhaway.",
+        "ay": "Mapan Oruro thaqhma, yapum 3Dn uñjma.",
+        "gn": "Eheka Oruro mapape ha ehecha nekokue 3D-pe.",
+        "en": "Find Oruro on the map and see your plot in 3D.",
+        "pt": "Procure Oruro no mapa e veja sua parcela em 3D.",
+        "fr": "Cherchez Oruro sur la carte et voyez votre parcelle en 3D."
+      }
+    },
+    "ubicacion": {
+      "titulo": {
+        "es": "Elige dónde está tu chacra",
+        "qu": "Chakraykipa maypi kasqanta akllay",
+        "ay": "Yapuman kawkinkis ajllim",
+        "gn": "Eiporavo moõpa oĩ nekokue",
+        "en": "Choose where your farm is",
+        "pt": "Escolha onde fica sua roça",
+        "fr": "Choisissez où se trouve votre ferme"
+      },
+      "para": {
+        "es": "Busca tu comunidad en el mapa del mundo o marca tu parcela.",
+        "qu": "Ayllaykita pacha mapapi maskay, utaq chakraykita unanchay.",
+        "ay": "Ayllum uraqpacha mapan thaqhma, jan ukax yapum chimpuntam.",
+        "gn": "Eheka ne táva yvy mapape térã ehechauka nekokue.",
+        "en": "Find your community on the world map or mark your plot.",
+        "pt": "Procure sua comunidade no mapa-múndi ou marque sua parcela.",
+        "fr": "Cherchez votre communauté sur la carte du monde ou marquez votre parcelle."
+      },
+      "ejemplo": {
+        "es": "Escribe Soracachi y marca el lugar de tu parcela.",
+        "qu": "Soracachi nispa qillqay, chakraykipa kasqanta unanchay.",
+        "ay": "Soracachi qillqt'am, yapuman kawkinkis chimpuntam.",
+        "gn": "Ehai Soracachi ha ehechauka moõpa oĩ nekokue.",
+        "en": "Type Soracachi and mark where your plot is.",
+        "pt": "Digite Soracachi e marque o lugar da sua parcela.",
+        "fr": "Tapez Soracachi et marquez l'emplacement de votre parcelle."
+      }
+    },
+    "laboratorio": {
+      "titulo": {
+        "es": "Abre el laboratorio",
+        "qu": "Yachana wasita kichay",
+        "ay": "Yatxatañ uta jist'aram",
+        "gn": "Eipe'a ñemoha'ãnga renda",
+        "en": "Open the lab",
+        "pt": "Abra o laboratório",
+        "fr": "Ouvrez le laboratoire"
+      },
+      "para": {
+        "es": "Entra a la escena 3D para preparar el suelo, sembrar y regar.",
+        "qu": "3D rikuchiyman yaykuy, allpata wakichinaykipaq, tarpunaykipaq, qarpanaykipaq.",
+        "ay": "3D uñacht'äwir mantam, uraqi wakichañataki, yapuchañataki, qarpañataki.",
+        "gn": "Eike 3D-pe embosako'i hag̃ua yvy, emitỹ ha emboy hag̃ua.",
+        "en": "Enter the 3D scene to prepare the soil, sow and irrigate.",
+        "pt": "Entre na cena 3D para preparar o solo, plantar e irrigar.",
+        "fr": "Entrez dans la scène 3D pour préparer le sol, semer et irriguer."
+      },
+      "ejemplo": {
+        "es": "Prueba sembrar papa y mira cómo cambia la parcela.",
+        "qu": "Papata tarpuyta pruebay, chakra imayna tikrakusqanta qhaway.",
+        "ay": "Ch'uqi yapuchañ yant'am, yapux kunjams mayjt'i uk uñjma.",
+        "gn": "Eha'ã emitỹ papa ha ehecha mba'éichapa oñemoambue nekokue.",
+        "en": "Try sowing potato and watch how the plot changes.",
+        "pt": "Experimente plantar batata e veja como a parcela muda.",
+        "fr": "Essayez de semer des pommes de terre et regardez la parcelle changer."
+      }
+    },
+    "comparar": {
+      "titulo": {
+        "es": "Compara rotaciones",
+        "qu": "Tarpuy muyuykunata tupachiy",
+        "ay": "Yapu muyunak chikachma",
+        "gn": "Embojoja ñemitỹ jere",
+        "en": "Compare rotations",
+        "pt": "Compare rotações",
+        "fr": "Comparez les rotations"
+      },
+      "para": {
+        "es": "Abre Raíz con 45 años de datos de la NASA ya calculados. No necesita 3D.",
+        "qu": "Raízta kichay, NASA 45 wata willakuykunawan, ñam yupasqa. Mana 3D necesitanchu.",
+        "ay": "Raíz jist'aram, NASA 45 mara yatiyawinakampi, niya jakhutawa. Janiw 3D munkiti.",
+        "gn": "Eipe'a Raíz NASA 45 ary mba'ekuaa ndive, oñembohasáma. Noikotevẽi 3D.",
+        "en": "Opens Raíz with 45 years of NASA data, already calculated. No 3D needed.",
+        "pt": "Abre o Raíz com 45 anos de dados da NASA já calculados. Não precisa de 3D.",
+        "fr": "Ouvre Raíz avec 45 ans de données NASA déjà calculées. Pas besoin de 3D."
+      },
+      "ejemplo": {
+        "es": "Compara papa, quinua y descanso en años de El Niño.",
+        "qu": "El Niño watakunapi papata, kinuwata, samaytawan tupachiy.",
+        "ay": "El Niño maranakan ch'uqi, jupha, samaña chikachma.",
+        "gn": "Embojoja papa, kinúa ha pytu'u El Niño arýpe.",
+        "en": "Compare potato, quinoa and fallow in El Niño years.",
+        "pt": "Compare batata, quinoa e pousio em anos de El Niño.",
+        "fr": "Comparez pomme de terre, quinoa et jachère les années El Niño."
+      }
+    },
+    "estado": {
+      "titulo": {
+        "es": "Estado del sistema",
+        "qu": "Sistemapa kaynin",
+        "ay": "Sistema kunjamaski",
+        "gn": "Sistema reko",
+        "en": "System status",
+        "pt": "Estado do sistema",
+        "fr": "État du système"
+      },
+      "para": {
+        "es": "Muestra si el mapa 3D y el servidor funcionan.",
+        "qu": "3D mapa, servidorpas llamk'achkanchu chayta rikuchin.",
+        "ay": "3D mapa, servidorasa irnaqaskiti uk uñacht'ayi.",
+        "gn": "Ohechauka mapa 3D ha servidor omba'apópa.",
+        "en": "Shows whether the 3D map and the server are working.",
+        "pt": "Mostra se o mapa 3D e o servidor estão funcionando.",
+        "fr": "Indique si la carte 3D et le serveur fonctionnent."
+      },
+      "ejemplo": {
+        "es": "Si dice Sin conexión, la búsqueda por nombre no funciona, pero puedes usar el mapa.",
+        "qu": "Sin conexión nispaqa, sutiwan maskayqa mana llamk'anchu, mapata ichaqa llamk'achiyta atinki.",
+        "ay": "Sin conexión sistixa, sutimp thaqhañax janiw irnaqkiti, ukampis mapa apnaqañaw puedisma.",
+        "gn": "He'írõ Sin conexión, jeheka térape ndoikói, ha katu ikatu reipuru mapa.",
+        "en": "If it says Offline, search by name won't work, but you can use the map.",
+        "pt": "Se disser Sem conexão, a busca por nome não funciona, mas você pode usar o mapa.",
+        "fr": "S'il indique Hors ligne, la recherche par nom ne marche pas, mais vous pouvez utiliser la carte."
+      }
+    }
+  },
+  "recorridos": {
+    "beta": [
+      {
+        "paso": "idioma",
+        "selector": ".selector-idioma"
+      },
+      {
+        "paso": "alarmas",
+        "selector": ".alarmas .alarma"
+      },
+      {
+        "paso": "escenario",
+        "selector": "#tu-escenario .scenario-band"
+      },
+      {
+        "paso": "casos",
+        "selector": ".lista-casos .caso"
+      },
+      {
+        "paso": "secciones",
+        "selector": ".app-nav"
+      },
+      {
+        "paso": "simulacion",
+        "selector": ".enlace-simulacion"
+      }
+    ],
+    "simulacion": [
+      {
+        "paso": "idioma",
+        "selector": "[data-tour='idioma']"
+      },
+      {
+        "paso": "ubicacion",
+        "selector": "[data-tour='ubicacion']"
+      },
+      {
+        "paso": "laboratorio",
+        "selector": "[data-tour='laboratorio']"
+      },
+      {
+        "paso": "comparar",
+        "selector": "[data-tour='comparar']"
+      },
+      {
+        "paso": "alarmas",
+        "selector": "[data-testid='alerts-panel'] li"
+      },
+      {
+        "paso": "estado",
+        "selector": "[data-tour='estado']"
+      }
+    ]
+  }
+}

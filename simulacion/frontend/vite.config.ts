@@ -25,6 +25,10 @@ export default defineConfig({
   server: {
     port: 5173,
     strictPort: true,
+    // Publicación por túnel de Cloudflare (subdominio del equipo).
+    allowedHosts: ['simulacion-nasa.los5furiosos.cloud'],
+    // Con VITE_API_BASE_URL=/ la API va por el mismo origen: local o por el túnel.
+    proxy: { '/api': 'http://127.0.0.1:8000' },
   },
   preview: {
     port: 4173,

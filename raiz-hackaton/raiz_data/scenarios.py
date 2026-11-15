@@ -17,9 +17,14 @@ PERIODS = [
 ]
 BUDGETS = [
     {'water_budget_id': 'secano', 'net_limit_mm': 0, 'label': 'Secano: sin riego (situación más común en Oruro)'},
-    {'water_budget_id': 'riego-100', 'net_limit_mm': 100, 'label': 'Riego suplementario hipotético: 100 mm netos por campaña'},
 ]
+# Decisión v3.2 (líder, 15-nov 02:30): recorte de D1-5 → 1 presupuesto, 1 suelo, sin ranking, 6 KPI.
+KPI_SET = ('net_irrigation_requirement_mm', 'water_stress_days', 'thermal_exposure_days', 'bare_rain_exposure_days',
+           'bare_wind_exposure_days', 'planned_coverage_pct')
+RANKING_ENABLED = False
+SENSITIVITY_IN_RESULTS = False
 SOIL_ID = 'soilgrids-0-60cm'
+DEFAULT_SOIL = 'local-obrajes'
 # Suelo descrito por el productor («medio arcilloso arenoso») e interpretado por P6 como franco arcillo arenoso,
 # con agua disponible genérica NRCS 0,14–0,16 m/m (content/soils.json). Solo importa la diferencia CC − PMP.
 LOCAL_SOIL = {'soil_profile_id': 'local-obrajes', 'nature': 'scenario_assumption', 'label': 'Descripción del productor (P6): franco arcillo arenoso',
@@ -49,7 +54,7 @@ METHODS = {
     'planned_coverage_pct': 'Promedio diario de cobertura planificada (curva por etapa; descanso 25 %; rastrojo 10 %) del año agrícola 1-ago a 31-jul.',
     'bare_rain_exposure_days': f"Días con cobertura < {int(T['bare_cover_fraction']['value']*100)} % y lluvia ≥ {T['erosive_rain_mm']['value']} mm (POWER PRECTOTCORR). Proxy, no erosión calibrada.",
     'bare_wind_exposure_days': f"Días con cobertura < {int(T['bare_cover_fraction']['value']*100)} % y viento máximo a 2 m ≥ {T['erosive_wind_ms']['value']} m/s (POWER WS2M_MAX). Proxy.",
-    'thermal_exposure_days': 'Días de cultivo con helada dañina: en floración (etapa media) Tmin ≤ umbral de floración (papa −2,5; quinua −2; haba −1 °C) y en el resto del ciclo Tmin ≤ umbral letal (papa −2,5; quinua −8; haba −5 °C), umbrales de P6-2. POWER T2M_MIN es aire a 2 m en celda ~50 km: subestima heladas locales. Descanso: no aplica.',
+    'thermal_exposure_days': 'Días de helada en floración (etapa media del cultivo): Tmin ≤ umbral de floración de P6-2 (papa −2,5; quinua −2; haba −1 °C). Es la pérdida principal que reportó el productor. POWER T2M_MIN es aire a 2 m en una celda de ~50 km: subestima heladas locales. Descanso: no aplica.',
     'constraint_pass_frequency': f"Ventanas donde la campaña cumple: estrés severo ≤ {int(T['pass_stress_fraction']['value']*100)} % de los días de cultivo, helada ≤ {T['pass_thermal_days']['value']} d y lluvia erosiva con suelo expuesto ≤ {T['pass_bare_rain_days']['value']} d. Frecuencia histórica, no garantía.",
 }
 KPI_SOURCES = {'net_irrigation_requirement_mm': ['nasa-power-daily', 'isric-soilgrids'], 'net_irrigation_applied_mm': ['nasa-power-daily', 'isric-soilgrids'],
@@ -100,12 +105,12 @@ def window_kpis(unconstrained, constrained):
                 'water_stress_days': None if d['crop'] == 'descanso' else d['stress_days'],
                 'planned_coverage_pct': d['coverage_pct'], 'bare_rain_exposure_days': d['bare_rain_days'],
                 'bare_wind_exposure_days': d['bare_wind_days'],
-                'thermal_exposure_days': None if d['crop'] == 'descanso' else d['thermal_days'], 'pass': campaign_pass(d)}
+                'thermal_exposure_days': None if d['crop'] == 'descanso' else d['flowering_frost_days'], 'pass': campaign_pass(d)}
     cycle = {'net_irrigation_requirement_mm': sum(c['irrigation'] for c in unconstrained),
              'net_irrigation_applied_mm': sum(c['irrigation'] for c in constrained),
              'water_stress_days': sum(c['stress_days'] for c in constrained), 'planned_coverage_pct': mean(c['coverage_pct'] for c in constrained),
              'bare_rain_exposure_days': sum(c['bare_rain_days'] for c in constrained), 'bare_wind_exposure_days': sum(c['bare_wind_days'] for c in constrained),
-             'thermal_exposure_days': sum(c['thermal_days'] for c in constrained), 'pass': all(campaign_pass(c) for c in constrained)}
+             'thermal_exposure_days': sum(c['flowering_frost_days'] for c in constrained), 'pass': all(campaign_pass(c) for c in constrained)}
     diag = {'decision_rain_mm': d['rain'], 'decision_relative_et': d['eta'] / d['etc'] if d['etc'] else None,
             'decision_mild_stress_days': d['mild_stress_days'], 'decision_flowering_frost_days': d['flowering_frost_days'], 'decision_drainage_mm': d['drainage'], 'decision_runoff_mm': d['runoff'],
             'decision_balance_adjust_mm': d['adjust'],
@@ -115,7 +120,8 @@ def window_kpis(unconstrained, constrained):
 
 def aggregate(per_window, scope, n):
     group = {}
-    for name, unit in KPI_UNITS.items():
+    for name in KPI_SET:
+        unit = KPI_UNITS[name]
         base = {'unit': unit, 'nature': 'simulated', 'source_ids': KPI_SOURCES[name], 'method': METHODS[name]}
         if name == 'constraint_pass_frequency':
             num = sum(1 for w in per_window if w['pass'])
@@ -206,11 +212,11 @@ def build(precip_scale=None):
     last_day = days[-1]
     case_list = cases()
     years = [y for y in range(1981, LAST_DECISION + 1) if date(y + 3, 7, 31) <= last_day]
-    soils = {SOIL_ID: soil, LOCAL_SOIL['soil_profile_id']: LOCAL_SOIL}
+    soils = {LOCAL_SOIL['soil_profile_id']: LOCAL_SOIL}
     by_soil = {sid: run_sims(years, case_list, climate_ok, et0, s) for sid, s in soils.items()}
-    sims, diags = by_soil[SOIL_ID]
+    sims, diags = by_soil[DEFAULT_SOIL]
     alt_by_soil = {}
-    if precip_scale:
+    if precip_scale and SENSITIVITY_IN_RESULTS:
         climate_alt = {d: {**c, 'PRECTOTCORR': c['PRECTOTCORR'] * precip_scale.get(d.month, 1.0)} for d, c in climate_ok.items()}
         alt_by_soil = {sid: run_sims(years, case_list, climate_alt, et0, s)[0] for sid, s in soils.items()}
     build_id = f"raiz-oruro-power-{last_day.strftime('%Y%m%d')}-v1"
@@ -284,7 +290,7 @@ def build(precip_scale=None):
                 for case in case_list:
                     n = len(window_years)
                     windows = [{'window_id': f'w{y}', 'campaign_years': [y, y + 1, y + 2], 'complete': True, 'oni_ndj': oni[('NDJ', y)]} for y in window_years]
-                    rid = f"p{period['period_id']}.{SLUG[phase]}.{budget['water_budget_id']}.{case['case_id']}" + ('' if soil_id == SOIL_ID else '.suelo-local')
+                    rid = f"p{period['period_id']}.{SLUG[phase]}.{budget['water_budget_id']}.{case['case_id']}" + ('' if soil_id == DEFAULT_SOIL else f'.{soil_id}')
                     record = {'result_id': rid, 'build_id': build_id, 'analysis_point_id': POINT['analysis_point_id'],
                               'rotation_id': case['rotation_id'], 'position_id': case['position_id'], 'case_id': case['case_id'],
                               'decision_crop': case['decision_crop'], 'period_id': period['period_id'], 'enso_initial_phase': phase,
@@ -323,13 +329,14 @@ def build(precip_scale=None):
                     else:
                         record['sensitivity_status'] = 'not_evaluated'
                         record['sensitivity_reason'] = ('Sin ventanas en este escenario' if n == 0 else
-                                                        'Sin segunda serie diaria representativa: SENAMHI no publica series diarias')
+                                                        'Segunda fuente diaria no disponible (P6-4: CHIRPS incompleto en el espejo NOAA; SENAMHI sin series diarias públicas). '
+                                                        'El contraste mensual con normales SENAMHI está en la verificación, no en este resultado.')
                     group.append(record)
-                if group[0]['n_windows'] >= 3:
+                if RANKING_ENABLED and group[0]['n_windows'] >= 3:
                     rank(group)
                 records.extend(group)
                 groups[(period['period_id'], phase, budget['water_budget_id'], soil_id)] = window_years
-    sims, diags = by_soil[SOIL_ID]
+    sims, diags = by_soil[DEFAULT_SOIL]
     results = {**envelope('simulated', sources), 'assumptions': assumptions, 'warnings': warnings,
                'data': {'records': records, 'enso_rule': ENSO_RULE, 'groups': {'|'.join(k): v for k, v in groups.items()}}}
     docs = {'catalog.json': catalog, 'climate.json': climate_doc, 'results.json': results}

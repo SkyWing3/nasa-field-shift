@@ -69,10 +69,18 @@
     "sha256": "58b0e40b6f9d93dfc9dc93e08668ae3523d7db2b1d5208221c3477a6fc035752",
     "bytes": 4372743
   },
+  "nasa-power-daily/power_reciente_alarmas.json": {
+    "source_id": "nasa-power-daily",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MAX%2CT2M_MIN%2CT2MDEW%2CRH2M%2CQV2M%2CPRECTOTCORR%2CWS2M%2CWS2M_MAX%2CALLSKY_SFC_SW_DWN%2CCLRSKY_SFC_SW_DWN%2CPS%2CGWETTOP%2CGWETROOT%2CGWETPROF%2CTS&community=AG&longitude=-67.0&latitude=-17.83&start=19810101&end=20261114&format=JSON&time-standard=LST",
+    "queried_at": "2026-11-15T12:06:30+00:00",
+    "sha256": "6a41fea9ece7d691f0af56dd86090f6c905a15c9daf35502305ecebcba68d94e",
+    "bytes": 4373581,
+    "uso": "solo alarmas (datos recientes); no es el original del paquete"
+  },
   "noaa-cpc-oni/oni.ascii.txt": {
     "source_id": "noaa-cpc-oni",
     "url": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
-    "queried_at": "2026-11-15T04:03:14+00:00",
+    "queried_at": "2026-11-15T12:06:31+00:00",
     "sha256": "118c563331335c8649cdc2677e6be7ae89d1259d901345fcddbc2857af280f7f",
     "bytes": 23050
   },

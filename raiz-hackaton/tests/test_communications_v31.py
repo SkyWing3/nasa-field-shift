@@ -141,3 +141,62 @@ class CommunicationsV31Tests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class TemplatedMessageTests(unittest.TestCase):
+    """Plantillas P5-1: se rellenan con campos reales; un dato nulo omite la frase en vez de inventarla."""
+    TEMPLATES = {'cmp_decision': 'En años {fase} como este, comparamos {n_casos} formas. Este año tendría {cultivo_decision}.',
+                 'agua_riego': 'En años {fase}, {cultivo} necesitó {riego_mm} mm ({riego_m3ha} m³ por hectárea).',
+                 'agua_secano': 'La quinua tuvo {dias_estres} días con poca agua ({fase}).',
+                 'helada_floracion': 'Floración de {cultivo}: {dias_helada} noches bajo {umbral_c} °C ({fase}).',
+                 'cob_descubierto': 'Descubierto {dias_lluvia} días con lluvia y {dias_viento} con viento.',
+                 'cob_descanso': 'Un descanso con maleza no es suelo pelado.',
+                 'lim_muestra': 'Sale de {n} años parecidos.', 'lim_muestra_baja': 'Hay solo {n} años parecidos.',
+                 'lim_no_orden': 'Raíz no le dice qué sembrar.', 'sin_datos_kpi': 'No hay datos ({motivo}).'}
+
+    def record(self, crop='papa', n=3, **kpis):
+        values = {'net_irrigation_requirement_mm': 491.3, 'water_stress_days': 110.0, 'thermal_exposure_days': 0.7,
+                  'bare_rain_exposure_days': 1.0, 'bare_wind_exposure_days': 39.3} | kpis
+        return {'n_windows': n, 'decision_crop': crop, 'enso_initial_phase': 'Niño fuerte', 'period_id': '2001-2025', 'case_id': 'A-1',
+                'build_id': 'b-test', 'missing_reason': 'motivo de prueba', 'ranking': None,
+                'decision_kpis': {k: {'value': v} for k, v in values.items()}}
+
+    def catalog(self):
+        return {'cases': [{}] * 9, 'crops': {'papa': {'frost_flowering_c': -2.5}, 'haba': {'frost_flowering_c': -1.0}}}
+
+    def test_web_derivative_keeps_source_evidence_and_audio_text(self):
+        from raiz_delivery.communications import _templated_message
+        original = self.record()
+        expected = _templated_message(original, self.catalog(), self.TEMPLATES)
+        derivative = copy.deepcopy(original)
+        derivative.update(build_id='b-test-web-view', derived_from_build_id='b-test')
+        self.assertEqual(_templated_message(derivative, self.catalog(), self.TEMPLATES), expected)
+        derivative['decision_kpis']['net_irrigation_requirement_mm']['value'] = 600
+        self.assertNotEqual(_templated_message(derivative, self.catalog(), self.TEMPLATES), expected)
+
+    def test_irrigated_crop_uses_well_message_and_consistent_units(self):
+        from raiz_delivery.communications import _templated_message
+        text = _templated_message(self.record(), self.catalog(), self.TEMPLATES)
+        self.assertIn('491 mm (4910 m³ por hectárea)', text)
+        self.assertIn('bajo -2,5 °C', text)
+        self.assertIn('n = 3 · caso A-1 · b-test', text)
+        self.assertNotIn('{', text)
+
+    def test_null_value_omits_sentence_instead_of_inventing(self):
+        from raiz_delivery.communications import _templated_message
+        text = _templated_message(self.record(net_irrigation_requirement_mm=None), self.catalog(), self.TEMPLATES)
+        self.assertNotIn('necesitó', text)
+        self.assertNotIn(' 0 mm', text)
+
+    def test_small_sample_shows_no_comparison(self):
+        from raiz_delivery.communications import _templated_message
+        text = _templated_message(self.record(n=2), self.catalog(), self.TEMPLATES)
+        self.assertTrue(text.startswith('Hay solo 2 años parecidos.'))
+        self.assertNotIn('comparamos', text)
+
+    def test_fallow_has_no_frost_or_water_sentence(self):
+        from raiz_delivery.communications import _templated_message
+        text = _templated_message(self.record(crop='descanso', water_stress_days=None, thermal_exposure_days=None), self.catalog(), self.TEMPLATES)
+        self.assertIn('no es suelo pelado', text)
+        self.assertNotIn('Floración', text)
+        self.assertNotIn('necesitó', text)

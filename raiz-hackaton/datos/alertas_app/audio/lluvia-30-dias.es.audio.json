@@ -1,0 +1,23 @@
+{
+  "texto_sha256": "c30ece52f2734fc236593230cfb083513f95ebd42d07a93affae67858f0c7990",
+  "texto_hablado": "Lluvia del último mes. En los últimos treinta días llovieron cuarenta y dos milímetros en la zona; lo normal para estas fechas es veintitrés milímetros. Una racha húmeda no cambia el riesgo de toda la temporada.",
+  "duracion_s": 19.332,
+  "velocidad": 1.0,
+  "rms": 3582.195,
+  "voz": {
+    "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+    "name": "facebook/mms-tts-spa",
+    "language": "es",
+    "model_revision": "833b96c0278c85cf09776d565ba8f1cb2819f7ec",
+    "seed": 1234,
+    "speaking_rate": 1.0,
+    "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+  },
+  "licencia": {
+    "status": "licensed",
+    "spdx": "CC-BY-NC-4.0",
+    "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+    "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+  },
+  "revision_escucha": "pendiente"
+}

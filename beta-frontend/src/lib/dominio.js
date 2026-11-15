@@ -58,8 +58,8 @@ export const KPI = {
     ayuda: 'Días en que el suelo está descubierto y el viento supera el umbral.',
   },
   thermal_exposure_days: {
-    nombre: 'Días de frío o calor riesgoso', icono: 'termometro', mejor: 'menos', clase: 'k-frio',
-    ayuda: 'Días con temperatura fuera del rango seguro para la etapa del cultivo. No mide heladas en tu chacra.',
+    nombre: 'Helada en floración', icono: 'termometro', mejor: 'menos', clase: 'k-frio',
+    ayuda: 'Días con temperatura mínima bajo el umbral declarado para floración. Dato regional, no helada medida en tu chacra.',
   },
   constraint_pass_frequency: {
     nombre: 'Ventanas que cumplen las reglas', icono: 'check', mejor: 'más', clase: 'k-cultivo',
@@ -69,6 +69,12 @@ export const KPI = {
 
 export const ORDEN_KPI = Object.keys(KPI)
 
+export const KPI_V32 = ['net_irrigation_requirement_mm', 'water_stress_days', 'thermal_exposure_days', 'bare_rain_exposure_days', 'bare_wind_exposure_days', 'planned_coverage_pct']
+export function kpisDisponibles(paquete) {
+  const declarados = paquete.catalog.data?.presentation?.kpis ?? KPI_V32
+  return KPI_V32.filter((k) => declarados.includes(k))
+}
+
 const UNIDADES = { mm: 'mm', days: 'días', '%': '%', fraction: '' }
 
 const numero = (v, dec = 0) =>
@@ -76,12 +82,12 @@ const numero = (v, dec = 0) =>
 
 // Formato de un KPI. null → «no disponible» + motivo (nunca 0 silencioso).
 export function formatoKpi(metrica) {
-  if (!metrica || metrica.value === null || metrica.value === undefined) {
+  if (!metrica || typeof metrica.value !== 'number' || !Number.isFinite(metrica.value)) {
     return { texto: 'No disponible', motivo: metrica?.missing_reason ?? 'Dato ausente en el paquete', vacio: true }
   }
   if (metrica.unit === 'fraction') {
     const { numerator: a, denominator: b } = metrica
-    return { texto: a !== undefined && b ? `${a} de ${b} años` : numero(metrica.value * 100) + ' %', vacio: false }
+    return { texto: Number.isFinite(a) && Number.isFinite(b) && b > 0 ? `${a} de ${b} ventanas` : numero(metrica.value * 100) + ' %', vacio: false }
   }
   const dec = Math.abs(metrica.value) < 10 && !Number.isInteger(metrica.value) ? 1 : 0
   return { texto: `${numero(metrica.value, dec)} ${UNIDADES[metrica.unit] ?? metrica.unit}`.trim(), vacio: false }
@@ -108,10 +114,12 @@ export function opcionesEscenario(paquete) {
   const cat = paquete.catalog.data ?? {}
   const registros = paquete.results.data?.records ?? []
   const fasesConDatos = new Set(registros.map((r) => r.enso_initial_phase).filter(Boolean))
+  const suelosConDatos = new Set(registros.map((r) => r.soil_profile_id))
+  const presupuestosConDatos = new Set(registros.map((r) => r.water_budget_id))
   return {
     periodos: cat.periods ?? [],
-    presupuestos: cat.water_budgets ?? [],
-    suelos: cat.soil_profiles ?? [],
+    presupuestos: (cat.water_budgets ?? []).filter((b) => presupuestosConDatos.has(b.water_budget_id)),
+    suelos: (cat.soil_profiles ?? []).filter((s) => suelosConDatos.has(s.soil_profile_id)),
     fases: FASES_ENSO.filter((f) => fasesConDatos.has(f.id)),
     motivoCatalogo: cat.missing_reason ?? null,
   }
@@ -147,4 +155,3 @@ export const letraSecuencia = (caso) => String(caso?.case_id ?? '').split('-')[0
 export function etiquetaCampana(y) {
   return `${y}–${String(y + 1).slice(-2)}`
 }
-

@@ -89,6 +89,9 @@ def validate_package(root, *, production=False):
         path = safe_path(root, message['print_sheet']['path'].lstrip('/'))
         require(path.read_text(encoding='utf-8') == render_sheet(message), 'Ficha no coincide con mensaje/resultado')
     require((root/'index.html').read_text(encoding='utf-8') == render_index(comm), 'Índice no coincide con communications')
+    if comm['data'].get('credits_markdown'):
+        from .print_sheet import render_credits
+        require((root/'creditos.html').read_text(encoding='utf-8') == render_credits(comm), 'Créditos no coinciden con communications')
     require(read_json(root/'data/quality.json') == analyze_inputs(docs), 'Reporte de calidad no coincide con entradas')
     manifest = read_json(root/'data/manifest.json')
     envelope(manifest, comm['build_id'])
@@ -96,6 +99,8 @@ def validate_package(root, *, production=False):
     files = manifest['data']['files']
     require(isinstance(files, dict), 'Inventario de archivos requerido')
     allowed = {f'data/{name}' for name in FILES} | {'data/communications.json', 'data/quality.json', 'index.html'}
+    if comm['data'].get('credits_markdown'):
+        allowed.add('creditos.html')
     if editorial_path.exists():
         allowed.add('data/editorial.json')
     allowed.update(f'data/{name}' for name in sources_in(docs))
@@ -142,6 +147,9 @@ def build(input_dir, output, *, editorial=None, audio_assets=None, production=Fa
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(render_sheet(message), encoding='utf-8', newline='\n')
         (stage/'index.html').write_text(render_index(comm), encoding='utf-8', newline='\n')
+        if comm['data'].get('credits_markdown'):
+            from .print_sheet import render_credits
+            (stage/'creditos.html').write_text(render_credits(comm), encoding='utf-8', newline='\n')
         manifest = {key:copy.deepcopy(value) for key,value in docs['results.json'].items() if key!='data'}
         manifest['data'] = {'status':'fixture_only' if comm['mode']=='fixture' else 'precalculated', 'adapter_version':'dev2-1.0', 'files':inventory(stage), 'method':'Publicación de resultados precalculados; no calcula ciencia ni consulta proveedores', 'hash_policy':'SHA256 de archivos salvo manifest.json; current.json guarda hash externo del manifiesto'}
         write_json(stage/'data/manifest.json', manifest)

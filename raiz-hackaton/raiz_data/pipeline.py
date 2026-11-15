@@ -43,7 +43,7 @@ def procesar():
 
 def resumen(docs, verification, counts):
     records = docs['results.json']['data']['records']
-    current = [r for r in records if r['period_id'] == '2001-2025' and r['enso_initial_phase'] == 'Niño fuerte' and r['water_budget_id'] == 'secano' and r['soil_profile_id'] == 'soilgrids-0-60cm']
+    current = [r for r in records if r['period_id'] == '2001-2025' and r['enso_initial_phase'] == 'Niño fuerte' and r['water_budget_id'] == 'secano' and r['soil_profile_id'] == 'local-obrajes']
     top = sorted((r for r in current if r.get('ranking')), key=lambda r: r['ranking'])
     return {'build_id': docs['results.json']['build_id'], 'datos_hasta': docs['results.json']['data_as_of'], 'registros': len(records),
             'dataset': counts, 'escenario_actual': {'periodo': '2001-2025', 'enso': 'Niño fuerte', 'presupuesto': 'secano',

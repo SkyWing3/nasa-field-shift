@@ -214,3 +214,131 @@ cifras en `docs/datos/RESULTADOS.md` (se genera desde los datos).
   - alguien aprueba o descarta las alertas borrador en `datos/alertas/`;
   - pedir series diarias a SENAMHI (dirmethi@senamhi.gob.bo);
   - cuenta Earthdata para GPM, SMAP y MODIS.
+
+## Bitácora 2026-11-15 02:30–02:55 · Decisiones v3.2 de la líder (PROMPT_DEV2)
+
+- **Decisiones registradas** en `dist/index.html`, `raiz.html` (nota «Plan v3.2») y `plan-equipo.json` (`decisions_v3_2`).
+- **Tablero** (servidor 8787 y `team.sqlite3`): P6-1..6, P5-1, P5-2 y D1-4/5/6 en «Hecho».
+  - D1 se marcó «Hecho» y no «En curso» porque Dev 2 ya entregó el paquete real y pasa el contrato.
+  - El tablero solo admite tres estados: lo de «pendiente de integración web» de P5-2 queda en esta nota.
+- **Recorte D1-5:**
+  - un presupuesto (secano) y un suelo (descripción del productor, 150 mm/m);
+  - KPI: riego requerido, estrés severo, helada en floración, suelo descubierto con lluvia y viento, cobertura;
+  - ranking null y sensibilidad «not_evaluated» (P6-4);
+  - resultado: 72 resultados que validan.
+- **Publicador:**
+  - 4 avisos obligatorios (`lim_zona`, `lim_granizo`, `lim_no_orden`, `sin_datos_fuente`) en el índice y las fichas;
+  - boletín regional con el texto aprobado de P6, audio español aprobado por P5 y quechua del productor como `human_recording` con su nota;
+  - `creditos.html` desde P6-6, más las fuentes de verificación;
+  - `publicacion/editorial.json` aprobado por P5/P6, vigente hasta el 31-dic-2026.
+- **Audio:** sin aymara ni quechua sintético; se quitaron del paquete de ejemplo. Mensajes con voz MMS (escucha pendiente, rotulados como borrador).
+- **Túnel viejo apagado:** cloudflared PID 6956 y servidor PID 10948. El enlace devuelve 502.
+- **Respaldo:** `Documents/raiz-respaldos/agricultural-site-20261115-0254` con SHA-256.
+- **Pruebas:** 84 OK.
+- **Pendientes:**
+  - plantillas P5-1 (`communications_templates.json`): no están en el repo; los avisos usan el texto de P6-6 hasta reemplazarlos;
+  - HTTPS estable (D2-6);
+  - volver a sincronizar `beta-frontend` (`npm run paquete`) con esta publicación.
+
+Comando completo de publicación:
+
+```powershell
+.venv-tts\Scripts\python scripts\generate_audio_mms.py --input datos --editorial publicacion\editorial.json --output assets\audio\<build> --languages es --filtro p2001-2025.nino-fuerte.secano
+python scripts\ensamblar_audio_publicacion.py --input datos --editorial publicacion\editorial.json --mensajes assets\audio\<build> --salida assets\audio\<build>-publicacion
+python -m raiz_delivery build --input datos --output build\package-real --editorial publicacion\editorial.json --audio-assets assets\audio\<build>-publicacion
+python -m raiz_delivery publish --package build\package-real --site-root build\agricultural-site
+```
+
+### 03:45 · Plantillas P5-1 integradas
+
+- `content/communications_templates.json` (20 plantillas, revisadas por P6) se embebe en `publicacion/editorial.json` (`message_templates`), así el paquete se reconstruye y valida solo.
+- **Mensajes reales:** cmp_decision + agua_riego (papa y haba, con pozo) o agua_secano (quinua) + helada_floracion + cob_descubierto (+ cob_descanso) + lim_muestra + pie de evidencia (fuente · periodo · n · caso · build_id).
+  - Con n < 3: lim_muestra_baja («no mostramos comparación»).
+  - Con n = 0: sin_datos_kpi.
+  - cmp_ciclo se omite porque el ranking es null (v3.2). Cualquier dato nulo omite su frase.
+- **Avisos en cada página, con el texto exacto de P5:** lim_zona, lim_granizo, lim_suelo, lim_no_orden y sin_datos_fuente.
+- **Audio de los 9 mensajes del escenario actual:** 60–80 s. Publicado y respaldado en `Documents/raiz-respaldos/agricultural-site-20261115-0341`.
+- **Pruebas:** 88 OK (4 nuevas de plantillas).
+
+### 04:00 · D2-6 publicado por HTTPS
+
+- **URL:** https://morning-violet-efd4.mila-eloc.workers.dev/releases/raiz-oruro-power-20261111-v1/ (Cloudflare, desplegado por la líder desde `build/sitio-estatico`).
+- **Verificado desde afuera:** portada, índice, créditos, fichas (Cloudflare quita `.html` con un 307, y las rutas relativas siguen bien) y audios. El MP3 en quechua publicado tiene el mismo SHA-256 que el aprobado.
+- **Tablero:** D2-1, D2-2, D2-4, D2-5 y D2-6 en «Hecho». D2-3 sigue «En curso» porque los 9 MP3 de mensajes (voz MMS) no tienen escucha de P5; el boletín sí está aprobado.
+
+### 15-nov · Integración web, contraste y movimiento
+
+- Navegación superior, preferencias de lectura claras, bloques de color y movimiento editorial; guía en beta-frontend/DESIGN.md.
+- Staging de raiz_data.web fuera de public/ para evitar exponer entradas y bloqueos del observador de Vite en Windows. Detener Vite antes de la publicación atómica de current.json en este entorno.
+- La publicación derivada conserva derived_from_build_id en cada resultado; el pie hablado cita el cálculo original. Metadatos de publicación mantienen su ID propio. Se reutilizan solo voces con hash de texto e identificadores coincidentes: 11 incluidas, 0 omitidas; no se crean ni aprueban voces nuevas.
+- Regresión: una derivación de presentación conserva el texto de voz; cambiar un KPI cambia ese texto. check_dev2.py: 89 pruebas, 1 omitida por dependencia de voz. npm run build completo pasó con Vite detenido.
+
+### 15-nov 08:20 · Alarmas para leer y escuchar, y menú en quechua y aymara
+
+- **Comando:** `python -m raiz_data alarmas --audio --publicar` (`raiz_data/alarms.py`).
+  - Calcula señales con datos guardados: ONI de NOAA, frecuencia 4 de 5 de la verificación, lluvia de 30 días de una copia aparte de POWER (`power_reciente_alarmas.json`, no toca el paquete publicado), heladas recientes y fuegos ya aprobados.
+  - Escribe `datos/alertas_app/alertas.json` (esquema `raiz-alertas-app-v1`) y un MP3 en español por alarma.
+  - Copia todo a `beta-frontend/public/alertas/`, `simulacion/frontend/public/alertas/` y `build/sitio-estatico/alertas/`.
+- **Alarmas de hoy:**
+  - «El Niño fuerte está en curso» (atención; ONI ASO 2026 = +2,46; n = 5).
+  - «Lluvia del último mes» (información; 42 mm frente a 23 mm normales).
+- **Quechua y aymara:** son traducción automática con IA (Claude). Cada alarma lleva `traduccion.estado = revision_de_hablante_pendiente` y la nota «el español es la referencia».
+- **Audio:** voz sintética Meta MMS, solo en español, con la etiqueta «Requiere revisión de pares antes de difundir». No se emite nada automáticamente.
+- **beta-frontend:**
+  - `components/Alertas.jsx`: el nivel se indica con texto e icono además del color, con reproductor, fuente, fecha de datos y vigencia. En quechua o aymara aparece un botón «Ver en español».
+  - `lib/idioma.js`: selector de idioma (es/qu/ay/otro) en la cabecera. Cambia menú, portada, títulos de sección y pie, y muestra un aviso de traducción con IA. «Otro idioma» explica cómo usar la traducción del navegador. Los datos y las fichas siguen en español.
+- **3D:**
+  - `ui/components/AlertsPanel.tsx` y `ui/i18n.ts`: selector es/qu/ay en la pantalla inicial (textos principales y botones) y panel de alarmas.
+  - Pruebas: 177 (3 nuevas). Lint y tipos OK.
+- **Límites:**
+  - Ninguna traducción fue revisada por hablantes.
+  - No hay audio en quechua ni aymara para las alarmas: MMS no se usa en estas lenguas en el MVP.
+  - Las alarmas son señales de datos históricos y del ONI, no un pronóstico.
+
+### 15-nov 08:55 · Toda la interfaz cambia de idioma, y la franja editorial
+
+- **Diccionarios por idioma:** `beta-frontend/src/i18n/qu.json` y `ay.json`, cada uno con 29 claves, 240 textos y 10 patrones con números. Un traductor de pantalla (`src/lib/traductor.js`) cambia los textos de las cuatro vistas, los diálogos, las ayudas de indicadores, la zona de las alarmas y las etiquetas `aria-label`. Al volver a español se restaura todo.
+- **Qué no se traduce:** cifras, citas de fuentes, mensajes y boletín aprobados por P5/P6, y bloques con `lang="es"`. Todo es traducción automática con IA, sin revisión de hablantes, y la cabecera lo avisa.
+- **Otro idioma:**
+  - `npm run idioma -- nuevo <código> "<Nombre>"` crea la plantilla.
+  - `npm run idioma -- revisar` lista lo que falta.
+  - Guía en `src/i18n/LEEME.md`.
+  - «Otro idioma…» sigue usando la traducción del navegador.
+- **Franja «Observar · Comparar · Decidir»:** ahora se traduce, va en mayúsculas, con letras más separadas y más lenta (110 s por vuelta, antes 32 s).
+  - Causa de que no se moviera: si Windows tiene desactivadas las animaciones, el navegador pide reducir el movimiento y la app lo respeta. Aun así el botón decía «Pausar movimiento».
+  - Arreglo: el botón muestra el estado real. Si la persona pulsa «Activar movimiento», solo la franja se mueve, lenta, aunque el sistema pida reducirlo. La elección se guarda.
+- **3D:** la zona y la nota «no pronostica» del panel de alarmas también salen en quechua y aymara.
+- **Pruebas:** beta-frontend tiene 12 unitarias (3 nuevas) y la integración OK. El 3D tiene 177, con lint y tipos OK.
+
+### 15-nov 09:20 · Enlace entre el 3D y beta-frontend, y siete idiomas listos
+
+- **Enlace en los dos sentidos:**
+  - beta-frontend tiene en la cabecera el botón «Simulación 3D». Abre `http://localhost:5173/` en desarrollo, o `VITE_RAIZ_SIMULACION_URL` si está definida. En producción, sin esa variable, no aparece.
+  - En el 3D, «Comparar rotaciones» abre en desarrollo el beta-frontend local (`http://localhost:5175/`). En producción sigue abriendo el sitio publicado. Se admite http solo para localhost.
+  - Las dos apps pasan `?idioma=` y abren en el mismo idioma.
+- **Idiomas listos sin comandos:** español, quechua, aymara, guaraní, inglés, portugués y francés.
+  - beta-frontend: `src/i18n/*.json`, 281 frases cada uno. Se eligen desde el selector de la cabecera y van incluidos en la app, así que funcionan sin internet.
+  - 3D: pantalla inicial y panel de alarmas.
+  - Todos los idiomas salvo el español son traducción automática con IA (Claude), sin revisión de hablantes, y cada pantalla lo avisa.
+- **Alarmas en 7 idiomas:** `raiz_data/alarms.py` (`T_MAS`, `LANGS`). El audio sigue solo en español (voz sintética, requiere revisión de pares). Corregido un fallo: al regenerar sin `--audio` se perdía la referencia al MP3. Ahora se reutiliza si el texto hablado es idéntico.
+- **Pruebas:** beta-frontend 12 unitarias y 7 de integración; 3D 179 (lint y tipos OK); `check_dev2.py` OK.
+- **Límite:** generar un idioma nuevo desde la interfaz, en vivo, exigiría llamar a una IA desde el navegador o un servidor con clave de API. No se hizo, para no exponer claves ni depender de la red en la demo.
+
+### 15-nov 09:55 · Bienvenida, lectura en voz alta y tutorial (3D y beta-frontend)
+
+- **Fuente única:** `content/tutorial/tutorial.json`. Contiene la bienvenida, los textos de interfaz y 10 pasos (para qué sirve y un ejemplo) en 7 idiomas, más los recorridos `simulacion` (6 paradas) y `beta` (6 paradas). Todos los idiomas salvo el español son traducción automática con IA, sin revisión de hablantes.
+- **Audios:** `raiz-hackaton/scripts/generar_audio_tutorial.py` (con `.venv-tts`) genera 11 MP3 por idioma con Meta MMS: español (spa), quechua (quh), aymara (ayr) y guaraní (grn, descargado hoy).
+  - Quedan en `content/tutorial/audio/` con `manifest.json` (texto leído, sha256, duración) y se copian a `public/tutorial/` de las dos apps.
+  - Están marcados «requiere revisión de pares» y solo se regeneran si cambia el texto.
+  - Inglés, portugués y francés usan la voz del navegador.
+- **Bienvenida:**
+  - Se abre la primera vez, cuando no hay idioma configurado.
+  - Tiene botones grandes de idioma, un botón redondo grande de altavoz que activa la lectura en voz alta y lee la bienvenida, un interruptor «Quiero ver el tutorial» y el botón «Empezar».
+  - Se puede volver a abrir con «Tutorial» (beta-frontend) o «Ver tutorial» (3D).
+- **Recorrido:**
+  - Oscurece la pantalla y resalta con un anillo amarillo animado el lugar donde tocar, con la etiqueta «Toca aquí».
+  - La tarjeta muestra el paso N de M, el título, «Para qué sirve», un ejemplo, botones de voz y de escuchar, Anterior/Siguiente y «Saltar tutorial ✕» siempre visible. También responde a Esc y a las flechas.
+  - Con la voz activada, lee cada paso solo.
+  - Respeta «reducir movimiento». En el móvil la tarjeta se muestra abajo.
+- **Enlace entre apps:** el 3D pasa `idioma`, `voz` y `tutorial=si` al beta-frontend, que arranca su propio recorrido si la persona lo pidió y no lo vio antes.
+- **Pruebas:** beta-frontend 15 unitarias (3 nuevas sobre el contenido del tutorial); 3D 179, con lint y tipos OK. Verificado en el navegador: bienvenida en los dos, recorrido en aymara (3D) y quechua (beta), y «Saltar».

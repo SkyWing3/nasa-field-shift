@@ -7,6 +7,7 @@ a servicios externos en tiempo de ejecución, ni límites de uso que respetar. L
 
 import asyncio
 import sqlite3
+from contextlib import closing
 from pathlib import Path
 
 from app.data_sources.geocoding.base import (
@@ -77,7 +78,9 @@ class GeoNamesGazetteer:
         seen: set[int] = set()
         # Modo solo lectura: la API nunca modifica el nomenclátor.
         uri = f"{self._database.resolve().as_uri()}?mode=ro"
-        with sqlite3.connect(uri, uri=True) as connection:
+        # closing(): cierra la conexión al terminar; en Windows un archivo abierto
+        # no se puede reemplazar al regenerar el nomenclátor.
+        with closing(sqlite3.connect(uri, uri=True)) as connection:
             for stage in stages:
                 for row in connection.execute(
                     """

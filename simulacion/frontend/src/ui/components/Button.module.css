@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
+  text-decoration: none; /* también para ButtonLink (<a>) */
   min-height: 36px;
   padding: 0 var(--space-4);
   border: 1px solid transparent;

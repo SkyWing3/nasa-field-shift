@@ -13,10 +13,18 @@ export type IconName =
   | 'home'
   | 'search'
   | 'pin'
-  | 'draw';
+  | 'draw'
+  | 'speaker'
+  | 'speaker-off';
 
 /** Trazos de 24×24 dibujados para TerraLab (sin dependencias de librerías de iconos). */
 const PATHS: Readonly<Record<IconName, readonly string[]>> = {
+  speaker: [
+    'M4 9.5h3.5L12 5.5v13l-4.5-4H4Z',
+    'M15.5 9a4 4 0 0 1 0 6',
+    'M18 6.5a7.5 7.5 0 0 1 0 11',
+  ],
+  'speaker-off': ['M4 9.5h3.5L12 5.5v13l-4.5-4H4Z', 'm16 9.5 5 5', 'M21 9.5l-5 5'],
   'prepare-soil': ['M4 19h16', 'M5 15c2.5-1.2 4.5-1.2 7 0s4.5 1.2 7 0', 'M12 3v8', 'M9 8l3 3 3-3'],
   sow: [
     'M12 21v-7',

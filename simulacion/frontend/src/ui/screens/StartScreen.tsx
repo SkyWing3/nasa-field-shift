@@ -1,9 +1,15 @@
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 
+import { withLanguage } from '../../config/env';
 import type { WebGLSupport } from '../../scene/webgl';
 import { useConnectionStore } from '../../state';
-import { Button } from '../components/Button';
+import { AlertsPanel } from '../components/AlertsPanel';
+import { Button, ButtonLink } from '../components/Button';
 import { Icon } from '../components/Icon';
+import { isLanguage, isLanguageConfigured, LANGUAGES, translate, useLanguage } from '../i18n';
+import { Tour, Welcome } from '../tutorial/Tutorial';
+import { ui, useReader, useTutorialData, useVoicePreference } from '../tutorial/tutorialData';
 import styles from './StartScreen.module.css';
 
 /** Resumen de la ubicación guardada que se muestra en la pantalla inicial. */
@@ -23,6 +29,8 @@ interface StartScreenProps {
   readonly onContinue: () => void;
   readonly onEnter: () => void;
   readonly onRetryApi: () => void;
+  /** Comparador de rotaciones de Raíz publicado (se abre en otra pestaña). */
+  readonly comparatorUrl: string;
 }
 
 type CheckTone = 'ok' | 'error' | 'pending' | 'planned';
@@ -82,9 +90,18 @@ export function StartScreen({
   onContinue,
   onEnter,
   onRetryApi,
+  comparatorUrl,
 }: StartScreenProps) {
   const api = useConnectionStore((s) => s.api);
   const isChecking = useConnectionStore((s) => s.isChecking);
+  const [welcomeOpen, setWelcomeOpen] = useState(() => !isLanguageConfigured());
+  const [language, setLanguage] = useLanguage();
+  const [voice, setVoice] = useVoicePreference();
+  const [withTutorial, setWithTutorial] = useState(true);
+  const [tourActive, setTourActive] = useState(false);
+  const [tutorialChosen, setTutorialChosen] = useState(false);
+  const tutorial = useTutorialData();
+  const reader = useReader(tutorial);
 
   const apiCheck: Pick<CheckRowProps, 'value' | 'tone' | 'detail'> =
     api.status === 'online'
@@ -98,14 +115,51 @@ export function StartScreen({
       <Furrows />
       <div className={styles.content}>
         <section className={styles.hero} aria-labelledby="start-title">
-          <p className={styles.eyebrow}>Laboratorio de simulación agrícola</p>
+          <div className={styles.languageRow}>
+            <label className={styles.language} data-tour="idioma">
+              <span>{translate('language', language)}</span>
+              <select
+                value={language}
+                onChange={(event) => {
+                  if (isLanguage(event.target.value)) setLanguage(event.target.value);
+                }}
+                data-testid="language-select"
+              >
+                {LANGUAGES.map((item) => (
+                  <option key={item.id} value={item.id} lang={item.id}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            {tutorial === null ? null : (
+              <button
+                type="button"
+                className={styles.tutorialButton}
+                onClick={() => {
+                  setWelcomeOpen(true);
+                }}
+                data-testid="open-tutorial"
+              >
+                <Icon name="speaker" size={16} />
+                {ui(tutorial, 'ver_tutorial', language)}
+              </button>
+            )}
+          </div>
+          {language === 'es' ? null : (
+            <p className={styles.ctaHint} role="note">
+              <span lang={language}>{translate('aiNotice', language)}</span>{' '}
+              <span lang="es">{translate('aiNotice', 'es')}</span>
+            </p>
+          )}
+          <p className={styles.eyebrow} lang={language}>
+            {translate('eyebrow', language)}
+          </p>
           <h1 id="start-title" className={styles.title}>
             TerraLab <span>3D</span>
           </h1>
-          <p className={styles.lead}>
-            Prepara parcelas, cultiva y compara estrategias de rotación en un entorno 3D, con
-            modelos agronómicos explícitos y reproducibles alimentados por datos científicos de la
-            NASA.
+          <p className={styles.lead} lang={language}>
+            {translate('lead', language)}
           </p>
           <div className={styles.cta}>
             {savedSite === null ? (
@@ -113,10 +167,11 @@ export function StartScreen({
                 variant="primary"
                 size="large"
                 onClick={onChooseLocation}
+                data-tour="ubicacion"
                 disabled={!graphics.supported}
               >
                 <Icon name="map" size={18} />
-                Elegir la ubicación de la granja
+                {translate('chooseLocation', language)}
               </Button>
             ) : (
               <>
@@ -124,10 +179,11 @@ export function StartScreen({
                   variant="primary"
                   size="large"
                   onClick={onContinue}
+                  data-tour="ubicacion"
                   disabled={!graphics.supported}
                   data-testid="continue-site"
                 >
-                  Continuar con {savedSite.name}
+                  {translate('continueWith', language, { name: savedSite.name })}
                 </Button>
                 <Button
                   variant="secondary"
@@ -135,13 +191,36 @@ export function StartScreen({
                   onClick={onChooseLocation}
                   disabled={!graphics.supported}
                 >
-                  Cambiar ubicación
+                  {translate('changeLocation', language)}
                 </Button>
               </>
             )}
-            <Button variant="ghost" onClick={onEnter} disabled={!graphics.supported}>
-              Abrir el laboratorio (escena provisional)
+            <Button
+              variant="ghost"
+              onClick={onEnter}
+              disabled={!graphics.supported}
+              data-tour="laboratorio"
+            >
+              {translate('openLab', language)}
             </Button>
+            <ButtonLink
+              variant="secondary"
+              size="large"
+              href={withLanguage(comparatorUrl, language, {
+                voz: voice ? 'si' : 'no',
+                ...(tutorialChosen ? { tutorial: 'si' } : {}),
+              })}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-testid="compare-rotations"
+              data-tour="comparar"
+            >
+              <Icon name="layers" size={18} />
+              {translate('compare', language)}
+            </ButtonLink>
+            <span className={styles.ctaHint} lang={language}>
+              {translate('compareHint', language)}
+            </span>
             {graphics.supported ? (
               api.status === 'offline' ? (
                 <span className={styles.ctaHint}>
@@ -162,9 +241,9 @@ export function StartScreen({
           </div>
         </section>
 
-        <section className={styles.status} aria-labelledby="status-heading">
+        <section className={styles.status} aria-labelledby="status-heading" data-tour="estado">
           <h2 id="status-heading" className={styles.statusHeading}>
-            Estado del sistema
+            {translate('systemStatus', language)}
           </h2>
           <ul className={styles.checks}>
             <CheckRow
@@ -219,6 +298,39 @@ export function StartScreen({
           </ul>
         </section>
       </div>
+      <AlertsPanel language={language} />
+      {tutorial === null ? null : (
+        <Welcome
+          open={welcomeOpen}
+          data={tutorial}
+          language={language}
+          onLanguage={setLanguage}
+          voice={voice}
+          onVoice={setVoice}
+          withTutorial={withTutorial}
+          onWithTutorial={setWithTutorial}
+          reader={reader}
+          onStart={(wants) => {
+            setWelcomeOpen(false);
+            reader.stop();
+            setTutorialChosen(wants);
+            if (wants) setTourActive(true);
+          }}
+        />
+      )}
+      {tutorial !== null && tourActive ? (
+        <Tour
+          data={tutorial}
+          tour="simulacion"
+          language={language}
+          voice={voice}
+          onVoice={setVoice}
+          reader={reader}
+          onFinish={() => {
+            setTourActive(false);
+          }}
+        />
+      ) : null}
       <footer className={styles.footer}>
         <span>TerraLab 3D · v{appVersion}</span>
         {import.meta.env.DEV ? (

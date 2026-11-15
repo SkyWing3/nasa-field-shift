@@ -17,7 +17,7 @@ def display(value):
     return str(value)
 
 
-STYLE = '''body{font:17px/1.6 system-ui;margin:0;background:#f3f3ed;color:#193b30}main{max-width:68rem;margin:auto;padding:2rem}h1,h2,h3{line-height:1.2}a{color:#176247}a:focus-visible,button:focus-visible,audio:focus-visible{outline:3px solid #a55232;outline-offset:4px}.banner,article{padding:1rem;background:#fffef9;border:1px solid #c7cfc5;border-radius:.6rem;margin:1rem 0}.banner{border-left:5px solid #a55232}table{width:100%;border-collapse:collapse}th,td{padding:.55rem;text-align:left;border-bottom:1px solid #c7cfc5;vertical-align:top}.table-wrap{overflow-x:auto}dt{font-weight:bold}dd{margin:0 0 .8rem}audio{display:block;max-width:100%;margin:.8rem 0}small{display:block}.selected{font-weight:bold;background:#e4ecdf}button{font:inherit;padding:.5rem 1rem}.translation{border-left:5px solid #a55232;padding-left:.8rem;margin:1rem 0}li,dd,p,td{overflow-wrap:anywhere}@media print{body{background:white}main{padding:0}.no-print,audio{display:none}article{break-inside:avoid}a{color:inherit;text-decoration:none}}'''
+STYLE = '''body{font:17px/1.6 system-ui;margin:0;background:#f3f3ed;color:#193b30}main{max-width:68rem;margin:auto;padding:2rem}h1,h2,h3{line-height:1.2}a{color:#176247}a:focus-visible,button:focus-visible,audio:focus-visible{outline:3px solid #a55232;outline-offset:4px}.banner,article{padding:1rem;background:#fffef9;border:1px solid #c7cfc5;border-radius:.6rem;margin:1rem 0}.banner{border-left:5px solid #a55232}table{width:100%;border-collapse:collapse}th,td{padding:.55rem;text-align:left;border-bottom:1px solid #c7cfc5;vertical-align:top}.table-wrap{overflow-x:auto}dt{font-weight:bold}dd{margin:0 0 .8rem}audio{display:block;max-width:100%;margin:.8rem 0}small{display:block}.selected{font-weight:bold;background:#e4ecdf}button{font:inherit;padding:.5rem 1rem}blockquote{border-left:4px solid #c7cfc5;margin:1rem 0;padding:.2rem 1rem}.notices ul{margin:.4rem 0 0}.translation{border-left:5px solid #a55232;padding-left:.8rem;margin:1rem 0}li,dd,p,td{overflow-wrap:anywhere}@media print{body{background:white}main{padding:0}.no-print,audio{display:none}article{break-inside:avoid}a{color:inherit;text-decoration:none}}'''
 
 # Se comprueba al abrir el archivo y durante la visita, incluso en HTML estático.
 EDITORIAL_SCRIPT = '''<script>
@@ -81,13 +81,66 @@ def _translations(item, prefix='..'):
         method = (entry.get('translation') or {}).get('method')
         origin = 'Traducción automática ('+esc((entry.get('translation') or {}).get('model', 'modelo no declarado'))+')' if method == 'machine' else 'Traducción humana'
         reviewed = entry.get('status') == 'available'
-        warning = '<p><strong>'+('Revisada por hablante.' if reviewed else 'EXPERIMENTAL: sin revisión de hablante ni agronómica. No usar como mensaje oficial.')+'</strong> '+origin+'. El texto en español es la referencia.</p>'
+        if method == 'human_recording':
+            warning = '<p><strong>'+esc(entry.get('note', ''))+'</strong></p>'
+        else:
+            warning = '<p><strong>'+('Revisada por hablante.' if reviewed else 'EXPERIMENTAL: sin revisión de hablante ni agronómica. No usar como mensaje oficial.')+'</strong> '+origin+'. El texto en español es la referencia.</p>'
         player = ''
         if entry.get('status') in ('available', 'available_experimental', 'available_fixture') and _public_audio_path(entry.get('path')):
             href = prefix + entry['path']
             player = '<audio controls preload="none" src="'+esc(href)+'" aria-label="Escuchar versión en '+esc(entry.get('language_name', language))+'"></audio><a data-audio-download href="'+esc(href)+'" download>Descargar MP3 ('+esc(language)+')</a>'+_voice_credit(entry)
         blocks.append('<div class="translation"><h3>'+esc(entry.get('language_name', language))+'</h3>'+warning+'<p lang="'+esc(language)+'">'+esc(entry.get('text', ''))+'</p>'+player+'</div>')
     return '<h2>Otros idiomas</h2>'+''.join(blocks) if blocks else ''
+
+
+def _notices(item):
+    """Avisos obligatorios v3.2 (zona, granizo, no es una orden, segunda fuente)."""
+    notices = item.get('notices') or []
+    if not notices:
+        return ''
+    return '<aside class="banner notices" aria-label="Avisos importantes"><strong>Antes de leer</strong><ul>'+''.join('<li data-notice="'+esc(n['id'])+'">'+esc(n['text'])+'</li>' for n in notices)+'</ul></aside>'
+
+
+def render_credits(communications):
+    """Créditos desde el Markdown aprobado (P6-6): títulos, listas, tablas y citas, sin HTML externo."""
+    lines, out, table = communications['data'].get('credits_markdown', '').splitlines(), [], []
+    def flush():
+        if table:
+            rows = [[c.strip() for c in r.strip('|').split('|')] for r in table if not set(r.replace('|', '').strip()) <= set('-: ')]
+            out.append('<div class="table-wrap"><table><thead><tr>'+''.join('<th>'+_inline(c)+'</th>' for c in rows[0])+'</tr></thead><tbody>'
+                       +''.join('<tr>'+''.join('<td>'+_inline(c)+'</td>' for c in r)+'</tr>' for r in rows[1:])+'</tbody></table></div>')
+            table.clear()
+    open_list = False
+    for line in lines:
+        if line.startswith('|'):
+            table.append(line); continue
+        flush()
+        if line.startswith('- '):
+            if not open_list:
+                out.append('<ul>'); open_list = True
+            out.append('<li>'+_inline(line[2:])+'</li>'); continue
+        if open_list:
+            out.append('</ul>'); open_list = False
+        if line.startswith('#'):
+            level = min(3, len(line) - len(line.lstrip('#')) + 1)
+            out.append(f'<h{level}>'+_inline(line.lstrip('#').strip())+f'</h{level}>')
+        elif line.startswith('> '):
+            out.append('<blockquote>'+_inline(line[2:])+'</blockquote>')
+        elif line.strip():
+            out.append('<p>'+_inline(line)+'</p>')
+    flush()
+    if open_list:
+        out.append('</ul>')
+    return ('<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Raíz · créditos y límites</title><style>'
+            +STYLE+'</style></head><body><main><p class="no-print"><a href="index.html">Volver al catálogo</a></p>'+''.join(out)+'</main></body></html>')
+
+
+def _inline(text):
+    import re
+    html = esc(text)
+    html = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', html)
+    html = re.sub(r'`(.+?)`', r'<code>\1</code>', html)
+    return re.sub(r'(https?://[^\s<]+)', r'<a href="\1">\1</a>', html)
 
 
 def _source_text(item):
@@ -133,7 +186,7 @@ def render_sheet(message):
     cases_table = '<h2>Nueve casos: tres posiciones por secuencia</h2><div class="table-wrap"><table><thead><tr><th>Caso</th><th>Ciclo completo</th><th>Cultivo de decisión</th></tr></thead><tbody>'+cases+'</tbody></table></div>' if cases else ''
     sources = '<ul>'+''.join('<li>'+_source_text(item)+'</li>' for item in sheet['sources'])+'</ul>' if sheet['sources'] else '<p>Fuentes científicas cargadas: ninguna.</p>'
     limits = '<ul>'+''.join('<li>'+esc(display(item))+'</li>' for item in sheet.get('limitations', [])+sheet.get('assumptions', []))+'</ul>'
-    return '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Raíz · ficha '+esc(message['result_id'])+'</title><style>'+STYLE+'</style></head><body><main><h1>Raíz · Oruro</h1><p class="banner"><strong>'+title+'</strong></p><p class="no-print"><a href="../index.html">Volver al catálogo</a> · Imprimir desde el navegador (Ctrl+P).</p><section'+_editorial_attrs(message)+'><h2>Mensaje equivalente</h2><p>'+esc(message['text'])+'</p><p data-editorial-status>Vigencia editorial: consultar fechas; no es horizonte meteorológico.</p>'+_audio(message)+_translations(message)+'<h2>Selección y evidencia</h2>'+_facts(message)+'<h2>Tres secuencias candidatas</h2><ol>'+alternatives+'</ol>'+cases_table+'<h2>KPI de campaña de decisión</h2>'+_kpis(sheet.get('decision_kpis'))+'<h2>KPI del ciclo completo</h2>'+_kpis(sheet.get('cycle_kpis'))+'<p>'+esc(sheet.get('missing_reason') or 'No se informa un motivo general de falta de datos.')+'</p><h2>Fuentes, supuestos y límites</h2>'+sources+limits+'<p>Boletín regional general separado; sin emisión comprobada. Ninguna ficha recomienda por sí sola una siembra.</p></section></main>'+EDITORIAL_SCRIPT+'</body></html>'
+    return '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Raíz · ficha '+esc(message['result_id'])+'</title><style>'+STYLE+'</style></head><body><main><h1>Raíz · Oruro</h1><p class="banner"><strong>'+title+'</strong></p><p class="no-print"><a href="../index.html">Volver al catálogo</a> · Imprimir desde el navegador (Ctrl+P).</p>'+_notices(message)+'<section'+_editorial_attrs(message)+'><h2>Mensaje equivalente</h2><p>'+esc(message['text'])+'</p><p data-editorial-status>Vigencia editorial: consultar fechas; no es horizonte meteorológico.</p>'+_audio(message)+_translations(message)+'<h2>Selección y evidencia</h2>'+_facts(message)+'<h2>Tres secuencias candidatas</h2><ol>'+alternatives+'</ol>'+cases_table+'<h2>KPI de campaña de decisión</h2>'+_kpis(sheet.get('decision_kpis'))+'<h2>KPI del ciclo completo</h2>'+_kpis(sheet.get('cycle_kpis'))+'<p>'+esc(sheet.get('missing_reason') or 'No se informa un motivo general de falta de datos.')+'</p><h2>Fuentes, supuestos y límites</h2>'+sources+limits+'<p>Boletín regional general separado; sin emisión comprobada. Ninguna ficha recomienda por sí sola una siembra.</p></section></main>'+EDITORIAL_SCRIPT+'</body></html>'
 
 
 def render_index(communications):
@@ -145,4 +198,4 @@ def render_index(communications):
         cards.append(card)
     bulletin = data['regional_bulletin']
     bulletin_card = '<article'+_editorial_attrs(bulletin)+'><h2>Boletín regional general</h2><p>'+esc(bulletin.get('text') or 'Boletín no disponible.')+'</p><p data-editorial-status>Vigencia editorial: consultar fechas.</p>'+_audio(bulletin, '.')+_translations(bulletin, '.')+'<p>Distribución: '+esc(bulletin['distribution_status'])+'; sin emisión comprobada. Duración medida: '+esc(display(bulletin.get('duration_seconds')))+' segundos.</p></article>'
-    return '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Raíz · resultados publicados</title><style>'+STYLE+'</style></head><body><main><h1>Raíz · paquete publicado</h1><p class="banner"><strong>'+('DEMOSTRACIÓN CON FIXTURE. Sin datos NASA/NOAA reales.' if fixture else 'Evaluación histórica simulada. Revisar evidencia y vigencia editorial.')+'</strong></p><p>Build: '+esc(communications['build_id'])+'. Tres secuencias, posiciones cíclicas y mensajes de la misma versión. Esta vista sirve para revisar la entrega Dev 2.</p><p><a href="data/manifest.json">Manifiesto de integridad</a> · <a href="data/communications.json">Textos y catálogo JSON</a></p>'+''.join(cards)+bulletin_card+'</main>'+EDITORIAL_SCRIPT+'</body></html>'
+    return '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Raíz · resultados publicados</title><style>'+STYLE+'</style></head><body><main><h1>Raíz · paquete publicado</h1><p class="banner"><strong>'+('DEMOSTRACIÓN CON FIXTURE. Sin datos NASA/NOAA reales.' if fixture else 'Evaluación histórica simulada. Revisar evidencia y vigencia editorial.')+'</strong></p><p>Build: '+esc(communications['build_id'])+'. Tres secuencias, posiciones cíclicas y mensajes de la misma versión. Esta vista sirve para revisar la entrega Dev 2.</p><p><a href="data/manifest.json">Manifiesto de integridad</a> · <a href="data/communications.json">Textos y catálogo JSON</a>'+(' · <a href="creditos.html">Créditos, fuentes y límites</a>' if communications['data'].get('credits_markdown') else '')+'</p>'+_notices(data['regional_bulletin'])+''.join(cards)+bulletin_card+'</main>'+EDITORIAL_SCRIPT+'</body></html>'

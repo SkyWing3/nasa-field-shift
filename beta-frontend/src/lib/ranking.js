@@ -80,8 +80,8 @@ export function ordenarCasos(registros, grupoKpi, pesosGrupo) {
       filas: base, metodo, n,
     }
   }
-  if (!(sumaPesos > 0)) {
-    return { estado: 'pesos_invalidos', motivo: 'Elige al menos una prioridad con peso mayor que cero.', filas: base, metodo, n }
+  if (Object.values(pesos).some((p) => !Number.isFinite(p.peso) || p.peso < 0) || !(sumaPesos > 0)) {
+    return { estado: 'pesos_invalidos', motivo: 'Usa pesos finitos, no negativos y al menos una prioridad mayor que cero.', filas: base, metodo, n }
   }
 
   // 1) faltantes por caso
@@ -174,4 +174,3 @@ export function nivelesRelativos(registros, grupoKpi = 'decision_kpis') {
   }
   return salida
 }
-

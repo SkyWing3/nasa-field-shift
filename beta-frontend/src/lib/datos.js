@@ -24,11 +24,12 @@ export class ErrorDatos extends Error {
   }
 }
 
-async function leerJSON(url) {
+async function leerJSON(url, signal) {
   let respuesta
   try {
-    respuesta = await fetch(url, { cache: 'no-store' })
-  } catch {
+    respuesta = await fetch(url, { cache: 'no-store', signal })
+  } catch (error) {
+    if (error.name === 'AbortError') throw error
     throw new ErrorDatos('No se pudo conectar para leer los datos. Revisa tu conexión a internet o a la red local.', url)
   }
   if (!respuesta.ok) {
@@ -42,26 +43,27 @@ async function leerJSON(url) {
 }
 
 // Archivos opcionales: si faltan, se devuelve null con motivo visible (nunca se inventan).
-async function leerOpcional(url) {
+async function leerOpcional(url, signal) {
   try {
-    return { doc: await leerJSON(url), motivo: null }
+    return { doc: await leerJSON(url, signal), motivo: null }
   } catch (error) {
+    if (error.name === 'AbortError') throw error
     return { doc: null, motivo: error.message }
   }
 }
 
-export async function cargarFuente(idFuente) {
+export async function cargarFuente(idFuente, signal) {
   const fuente = FUENTES.find((f) => f.id === idFuente) ?? FUENTES[0]
   const raiz = `${import.meta.env?.BASE_URL ?? './'}${fuente.carpeta}`
-  const puntero = await leerJSON(`${raiz}current.json`)
+  const puntero = await leerJSON(`${raiz}current.json`, signal)
   if (!puntero?.base_path) throw new ErrorDatos('El puntero current.json no indica base_path.', raiz)
   const base = raiz + String(puntero.base_path).replace(/^\/+/, '')
 
-  const [catalog, climate, results] = await Promise.all(
-    ['catalog', 'climate', 'results'].map((n) => leerJSON(`${base}data/${n}.json`)),
-  )
-  const comunicaciones = await leerOpcional(`${base}data/communications.json`)
-  const manifiesto = await leerOpcional(`${base}data/manifest.json`)
+  const [catalog, climate, results, comunicaciones, manifiesto] = await Promise.all([
+    ...['catalog', 'climate', 'results'].map((n) => leerJSON(`${base}data/${n}.json`, signal)),
+    leerOpcional(`${base}data/communications.json`, signal),
+    leerOpcional(`${base}data/manifest.json`, signal),
+  ])
 
   // Un mismo build_id en todos los archivos: si no coincide, no se mezcla (contrato v3).
   const docs = { catalog, climate, results }
@@ -107,4 +109,3 @@ export function naturalezaPaquete(paquete) {
   }
   return { tipo: 'descargado', titulo: 'Datos descargados', texto: 'Datos históricos descargados. No es una predicción.' }
 }
-

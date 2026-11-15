@@ -134,8 +134,57 @@ def _summary(record, crop, budget):
     return text + ' '
 
 
-def _message(record, source, catalog):
+PHASE_TEXT = {'Normal': 'normales', 'Niño': 'Niño', 'Niña': 'Niña', 'Niño fuerte': 'Niño fuerte'}
+IRRIGATED = ('papa', 'haba')  # el productor riega papa y haba con pozo; la quinua es de secano (P6-1)
+
+
+def _fill(templates, key, **values):
+    """Plantilla P5-1 rellenada; None si falta la plantilla o algún dato (nunca se inventa)."""
+    template = templates.get(key)
+    if template is None or any(v is None for v in values.values()):
+        return None
+    text = template
+    for name, value in values.items():
+        text = text.replace('{' + name + '}', value if isinstance(value, str) else _num(value))
+    return None if '{' in text else text
+
+
+def _templated_message(record, catalog, templates):
+    """Mensaje real armado solo con plantillas P5-1 (≤30 palabras cada una) y un pie de evidencia."""
+    n = record['n_windows']
+    crop = record.get('decision_crop') or 'cultivo'
+    phase = PHASE_TEXT.get(record.get('enso_initial_phase'), record.get('enso_initial_phase') or 'parecidos')
+    d = record.get('decision_kpis') or {}
+    value = lambda key: (d.get(key) or {}).get('value')
+    n_cases = len(catalog.get('cases', [])) or None
+    if n == 0 or not d:
+        parts = [_fill(templates, 'sin_datos_kpi', motivo=record.get('missing_reason') or 'sin años parecidos'), templates.get('lim_no_orden')]
+    elif n < 3:
+        parts = [_fill(templates, 'lim_muestra_baja', n=n), templates.get('lim_no_orden')]
+    else:
+        flowering = ((catalog.get('crops') or {}).get(crop) or {}).get('frost_flowering_c')
+        irrigation = value('net_irrigation_requirement_mm')
+        parts = [
+            _fill(templates, 'cmp_decision', fase=phase, n_casos=n_cases, cultivo_decision=crop),
+            # cmp_ciclo necesita el puesto del ranking: con ranking null (decisión v3.2) se omite.
+            _fill(templates, 'agua_riego', fase=phase, cultivo=crop, riego_mm=None if irrigation is None else round(irrigation),
+                  riego_m3ha=None if irrigation is None else round(irrigation) * 10) if crop in IRRIGATED else None,  # 1 mm = 10 m³/ha
+            _fill(templates, 'agua_secano', fase=phase, dias_estres=value('water_stress_days')) if crop == 'quinua' else None,
+            _fill(templates, 'helada_floracion', fase=phase, cultivo=crop, dias_helada=value('thermal_exposure_days'),
+                  umbral_c=flowering) if crop != 'descanso' else None,
+            _fill(templates, 'cob_descubierto', dias_lluvia=value('bare_rain_exposure_days'), dias_viento=value('bare_wind_exposure_days')),
+            templates.get('cob_descanso') if crop == 'descanso' else None,
+            _fill(templates, 'lim_muestra', n=n),
+        ]
+    footer = (f"Fuente: NASA POWER y NOAA ONI · periodo {record.get('period_id') or 'no disponible'} · n = {n} · "
+              f"caso {record.get('case_id')} · {record.get('derived_from_build_id') or record.get('build_id')}.")
+    return ' '.join(p for p in parts if p) + ' ' + footer
+
+
+def _message(record, source, catalog, templates=None):
     fixture = source['mode'] == 'fixture'
+    if templates and not fixture:
+        return _templated_message(record, catalog, templates)
     n = record['n_windows']
     case = _lookup(catalog.get('cases', []), 'case_id', record.get('case_id'))
     rotation = _lookup(catalog['rotations'], 'rotation_id', record['rotation_id'])
@@ -176,6 +225,10 @@ def make_communications(docs, editorial=None):
     catalog = docs['catalog.json']['data']
     fixture = source['mode'] == 'fixture'
     dates = _editorial(editorial)
+    raw = editorial or {}
+    # Avisos obligatorios (decisión v3.2) y textos aprobados: vienen del JSON editorial, no se inventan aquí.
+    notices = [] if fixture else [{'id': str(n['id']), 'text': str(n['text'])} for n in raw.get('limits_messages', [])]
+    templates = None if fixture else {t['id']: t['text_es'] for t in raw.get('message_templates', [])} or None
     entries = []
     for record in source['data']['records']:
         fields = {key: record.get(key) for key in CONTEXT}
@@ -187,8 +240,9 @@ def make_communications(docs, editorial=None):
             'mode': source['mode'], 'language': 'es',
             'status': 'draft_fixture' if fixture else 'reviewed' if dates['review_status'] == 'approved' else 'draft_pending_review',
             **deepcopy(dates), 'data_as_of': source['data_as_of'],
-            'text': _message(record, source, catalog),
+            'text': _message(record, source, catalog, templates),
             'audio': {'status': 'unavailable', 'path': None, 'reason': 'MP3 y revisión de escucha pendientes'},
+            'notices': deepcopy(notices),
             'print_sheet': {
                 'path': f"/print/{record['result_id']}.html",
                 'alternatives': deepcopy(catalog['rotations']),
@@ -226,7 +280,10 @@ def make_communications(docs, editorial=None):
         'Revise agua, cobertura y calendario con un técnico antes de decidir. '
         'Boletín preparado, sin emisión de radio comprobada.'
     )
-    if bulletin_text is not None:
+    approved_bulletin = None if fixture else raw.get('regional_bulletin_text')
+    if approved_bulletin:
+        bulletin_text = str(approved_bulletin).strip()  # texto aprobado tal cual: su audio debe coincidir palabra por palabra
+    elif bulletin_text is not None:
         bulletin_text += _spoken_editorial(dates)
     output = {key: deepcopy(value) for key, value in source.items() if key != 'data'}
     output['data'] = {'messages': entries, 'regional_bulletin': {
@@ -237,6 +294,9 @@ def make_communications(docs, editorial=None):
         'audio': {'status': 'unavailable', 'path': None, 'reason': 'MP3 regional pendiente'},
         **deepcopy(dates), 'data_as_of': source['data_as_of'],
         'distribution_status': 'prepared_not_broadcast',
-        'reason': 'Guion pendiente de revisión P5/P6; audio no difundido',
+        'reason': 'Guion aprobado por P5/P6 (acta P5-2); preparado para radio, no emitido' if approved_bulletin else 'Guion pendiente de revisión P5/P6; audio no difundido',
+        'notices': deepcopy(notices),
     }}
+    if not fixture and raw.get('credits_markdown'):
+        output['data']['credits_markdown'] = str(raw['credits_markdown'])
     return output

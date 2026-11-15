@@ -4,7 +4,7 @@
 import { useState } from 'react'
 import Icono from '../components/Icono.jsx'
 import { Aviso, EtiquetaEstado, FilaKpi, NoDisponible, Secuencia } from '../components/Comunes.jsx'
-import { FASES_ENSO, nombreCultivo, nombreFuente, ORDEN_KPI } from '../lib/dominio.js'
+import { FASES_ENSO, nombreCultivo, nombreFuente, kpisDisponibles } from '../lib/dominio.js'
 import { urlRelease } from '../lib/datos.js'
 
 const ESTADO_AUDIO = {
@@ -54,16 +54,16 @@ function Reproductor({ paquete, audio, etiqueta, idioma }) {
 }
 
 function Traducciones({ paquete, item, etiqueta }) {
-  const lista = item.translations ?? []
+  const lista = (item.translations ?? []).filter((t) => ['que', 'quh', 'quz'].includes(t.language) && t.translation?.method === 'human_recording' && t.speaker_review?.status === 'approved' && t.status === 'available')
   if (!lista.length) return null
   return (
     <details className="detalle">
-      <summary>Otras lenguas (traducción automática sin revisar)</summary>
+      <summary>Quechua: grabación del productor</summary>
       {lista.map((t) => (
         <div key={t.language} className="traduccion">
-          <p><strong>{t.language_name ?? t.language}</strong> · <EtiquetaEstado estado="not_evaluated" texto="Revisión de hablante pendiente" /></p>
+          <p><strong>{t.language_name ?? t.language}</strong> · <EtiquetaEstado estado="confirmed" texto="Grabación humana, revisión aprobada" /></p>
           <Reproductor key={urlRelease(paquete, t.path)} paquete={paquete} audio={t} etiqueta={etiqueta} idioma={t.language_name ?? t.language} />
-          <p className="texto-equivalente" lang={t.language === 'ayr' ? 'ay' : t.language === 'quh' ? 'qu' : t.language}>{t.text}</p>
+          <p className="texto-equivalente" lang="qu">{t.text}</p>
           <p className="texto-secundario">{t.translation?.notes}</p>
         </div>
       ))}
@@ -73,6 +73,7 @@ function Traducciones({ paquete, item, etiqueta }) {
 
 export default function VistaFicha({ paquete, escenario, registros, casoId, setCasoId }) {
   const casos = paquete.catalog.data?.cases ?? []
+  const indicadores = kpisDisponibles(paquete)
   const registro = registros.find((r) => r.case_id === casoId) ?? registros[0]
   const caso = casos.find((c) => c.case_id === registro?.case_id)
   const comm = paquete.comunicaciones
@@ -117,7 +118,7 @@ export default function VistaFicha({ paquete, escenario, registros, casoId, setC
             <p className="ficha-marca">Raíz, Oruro. NASA Space Apps 2026</p>
             <h3 id="titulo-ficha">Caso {registro.case_id}: este año {nombreCultivo(registro.decision_crop)}</h3>
             {caso && <Secuencia campanas={caso.campaigns} />}
-            <p className="texto-secundario">Identificador del resultado: <code>{registro.result_id}</code> · build <code>{registro.build_id}</code></p>
+            <details className="detalle"><summary>Identificación del resultado</summary><p className="texto-secundario"><code>{registro.result_id}</code> · versión <code>{registro.build_id}</code></p></details>
           </header>
 
           <dl className="ficha-datos">
@@ -129,11 +130,11 @@ export default function VistaFicha({ paquete, escenario, registros, casoId, setC
 
           <h4 className="h-sub">Esta campaña</h4>
           <div className="kpis">
-            {registro.decision_kpis ? ORDEN_KPI.map((k) => <FilaKpi key={k} nombre={k} metrica={registro.decision_kpis[k]} />) : <NoDisponible motivo={registro.missing_reason} />}
+            {registro.decision_kpis ? indicadores.map((k) => <FilaKpi key={k} nombre={k} metrica={registro.decision_kpis[k]} />) : <NoDisponible motivo={registro.missing_reason} />}
           </div>
           <h4 className="h-sub">Ciclo completo (3 campañas)</h4>
           <div className="kpis">
-            {registro.cycle_kpis ? ORDEN_KPI.map((k) => <FilaKpi key={k} nombre={k} metrica={registro.cycle_kpis[k]} />) : <NoDisponible motivo={registro.missing_reason} />}
+            {registro.cycle_kpis ? indicadores.map((k) => <FilaKpi key={k} nombre={k} metrica={registro.cycle_kpis[k]} />) : <NoDisponible motivo={registro.missing_reason} />}
           </div>
 
           <h4 className="h-sub">Las tres secuencias comparadas</h4>
@@ -147,11 +148,11 @@ export default function VistaFicha({ paquete, escenario, registros, casoId, setC
           {mensaje ? (
             <>
               <p className="estados-dato">
-                <EtiquetaEstado estado="fixture" texto={mensaje.status === 'reviewed' ? 'Revisado' : 'Borrador, revisión pendiente'} />
-                <span>{mensaje.editorial_status === 'not_issued' ? 'Sin emisión editorial ni vigencia' : `Vigente hasta ${mensaje.valid_until}`}</span>
+                <EtiquetaEstado estado={mensaje.status === 'reviewed' ? 'confirmed' : 'not_evaluated'} texto={mensaje.status === 'reviewed' ? 'Revisado' : 'Borrador, revisión pendiente'} />
+                <span>{mensaje.editorial_status === 'not_issued' ? 'Sin emisión editorial ni vigencia' : mensaje.valid_until ? `Vigencia editorial hasta ${new Date(mensaje.valid_until).toLocaleDateString('es-BO', { timeZone: 'America/La_Paz' })}` : 'Sin fecha de vigencia editorial'}</span>
               </p>
               <div className="no-imprimir">
-                <Reproductor key={`${paquete.puntero.build_id}:${mensaje.result_id}`} paquete={paquete} audio={mensaje.audio} etiqueta="mensaje" idioma="español" />
+                <Reproductor key={`${paquete.puntero.build_id}:${mensaje.result_id}:${mensaje.audio?.path ?? ''}`} paquete={paquete} audio={mensaje.audio} etiqueta="mensaje" idioma="español" />
               </div>
               <p className="texto-equivalente">{mensaje.text}</p>
               <div className="acciones no-imprimir">
@@ -160,11 +161,11 @@ export default function VistaFicha({ paquete, escenario, registros, casoId, setC
                 </button>
                 {rutaFichaDev2 && (
                   <a className="boton secundario" href={rutaFichaDev2} target="_blank" rel="noreferrer">
-                    <Icono nombre="imprimir" /> Ficha oficial de Dev 2
+                    <Icono nombre="imprimir" /> Abrir ficha del paquete
                   </a>
                 )}
               </div>
-              <div className="no-imprimir"><Traducciones paquete={paquete} item={mensaje} etiqueta="mensaje" /></div>
+              <div className="no-imprimir"><Traducciones key={`${paquete.puntero.build_id}:${mensaje.result_id}`} paquete={paquete} item={mensaje} etiqueta="mensaje" /></div>
             </>
           ) : (
             <Aviso tipo="alerta" titulo="Sin mensaje para este resultado">
@@ -174,6 +175,7 @@ export default function VistaFicha({ paquete, escenario, registros, casoId, setC
           )}
 
           <h4 className="h-sub">Límites</h4>
+          {(mensaje?.notices ?? []).map((aviso) => <p key={aviso.id}>{aviso.text}</p>)}
           <ul className="lista">
             {(paquete.results.warnings ?? []).map((w) => <li key={w}>{w}</li>)}
             {(paquete.results.assumptions ?? []).map((a) => <li key={a}>Supuesto: {a}</li>)}
@@ -212,4 +214,3 @@ export default function VistaFicha({ paquete, escenario, registros, casoId, setC
     </div>
   )
 }
-

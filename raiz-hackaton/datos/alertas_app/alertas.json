@@ -1,0 +1,114 @@
+{
+ "schema": "raiz-alertas-app-v1",
+ "generado": "2026-11-15T09:12:41-04:00",
+ "zona": "Obrajes y alrededores, Oruro (celda regional de ~50 km)",
+ "fuente_clima": "power_reciente_alarmas.json",
+ "idiomas": {
+  "es": "Español",
+  "qu": "Quechua",
+  "ay": "Aymara",
+  "gn": "Guaraní",
+  "en": "English",
+  "pt": "Português",
+  "fr": "Français"
+ },
+ "aviso_traduccion": {
+  "metodo": "Traducción automática con IA (Claude, Anthropic)",
+  "estado": "revision_de_hablante_pendiente",
+  "nota_es": "Traducción automática: puede tener errores. El texto en español es la referencia."
+ },
+ "aviso_audio": "Voz sintética (Meta MMS, CC BY-NC 4.0). Requiere revisión de pares antes de difundir.",
+ "no_es_pronostico": "Raíz no pronostica: muestra señales de los datos y cita el pronóstico de NOAA con fecha.",
+ "alertas": [
+  {
+   "emitida": "2026-11-15T09:12:41-04:00",
+   "vigente_hasta": "2026-11-22T09:12:41-04:00",
+   "zona": "Obrajes y alrededores, Oruro (celda regional de ~50 km)",
+   "traduccion": {
+    "metodo": "Traducción automática con IA (Claude, Anthropic)",
+    "estado": "revision_de_hablante_pendiente",
+    "nota_es": "Traducción automática: puede tener errores. El texto en español es la referencia."
+   },
+   "id": "enso-nino-fuerte",
+   "nivel": "atencion",
+   "icono": "ola",
+   "titulo": {
+    "es": "El Niño fuerte está en curso",
+    "qu": "Sinchi Niño kachkanña",
+    "ay": "Ch'amani Niño utjxiwa",
+    "gn": "El Niño mbarete oikóma",
+    "en": "A strong El Niño is under way",
+    "pt": "Um El Niño forte está em curso",
+    "fr": "Un El Niño fort est en cours"
+   },
+   "texto": {
+    "es": "El océano Pacífico está 2,5 °C más caliente que lo normal. En 4 de 5 Niños fuertes desde 1981, aquí llovió menos de lo normal entre noviembre y marzo.",
+    "qu": "Pacífico qucha 2,5 °C aswan q'uñi kachkan. 1981 watamanta 5 sinchi Niño watakunamanta, 4pi kaypi pisillata pararqa noviembre killamanta marzo killakama.",
+    "ay": "Pacífico quta 2,5 °C juk'amp junt'uwa. 1981 maratpacha, 5 ch'amani Niño maranakatxa, 4nxa aka chiqanx juk'a jallupxi noviembre phaxsita marzo phaxsikama.",
+    "gn": "Pacífico para haku 2,5 °C jepivegua ári. 1981 guive, 5 El Niño mbarete apytépe, 4-pe ko'ápe oky sa'ive jepivegua noviembre guive marzo peve.",
+    "en": "The Pacific Ocean is 2.5 °C warmer than normal. In 4 of 5 strong El Niños since 1981, it rained less than normal here between November and March.",
+    "pt": "O oceano Pacífico está 2,5 °C mais quente que o normal. Em 4 de 5 El Niños fortes desde 1981, choveu menos que o normal aqui entre novembro e março.",
+    "fr": "L'océan Pacifique est 2,5 °C plus chaud que la normale. Pour 4 des 5 El Niño forts depuis 1981, il a plu moins que la normale ici entre novembre et mars."
+   },
+   "accion": {
+    "es": "Planifique el agua de riego y, antes de sembrar, converse con su técnico.",
+    "qu": "Qarpana yakuykita yuyaykuy. Imata tarpunaykita manaraq akllaspa, técnicoykiwan rimariy.",
+    "ay": "Qarpañ umamat amuyt'asim. Janïr yapuchkasax técnicomp aruskipt'asim.",
+    "gn": "Eñembosako'i y ñemboyrã ha, eñemitỹ mboyve, eñe'ẽ ne técnico ndive.",
+    "en": "Plan your irrigation water and talk with your technician before planting.",
+    "pt": "Planeje a água de irrigação e, antes de plantar, converse com seu técnico.",
+    "fr": "Prévoyez l'eau d'irrigation et parlez avec votre technicien avant de semer."
+   },
+   "fuente": "NOAA ONI (ASO 2026 = +2.46) y NASA POWER 1981–2025 (n = 5, frecuencia histórica). NOAA (12-nov-2026) prevé un Niño de fuerte a muy fuerte hasta enero–marzo de 2027.",
+   "datos_hasta": "ASO 2026",
+   "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml",
+   "audio": {
+    "es": "audio/enso-nino-fuerte.es.mp3",
+    "estado": "requiere_revision_de_pares"
+   }
+  },
+  {
+   "emitida": "2026-11-15T09:12:41-04:00",
+   "vigente_hasta": "2026-11-22T09:12:41-04:00",
+   "zona": "Obrajes y alrededores, Oruro (celda regional de ~50 km)",
+   "traduccion": {
+    "metodo": "Traducción automática con IA (Claude, Anthropic)",
+    "estado": "revision_de_hablante_pendiente",
+    "nota_es": "Traducción automática: puede tener errores. El texto en español es la referencia."
+   },
+   "id": "lluvia-30-dias",
+   "nivel": "informacion",
+   "icono": "gota",
+   "titulo": {
+    "es": "Lluvia del último mes",
+    "qu": "Qhipa killapi para",
+    "ay": "Qhipa phaxsin jallu",
+    "gn": "Ama ko jasy ohasa va'ekuépe",
+    "en": "Rain in the last month",
+    "pt": "Chuva do último mês",
+    "fr": "Pluie du dernier mois"
+   },
+   "texto": {
+    "es": "En los últimos 30 días llovieron 42 mm en la zona; lo normal para estas fechas es 23 mm. Una racha húmeda no cambia el riesgo de toda la temporada.",
+    "qu": "Qhipa 30 p'unchawkunapi 42 mm paran; kay p'unchawkunapaq 23 mm paran sapa kuti. Huk chhika parayqa manam tukuy pachapi riesgota tikranchu.",
+    "ay": "Qhipa 30 urunakanx 42 mm jallupxi; aka urunakatakix 23 mm jallupxi sapa kuti. Mä qawqha jallunakax janiw taqpach pachan riesgop mayjt'aykiti.",
+    "gn": "Ko 30 ára ohasa va'ekuépe oky 42 mm ko tetã'ỹime; jepivegua ko ára rupi ha'e 23 mm. Peteĩ ára ama hetáva nomoambuéi opa ary riesgo.",
+    "en": "In the last 30 days 42 mm of rain fell in the area; normal for these dates is 23 mm. A wet spell does not change the risk for the whole season.",
+    "pt": "Nos últimos 30 dias choveram 42 mm na região; o normal para estas datas é 23 mm. Uma sequência úmida não muda o risco de toda a temporada.",
+    "fr": "Au cours des 30 derniers jours, il est tombé 42 mm dans la zone ; la normale pour ces dates est de 23 mm. Une période humide ne change pas le risque de toute la saison."
+   },
+   "accion": null,
+   "fuente": "NASA POWER (PRECTOTCORR), 2026-10-14 a 2026-11-12; normal 1991–2020 de las mismas fechas",
+   "datos_hasta": "2026-11-12",
+   "valores": {
+    "lluvia_mm": 41.6,
+    "normal_mm": 23.0,
+    "razon": 1.81
+   },
+   "audio": {
+    "es": "audio/lluvia-30-dias.es.mp3",
+    "estado": "requiere_revision_de_pares"
+   }
+  }
+ ]
+}

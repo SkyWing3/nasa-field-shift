@@ -4,7 +4,7 @@ import { findPreset, formatArea, formatDegrees } from '../geo';
 import { detectWebGLSupport } from '../scene';
 import { useAppStore, useSiteStore } from '../state';
 import { ErrorBoundary, ErrorState, LoadingIndicator, StartScreen } from '../ui';
-import { APP_VERSION, refreshApiHealth } from './services';
+import { APP_VERSION, appConfig, refreshApiHealth } from './services';
 import { useApiHealthMonitor } from './useApiHealthMonitor';
 import { WorkspaceScreen } from './WorkspaceScreen';
 
@@ -128,6 +128,7 @@ export function App() {
       onContinue={openFarm}
       onEnter={enterWorkspace}
       onRetryApi={retryApi}
+      comparatorUrl={appConfig.comparatorUrl}
     />
   );
 }

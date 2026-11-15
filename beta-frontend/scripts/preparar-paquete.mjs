@@ -1,16 +1,17 @@
 // D3-1 / D3-5 · Prepara public/paquete/ con el paquete OFICIAL de Dev 2.
 // No edita ni recalcula nada: ejecuta el publicador de Dev 2 (raiz_delivery)
-// y copia su sitio (current.json + releases/<build_id>/) tal cual.
+// y publica su sitio (current.json + releases/<build_id>/) tal cual.
 //
 // Uso:  node scripts/preparar-paquete.mjs [--entrada ruta] [--audio ruta] [--si-falla-continuar]
-//   --entrada  carpeta con catalog/climate/results (por defecto el fixture v3.1 de Dev 2)
-//   --audio    carpeta de MP3 de Dev 2 (por defecto assets/audio/fixture-dev2-v31-demo)
+//   --entrada  carpeta con catalog/climate/results (datos/ si existe; si no, fixture v3.1)
+//   --audio    carpeta de MP3 de Dev 2 (por defecto assets/audio/<build_id>)
 // Cuando Dev 1 entregue datos reales: --entrada <carpeta de Dev 1> --audio <MP3 de Dev 2>.
 import { spawnSync } from 'node:child_process'
-import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { buscarPython } from './python.mjs'
 
 const aqui = dirname(fileURLToPath(import.meta.url))
 const frontend = resolve(aqui, '..')
@@ -30,7 +31,10 @@ try {
 } catch {
   // La validación y el mensaje de error corresponden al publicador oficial.
 }
-const audio = valor('--audio', join(dev2, 'assets', 'audio', buildId ?? 'fixture-dev2-v31-demo'))
+const audioPublicado = join(dev2, 'assets', 'audio', `${buildId}-publicacion`)
+const audio = valor('--audio', existsSync(join(audioPublicado, 'catalog.json')) ? audioPublicado : join(dev2, 'assets', 'audio', buildId ?? 'fixture-dev2-v31-demo'))
+const editorialPublicado = join(dev2, 'publicacion', 'editorial.json')
+const editorial = valor('--editorial', existsSync(editorialPublicado) ? editorialPublicado : null)
 const destino = join(frontend, 'public', 'paquete')
 
 function salir(mensaje) {
@@ -45,35 +49,38 @@ function salir(mensaje) {
 if (!existsSync(join(dev2, 'raiz_delivery'))) salir(`No encuentro ${dev2}/raiz_delivery (módulo de Dev 2).`)
 if (!existsSync(entrada)) salir(`No existe la entrada ${entrada}`)
 
-const candidatos = process.env.PYTHON ? [process.env.PYTHON] : process.platform === 'win32' ? ['python', 'python3'] : ['python3', 'python']
-const intentos = []
 let python
-for (const p of candidatos) {
-  const resultado = spawnSync(p, ['--version'], { encoding: 'utf8', timeout: 10000 })
-  intentos.push({ p, resultado })
-  if (resultado.status === 0 && /Python 3\.(?:1[0-9]|[2-9][0-9])\b/.test(resultado.stdout || resultado.stderr || '')) {
-    python = p
-    break
-  }
+try {
+  python = buscarPython()
+} catch (error) {
+  salir(error.message)
 }
-if (!python) salir(`No se pudo ejecutar Python 3.10+: ${intentos.map(({ p, resultado: r }) => `${p}: ${r.error?.message ?? (r.stderr || r.stdout || `código ${r.status}`).trim()}`).join('; ')}`)
 
 const tmp = mkdtempSync(join(tmpdir(), 'raiz-paquete-'))
 try {
-  const correr = (pasos) => {
-    const r = spawnSync(python, ['-m', 'raiz_delivery', ...pasos], {
+  const correr = (pasos, modulo = 'raiz_delivery') => {
+    const r = spawnSync(python, ['-m', modulo, ...pasos], {
       cwd: dev2, encoding: 'utf-8', env: { ...process.env, PYTHONUTF8: '1' },
     })
     process.stdout.write(r.stdout || '')
     if (r.status !== 0) throw new Error(`Falló «${pasos[0]}» de Dev 2: ${r.error?.message ?? (r.stderr || '').trim()}`)
   }
-  const build = ['build', '--input', entrada, '--output', join(tmp, 'package')]
-  if (existsSync(audio)) build.push('--audio-assets', audio)
-  correr(build)
-  correr(['publish', '--package', join(tmp, 'package'), '--site-root', join(tmp, 'site')])
+  const modo = JSON.parse(readFileSync(join(entrada, 'catalog.json'), 'utf8')).mode
+  if (modo !== 'fixture' && existsSync(join(dev2, 'raiz_data', 'web.py'))) {
+    const pasos = ['--input', entrada, '--site-root', destino]
+    if (existsSync(join(audio, 'catalog.json'))) pasos.push('--audio-assets', audio)
+    else console.warn('[paquete] No hay catálogo de audio para esta entrada; los mensajes indicarán audio no disponible.')
+    if (editorial) pasos.push('--editorial', editorial)
+    correr(pasos, 'raiz_data.web')
+  } else {
+    const build = ['build', '--input', entrada, '--output', join(tmp, 'package')]
+    if (existsSync(join(audio, 'catalog.json'))) build.push('--audio-assets', audio)
+    if (editorial) build.push('--editorial', editorial)
+    correr(build)
+    // El publicador conserva las releases y cambia current.json atómicamente.
+    correr(['publish', '--package', join(tmp, 'package'), '--site-root', destino])
+  }
   console.log(`[paquete] Entrada: ${entrada}`)
-  rmSync(destino, { recursive: true, force: true })
-  cpSync(join(tmp, 'site'), destino, { recursive: true })
   console.log(`[paquete] Listo: ${destino}`)
 } catch (error) {
   console.warn(`[paquete] ${error.message}`)
@@ -82,4 +89,3 @@ try {
 } finally {
   rmSync(tmp, { recursive: true, force: true })
 }
-

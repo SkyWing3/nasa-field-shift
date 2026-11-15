@@ -41,7 +41,7 @@ def analogs(phase):
     out = {}
     for case, crop in (('A-1', 'papa'), ('A-2', 'quinua'), ('B-3', 'haba')):
         rec = next((r for r in records if r['period_id'] == '2001-2025' and r['enso_initial_phase'] == phase
-                    and r['water_budget_id'] == 'secano' and r['soil_profile_id'] == 'soilgrids-0-60cm' and r['case_id'] == case), None)
+                    and r['water_budget_id'] == 'secano' and r['soil_profile_id'] == 'local-obrajes' and r['case_id'] == case), None)
         if rec and rec['decision_kpis']:
             out[crop] = {'estres_dias': rec['decision_kpis']['water_stress_days']['value'], 'n': rec['n_windows'],
                          'riego_mm': rec['decision_kpis']['net_irrigation_requirement_mm']['value'], 'result_id': rec['result_id'],

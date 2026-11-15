@@ -2,7 +2,7 @@
  "schema_version": "3.0",
  "build_id": "raiz-oruro-power-20261111-v1",
  "mode": "simulated",
- "generated_at": "2026-11-15T05:39:08+00:00",
+ "generated_at": "2026-11-15T06:43:55+00:00",
  "data_as_of": "2026-11-11T23:59:59-04:00",
  "model_version": "raiz-agua-1.0 (balance diario FAO-56, un depósito)",
  "sources": [
@@ -210,11 +210,6 @@
     "water_budget_id": "secano",
     "net_limit_mm": 0,
     "label": "Secano: sin riego (situación más común en Oruro)"
-   },
-   {
-    "water_budget_id": "riego-100",
-    "net_limit_mm": 100,
-    "label": "Riego suplementario hipotético: 100 mm netos por campaña"
    }
   ],
   "soil_profiles": [

@@ -1,6 +1,7 @@
 # beta-frontend (rutas relativas a esta carpeta). Lo general está en ../.gitignore.
 node_modules/
 dist/
+.vite-session.log
 # Copia generada del paquete de Dev 2: se regenera con `npm run paquete`
 public/paquete/
-
+public/.web-*/

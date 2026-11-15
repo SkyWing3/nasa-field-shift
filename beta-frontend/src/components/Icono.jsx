@@ -11,6 +11,7 @@ const TRAZOS = {
   viento: <><path d="M3 9h11a3 3 0 1 0-3-3M3 13h15a3 3 0 1 1-3 3M3 17h7" /></>,
   suelo: <><path d="M3 15c3-2 6-2 9 0s6 2 9 0" /><path d="M3 19c3-2 6-2 9 0s6 2 9 0" /><path d="M12 12V5m0 0-2.5 2.5M12 5l2.5 2.5" /></>,
   altavoz: <><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4Z" /><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" /></>,
+  silencio: <><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4Z" /><path d="m16 9.5 5 5M21 9.5l-5 5" /></>,
   imprimir: <><path d="M7 9V3.5h10V9" /><rect x="3.5" y="9" width="17" height="8" rx="1.5" /><path d="M7 14h10v6.5H7Z" /></>,
   descargar: <><path d="M12 4v11m0 0-4-4m4 4 4-4" /><path d="M5 19.5h14" /></>,
   info: <><circle cx="12" cy="12" r="9" /><path d="M12 11v6M12 7.5v.5" /></>,
@@ -53,4 +54,3 @@ export default function Icono({ nombre, tam = 24, titulo }) {
     </svg>
   )
 }
-

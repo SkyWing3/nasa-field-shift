@@ -11,10 +11,13 @@ const fmt = (v, u) => (v === null || v === undefined ? null : `${formatoNumero(v
 
 // Gráfica de barras horizontales con rango mín–máx. SVG con alternativa textual (role=img + tabla).
 function GraficaPeriodos({ filas, periodos, unidad, titulo }) {
-  const valores = filas.flatMap((f) => [f.min, f.max, f.value]).filter((v) => typeof v === 'number')
+  const valores = filas.flatMap((f) => [f.min, f.max, f.value]).filter(Number.isFinite)
   if (valores.length === 0) return null
-  const lo = Math.min(0, ...valores)
-  const hi = Math.max(...valores) * 1.08 || 1
+  const minimo = Math.min(0, ...valores)
+  const maximo = Math.max(0, ...valores)
+  const margen = (maximo - minimo || 1) * 0.08
+  const lo = minimo < 0 ? minimo - margen : 0
+  const hi = maximo + margen
   const ancho = 420
   const izq = 118
   const x = (v) => izq + ((v - lo) / (hi - lo)) * (ancho - izq - 80)
@@ -37,7 +40,7 @@ function GraficaPeriodos({ filas, periodos, unidad, titulo }) {
               <text x={izq} y={y + 20} className="g-vacio">No disponible</text>
             ) : (
               <>
-                <rect x={x(lo)} y={y + 4} width={x(f.value) - x(lo)} height="24" rx="5" className={i === 0 ? 'g-barra-antes' : 'g-barra-ahora'} />
+                <rect x={Math.min(x(0), x(f.value))} y={y + 4} width={Math.abs(x(f.value) - x(0))} height="24" rx="5" className={i === 0 ? 'g-barra-antes' : 'g-barra-ahora'} />
                 {typeof f.min === 'number' && typeof f.max === 'number' && (
                   <g className="g-rango">
                     <line x1={x(f.min)} x2={x(f.max)} y1={y + 38} y2={y + 38} />
@@ -45,7 +48,7 @@ function GraficaPeriodos({ filas, periodos, unidad, titulo }) {
                     <line x1={x(f.max)} x2={x(f.max)} y1={y + 33} y2={y + 43} />
                   </g>
                 )}
-                <text x={x(f.value) + 6} y={y + 21} className="g-valor">{fmt(f.value, unidad)}</text>
+                <text x={x(f.value) + (f.value < 0 ? -6 : 6)} textAnchor={f.value < 0 ? 'end' : 'start'} y={y + 21} className="g-valor">{fmt(f.value, unidad)}</text>
               </>
             )}
           </g>
@@ -133,6 +136,7 @@ export default function VistaClima({ paquete, escenario, registros }) {
   const clima = paquete.climate
   const resumenes = clima.data?.period_summaries ?? null
   const campanas = clima.data?.campaigns ?? null
+  const decadas = clima.data?.decade_summaries ?? []
   const periodos = paquete.catalog.data?.periods ?? []
   const variables = resumenes ? [...new Set(resumenes.map((r) => r.variable))] : []
   const meta = resumenes?.[0]
@@ -188,6 +192,22 @@ export default function VistaClima({ paquete, escenario, registros }) {
               </table>
             </div>
           </section>
+          {decadas.length > 0 && (
+            <details className="tarjeta detalle">
+              <summary>Comparación por décadas: tabla de datos</summary>
+              <div className="tabla-scroll" tabIndex={0} role="region" aria-label="Clima por décadas">
+                <table className="tabla">
+                  <caption>Medias por campaña completa; los periodos inicial y final pueden tener menos de diez campañas</caption>
+                  <thead><tr><th scope="col">Periodo</th><th scope="col">Variable</th><th scope="col">Media</th><th scope="col">Desviación</th><th scope="col">Mín–máx</th><th scope="col">n</th><th scope="col">Faltantes</th></tr></thead>
+                  <tbody>{decadas.map((r) => <tr key={`${r.period_id}-${r.variable}`}>
+                    <th scope="row">{r.period_label}</th><td>{r.label} ({r.unit})</td><td>{fmt(r.value, r.unit) ?? 'No disponible'}</td>
+                    <td>{fmt(r.sd, r.unit) ?? '—'}</td><td>{r.min === null ? '—' : `${fmt(r.min, r.unit)} a ${fmt(r.max, r.unit)}`}</td><td>{r.n_campaigns}</td><td>{r.n_missing}</td>
+                  </tr>)}</tbody>
+                </table>
+              </div>
+            </details>
+          )}
+          {clima.data?.summary_rule && <p className="texto-secundario">Campañas completas del 1 de noviembre al 31 de marzo: no se rellenan días faltantes. Frío: noches con Tmin &lt; 0 °C, un conteo regional que no equivale a daño por helada en el cultivo.</p>}
         </>
       )}
 
@@ -199,4 +219,3 @@ export default function VistaClima({ paquete, escenario, registros }) {
     </div>
   )
 }
-

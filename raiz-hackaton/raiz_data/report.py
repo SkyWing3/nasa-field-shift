@@ -31,7 +31,7 @@ def build():
              '| Periodo | ENSO | n | Años | Lluvia campaña (mm) | ETa/ETc | Estrés severo (días) | Riego necesario (mm) | Campaña aceptable | Estrés con lluvia SENAMHI |',
              '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |']
     for r in records:
-        if r['case_id'] == 'A-1' and r['water_budget_id'] == 'secano' and r['soil_profile_id'] == 'soilgrids-0-60cm':
+        if r['case_id'] == 'A-1' and r['water_budget_id'] == 'secano' and r['soil_profile_id'] == 'local-obrajes':
             d = r['decision_kpis']
             alt = (r.get('sensitivity') or {}).get('decision_kpis_alt', {}).get('water_stress_days')
             diag = r.get('diagnostics') or {}
@@ -43,7 +43,7 @@ def build():
               'El Niño en curso: ONI ASO 2026 = +2,46 (NOAA CPC). Las ventanas análogas son las campañas con ONI NDJ ≥ 1,5.', '',
               '| Puesto | Caso | Rotación | Cultivo este año | Puntaje | Estrés decisión (d) | Riego decisión (mm) | Estrés ciclo (d) | Riego ciclo (mm) | Lluvia erosiva expuesta ciclo (d) |',
               '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |']
-    current = sorted((r for r in records if r['period_id'] == '2001-2025' and r['enso_initial_phase'] == 'Niño fuerte' and r['water_budget_id'] == 'secano' and r['soil_profile_id'] == 'soilgrids-0-60cm'),
+    current = sorted((r for r in records if r['period_id'] == '2001-2025' and r['enso_initial_phase'] == 'Niño fuerte' and r['water_budget_id'] == 'secano' and r['soil_profile_id'] == 'local-obrajes'),
                      key=lambda r: (r.get('ranking') or 99, r['case_id']))
     for r in current:
         d, c = r['decision_kpis'], r['cycle_kpis']

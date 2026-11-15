@@ -49,6 +49,13 @@ export function FilaKpi({ nombre, metrica, barra }) {
       {barra !== undefined && barra !== null && !f.vacio && (
         <span className="fila-kpi-barra" aria-hidden="true"><span style={{ width: `${Math.round(barra * 100)}%` }} /></span>
       )}
+      {!f.vacio && Number.isFinite(metrica?.min) && Number.isFinite(metrica?.max) && (
+        <span className="fila-kpi-evidencia">
+          Rango: {formatoKpi({ value: metrica.min, unit: metrica.unit }).texto} a {formatoKpi({ value: metrica.max, unit: metrica.unit }).texto}
+          {Number.isFinite(metrica.sd) && <>; desviación: {formatoKpi({ value: metrica.sd, unit: metrica.unit }).texto}</>}
+        </span>
+      )}
+      {metrica?.method && <details className="fila-kpi-metodo"><summary>Método de este indicador</summary><p>{metrica.method}</p></details>}
     </div>
   )
 }
@@ -67,4 +74,3 @@ export function Secuencia({ campanas }) {
     </ol>
   )
 }
-

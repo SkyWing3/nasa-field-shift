@@ -9,6 +9,7 @@
     python -m raiz_data programar                    comandos para tareas periódicas de Windows
 """
 import argparse
+from pathlib import Path
 import json
 import sys
 
@@ -60,6 +61,9 @@ def main():
     bsub.add_parser('p6', help='Registrar el boletín regional de P6 aprobado por P5')
     sub.add_parser('programar')
     sub.add_parser('informe')
+    al = sub.add_parser('alarmas', help='Señales para la app (leer y escuchar) en es/qu/ay')
+    al.add_argument('--audio', action='store_true', help='MP3 en español (voz sintética, revisión de pares pendiente)')
+    al.add_argument('--publicar', action='store_true', help='Copiar a beta-frontend, al 3D y al sitio estático')
     args = parser.parse_args()
     try:
         if args.cmd == 'fuentes':
@@ -106,6 +110,16 @@ def main():
                 print(f'MP3: {mp3}')
         elif args.cmd == 'programar':
             show(bulletins.programar_instrucciones())
+        elif args.cmd == 'alarmas':
+            from . import alarms
+            data = alarms.build(audio=args.audio)
+            for a in data['alertas']:
+                print(f"[{a['nivel']}] {a['titulo']['es']}: {a['texto']['es']}")
+            if args.publicar:
+                root = Path(__file__).resolve().parents[2]
+                targets = [root / 'beta-frontend' / 'public', root / 'simulacion' / 'frontend' / 'public', root / 'raiz-hackaton' / 'build' / 'sitio-estatico']
+                for folder in alarms.publish([t for t in targets if t.exists()]):
+                    print('Publicado en:', folder)
         elif args.cmd == 'informe':
             from . import report
             print(f'Informe: {report.build()}')

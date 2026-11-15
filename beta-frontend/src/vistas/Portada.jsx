@@ -18,4 +18,3 @@ export default function Portada({ rotaciones, alEmpezar }) {
     </section>
   )
 }
-

@@ -1,20 +1,20 @@
 # Resultados del modelo (generado automáticamente)
 
-Build `raiz-oruro-power-20261111-v1` · datos hasta 2026-11-11 · generado 2026-11-15T05:39:08+00:00.
+Build `raiz-oruro-power-20261111-v1` · datos hasta 2026-11-11 · generado 2026-11-15T06:43:55+00:00.
 No editar a mano: `python -m raiz_data procesar` y luego `python -m raiz_data informe`.
 
 ## 1. Papa en secano por periodo y fase ENSO (campaña de decisión, caso A-1)
 
 | Periodo | ENSO | n | Años | Lluvia campaña (mm) | ETa/ETc | Estrés severo (días) | Riego necesario (mm) | Campaña aceptable | Estrés con lluvia SENAMHI |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1981-2000 | Normal | 7 | 1981, 1985, 1989, 1990, 1992, 1993, 1996 | 419.3 | 0.467 | 111,3 | 437 | 0/7 | 116,1 |
-| 1981-2000 | Niño | 6 | 1982, 1986, 1987, 1991, 1994, 1997 | 355.7 | 0.374 | 131,8 | 533 | 0/6 | 134,3 |
-| 1981-2000 | Niña | 5 | 1983, 1984, 1988, 1995, 1998 | 411.1 | 0.453 | 125,0 | 461 | 0/5 | 127,2 |
-| 1981-2000 | Niño fuerte | 2 | 1982, 1997 | 313.7 | 0.326 | 146,0 | 584 | 0/2 | 148,5 |
-| 2001-2025 | Normal | 5 | 2001, 2003, 2012, 2013, 2016 | 441.6 | 0.481 | 111,8 | 444 | 0/5 | 115,6 |
-| 2001-2025 | Niño | 9 | 2002, 2004, 2006, 2009, 2014, 2015, 2018, 2019, 2023 | 511.8 | 0.472 | 112,3 | 447 | 0/9 | 115,8 |
-| 2001-2025 | Niña | 9 | 2005, 2007, 2008, 2010, 2011, 2017, 2020, 2021, 2022 | 416.4 | 0.447 | 118,2 | 448 | 0/9 | 120,3 |
-| 2001-2025 | Niño fuerte | 3 | 2009, 2015, 2023 | 420.1 | 0.448 | 113,0 | 471 | 0/3 | 117,3 |
+| 1981-2000 | Normal | 7 | 1981, 1985, 1989, 1990, 1992, 1993, 1996 | 419.3 | 0.478 | 110,0 | 427 | — | — |
+| 1981-2000 | Niño | 6 | 1982, 1986, 1987, 1991, 1994, 1997 | 355.7 | 0.379 | 133,8 | 528 | — | — |
+| 1981-2000 | Niña | 5 | 1983, 1984, 1988, 1995, 1998 | 411.1 | 0.456 | 130,4 | 463 | — | — |
+| 1981-2000 | Niño fuerte | 2 | 1982, 1997 | 313.7 | 0.329 | 149,0 | 557 | — | — |
+| 2001-2025 | Normal | 5 | 2001, 2003, 2012, 2013, 2016 | 441.6 | 0.488 | 109,8 | 451 | — | — |
+| 2001-2025 | Niño | 9 | 2002, 2004, 2006, 2009, 2014, 2015, 2018, 2019, 2023 | 511.8 | 0.481 | 110,8 | 456 | — | — |
+| 2001-2025 | Niña | 9 | 2005, 2007, 2008, 2010, 2011, 2017, 2020, 2021, 2022 | 416.4 | 0.458 | 113,9 | 446 | — | — |
+| 2001-2025 | Niño fuerte | 3 | 2009, 2015, 2023 | 420.1 | 0.459 | 110,0 | 491 | — | — |
 
 ## 2. Escenario actual: 2001–2025, Niño fuerte, secano (orden por ciclo de 3 campañas)
 
@@ -22,17 +22,15 @@ El Niño en curso: ONI ASO 2026 = +2,46 (NOAA CPC). Las ventanas análogas son l
 
 | Puesto | Caso | Rotación | Cultivo este año | Puntaje | Estrés decisión (d) | Riego decisión (mm) | Estrés ciclo (d) | Riego ciclo (mm) | Lluvia erosiva expuesta ciclo (d) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | A-2 | papa-quinua-descanso | quinua | 0.6705 | 78,0 | 329 | 191,3 | 770 | 8,0 |
-| 2 | A-1 | papa-quinua-descanso | papa | 0.6691 | 113,0 | 471 | 182,0 | 761 | 8,3 |
-| 3 | A-3 | papa-quinua-descanso | descanso | 0.668 | — | 0 | 177,0 | 762 | 6,7 |
-| 4 | C-3 | papa-haba-descanso | descanso | 0.5401 | — | 0 | 221,7 | 920 | 7,0 |
-| 5 | C-2 | papa-haba-descanso | haba | 0.5146 | 120,7 | 500 | 234,0 | 940 | 8,3 |
-| 6 | B-1 | papa-quinua-haba | papa | 0.4736 | 113,0 | 471 | 306,0 | 1258 | 2,7 |
-| 7 | B-3 | papa-quinua-haba | haba | 0.4005 | 120,7 | 500 | 297,7 | 1261 | 2,7 |
-| 8 | C-1 | papa-haba-descanso | papa | 0.3925 | 113,0 | 471 | 238,3 | 1001 | 9,7 |
-| 9 | B-2 | papa-quinua-haba | quinua | 0.3543 | 78,0 | 329 | 314,7 | 1297 | 3,7 |
-
-Pesos: {"water_stress_days": 0.3, "net_irrigation_requirement_mm": 0.2, "thermal_exposure_days": 0.15, "bare_rain_exposure_days": 0.15, "bare_wind_exposure_days": 0.1, "planned_coverage_pct": 0.1}. Las rotaciones con descanso tienen menos campañas cultivadas: menos agua y estrés, pero también menos producción, que no se cuantifica.
+| None | A-1 | papa-quinua-descanso | papa | — | 110,0 | 491 | 182,7 | 787 | 8,3 |
+| None | A-2 | papa-quinua-descanso | quinua | — | 76,7 | 344 | 185,7 | 784 | 8,0 |
+| None | A-3 | papa-quinua-descanso | descanso | — | — | 0 | 175,0 | 743 | 6,7 |
+| None | B-1 | papa-quinua-haba | papa | — | 110,0 | 491 | 300,3 | 1258 | 2,7 |
+| None | B-2 | papa-quinua-haba | quinua | — | 76,7 | 344 | 313,3 | 1299 | 3,7 |
+| None | B-3 | papa-quinua-haba | haba | — | 125,7 | 512 | 297,7 | 1251 | 2,7 |
+| None | C-1 | papa-haba-descanso | papa | — | 110,0 | 491 | 241,3 | 1013 | 9,7 |
+| None | C-2 | papa-haba-descanso | haba | — | 125,7 | 512 | 234,7 | 951 | 8,3 |
+| None | C-3 | papa-haba-descanso | descanso | — | — | 0 | 218,0 | 884 | 7,0 |
 
 ## 3. Verificación externa
 

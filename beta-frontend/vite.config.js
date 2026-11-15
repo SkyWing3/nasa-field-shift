@@ -5,7 +5,11 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: './',
   plugins: [react()],
-  server: { host: true, port: 5173 },
-  test: { environment: 'node' },
+  server: {
+    host: true,
+    port: 5173,
+    allowedHosts: ['front-nasa.los5furiosos.cloud'],
+  },
+  // La integración usa node:test y se ejecuta por separado, sin mezclar runners.
+  test: { environment: 'node', include: ['src/**/*.test.{js,jsx}'] },
 })
-

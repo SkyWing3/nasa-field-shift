@@ -15,6 +15,7 @@ import sqlite3
 import sys
 import zipfile
 from collections.abc import Iterator
+from contextlib import closing
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -99,7 +100,9 @@ def build_database(
     temporary = database.with_suffix(".tmp")
     temporary.unlink(missing_ok=True)
     count = 0
-    with sqlite3.connect(temporary) as connection:
+    # closing(): `with sqlite3.connect()` confirma pero NO cierra la conexión, y en Windows
+    # no se puede renombrar un archivo abierto (WinError 32 en temporary.replace).
+    with closing(sqlite3.connect(temporary)) as connection, connection:
         connection.executescript(SCHEMA)
         for row in iter_cities(cities_text):
             geoname_id = int(row[0])

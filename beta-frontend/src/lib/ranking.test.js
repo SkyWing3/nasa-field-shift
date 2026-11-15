@@ -70,4 +70,3 @@ describe('nivelesRelativos', () => {
     expect(nivelesRelativos([reg('A', [0, 1, 0, 0, 0], 2), reg('B', [0, 9, 0, 0, 0], 2)]).A.agua).toBeNull()
   })
 })
-
