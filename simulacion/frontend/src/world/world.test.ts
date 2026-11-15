@@ -3,7 +3,6 @@ import { describe, expect, it } from 'vitest';
 import { createLocalFrame } from '../geo/localFrame.ts';
 import { createRegion } from '../geo/region.ts';
 import { geoPoint } from '../geo/wgs84.ts';
-import { BIOMES } from './biome.ts';
 import { computeWorldExtent, type GeoBBox } from './extent.ts';
 import {
   dominantOrientationDeg,
@@ -152,7 +151,7 @@ describe('materiales del terreno', () => {
   });
 
   it('asigna materiales según la cobertura real y la pendiente', () => {
-    const w = new Float32Array(TERRAIN_LAYERS.length);
+    const w = new Float32Array(8);
     materialWeights(LAND_COVER.crop, 2, 'furrows', 20, 0.5, w);
     expect(w[LAYER.furrows]).toBe(1);
     materialWeights(LAND_COVER.crop, 2, 'tilled', 0.5, 0.5, w);
@@ -161,7 +160,7 @@ describe('materiales del terreno', () => {
     expect(w[LAYER.stony]).toBe(1); // pendiente fuerte: roca
     materialWeights(LAND_COVER.built, 0, null, 99, 0.5, w);
     expect(w[LAYER.dirt]).toBe(Math.max(...w)); // suelo apisonado dominante
-    expect(TERRAIN_LAYERS).toHaveLength(10);
+    expect(TERRAIN_LAYERS).toHaveLength(8);
   });
 
   it('el mosaico procedural de campos es estable y orientado', () => {
@@ -226,8 +225,6 @@ describe('pipeline completo', () => {
       extent,
       quality: WORLD_QUALITIES.low,
       seed: 3,
-      biome: 'valley',
-      species: SPECIES,
       data: {
         elevation: elevation.elevation,
         elevationOrigin: 'procedural',
@@ -235,9 +232,6 @@ describe('pipeline completo', () => {
         landCoverContext: contextCover,
         landCoverOrigin: 'procedural',
         features: [road],
-        contextFeatures: null,
-        imageryDetail: null,
-        imageryContext: null,
       },
     },
     (stage, duration) => {
@@ -299,8 +293,6 @@ describe('pipeline completo', () => {
       mosaic: build.mosaic,
       features: build.localFeatures,
       density: 1,
-      species: SPECIES,
-      vegetation: BIOMES.valley.vegetation,
     };
     expect(isBlocked(ctx, 0, 400, 0.3)).toBe(true); // sobre el asfalto (z = −norte)
     expect(isBlocked(ctx, 0, 0, 0.3)).toBe(true); // región reservada

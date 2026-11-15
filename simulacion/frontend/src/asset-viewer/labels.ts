@@ -26,9 +26,6 @@ export const GROUP_LABELS: Readonly<Record<AssetGroup, string>> = {
   'stony-ground': 'Piedras',
   'rural-path': 'Caminos rurales',
   'paved-road': 'Caminos asfaltados',
-  'forest-floor': 'Suelo de bosque',
-  sand: 'Arena y suelo arenoso',
-  snow: 'Nieve',
   'grass-ground': 'Pasto (terreno)',
   grass: 'Pasto',
   shrub: 'Arbustos',
@@ -42,8 +39,6 @@ export const GROUP_LABELS: Readonly<Record<AssetGroup, string>> = {
   'farm-object': 'Objetos agrícolas',
   rock: 'Rocas',
   'ground-debris': 'Restos naturales',
-  'building-wall': 'Muros de edificaciones',
-  'building-roof': 'Techos de edificaciones',
   sky: 'HDRI de exteriores',
 };
 

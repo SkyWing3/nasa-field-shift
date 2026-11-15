@@ -12,9 +12,6 @@ const CATEGORY_OF_GROUP: Readonly<Record<AssetGroup, AssetCategory>> = {
   'stony-ground': 'terrain',
   'rural-path': 'terrain',
   'paved-road': 'terrain',
-  'forest-floor': 'terrain',
-  sand: 'terrain',
-  snow: 'terrain',
   'grass-ground': 'terrain',
   grass: 'vegetation',
   shrub: 'vegetation',
@@ -28,8 +25,6 @@ const CATEGORY_OF_GROUP: Readonly<Record<AssetGroup, AssetCategory>> = {
   'farm-object': 'environment',
   rock: 'environment',
   'ground-debris': 'environment',
-  'building-wall': 'environment',
-  'building-roof': 'environment',
   sky: 'lighting',
 };
 

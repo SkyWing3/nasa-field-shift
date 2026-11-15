@@ -62,7 +62,7 @@ async function mockProviders(page: Page, options: { failBasemap?: boolean } = {}
 }
 
 async function openMap(page: Page): Promise<void> {
-  await page.goto('/terralab.html');
+  await page.goto('/');
   await page.getByRole('button', { name: 'Elegir la ubicación de la granja' }).click();
   await expect(page.getByTestId('location-screen')).toBeVisible();
 }

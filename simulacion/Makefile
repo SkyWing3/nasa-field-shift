@@ -6,11 +6,6 @@ API_PORT ?= 8000
 VENV_BIN := .venv/bin
 
 .DEFAULT_GOAL := help
-.PHONY: raiz-data
-
-raiz-data: ## Precalcula Raíz desde content/p6 y POWER, sin consultar proveedores
-	cd backend && $(VENV_BIN)/python ../scripts/build_raiz.py
-
 .PHONY: help install install-frontend install-backend install-browsers dev dev-frontend \
 	dev-backend lint lint-frontend lint-backend format typecheck test test-frontend \
 	test-backend test-e2e build check clean assets assets-fetch assets-process assets-verify \

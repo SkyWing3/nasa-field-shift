@@ -6,7 +6,6 @@ import httpx2
 import pytest
 
 from app.data_sources.osm import (
-    FeatureResult,
     OsmFeatureProvider,
     OsmSnapshot,
     OsmSnapshotStore,
@@ -16,9 +15,7 @@ from app.data_sources.osm import (
     OverpassClient,
 )
 from app.data_sources.osm.features import classify, intersects, overpass_query, parse_overpass
-from app.data_sources.osm.vectortiles import VectorTileProvider
 from app.data_sources.raster import BBox
-from app.data_sources.raster.sources import BlobCache
 
 AREA = BBox(-17.58, -65.89, -17.52, -65.83)
 
@@ -131,25 +128,8 @@ def test_provider_serves_snapshots_and_refuses_live_queries_by_default(tmp_path:
     result = asyncio.run(provider.features(BBox(-17.551, -65.861, -17.548, -65.858)))
     assert result.origin == "snapshot"
     assert {f.id for f in result.features} >= {"way/4", "way/5"}
-    with pytest.raises(OsmUnavailableError, match="OpenStreetMap"):
+    with pytest.raises(OsmUnavailableError, match="TERRALAB_OVERPASS_URL"):
         asyncio.run(provider.features(BBox(10, 10, 10.01, 10.01)))
-
-
-def test_provider_falls_back_to_snapshots_when_vector_tiles_fail(tmp_path: Path) -> None:
-    store = OsmSnapshotStore(tmp_path / "osm")
-    store.save(snapshot(AREA))
-
-    async def run(bbox: BBox) -> FeatureResult:
-        async with httpx2.AsyncClient(
-            transport=httpx2.MockTransport(lambda _: httpx2.Response(500))
-        ) as client:
-            tiles = VectorTileProvider(client, BlobCache(tmp_path / "tiles"))
-            return await OsmFeatureProvider(store, None, tiles).features(bbox)
-
-    result = asyncio.run(run(BBox(-17.551, -65.861, -17.548, -65.858)))
-    assert result.origin == "snapshot"
-    with pytest.raises(OsmUnavailableError, match="OpenFreeMap"):
-        asyncio.run(run(BBox(10, 10, 10.01, 10.01)))
 
 
 class FakeClock:

@@ -10,13 +10,11 @@ from fastapi.testclient import TestClient
 from app.core.config import Settings
 from app.data_sources.elevation import NasademProvider
 from app.data_sources.elevation.nasadem import nasadem_tile_name, nasadem_tiles_for
-from app.data_sources.imagery import ImageryProvider
 from app.data_sources.landcover import WorldCoverProvider
 from app.data_sources.landcover.worldcover import worldcover_tile_name, worldcover_tiles_for
 from app.data_sources.osm import OsmFeatureProvider, OsmSnapshot, OsmSnapshotStore
 from app.data_sources.osm.features import parse_overpass
 from app.data_sources.raster import BBox, RangeCache
-from app.data_sources.raster.sources import BlobCache
 from app.data_sources.world import WorldDataService
 from app.main import create_app
 from tests.test_osm import PAYLOAD
@@ -47,9 +45,7 @@ def worldcover_tile() -> bytes:
     )
 
 
-JPEG = b"\xff\xd8\xff\xe0synthetic"
 FILES = {
-    "/imagery/14/9003/5194.jpg": JPEG,
     "/nasadem/NASADEM_HGT_s18w066.tif": nasadem_tile(),
     "/map/ESA_WorldCover_10m_2021_v200_S18W066_Map.tif": worldcover_tile(),
 }
@@ -61,8 +57,6 @@ def range_server(requests: list[str]) -> httpx2.MockTransport:
         body = FILES.get(request.url.path)
         if body is None:
             return httpx2.Response(404)
-        if "Range" not in request.headers:
-            return httpx2.Response(200, content=body)
         start, end = (int(v) for v in request.headers["Range"].removeprefix("bytes=").split("-"))
         return httpx2.Response(206, content=body[start : end + 1])
 
@@ -90,12 +84,6 @@ def world_service(
         elevation=NasademProvider(client, cache, base_url=DEM_URL, offline=offline),
         landcover=WorldCoverProvider(client, cache, base_url=LC_URL, offline=offline),
         features=OsmFeatureProvider(store, None),
-        imagery=ImageryProvider(
-            client,
-            BlobCache(tmp_path / "tiles"),
-            template="https://imagery.test/imagery/{z}/{y}/{x}.jpg",
-            offline=offline,
-        ),
         client=client,
         offline=offline,
     )
@@ -134,8 +122,6 @@ def test_datasets_describe_provenance(client: TestClient) -> None:
     assert {"code": 40, "label": "Cultivos"} in data["landcoverClasses"]
     assert "OpenStreetMap" in data["features"]["attribution"]
     assert data["featuresLiveEnabled"] is False
-    assert data["imagery"]["license"] == "CC BY 4.0"
-    assert "EOX" in data["imagery"]["attribution"]
 
 
 def test_elevation_returns_decodable_float_grid(client: TestClient) -> None:
@@ -196,8 +182,7 @@ def test_features_from_snapshot_and_unavailable_area(client: TestClient) -> None
         ("/api/world/elevation", {"south": -18, "west": -66, "north": -17, "east": -65}),
         ("/api/world/elevation", {"south": -17, "west": -66, "north": -17.5, "east": -65.9}),
         ("/api/world/elevation", {"south": 70, "west": 10, "north": 70.1, "east": 10.1}),
-        ("/api/world/features", {"south": -18.0, "west": -66.0, "north": -17.3, "east": -65.7}),
-        ("/api/world/features", {**AREA, "zoom": 15}),
+        ("/api/world/features", {"south": -17.6, "west": -65.9, "north": -17.4, "east": -65.7}),
         ("/api/world/landcover", {**AREA, "maxSize": 4096}),
     ],
 )
@@ -221,17 +206,6 @@ def test_offline_mode_serves_cache_and_reports_missing_data(tmp_path: Path) -> N
     other = offline.get("/api/world/landcover", params={**AREA, "maxSize": 64})
     assert other.status_code == 503
     assert offline.get("/api/world/datasets").json()["offline"] is True
-
-
-def test_imagery_tiles_are_proxied_with_cache_headers(client: TestClient) -> None:
-    response = client.get("/api/world/imagery/14/5194/9003.jpg")
-    assert response.status_code == 200
-    assert response.headers["content-type"] == "image/jpeg"
-    assert "max-age" in response.headers["cache-control"]
-    assert response.content == JPEG
-    assert client.get("/api/world/imagery/14/5195/9003.jpg").status_code == 404
-    assert client.get("/api/world/imagery/15/0/0.jpg").status_code == 422
-    assert client.get("/api/world/imagery/2/9/0.jpg").status_code == 422
 
 
 def test_responses_are_gzip_compressed(client: TestClient) -> None:

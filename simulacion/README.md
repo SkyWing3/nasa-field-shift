@@ -1,7 +1,5 @@
 # TerraLab 3D
 
-La entrada principal actual es Raíz 2D; TerraLab 3D se conserva en `/terralab.html`. Los créditos están en `/?vista=creditos`; las direcciones anteriores `/raiz.html` y `/creditos.html` redirigen ahí. Ver [entrega, supuestos y evidencia](docs/ENTREGA_P6_V3.md). Para regenerar los nueve casos con los insumos locales: `make raiz-data`.
-
 Plataforma web de simulación agrícola en 3D para el apoyo a decisiones: preparar parcelas,
 cultivar, regar, cosechar, avanzar el tiempo y comparar estrategias de rotación con modelos
 agronómicos explícitos y datos científicos de la NASA.
@@ -64,7 +62,7 @@ cp frontend/.env.example frontend/.env.local
 
 | Variable | Dónde | Por defecto | Uso |
 |---|---|---|---|
-| `VITE_API_BASE_URL` | frontend | vacío (mismo origen) | `/api` usa el dominio de la página; Vite lo reenvía a `127.0.0.1:8000`. Una URL absoluta permite una API en otro origen |
+| `VITE_API_BASE_URL` | frontend | `http://127.0.0.1:8000` | URL base de la API |
 | `TERRALAB_ENVIRONMENT` | backend | `development` | `development`, `test` o `production` |
 | `TERRALAB_CORS_ORIGINS` | backend | puertos locales de Vite 5173 y 4173 | Orígenes CORS, separados por comas. Solo se aplican en `development` |
 | `VITE_BASEMAP_STYLE_URL` | frontend | estilo «Liberty» de OpenFreeMap | Estilo vectorial MapLibre del mapa base (solo `https://`) |
@@ -102,14 +100,6 @@ Levanta en paralelo (Ctrl+C detiene ambos):
 - API: <http://127.0.0.1:8000/api/health> · documentación interactiva en <http://127.0.0.1:8000/api/docs>
 
 También pueden levantarse por separado con `make dev-frontend` y `make dev-backend`.
-
-Para abrir la aplicación mediante Cloudflare Tunnel, dirige el dominio
-`nasa-simulacion.los5furiosos.cloud` a `http://localhost:5173` y mantén ambos servidores
-en ejecución. Deja `VITE_API_BASE_URL` vacío: el navegador consulta `/api` en ese mismo
-dominio y el proxy de Vite lo reenvía a FastAPI. No hace falta otro túnel ni añadir ese
-dominio a CORS. `https://nasa-simulacion.los5furiosos.cloud/api/health` debe devolver JSON.
-Al cambiar variables de entorno, reinicia Vite. Para publicar el build de producción,
-configura también el servidor de despliegue para enrutar `/api` al backend.
 
 ## Comandos
 

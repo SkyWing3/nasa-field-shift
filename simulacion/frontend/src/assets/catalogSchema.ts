@@ -22,9 +22,6 @@ export type AssetGroup =
   | 'stony-ground'
   | 'rural-path'
   | 'paved-road'
-  | 'forest-floor'
-  | 'sand'
-  | 'snow'
   | 'grass-ground'
   // Vegetación
   | 'grass'
@@ -41,13 +38,11 @@ export type AssetGroup =
   | 'farm-object'
   | 'rock'
   | 'ground-debris'
-  | 'building-wall'
-  | 'building-roof'
   // Iluminación
   | 'sky';
 
 /**
- * - `available`: descargado, procesado y comprobado.
+ * - `available`: descargado, procesado y validado.
  * - `missing`: no existe un recurso gratuito con licencia compatible descargable sin intervención.
  * - `error`: seleccionado, pero falló la descarga, el procesado o la validación.
  */

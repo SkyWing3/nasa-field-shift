@@ -3,8 +3,7 @@
  * Se valida una sola vez al arrancar para fallar pronto ante valores incorrectos.
  */
 
-/** Vacío: las peticiones /api usan el mismo origen que la página (proxy de Vite en desarrollo). */
-export const DEFAULT_API_BASE_URL = '';
+export const DEFAULT_API_BASE_URL = 'http://127.0.0.1:8000';
 /** Estilo vectorial de OpenFreeMap (datos OpenStreetMap, sin clave ni límites de uso; ADR-027). */
 export const DEFAULT_BASEMAP_STYLE_URL = 'https://tiles.openfreemap.org/styles/liberty';
 /** Mosaico Sentinel-2 cloudless 2016 de EOX (CC BY 4.0; ADR-027). */
@@ -19,7 +18,7 @@ export const DEFAULT_COMPARATOR_URL =
 export const DEV_COMPARATOR_URL = 'http://localhost:5175/';
 
 export interface AppConfig {
-  /** URL base de la API, sin barra final; vacío usa el mismo origen que la página. */
+  /** URL base de la API, sin barra final. */
   readonly apiBaseUrl: string;
   /** Estilo MapLibre del mapa base; se puede cambiar de proveedor sin tocar el código. */
   readonly basemapStyleUrl: string;
@@ -29,9 +28,10 @@ export interface AppConfig {
   readonly comparatorUrl: string;
 }
 
-export function parseApiBaseUrl(raw: string | undefined): string {
+export function parseApiBaseUrl(raw: string | undefined, origin?: string): string {
   const value = raw?.trim() ? raw.trim() : DEFAULT_API_BASE_URL;
-  if (value === '' || value === '/') return '';
+  // «/» = mismo origen que la página (el servidor de Vite reenvía /api al backend).
+  if (value === '/') return (origin ?? globalThis.location.origin).replace(/\/+$/, '');
   let url: URL;
   try {
     url = new URL(value);

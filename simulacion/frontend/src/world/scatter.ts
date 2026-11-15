@@ -19,8 +19,7 @@ import { type Heightfield, heightAt, slopeDegAt } from './heightfield.ts';
 import { type ClassGrid, classAt, LAND_COVER } from './landcover.ts';
 import { hashCoords, unit } from './random.ts';
 import { decodeDistance, type FeatureField, regionContains } from './splat.ts';
-import type { VegetationRule } from './biome.ts';
-import { pickModel, type SpeciesConfig, type SpeciesId, type SpeciesSet } from './vegetationSpecies.ts';
+import { pickModel, SPECIES, type SpeciesConfig, type SpeciesId } from './vegetationSpecies.ts';
 
 /** Datos por instancia: x, y, z, giro (rad), escala, índice de modelo. */
 export const INSTANCE_STRIDE = 6;
@@ -48,10 +47,6 @@ export interface ScatterContext {
   readonly mosaic: FieldMosaic;
   readonly features: LocalFeatures | null;
   readonly density: number;
-  /** Modelos de cada especie (según el bioma). */
-  readonly species: SpeciesSet;
-  /** Densidades y probabilidades de la vegetación del bioma. */
-  readonly vegetation: VegetationRule;
 }
 
 const FAR = 1e3;
@@ -122,11 +117,16 @@ class InstanceWriter {
 
   add(x: number, z: number, hash: number, scaleFactor = 1): void {
     const [smin, smax] = this.species.scaleRange;
-    const model = pickModel(this.species, unit(hashCoords(hash, 3)));
-    const base = this.species.models[model]?.baseScale ?? 1;
-    const scale = (smin + (smax - smin) * unit(hashCoords(hash, 1))) * scaleFactor * base;
+    const scale = (smin + (smax - smin) * unit(hashCoords(hash, 1))) * scaleFactor;
     const y = heightAt(this.ctx.heightfield, x, z) - this.species.sinkM * scale;
-    this.values.push(x, y, z, unit(hashCoords(hash, 2)) * Math.PI * 2, scale, model);
+    this.values.push(
+      x,
+      y,
+      z,
+      unit(hashCoords(hash, 2)) * Math.PI * 2,
+      scale,
+      pickModel(this.species, unit(hashCoords(hash, 3))),
+    );
   }
 
   get count(): number {
@@ -209,37 +209,22 @@ function accept(hash: number, probability: number): boolean {
   return unit(hashCoords(hash, 4)) < probability;
 }
 
-/**
- * Árboles: cobertura arbórea (con la densidad del bioma), huertos de OSM, zonas habitadas,
- * lindes de cauces y árboles aislados en pastizal y matorral.
- */
+/** Árboles: cobertura arbórea, huertos de OSM, zonas habitadas, lindes de cauces y pastizal. */
 export function scatterTrees(ctx: ScatterContext): InstanceSet {
-  const writer = new InstanceWriter(ctx, ctx.species.tree);
+  const writer = new InstanceWriter(ctx, SPECIES.tree);
   const half = ctx.sizeM / 2;
   const seed = ctx.seed + 101;
   const d = ctx.density;
-  const rule = ctx.vegetation;
-  // Bosque: rejilla con la separación del bioma (copas grandes en la selva, más juntas en el
-  // bosque boreal). Fuera del bosque, una rejilla de 7 m para los árboles aislados.
-  jitteredGrid(seed + 1, -half, -half, half, half, rule.forestSpacingM, (x, z, hash) => {
-    const cover = classAt(ctx.landCover, x, z);
-    if (cover !== LAND_COVER.tree && cover !== LAND_COVER.mangrove) return;
-    if (
-      accept(hash, rule.forestProbability * d) &&
-      !isBlocked(ctx, x, z, 3) &&
-      slopeDegAt(ctx.heightfield, x, z) < 40
-    ) {
-      writer.add(x, z, hash);
-    }
-  });
   jitteredGrid(seed, -half, -half, half, half, 7, (x, z, hash) => {
     const cover = classAt(ctx.landCover, x, z);
     const p =
-      cover === LAND_COVER.built
-        ? 0.06
-        : cover === LAND_COVER.grass || cover === LAND_COVER.shrub
-          ? rule.openTreeProbability
-          : 0;
+      cover === LAND_COVER.tree
+        ? 0.55
+        : cover === LAND_COVER.built
+          ? 0.06
+          : cover === LAND_COVER.grass
+            ? 0.008
+            : 0;
     if (
       p > 0 &&
       accept(hash, p * d) &&
@@ -280,8 +265,7 @@ export function scatterTrees(ctx: ScatterContext): InstanceSet {
           Math.round(ax + ((bx - ax) * s) / length),
           Math.round(az + ((bz - az) * s) / length),
         );
-        // En biomas sin árboles aislados (altiplano) la orilla casi nunca tiene árboles.
-        if (!accept(hash, (rule.openTreeProbability > 0 ? 0.07 : 0.01) * d)) continue;
+        if (!accept(hash, 0.07 * d)) continue;
         const side = unit(hashCoords(hash, 14)) < 0.5 ? -1 : 1;
         const offset = line.widthM / 2 + 2.5;
         const nx = (-(bz - az) / length) * offset * side;
@@ -296,7 +280,7 @@ export function scatterTrees(ctx: ScatterContext): InstanceSet {
 }
 
 export function scatterShrubs(ctx: ScatterContext): InstanceSet {
-  const writer = new InstanceWriter(ctx, ctx.species.shrub);
+  const writer = new InstanceWriter(ctx, SPECIES.shrub);
   const half = ctx.sizeM / 2;
   const d = ctx.density;
   jitteredGrid(ctx.seed + 202, -half, -half, half, half, 4.5, (x, z, hash) => {
@@ -317,7 +301,7 @@ export function scatterShrubs(ctx: ScatterContext): InstanceSet {
 }
 
 export function scatterRocks(ctx: ScatterContext): InstanceSet {
-  const writer = new InstanceWriter(ctx, ctx.species.rock);
+  const writer = new InstanceWriter(ctx, SPECIES.rock);
   const half = ctx.sizeM / 2;
   const d = ctx.density;
   jitteredGrid(ctx.seed + 303, -half, -half, half, half, 7, (x, z, hash) => {
@@ -340,7 +324,7 @@ export function scatterRocks(ctx: ScatterContext): InstanceSet {
 
 /** Tocones y ramas: alrededor de algunos árboles y dispersos en el matorral. */
 export function scatterDebris(ctx: ScatterContext, trees: InstanceSet): InstanceSet {
-  const writer = new InstanceWriter(ctx, ctx.species.debris);
+  const writer = new InstanceWriter(ctx, SPECIES.debris);
   for (let k = 0; k < trees.count; k++) {
     const tx = trees.data[k * INSTANCE_STRIDE] ?? 0;
     const tz = trees.data[k * INSTANCE_STRIDE + 2] ?? 0;
@@ -411,7 +395,7 @@ export function scatterGroundCoverCell(
   cellSizeM: number,
   densityPerM2: number,
 ): Float32Array {
-  const config = ctx.species[species];
+  const config = SPECIES[species];
   const writer = new InstanceWriter(ctx, config);
   const spacing = species === 'grass' ? 1 / Math.sqrt(Math.max(densityPerM2, 0.05)) : 2.2;
   const x0 = cx * cellSizeM;

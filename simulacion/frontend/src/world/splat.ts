@@ -15,32 +15,20 @@ import type { FieldMosaic } from './fields.ts';
 import { sampleField } from './fields.ts';
 import { type Heightfield, slopeDegAt } from './heightfield.ts';
 import { type ClassGrid, classAt, LAND_COVER } from './landcover.ts';
-import {
-  type LocalFeatures,
-  type LocalPolygon,
-  pointInPolygon,
-  segmentDistance,
-} from './features.ts';
+import { type LocalFeatures, type LocalPolygon, pointInRing, segmentDistance } from './features.ts';
 import { fbm, hashCoords, unit } from './random.ts';
-import type { TerrainRole } from './biome.ts';
 
-/**
- * Funciones de las capas de material del terreno, en el orden de las texturas de array. El
- * material del catálogo de cada función lo decide el bioma de la región (`biome.ts`): p. ej. el
- * «suelo natural» es pajonal seco en el altiplano y pasto verde en los llanos.
- */
+/** Capas de material del terreno, en el orden de las texturas de array. */
 export const TERRAIN_LAYERS = [
-  { role: 'soil', label: 'Suelo agrícola' },
-  { role: 'tilled', label: 'Suelo labrado con surcos' },
-  { role: 'path', label: 'Camino de tierra y suelo compactado' },
-  { role: 'dryGround', label: 'Suelo seco o arenoso' },
-  { role: 'naturalGround', label: 'Suelo con vegetación natural (pasto, pajonal)' },
-  { role: 'rock', label: 'Roca y grava (pendientes, cauces)' },
-  { role: 'wet', label: 'Barro húmedo (cauces y canales)' },
-  { role: 'asphalt', label: 'Asfalto' },
-  { role: 'forestFloor', label: 'Hojarasca bajo el dosel' },
-  { role: 'snow', label: 'Nieve y hielo' },
-] as const satisfies readonly { role: TerrainRole; label: string }[];
+  { id: 'farm_soil', role: 'Suelo agrícola' },
+  { id: 'farm_furrows', role: 'Suelo labrado con surcos' },
+  { id: 'dry_mud_field_001', role: 'Camino de tierra y suelo compactado' },
+  { id: 'dry_ground_rocks', role: 'Suelo seco y pedregoso' },
+  { id: 'sparse_grass', role: 'Pasto ralo (vegetación natural)' },
+  { id: 'rocky_trail', role: 'Roca y grava (pendientes, cauces)' },
+  { id: 'brown_mud_03', role: 'Barro húmedo (cauces y canales)' },
+  { id: 'asphalt_01', role: 'Asfalto' },
+] as const;
 
 export const LAYER = {
   farmSoil: 0,
@@ -51,12 +39,7 @@ export const LAYER = {
   stony: 5,
   wetMud: 6,
   asphalt: 7,
-  forestFloor: 8,
-  snow: 9,
 } as const;
-
-/** Número de capas; los pesos se guardan en tres texturas RGBA (la última usa 2 canales). */
-export const LAYER_COUNT = TERRAIN_LAYERS.length;
 
 /** Rango de distancias codificado en 8 bits: [−8, 24] m con 0,125 m de resolución. */
 export const FIELD_DISTANCE_MIN_M = -8;
@@ -66,10 +49,9 @@ export interface SplatMaps {
   readonly sizeM: number;
   readonly resolution: number;
   readonly texelM: number;
-  /** Capas 0–3, 4–7 y 8–9 (RGBA), 8 bits, normalizadas para sumar 255. */
+  /** Capas 0–3 (RGBA) y 4–7 (RGBA), 8 bits, normalizadas para sumar 255. */
   readonly weightsA: Uint8Array;
   readonly weightsB: Uint8Array;
-  readonly weightsC: Uint8Array;
   /** R: surcos transversales (0/255) · G: tono del campo · B: región reservada · A: libre. */
   readonly fieldInfo: Uint8Array;
 }
@@ -175,22 +157,9 @@ export function materialWeights(
       out[LAYER.dryGround] = 0.65 - 0.3 * noise;
       break;
     case LAND_COVER.tree:
-      // Bajo el dosel: hojarasca con claros de vegetación baja.
-      out[LAYER.forestFloor] = 0.6 + 0.25 * noise;
-      out[LAYER.grass] = 0.3 - 0.2 * noise;
-      out[LAYER.farmSoil] = 0.1;
-      break;
-    case LAND_COVER.mangrove:
-      out[LAYER.forestFloor] = 0.4;
-      out[LAYER.wetMud] = 0.6;
-      break;
-    case LAND_COVER.snow:
-      out[LAYER.snow] = 0.85 + 0.15 * noise;
-      out[LAYER.stony] = 0.15 - 0.15 * noise;
-      break;
-    case LAND_COVER.moss:
-      out[LAYER.grass] = 0.5;
-      out[LAYER.stony] = 0.5;
+      out[LAYER.grass] = 0.6;
+      out[LAYER.farmSoil] = 0.25;
+      out[LAYER.wetMud] = 0.15;
       break;
     case LAND_COVER.built:
       // Patios y solares de tierra apisonada con algo de hierba (sin modelos de edificios).
@@ -218,24 +187,6 @@ export function materialWeights(
   }
 }
 
-/** Escribe los pesos normalizados (suma 255) del texel `index` en las tres texturas. */
-export function packWeights(
-  weights: Float32Array,
-  index: number,
-  a: Uint8Array,
-  b: Uint8Array,
-  c: Uint8Array,
-): void {
-  let total = 0;
-  for (const w of weights) total += w;
-  const scale = total > 0 ? 255 / total : 0;
-  for (let k = 0; k < 4; k++) {
-    a[index + k] = Math.round((weights[k] ?? 0) * scale);
-    b[index + k] = Math.round((weights[k + 4] ?? 0) * scale);
-    c[index + k] = Math.round((weights[k + 8] ?? 0) * scale);
-  }
-}
-
 /** Máscara (1 = dentro) de un conjunto de polígonos sobre la rejilla de texels. */
 export function rasterizePolygons(
   polygons: readonly LocalPolygon[],
@@ -253,7 +204,7 @@ export function rasterizePolygons(
     for (let j = j0; j <= j1; j++) {
       const z = origin + (j + 0.5) * cell;
       for (let i = i0; i <= i1; i++) {
-        if (pointInPolygon(polygon, origin + (i + 0.5) * cell, z)) mask[j * resolution + i] = 1;
+        if (pointInRing(polygon.ring, origin + (i + 0.5) * cell, z)) mask[j * resolution + i] = 1;
       }
     }
   }
@@ -267,9 +218,8 @@ export function buildSplatMaps(input: SplatInput): SplatMaps {
   const origin = -input.sizeM / 2;
   const weightsA = new Uint8Array(resolution * resolution * 4);
   const weightsB = new Uint8Array(resolution * resolution * 4);
-  const weightsC = new Uint8Array(resolution * resolution * 4);
   const fieldInfo = new Uint8Array(resolution * resolution * 4);
-  const weights = new Float32Array(LAYER_COUNT);
+  const weights = new Float32Array(8);
   const buildingMask = rasterizePolygons(
     input.features?.polygons.filter((p) => p.kind === 'building') ?? [],
     resolution,
@@ -308,7 +258,13 @@ export function buildSplatMaps(input: SplatInput): SplatMaps {
         weights[LAYER.dirt] = 0.8;
         weights[LAYER.dryGround] = 0.2;
       }
-      packWeights(weights, index, weightsA, weightsB, weightsC);
+      let total = 0;
+      for (const w of weights) total += w;
+      const scale = total > 0 ? 255 / total : 0;
+      for (let k = 0; k < 4; k++) {
+        weightsA[index + k] = Math.round((weights[k] ?? 0) * scale);
+        weightsB[index + k] = Math.round((weights[k + 4] ?? 0) * scale);
+      }
       if (field !== null) {
         const across = Math.abs(field.furrowAngleRad - input.mosaic.angleRad) > 0.1;
         fieldInfo[index] = across ? 255 : 0;
@@ -329,8 +285,7 @@ export function buildSplatMaps(input: SplatInput): SplatMaps {
   // Filtro 3 × 3 de los pesos: suaviza los escalones de las transiciones a la escala del texel.
   smoothWeights(weightsA, resolution);
   smoothWeights(weightsB, resolution);
-  smoothWeights(weightsC, resolution);
-  return { sizeM: input.sizeM, resolution, texelM, weightsA, weightsB, weightsC, fieldInfo };
+  return { sizeM: input.sizeM, resolution, texelM, weightsA, weightsB, fieldInfo };
 }
 
 /** Promedio 3 × 3 (con pesos 1-2-1) de una textura RGBA de 8 bits, en el sitio. */
@@ -425,28 +380,26 @@ export function buildFeatureField(
     const i1 = Math.min(resolution - 1, Math.ceil((maxX + reach - origin) / cell));
     const j0 = Math.max(0, Math.floor((minZ - reach - origin) / cell));
     const j1 = Math.min(resolution - 1, Math.ceil((maxZ + reach - origin) / cell));
-    const rings = [polygon.ring, ...polygon.holes];
+    const ring = polygon.ring;
     for (let j = j0; j <= j1; j++) {
       const z = origin + (j + 0.5) * cell;
       for (let i = i0; i <= i1; i++) {
         const x = origin + (i + 0.5) * cell;
         let edge = Infinity;
-        for (const ring of rings) {
-          for (let k = 0; k + 3 < ring.length; k += 2) {
-            edge = Math.min(
-              edge,
-              segmentDistance(
-                x,
-                z,
-                ring[k] ?? 0,
-                ring[k + 1] ?? 0,
-                ring[k + 2] ?? 0,
-                ring[k + 3] ?? 0,
-              ),
-            );
-          }
+        for (let k = 0; k + 3 < ring.length; k += 2) {
+          edge = Math.min(
+            edge,
+            segmentDistance(
+              x,
+              z,
+              ring[k] ?? 0,
+              ring[k + 1] ?? 0,
+              ring[k + 2] ?? 0,
+              ring[k + 3] ?? 0,
+            ),
+          );
         }
-        const signed = pointInPolygon(polygon, x, z) ? -edge : edge;
+        const signed = pointInRing(ring, x, z) ? -edge : edge;
         const index = j * resolution + i;
         if (signed < (water[index] ?? reach)) water[index] = signed;
       }
@@ -462,28 +415,19 @@ export function buildFeatureField(
   return { sizeM, resolution, data };
 }
 
-export interface ContextSplat {
-  readonly weightsA: Uint8Array;
-  readonly weightsB: Uint8Array;
-  readonly weightsC: Uint8Array;
-  readonly resolution: number;
-  readonly sizeM: number;
-}
-
 /** Mapas de mezcla gruesos del contexto: solo cobertura y pendiente. */
 export function buildContextSplat(
   heightfield: Heightfield,
   landCover: ClassGrid,
   resolution: number,
   seed: number,
-): ContextSplat {
+): { weightsA: Uint8Array; weightsB: Uint8Array; resolution: number; sizeM: number } {
   const sizeM = heightfield.sizeM;
   const texel = sizeM / resolution;
   const origin = -sizeM / 2;
   const weightsA = new Uint8Array(resolution * resolution * 4);
   const weightsB = new Uint8Array(resolution * resolution * 4);
-  const weightsC = new Uint8Array(resolution * resolution * 4);
-  const weights = new Float32Array(LAYER_COUNT);
+  const weights = new Float32Array(8);
   for (let j = 0; j < resolution; j++) {
     const z = origin + (j + 0.5) * texel;
     for (let i = 0; i < resolution; i++) {
@@ -502,13 +446,19 @@ export function buildContextSplat(
         noise,
         weights,
       );
-      packWeights(weights, (j * resolution + i) * 4, weightsA, weightsB, weightsC);
+      let total = 0;
+      for (const w of weights) total += w;
+      const scale = total > 0 ? 255 / total : 0;
+      const index = (j * resolution + i) * 4;
+      for (let k = 0; k < 4; k++) {
+        weightsA[index + k] = Math.round((weights[k] ?? 0) * scale);
+        weightsB[index + k] = Math.round((weights[k + 4] ?? 0) * scale);
+      }
     }
   }
   for (let pass = 0; pass < 2; pass++) {
     smoothWeights(weightsA, resolution);
     smoothWeights(weightsB, resolution);
-    smoothWeights(weightsC, resolution);
   }
-  return { weightsA, weightsB, weightsC, resolution, sizeM };
+  return { weightsA, weightsB, resolution, sizeM };
 }

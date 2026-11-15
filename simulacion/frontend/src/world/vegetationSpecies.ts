@@ -1,15 +1,11 @@
 /**
  * Especies de la vegetación ambiental y elementos dispersos, con los modelos del catálogo
- * (todos CC0 de Poly Haven) que las representan.
+ * (fase 02, todos CC0 de Poly Haven) que las representan.
  *
- * El bioma de la región (`biome.ts`) elige los modelos de cada tipo (p. ej. árboles tropicales
- * altos en la selva, arbustos espinosos en el altiplano) y la altura de los árboles. Los
- * modelos son representativos del tipo de planta: el catálogo no tiene especies nativas
- * (queñua, molle, palmeras, ichu…), así que no se afirma ninguna especie concreta.
+ * Los modelos son representativos del tipo de planta (árbol, arbusto, pasto, maleza): el
+ * catálogo no tiene especies nativas del Valle Alto (molle, eucalipto, chillka…), así que no se
+ * afirma ninguna especie concreta.
  */
-import type { AssetCatalog } from '../assets';
-import type { VegetationRule } from './biome.ts';
-
 export type SpeciesId = 'tree' | 'shrub' | 'rock' | 'debris' | 'grass' | 'weed';
 
 export interface SpeciesModel {
@@ -17,8 +13,6 @@ export interface SpeciesModel {
   /** Nombre del nodo de la variante en el LOD0 del GLB (el LODn añade `_LODn`). */
   readonly variant: string;
   readonly weight: number;
-  /** Escala base del modelo (lleva cada árbol a la altura objetivo del bioma). */
-  readonly baseScale: number;
 }
 
 export interface SpeciesConfig {
@@ -39,13 +33,9 @@ const m = (assetId: string, variant: string, weight = 1): SpeciesModel => ({
   assetId,
   variant,
   weight,
-  baseScale: 1,
 });
 
-export type SpeciesSet = Readonly<Record<SpeciesId, SpeciesConfig>>;
-
-/** Especies por defecto (valle templado); plantilla de distancias de LOD, sombras y escalas. */
-export const SPECIES: SpeciesSet = {
+export const SPECIES: Readonly<Record<SpeciesId, SpeciesConfig>> = {
   tree: {
     id: 'tree',
     label: 'Árboles',
@@ -166,74 +156,8 @@ export function pickModel(species: SpeciesConfig, u: number): number {
 }
 
 /** Recursos del catálogo necesarios para la vegetación. */
-export function vegetationAssetIds(species: SpeciesSet = SPECIES): string[] {
+export function vegetationAssetIds(): string[] {
   return [
-    ...new Set(SPECIES_ORDER.flatMap((id) => species[id].models.map((model) => model.assetId))),
+    ...new Set(SPECIES_ORDER.flatMap((id) => SPECIES[id].models.map((model) => model.assetId))),
   ];
-}
-
-/** Variantes de pasto demasiado pequeñas para verse (plántulas, briznas sueltas, aplastadas). */
-const TINY_VARIANT = /(tiny|seedling|single|flattened)/;
-/** Límites de la escala base: más allá, el tronco y las hojas pierden la proporción. */
-const MIN_TREE_SCALE = 0.6;
-const MAX_TREE_SCALE = 2.2;
-
-export interface BiomeSpecies {
-  readonly species: SpeciesSet;
-  /** Modelos del bioma que faltan en el catálogo (se usan los de la plantilla en su lugar). */
-  readonly missing: readonly string[];
-}
-
-/**
- * Especies de un bioma con las variantes publicadas en el catálogo. Los árboles se escalan a la
- * altura objetivo del bioma (limitada para no deformar el modelo); si falta un modelo se usa
- * el de la plantilla y se informa.
- */
-export function speciesForBiome(rule: VegetationRule, catalog: AssetCatalog): BiomeSpecies {
-  const missing: string[] = [];
-  const build = (id: SpeciesId, assetIds: readonly string[]): SpeciesConfig => {
-    const template = SPECIES[id];
-    const models: SpeciesModel[] = [];
-    for (const assetId of assetIds) {
-      const asset = catalog.assets.find((entry) => entry.id === assetId);
-      const info = asset?.model;
-      if (asset?.status !== 'available' || info === null || info === undefined) {
-        missing.push(assetId);
-        continue;
-      }
-      let variants = info.variants.length > 0 ? [...info.variants] : [assetId];
-      if (id === 'grass' || id === 'weed') {
-        const visible = variants.filter((variant) => !TINY_VARIANT.test(variant));
-        if (visible.length > 0) variants = visible;
-      }
-      let baseScale = 1;
-      if (id === 'tree') {
-        const heightM = info.sizeM[1];
-        const target = (rule.treeHeightM[0] + rule.treeHeightM[1]) / 2;
-        baseScale = Math.min(MAX_TREE_SCALE, Math.max(MIN_TREE_SCALE, target / heightM));
-      }
-      // Cada modelo pesa lo mismo, repartido entre sus variantes.
-      for (const variant of variants)
-        models.push({ assetId, variant, weight: 1 / variants.length, baseScale });
-    }
-    const scaleRange: readonly [number, number] =
-      id === 'tree'
-        ? [
-            (2 * rule.treeHeightM[0]) / (rule.treeHeightM[0] + rule.treeHeightM[1]),
-            (2 * rule.treeHeightM[1]) / (rule.treeHeightM[0] + rule.treeHeightM[1]),
-          ]
-        : template.scaleRange;
-    return { ...template, models: models.length > 0 ? models : template.models, scaleRange };
-  };
-  return {
-    species: {
-      tree: build('tree', rule.tree),
-      shrub: build('shrub', rule.shrub),
-      rock: build('rock', rule.rock),
-      debris: build('debris', rule.debris),
-      grass: build('grass', rule.grass),
-      weed: build('weed', rule.weed),
-    },
-    missing,
-  };
 }

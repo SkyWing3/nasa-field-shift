@@ -38,10 +38,7 @@ export interface SimulationClient {
   getWorldDatasets(signal?: AbortSignal): Promise<WorldDatasets>;
   getElevation(bbox: BBoxQuery, maxSize: number, signal?: AbortSignal): Promise<RasterGrid>;
   getLandCover(bbox: BBoxQuery, maxSize: number, signal?: AbortSignal): Promise<RasterGrid>;
-  /** Elementos de OSM; `zoom` de las teselas vectoriales (14 = detalle, 11 = contexto). */
-  getWorldFeatures(bbox: BBoxQuery, zoom: number, signal?: AbortSignal): Promise<GeoFeatures>;
-  /** Mosaico JPEG de la imagen satelital; `null` si no existe (p. ej. océano). */
-  getImageryTile(z: number, x: number, y: number, signal?: AbortSignal): Promise<Blob | null>;
+  getWorldFeatures(bbox: BBoxQuery, signal?: AbortSignal): Promise<GeoFeatures>;
 }
 
 async function readErrorDetail(response: Response): Promise<string | null> {
@@ -73,7 +70,7 @@ function bboxParams(bbox: BBoxQuery, extra: Record<string, string> = {}): string
 
 /**
  * Cliente HTTP de la API de simulación. No conoce React ni el estado global:
- * devuelve datos comprobados o lanza `ApiError`.
+ * devuelve datos validados o lanza `ApiError`.
  */
 export function createSimulationClient(options: SimulationClientOptions): SimulationClient {
   const fetchFn = options.fetchFn ?? globalThis.fetch.bind(globalThis);
@@ -148,35 +145,12 @@ export function createSimulationClient(options: SimulationClientOptions): Simula
         signal,
         WORLD_DATA_TIMEOUT_MS,
       ),
-    getWorldFeatures: (bbox, zoom, signal) =>
+    getWorldFeatures: (bbox, signal) =>
       getJson(
-        `/api/world/features?${bboxParams(bbox, { zoom: String(zoom) })}`,
+        `/api/world/features?${bboxParams(bbox)}`,
         isGeoFeatures,
         signal,
         WORLD_DATA_TIMEOUT_MS,
       ),
-    getImageryTile: async (z, x, y, signal) => {
-      const path = `/api/world/imagery/${String(z)}/${String(x)}/${String(y)}.jpg`;
-      const timeoutSignal = AbortSignal.timeout(WORLD_DATA_TIMEOUT_MS);
-      const combined = signal ? AbortSignal.any([signal, timeoutSignal]) : timeoutSignal;
-      let response: Response;
-      try {
-        response = await fetchFn(`${options.baseUrl}${path}`, {
-          method: 'GET',
-          headers: { Accept: 'image/jpeg' },
-          signal: combined,
-        });
-      } catch (cause) {
-        throw new ApiError('network', `Error de red: ${path}`, { cause });
-      }
-      if (response.status === 404) return null;
-      if (!response.ok) {
-        throw new ApiError('http', `HTTP ${String(response.status)}: ${path}`, {
-          status: response.status,
-          detail: await readErrorDetail(response),
-        });
-      }
-      return response.blob();
-    },
   };
 }

@@ -7,12 +7,9 @@ import httpx2
 
 from app.core.config import Settings
 from app.data_sources.elevation import NasademProvider
-from app.data_sources.imagery import ImageryProvider
 from app.data_sources.landcover import WorldCoverProvider
 from app.data_sources.osm import OsmFeatureProvider, OsmSnapshotStore, OverpassClient
-from app.data_sources.osm.vectortiles import VectorTileProvider
 from app.data_sources.raster import RangeCache
-from app.data_sources.raster.sources import BlobCache
 
 
 @dataclass(slots=True)
@@ -20,7 +17,6 @@ class WorldDataService:
     elevation: NasademProvider
     landcover: WorldCoverProvider
     features: OsmFeatureProvider
-    imagery: ImageryProvider
     client: httpx2.AsyncClient
     offline: bool
 
@@ -35,15 +31,9 @@ def world_paths(data_dir: Path) -> tuple[Path, Path]:
     return data_dir / "cache", data_dir / "osm"
 
 
-def tiles_path(data_dir: Path) -> Path:
-    """Caché de teselas vectoriales e imágenes satelitales."""
-    return data_dir / "tiles"
-
-
 def create_world_service(settings: Settings) -> WorldDataService:
     cache_dir, snapshot_dir = world_paths(settings.world_data_dir)
     cache = RangeCache(cache_dir)
-    blobs = BlobCache(tiles_path(settings.world_data_dir))
     client = httpx2.AsyncClient(timeout=httpx2.Timeout(30.0, connect=8.0))
     overpass = None
     if settings.overpass_url:
@@ -59,19 +49,7 @@ def create_world_service(settings: Settings) -> WorldDataService:
         landcover=WorldCoverProvider(
             client, cache, base_url=settings.landcover_url, offline=settings.world_offline
         ),
-        features=OsmFeatureProvider(
-            OsmSnapshotStore(snapshot_dir),
-            overpass,
-            VectorTileProvider(
-                client,
-                blobs,
-                tilejson_url=settings.vector_tiles_url,
-                offline=settings.world_offline,
-            ),
-        ),
-        imagery=ImageryProvider(
-            client, blobs, template=settings.imagery_url, offline=settings.world_offline
-        ),
+        features=OsmFeatureProvider(OsmSnapshotStore(snapshot_dir), overpass),
         client=client,
         offline=settings.world_offline,
     )

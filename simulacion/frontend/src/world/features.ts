@@ -4,8 +4,7 @@
  * La geometría y la categoría vienen de OSM. El **ancho** se toma de la etiqueta `width` si
  * existe y es plausible; si no, se **estima** por categoría (OSM casi nunca lo registra en zonas
  * rurales). El tipo de superficie (pavimentada o no) sale de `surface`; sin esa etiqueta se
- * estima por categoría de vía (en zona urbana, las calles sin etiqueta se suponen pavimentadas).
- * Cada valor estimado queda marcado como tal.
+ * estima por categoría de vía. Cada valor estimado queda marcado como tal.
  */
 import type { LocalFrame } from '../geo/localFrame.ts';
 import { geoPoint } from '../geo/wgs84.ts';
@@ -15,12 +14,10 @@ export type PolygonKind = 'building' | 'water' | 'landuse';
 
 export interface WorldFeatureInput {
   readonly id: string;
-  readonly kind: LineKind | PolygonKind | 'place';
+  readonly kind: LineKind | PolygonKind;
   readonly subtype: string;
-  readonly geometryType: 'Point' | 'LineString' | 'Polygon';
+  readonly geometryType: 'LineString' | 'Polygon';
   readonly coordinates: readonly (readonly [number, number])[];
-  /** Agujeros de un polígono (islas de un lago, patios). */
-  readonly holes?: readonly (readonly (readonly [number, number])[])[];
   readonly tags: Readonly<Record<string, string>>;
 }
 
@@ -46,35 +43,13 @@ export interface LocalPolygon {
   readonly name: string | null;
   /** Anillo exterior cerrado, pares (x, z). */
   readonly ring: Float32Array;
-  readonly holes: readonly Float32Array[];
   readonly bounds: readonly [minX: number, minZ: number, maxX: number, maxZ: number];
   readonly intermittent: boolean;
-  /** Altura y base de una edificación (m) según OSM/OpenMapTiles; `null` si no se publica. */
-  readonly heightM: number | null;
-  readonly minHeightM: number | null;
-}
-
-export type PlaceKind = 'city' | 'town' | 'village' | 'hamlet' | 'suburb' | 'quarter' | 'neighbourhood';
-
-export interface LocalPlace {
-  readonly id: string;
-  readonly kind: PlaceKind;
-  readonly name: string;
-  readonly x: number;
-  readonly z: number;
-  /** Importancia de OpenMapTiles (menor = más importante); `null` si no se publica. */
-  readonly rank: number | null;
 }
 
 export interface LocalFeatures {
   readonly lines: readonly LocalLine[];
   readonly polygons: readonly LocalPolygon[];
-  readonly places: readonly LocalPlace[];
-}
-
-export interface LocalFeatureOptions {
-  /** ¿Es zona urbana (cobertura «construido»)? Para estimar el pavimento de las calles. */
-  readonly isUrban?: (x: number, z: number) => boolean;
 }
 
 /** Anchos estimados por categoría (m): valores típicos de vías rurales, no medidas. */
@@ -86,7 +61,6 @@ export const ESTIMATED_WIDTH_M: Readonly<Record<string, number>> = {
   tertiary: 6,
   unclassified: 5,
   residential: 5,
-  minor: 6,
   living_street: 4,
   service: 3.5,
   road: 5,
@@ -145,15 +119,6 @@ const PAVED_BY_DEFAULT = new Set([
   'trunk_link',
   'primary_link',
 ]);
-/** En zona urbana también se suponen pavimentadas las calles secundarias y locales. */
-const PAVED_IF_URBAN = new Set(['secondary', 'tertiary', 'minor', 'residential', 'unclassified', 'service']);
-const PLACE_KINDS = new Set<string>(['city', 'town', 'village', 'hamlet', 'suburb', 'quarter', 'neighbourhood']);
-
-function parseHeight(tag: string | undefined): number | null {
-  if (tag === undefined) return null;
-  const value = Number.parseFloat(tag.replace(',', '.'));
-  return Number.isFinite(value) && value >= 0 && value <= 600 ? value : null;
-}
 
 function parseWidth(tag: string | undefined): number | null {
   if (tag === undefined) return null;
@@ -177,29 +142,13 @@ function toLocal(
 export function toLocalFeatures(
   features: readonly WorldFeatureInput[],
   frame: LocalFrame,
-  options: LocalFeatureOptions = {},
 ): LocalFeatures {
   const lines: LocalLine[] = [];
   const polygons: LocalPolygon[] = [];
-  const places: LocalPlace[] = [];
   for (const feature of features) {
     const name = feature.tags.name ?? null;
     const intermittent = feature.tags.intermittent === 'yes' || feature.tags.seasonal === 'yes';
-    if (feature.geometryType === 'Point') {
-      const first = feature.coordinates[0];
-      if (feature.kind !== 'place' || name === null || first === undefined) continue;
-      if (!PLACE_KINDS.has(feature.subtype)) continue;
-      const { east, north } = frame.toEnu(geoPoint(first[1], first[0]));
-      const rank = feature.tags.rank === undefined ? null : Number.parseInt(feature.tags.rank, 10);
-      places.push({
-        id: feature.id,
-        kind: feature.subtype as PlaceKind,
-        name,
-        x: east,
-        z: -north,
-        rank: rank !== null && Number.isFinite(rank) ? rank : null,
-      });
-    } else if (feature.geometryType === 'LineString') {
+    if (feature.geometryType === 'LineString') {
       if (feature.coordinates.length < 2) continue;
       const kind = feature.kind as LineKind;
       const tagged = parseWidth(feature.tags.width);
@@ -215,23 +164,12 @@ export function toLocalFeatures(
           surfaceEstimated = true;
         }
       }
-      const points = toLocal(frame, feature.coordinates);
-      if (
-        paved === false &&
-        surfaceEstimated &&
-        kind === 'road' &&
-        PAVED_IF_URBAN.has(feature.subtype) &&
-        options.isUrban !== undefined
-      ) {
-        const mid = Math.floor(points.length / 4) * 2;
-        paved = options.isUrban(points[mid] ?? 0, points[mid + 1] ?? 0);
-      }
       lines.push({
         id: feature.id,
         kind,
         subtype: feature.subtype,
         name,
-        points,
+        points: toLocal(frame, feature.coordinates),
         widthM: tagged ?? estimate,
         widthEstimated: tagged === null,
         paved,
@@ -239,7 +177,7 @@ export function toLocalFeatures(
         intermittent,
       });
     } else {
-      if (feature.coordinates.length < 4 || feature.kind === 'place') continue;
+      if (feature.coordinates.length < 4) continue;
       const ring = toLocal(frame, feature.coordinates);
       let minX = Infinity;
       let minZ = Infinity;
@@ -259,23 +197,12 @@ export function toLocalFeatures(
         subtype: feature.subtype,
         name,
         ring,
-        holes: (feature.holes ?? [])
-          .filter((hole) => hole.length >= 4)
-          .map((hole) => toLocal(frame, hole)),
         bounds: [minX, minZ, maxX, maxZ],
         intermittent,
-        heightM: parseHeight(feature.tags.height),
-        minHeightM: parseHeight(feature.tags.min_height),
       });
     }
   }
-  return { lines, polygons, places };
-}
-
-/** Punto dentro de un polígono con agujeros. */
-export function pointInPolygon(polygon: LocalPolygon, x: number, z: number): boolean {
-  if (!pointInRing(polygon.ring, x, z)) return false;
-  return !polygon.holes.some((hole) => pointInRing(hole, x, z));
+  return { lines, polygons };
 }
 
 /** Punto dentro de un polígono (regla par-impar). */

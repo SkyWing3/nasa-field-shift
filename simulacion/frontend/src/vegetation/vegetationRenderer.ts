@@ -24,7 +24,7 @@ import {
   type ScatterContext,
   scatterGroundCoverCell,
 } from '../world/scatter.ts';
-import type { SpeciesId, SpeciesSet } from '../world/vegetationSpecies.ts';
+import { SPECIES, type SpeciesId } from '../world/vegetationSpecies.ts';
 import { type Impostor, impostorInstanceMatrix } from './impostor.ts';
 import type { SpeciesModels, VegetationModel } from './vegetationAssets.ts';
 
@@ -152,7 +152,6 @@ export interface VegetationStats {
 }
 
 export interface VegetationRendererOptions {
-  readonly species: SpeciesSet;
   readonly models: SpeciesModels;
   readonly far: Readonly<Record<'tree' | 'shrub' | 'rock' | 'debris', InstanceSet>>;
   readonly impostors: readonly (Impostor | null)[];
@@ -190,7 +189,7 @@ export class VegetationRenderer {
     this.options = options;
     this.group.name = 'vegetacion';
     for (const id of ['tree', 'shrub', 'rock', 'debris', 'grass', 'weed'] as const) {
-      const config = options.species[id];
+      const config = SPECIES[id];
       const models = options.models[id];
       const counts = this.modelCounts(id, models.length);
       models.forEach((model, index) => {
@@ -278,7 +277,7 @@ export class VegetationRenderer {
   }
 
   private lodFor(id: SpeciesId, distance: number): number {
-    const [l1, l2, cull] = this.options.species[id].lodDistancesM;
+    const [l1, l2, cull] = SPECIES[id].lodDistancesM;
     const s = this.options.lodScale;
     if (id === 'tree') {
       if (distance < l1 * s) return 0;
@@ -326,9 +325,7 @@ export class VegetationRenderer {
   ): { visible: number; impostors: number } {
     const hf = this.options.heightfield;
     const cull =
-      id === 'tree'
-        ? TREE_IMPOSTOR_CULL_M
-        : this.options.species[id].lodDistancesM[2] * this.options.lodScale;
+      id === 'tree' ? TREE_IMPOSTOR_CULL_M : SPECIES[id].lodDistancesM[2] * this.options.lodScale;
     let visible = 0;
     let impostors = 0;
     for (let j = 0; j < set.cellsPerSide; j++) {

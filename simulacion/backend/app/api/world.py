@@ -4,11 +4,10 @@ import base64
 from typing import Annotated, Any, cast
 
 import numpy as np
-from fastapi import APIRouter, Depends, HTTPException, Path, Query, Request, Response, status
+from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
 
 from app.data_sources.datasets import DatasetInfo
 from app.data_sources.elevation import NASADEM_INFO, ElevationUnavailableError
-from app.data_sources.imagery import EOX_INFO
 from app.data_sources.landcover import WORLDCOVER_CLASSES, WORLDCOVER_INFO
 from app.data_sources.osm import (
     OSM_INFO,
@@ -37,9 +36,9 @@ from app.schemas.world import (
 router = APIRouter(prefix="/world", tags=["mundo 3D"])
 
 # Límites por petición: el mundo 3D usa ±15 km de relieve (hasta 0,6° de longitud en latitudes
-# altas). El tamaño en píxeles se limita con `maxSize` y las teselas vectoriales por petición, a 48.
+# altas) y como mucho ±3 km de elementos. El tamaño en píxeles se limita además con `maxSize`.
 MAX_RASTER_SPAN_DEG = 0.6
-MAX_FEATURE_SPAN_DEG = 0.6
+MAX_FEATURE_SPAN_DEG = 0.08
 
 ERRORS: dict[int | str, dict[str, Any]] = {
     422: {"description": "Área no válida, demasiado grande o fuera de cobertura"},
@@ -106,7 +105,6 @@ def read_datasets(world: World) -> WorldDatasets:
     return WorldDatasets(
         elevation=_meta(NASADEM_INFO),
         landcover=_meta(WORLDCOVER_INFO),
-        imagery=_meta(EOX_INFO),
         landcover_classes=[
             LandCoverClass(code=code, label=label) for code, label in WORLDCOVER_CLASSES.items()
         ],
@@ -182,18 +180,11 @@ async def read_landcover(
 
 @router.get("/features", summary="Caminos, agua y edificaciones de OpenStreetMap", responses=ERRORS)
 async def read_features(
-    world: World,
-    south: South,
-    west: West,
-    north: North,
-    east: East,
-    zoom: Annotated[int, Query(ge=8, le=14, description="Zoom de las teselas vectoriales")] = 14,
+    world: World, south: South, west: West, north: North, east: East
 ) -> GeoFeatures:
     bbox = _bbox(south, west, north, east, MAX_FEATURE_SPAN_DEG)
     try:
-        result = await world.features.features(bbox, zoom)
-    except ValueError as error:
-        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, str(error)) from error
+        result = await world.features.features(bbox)
     except OsmUnavailableError as error:
         raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, str(error)) from error
     except OsmTimeoutError as error:
@@ -203,7 +194,6 @@ async def read_features(
     snapshot = result.snapshot
     return GeoFeatures(
         origin=result.origin,
-        zoom=zoom if result.origin == "vectortiles" else None,
         snapshot_id=snapshot.id,
         osm_timestamp=snapshot.osm_timestamp,
         fetched_at=snapshot.fetched_at,
@@ -215,34 +205,8 @@ async def read_features(
                 subtype=feature.subtype,
                 geometry_type=feature.geometry_type,
                 coordinates=list(feature.coordinates),
-                holes=[list(hole) for hole in feature.holes],
                 tags=feature.tags,
             )
             for feature in result.features
         ],
-    )
-
-
-@router.get(
-    "/imagery/{z}/{x}/{y}.jpg",
-    summary="Mosaico de la imagen Sentinel-2 cloudless 2016 (EOX) con caché",
-    responses={**ERRORS, 404: {"description": "Mosaico inexistente"}},
-    response_class=Response,
-)
-async def read_imagery(
-    world: World,
-    z: Annotated[int, Path(ge=0, le=14)],
-    x: Annotated[int, Path(ge=0)],
-    y: Annotated[int, Path(ge=0)],
-) -> Response:
-    try:
-        data = await world.imagery.tile(z, x, y)
-    except ValueError as error:
-        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, str(error)) from error
-    except RangeSourceError as error:
-        raise _upstream_error(error) from error
-    if data is None:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Mosaico inexistente")
-    return Response(
-        content=data, media_type="image/jpeg", headers={"Cache-Control": "public, max-age=86400"}
     )

@@ -1,7 +1,0 @@
-{
-  "request_url": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
-  "downloaded_at_utc": "2026-11-15T00:56:21.551161+00:00",
-  "timestamp_method": "Hora de escritura de la respuesta HTTP descargada en el archivo temporal original",
-  "sha256": "118c563331335c8649cdc2677e6be7ae89d1259d901345fcddbc2857af280f7f",
-  "response_bytes": 23050
-}

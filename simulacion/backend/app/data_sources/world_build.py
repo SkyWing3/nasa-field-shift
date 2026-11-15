@@ -23,13 +23,11 @@ import httpx2
 
 from app.core.config import get_settings
 from app.data_sources.elevation import NasademProvider
-from app.data_sources.imagery import ImageryProvider
 from app.data_sources.landcover import WorldCoverProvider
 from app.data_sources.osm import OsmSnapshot, OsmSnapshotStore, OverpassClient
-from app.data_sources.osm.vectortiles import VectorTileProvider, tiles_for
 from app.data_sources.raster import BBox, RangeCache
-from app.data_sources.raster.sources import DEFAULT_USER_AGENT, BlobCache
-from app.data_sources.world import tiles_path, world_paths
+from app.data_sources.raster.sources import DEFAULT_USER_AGENT
+from app.data_sources.world import world_paths
 
 PUBLIC_OVERPASS_URL = "https://overpass-api.de/api/interpreter"
 METERS_PER_DEGREE_LAT = 111_320.0
@@ -79,20 +77,6 @@ async def prepare(
                 {"maxSize": max_size, "shape": list(raster.data.shape), "tiles": list(tiles)}
             )
         report["landcover"] = levels
-        # Teselas vectoriales (OpenFreeMap) e imagen satelital (EOX) del detalle y del contexto.
-        blobs = BlobCache(tiles_path(settings.world_data_dir))
-        vector = VectorTileProvider(client, blobs, tilejson_url=settings.vector_tiles_url)
-        imagery = ImageryProvider(client, blobs, template=settings.imagery_url)
-        vector_report = {}
-        image_tiles = 0
-        for area, zoom in ((detail, 14), (context, 11)):
-            result = await vector.features(area, zoom)
-            vector_report[f"z{zoom}"] = {"tiles": result.tiles, "features": len(result.features)}
-            for x, y in tiles_for(area, zoom):
-                await imagery.tile(zoom, x, y)
-                image_tiles += 1
-        report["vectorTiles"] = vector_report
-        report["imageryTiles"] = image_tiles
 
     store = OsmSnapshotStore(snapshot_dir)
     existing = store.find(detail)
