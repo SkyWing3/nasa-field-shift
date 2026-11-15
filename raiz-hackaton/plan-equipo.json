@@ -1,0 +1,483 @@
+{
+  "version": "2026-11-14-altiplano-fusion-v3",
+  "timezone": "America/La_Paz",
+  "scope": "Oruro; POWER + ONI; historia/reciente y ENSO inicial; tres rotaciones anuales; JSON precalculado, ficha, audio y radio. Sin pronóstico, observaciones agrícolas ni Santa Cruz.",
+  "tasks": [
+    {
+      "code": "D1-1",
+      "role": "Dev 1",
+      "title": "Fijar contrato de resultados y revisar el cálculo existente",
+      "due": "Sáb 19:00",
+      "deliverable": "Contrato v3, inventario de código y fixture identificado.",
+      "acceptance": [
+        "Dev 1, Dev 2 y Dev 3 acuerdan IDs, unidades, versiones y rutas de archivos; fixture no se presenta como NASA real.",
+        "Registrar qué calcula realmente el código; no construir pronóstico ni ML como requisito."
+      ],
+      "dependencies": "Puede empezar ahora"
+    },
+    {
+      "code": "D1-2",
+      "role": "Dev 1",
+      "title": "Descargar y depurar POWER para el punto de Oruro",
+      "due": "Sáb 21:00",
+      "deliverable": "Originales, series diarias, comando de descarga y manifiesto.",
+      "acceptance": [
+        "Un punto de Oruro con coordenadas y representatividad documentadas por P6-1; no reutilizar Patacamaya como si fuera Oruro.",
+        "Objetivo 1981–2025, campañas completas; 2026 solo hasta la última fecha realmente disponible y nunca como campaña futura completa.",
+        "Tmin, Tmax, precipitación y variables de ET0 según método; viento si se usa ese indicador. Registrar unidades, calendario, QA y faltantes.",
+        "Archivos versionados en servidor; no consultar proveedores al pulsar la demo."
+      ],
+      "dependencies": "D1-1; P6-1 fija el punto"
+    },
+    {
+      "code": "D1-3",
+      "role": "Dev 1",
+      "title": "Comparar clima histórico y reciente sin forzar tendencias",
+      "due": "Sáb 23:30",
+      "deliverable": "climate.json con periodos, resumen por década y alternativa textual.",
+      "acceptance": [
+        "Periodos iniciales 1981–2000 y 2001–2025 sujetos a datos completos; medias por campaña y denominadores, no totales de periodos de distinta longitud.",
+        "Lluvia nov–mar, días de calor/frío y ventanas con umbrales documentados; definición reproducible del inicio de lluvias si se incluye.",
+        "Mostrar tamaño de muestra, dispersión y vacíos; distinguir diferencia de periodos de tendencia y no atribuir causas."
+      ],
+      "dependencies": "D1-2 y P6-2"
+    },
+    {
+      "code": "D1-4",
+      "role": "Dev 1",
+      "title": "Clasificar campañas Normal, Niño y Niña con ONI",
+      "due": "Sáb 23:30",
+      "deliverable": "enso_campaigns.json y script de clasificación.",
+      "acceptance": [
+        "Guardar serie ONI de NOAA, versión, regla, umbral, persistencia y ventana temporal antes de agrupar campañas.",
+        "Indicar años incluidos/excluidos y tamaño de cada grupo; si falta muestra, mostrar insuficiente y no inventar un ranking.",
+        "Para ciclos de tres campañas, el escenario corresponde a la campaña inicial; las siguientes conservan su clima histórico real.",
+        "Los cinco episodios y porcentajes del PDF solo se publican como resultado cuando el cuaderno y cálculo se reproduzcan."
+      ],
+      "dependencies": "D1-2 y P6-3"
+    },
+    {
+      "code": "D1-5",
+      "role": "Dev 1",
+      "title": "Precalcular tres rotaciones con agua y suelo descubierto",
+      "due": "Sáb 23:30",
+      "deliverable": "results.json con ventanas históricas de tres campañas y KPI.",
+      "acceptance": [
+        "Base candidata papa/quinua/descanso; alternativas papa/quinua/haba y papa/haba/descanso; marcar supuesto hasta confirmar orden en una parcela.",
+        "Igual horizonte de tres campañas, fase inicial, suelo y manejo comparable; transferir humedad entre cultivos y declarar inicialización de cada ventana.",
+        "Balance diario conserva agua: lluvia, escorrentía, ET, riego y drenaje con límites físicos; no asignar Kc inventado.",
+        "KPI: riego neto, estrés, cobertura, exposición térmica, suelo descubierto coincidente con lluvia/viento y frecuencia de cumplimiento con denominador.",
+        "Comparar periodos y grupos ENSO sin mezclarlos; presupuestos precalculados explícitos. Rendimiento, dinero y carbono quedan fuera."
+      ],
+      "dependencies": "D1-1, D1-2, D1-4 y P6-2"
+    },
+    {
+      "code": "D1-6",
+      "role": "Dev 1",
+      "title": "Publicar paquete científico consistente para la web",
+      "due": "Sáb 23:30",
+      "deliverable": "catalog.json, climate.json, results.json y manifest.json.",
+      "acceptance": [
+        "Un build_id común, unidades, fuentes, supuestos y limitaciones por salida; null con motivo para faltantes.",
+        "Prioridad reordena resultados existentes; límite de agua selecciona un presupuesto precalculado, sin fingir una nueva simulación.",
+        "No se generan /forecast, /verification ni observaciones para este MVP."
+      ],
+      "dependencies": "D1-3, D1-4 y D1-5"
+    },
+    {
+      "code": "D1-7",
+      "role": "Dev 1",
+      "title": "Cuantificar sensibilidad y evidencia de los KPI",
+      "due": "Dom 08:30",
+      "deliverable": "Comparación con segunda fuente o estado explícito de no disponible.",
+      "acceptance": [
+        "Priorizar archivo local o estación utilizable; comprobar linaje y periodo común antes de decir que son fuentes independientes.",
+        "Repetir variables/KPI compatibles con la otra fuente; rangos entre fuentes son sensibilidad, no intervalos de confianza.",
+        "Si no llega a integración, mostrar una fuente, muestra histórica y limitación explícita. No bloquear el núcleo ni añadir MODIS obligatorio."
+      ],
+      "dependencies": "D1-5 y P6-4"
+    },
+    {
+      "code": "D2-1",
+      "role": "Dev 2",
+      "title": "Preparar publicación modular de JSON y audio",
+      "due": "Sáb 19:00",
+      "deliverable": "Estructura de datos, módulos y contrato de archivos acordados.",
+      "acceptance": [
+        "Procesamiento por lotes y servidor de archivos HTTPS; no introducir SQLite agrícola, POST, broker ni microservicios.",
+        "FastAPI solo se conserva si ya está integrado y sirve el mismo paquete; no es dependencia del MVP.",
+        "El server.py de coordinación y su /api/tasks siguen separados de la futura web agrícola."
+      ],
+      "dependencies": "D1-1; acuerdo con Dev 3"
+    },
+    {
+      "code": "D2-2",
+      "role": "Dev 2",
+      "title": "Generar mensajes desde el resultado de rotación",
+      "due": "Sáb 23:30",
+      "deliverable": "communications.json y plantillas revisadas.",
+      "acceptance": [
+        "Mensaje enlazado a build_id y result_id, zona, periodos, escenario, presupuesto y rotación; no alertas meteorológicas a 24 h.",
+        "Explicar riesgo y acción prudente de revisión con técnico; distinguir escenarios históricos de futuro y riego desconocido.",
+        "issued_at y valid_until son vigencia editorial; fecha de datos separada. Una vigencia no convierte historia en pronóstico."
+      ],
+      "dependencies": "P5-1 y P6-2; integrar D1-6"
+    },
+    {
+      "code": "D2-3",
+      "role": "Dev 2",
+      "title": "Publicar audio español real con texto equivalente",
+      "due": "Sáb 21:00 primero · Dom 08:30 final",
+      "deliverable": "MP3 reproducible y catálogo de revisión.",
+      "acceptance": [
+        "Primer audio de demostración claramente marcado si aún usa fixture; final enlazado al resultado real y texto idéntico.",
+        "Reproducción por acción del usuario; descarga real; licencia de voz o TTS registrada.",
+        "Español revisado; otros idiomas solo con hablante y contenido agronómico revisado."
+      ],
+      "dependencies": "P5-1; P5-2 revisa"
+    },
+    {
+      "code": "D2-4",
+      "role": "Dev 2",
+      "title": "Preparar ficha imprimible del escenario comparado",
+      "due": "Dom 08:30",
+      "deliverable": "Datos de ficha con resumen, evidencia y texto imprimible.",
+      "acceptance": [
+        "Incluye tres alternativas, selección, escenario inicial, periodos, muestra, suelo, presupuesto y límites.",
+        "Comparte result_id con pantalla y audio; si no existe audio para esa selección, indicarlo sin usar otro mensaje.",
+        "Formato de impresión desde la web, sin añadir motor PDF obligatorio ni captura de observaciones."
+      ],
+      "dependencies": "D1-6, D2-2 y Dev 3"
+    },
+    {
+      "code": "D2-5",
+      "role": "Dev 2",
+      "title": "Generar boletín regional MP3 para radio",
+      "due": "Dom 08:30",
+      "deliverable": "Texto y MP3 regional de hasta 60 segundos.",
+      "acceptance": [
+        "Zona general, escenario histórico, revisión prudente de agua/cobertura, fuentes, fecha y vigencia editorial.",
+        "Sin nombres ni coordenadas de fincas; sin consulta personalizada por radio.",
+        "Vencido o ausente se informa; distribución prepared_not_broadcast hasta emisión comprobada."
+      ],
+      "dependencies": "D2-2, D2-3 y P6-5"
+    },
+    {
+      "code": "D2-6",
+      "role": "Dev 2",
+      "title": "Publicar el paquete estable y comprobar integración",
+      "due": "Dom 08:30",
+      "deliverable": "Web y archivos accesibles por HTTPS; respaldo del paquete final.",
+      "acceptance": [
+        "La demo sirve JSON y MP3 ya guardados; sin llamadas en vivo a NASA, NOAA o TTS.",
+        "Comprobar esquema, build_id, integridad, rutas y enlace entre resultado/ficha/audio; fixture nunca se hace pasar por real.",
+        "Un comando documentado publica el paquete y un error de proveedor no impide mostrar la última versión fechada."
+      ],
+      "dependencies": "D1-6, D2-4, D2-5 y Dev 3"
+    },
+    {
+      "code": "D3-1",
+      "role": "Dev 3",
+      "title": "Publicar web con Oruro y controles de escenario",
+      "due": "Sáb 21:00",
+      "deliverable": "Web adaptable: Clima, Rotaciones y Ficha/audio.",
+      "acceptance": [
+        "Una zona Altiplano/Oruro; Normal/Niño/Niña sobre la campaña inicial, periodos y años evaluados visibles.",
+        "Leer JSON con fixture identificado hasta disponer del paquete real; no selección Santa Cruz ni pantalla ¿Acertamos?."
+      ],
+      "dependencies": "D1-1 y D2-1"
+    },
+    {
+      "code": "D3-2",
+      "role": "Dev 3",
+      "title": "Mostrar clima histórico y reciente con evidencia",
+      "due": "Sáb 23:30",
+      "deliverable": "Gráfica y tabla textual de clima por periodos/décadas.",
+      "acceptance": [
+        "Datos NASA, unidad, periodo, resolución y muestra visibles; sin escala fingida de chacra.",
+        "Diferencia, variabilidad y datos insuficientes comprensibles; no fabricar cambios o significancia."
+      ],
+      "dependencies": "D1-3"
+    },
+    {
+      "code": "D3-3",
+      "role": "Dev 3",
+      "title": "Conectar las tres rotaciones y prioridades",
+      "due": "Sáb 23:30",
+      "deliverable": "Comparador con KPI, orden y restricciones.",
+      "acceptance": [
+        "Cambiar escenario filtra ventanas válidas; prioridad reordena y explica normalización, pesos y empates.",
+        "Presupuesto de agua selecciona opciones precalculadas; no ofrecer valores que el modelo no evaluó.",
+        "Mostrar línea base candidata, periodo, n, delta comparable y faltantes; un ranking igual es resultado válido."
+      ],
+      "dependencies": "D1-5 y D1-6"
+    },
+    {
+      "code": "D3-4",
+      "role": "Dev 3",
+      "title": "Visualizar suelo descubierto y sensibilidad",
+      "due": "Dom 08:30",
+      "deliverable": "Calendario de cobertura y panel de calidad/sensibilidad.",
+      "acceptance": [
+        "Semáforo con conteos, umbral, fuente y texto; no toneladas de erosión ni medición de fertilidad.",
+        "Mostrar por fuente cuando exista; si no, declarar no evaluado y límites históricos. Color nunca como única señal."
+      ],
+      "dependencies": "D1-5, D1-7 y P6-2"
+    },
+    {
+      "code": "D3-5",
+      "role": "Dev 3",
+      "title": "Conectar ficha, audio y boletín de la misma evidencia",
+      "due": "Dom 08:30",
+      "deliverable": "Vista imprimible, reproductor y descarga de texto/MP3.",
+      "acceptance": [
+        "result_id coincide entre resultado y ficha/audio; mensajes sin coincidencia no se reproducen como específicos.",
+        "Distinguir audio de ficha de boletín regional general; emisión de radio no confirmada visible."
+      ],
+      "dependencies": "D2-3, D2-4 y D2-5"
+    },
+    {
+      "code": "D3-6",
+      "role": "Dev 3",
+      "title": "Verificar accesibilidad y publicar recorrido final",
+      "due": "Dom 08:30",
+      "deliverable": "Web HTTPS probada en móvil y escritorio.",
+      "acceptance": [
+        "Teclado, foco, etiquetas, texto ampliado, controles táctiles y alternativa textual de gráficas.",
+        "Audio al pulsar, texto equivalente, mensajes de falta de datos o red y versiones de archivos coherentes.",
+        "Sin PWA, sincronización offline ni formulario de reportes comunitarios."
+      ],
+      "dependencies": "D2-6 y P5-4"
+    },
+    {
+      "code": "P4-1",
+      "role": "Persona 4",
+      "title": "Confirmar cierre local y fijar el relato de rotaciones",
+      "due": "Sáb 19:00",
+      "deliverable": "Hora/formato oficiales registrados y frase central.",
+      "acceptance": [
+        "Planificar envío domingo 10:30–11:00 como meta interna frente al cierre local de 12:00 indicado en el PDF; confirmar con organización.",
+        "No usar cronograma 22:00/23:59; si el cierre real es antes, adelantar hitos.",
+        "Relato: clima histórico y reciente + ENSO inicial → tres rotaciones → suelo/agua → ficha/audio."
+      ],
+      "dependencies": "Puede empezar ahora"
+    },
+    {
+      "code": "P4-2",
+      "role": "Persona 4",
+      "title": "Escribir pitch con evidencia reproducible",
+      "due": "Sáb 23:30 borrador · Dom 08:30 final",
+      "deliverable": "Guion adaptable al formato confirmado.",
+      "acceptance": [
+        "No usar Niño más fuerte en décadas ni anomalía +5 °C sin fuente vigente verificable.",
+        "4 de 5 episodios y porcentajes solo si D1-4 reproduce y muestra muestra/periodo; sin ello usar problema y comparación real.",
+        "Audio/radio como cierre accesible; no prometer ranking cambiante, impacto medido ni premios."
+      ],
+      "dependencies": "P6-3 y D1-6"
+    },
+    {
+      "code": "P4-3",
+      "role": "Persona 4",
+      "title": "Preparar demostración en cuatro pasos",
+      "due": "Dom 08:30",
+      "deliverable": "Guion Clima → Rotaciones → Suelo → Ficha/audio/radio.",
+      "acceptance": [
+        "Mostrar antes/ahora y escenario ENSO como ejes distintos; fuente NASA con uso concreto.",
+        "Cambiar prioridades y presupuesto válido; si ranking no cambia explicarlo.",
+        "Solo recorrido integrado, con alternativa grabada."
+      ],
+      "dependencies": "D2-6 y Dev 3"
+    },
+    {
+      "code": "P4-4",
+      "role": "Persona 4",
+      "title": "Grabar respaldo de la aplicación real",
+      "due": "Dom 08:30",
+      "deliverable": "Video según duración oficial confirmada.",
+      "acceptance": [
+        "Grabar versión final con subtítulos, audio y fuentes legibles.",
+        "El respaldo muestra capacidades reales; no sustituye fixture por evidencia ficticia."
+      ],
+      "dependencies": "P4-3"
+    },
+    {
+      "code": "P4-5",
+      "role": "Persona 4",
+      "title": "Preparar presentación breve y enlaces",
+      "due": "Dom 10:00",
+      "deliverable": "Presentación o video según formato de entrega.",
+      "acceptance": [
+        "Problema Oruro, decisión, NASA, incertidumbre, validación local pendiente/real y límites.",
+        "Priorizar un entregable requerido antes que producir formatos extra."
+      ],
+      "dependencies": "P4-1, P4-3 y P6-6"
+    },
+    {
+      "code": "P4-6",
+      "role": "Persona 4",
+      "title": "Preparar respuestas sobre validez y alcance",
+      "due": "Dom 10:00",
+      "deliverable": "Respuestas cortas con archivos de respaldo.",
+      "acceptance": [
+        "Explicar NASA frente a NOAA, ENSO frente a periodos, secuencia anual, escala, agua y proxy de suelo.",
+        "Justificar JSON por lotes, fuente secundaria, revisión humana, accesibilidad y radio sin emisión propia.",
+        "Separar evaluación retrospectiva, predicción y validación de campo."
+      ],
+      "dependencies": "D1-6 y P6-3"
+    },
+    {
+      "code": "P4-7",
+      "role": "Persona 4",
+      "title": "Ensayar y enviar antes de la meta interna",
+      "due": "Dom 10:30–11:00",
+      "deliverable": "Tres ensayos, formulario revisado y comprobante de envío.",
+      "acceptance": [
+        "Ensayos y enlaces revisados antes de 10:30; titular realiza el envío.",
+        "Verificar hora oficial con P4-1 y adelantar si procede; la meta de 11:00 no certifica un cierre oficial.",
+        "Guardar comprobante real; no esperar hasta el horario del plan anterior."
+      ],
+      "dependencies": "P5-5, P6-6 y P4-4 o P4-5"
+    },
+    {
+      "code": "P5-1",
+      "role": "Persona 5",
+      "title": "Redactar mensajes sobre rotaciones y escenarios",
+      "due": "Sáb 21:00",
+      "deliverable": "Plantillas de comparación, cobertura, agua, límites, sin datos y vencido.",
+      "acceptance": [
+        "Una acción prudente y texto sencillo; no avisos de helada inminente ni decisión de siembra por un solo umbral.",
+        "Referenciar resultado, escenario, muestra y revisión agronómica P6."
+      ],
+      "dependencies": "Puede empezar ahora"
+    },
+    {
+      "code": "P5-2",
+      "role": "Persona 5",
+      "title": "Revisar audio y equivalencia con el texto",
+      "due": "Dom 08:30",
+      "deliverable": "Hoja de escucha y español revisado.",
+      "acceptance": [
+        "Verificar pronunciación, cortes, cifras, escenario y coincidencia con pantalla/ficha.",
+        "Aymara/quechua solo con hablante y revisión; sin ella quedan fuera del MVP."
+      ],
+      "dependencies": "D2-3 y P5-1"
+    },
+    {
+      "code": "P5-3",
+      "role": "Persona 5",
+      "title": "Probar comprensión del recorrido",
+      "due": "Dom 08:30",
+      "deliverable": "Registro anónimo de tareas y tres problemas priorizados.",
+      "acceptance": [
+        "Otra persona distingue antes/ahora de Niño/Niña, compara secuencias y escucha/imprime sin ayuda.",
+        "No llamar validación agrícola a una prueba de interfaz ni inventar entrevistas."
+      ],
+      "dependencies": "D3-2 y D3-3"
+    },
+    {
+      "code": "P5-4",
+      "role": "Persona 5",
+      "title": "Probar escenarios, datos y accesibilidad",
+      "due": "Sáb 23:30 y Dom 08:30",
+      "deliverable": "Matriz pasa/falla con responsable y evidencia.",
+      "acceptance": [
+        "Cubrir tres escenarios, tres rotaciones, años excluidos, muestra escasa, null, presupuesto, pesos y ranking igual.",
+        "Verificar suelo descubierto, texto/ficha/audio/result_id, boletín general, vencido y archivo ausente.",
+        "Teclado, celular, texto ampliado, fallo de red explícito y cero llamadas a proveedores durante demo."
+      ],
+      "dependencies": "Primer recorrido con lo disponible; repetir al integrar"
+    },
+    {
+      "code": "P5-5",
+      "role": "Persona 5",
+      "title": "Revisar enlaces y aceptar demo funcional",
+      "due": "Dom 10:00",
+      "deliverable": "Lista de enlaces probados y fallos críticos cerrados.",
+      "acceptance": [
+        "Incógnito y celular con datos: web, JSON, MP3, ficha y respaldo accesibles.",
+        "Ningún fixture, cifra sin reproducir ni mensaje de otro escenario presentado como real.",
+        "Verificar pendientes visibles y cortes de alcance antes de ensayar."
+      ],
+      "dependencies": "D2-6, Dev 3 y P4-4"
+    },
+    {
+      "code": "P6-1",
+      "role": "Persona 6",
+      "title": "Confirmar punto y calendario del productor de Oruro",
+      "due": "Sáb 20:00",
+      "deliverable": "Punto de análisis y nota de conversación con estado de validación.",
+      "acceptance": [
+        "Registrar coordenadas del punto de datos, municipio, elevación/uso agrícola y representatividad; no confundir ciudad con finca validada.",
+        "El PDF recoge calendario de productor; falta confirmar orden de cultivos en la misma parcela y riego de papa/haba.",
+        "Si no hay respuesta, conservar baseline_status=assumed y soil_profile de escenario, sin inventar validación."
+      ],
+      "dependencies": "Puede empezar ahora"
+    },
+    {
+      "code": "P6-2",
+      "role": "Persona 6",
+      "title": "Curar papa, quinua, haba y tres secuencias anuales",
+      "due": "Sáb 21:00",
+      "deliverable": "crops.json, soils.json y rotations.json con fuentes.",
+      "acceptance": [
+        "Priorizar tres cultivos más descanso; hortalizas del calendario solo contexto. Cañahua/papa amarga requieren validación y quedan fuera.",
+        "Duración, calendario, Kc por etapa, profundidad y umbrales con fuente o null; no tolerancia genérica convertida en parámetro calibrado.",
+        "Manejo de residuos, suelo, sanidad, forraje y potencial de leguminosa explicados sin prometer N, rendimiento o dinero.",
+        "Confirmar que las tres secuencias comparten horizonte de tres campañas; descanso no equivale siempre a suelo desnudo."
+      ],
+      "dependencies": "P6-1 y acuerdo con D1-5"
+    },
+    {
+      "code": "P6-3",
+      "role": "Persona 6",
+      "title": "Auditar POWER, ONI y cifras del relato",
+      "due": "Sáb 21:00",
+      "deliverable": "Registro de fuentes y afirmaciones permitidas.",
+      "acceptance": [
+        "NASA POWER es base climática; ONI de NOAA es clasificación externa; guardar metodología y separar Niño 1+2 de ONI.",
+        "Recuperar cuaderno/datos del análisis 4/5, normal de referencia y criterio de selección; sin reproducción no usar porcentajes como conclusión.",
+        "No repetir pronóstico 2026–27 ni puntuaciones de los informes como hechos verificados o rúbrica oficial."
+      ],
+      "dependencies": "Puede empezar ahora"
+    },
+    {
+      "code": "P6-4",
+      "role": "Persona 6",
+      "title": "Buscar contraste local o segunda fuente viable",
+      "due": "Sáb 22:00 corte de búsqueda",
+      "deliverable": "Inventario de archivos, cobertura, licencia y límites.",
+      "acceptance": [
+        "Búsqueda acotada; prioridad estación local utilizable y lluvia compatible, luego fuente descargable con linaje claro.",
+        "Documentar fechas comunes y representatividad; si no existe serie utilizable, entregar estado unavailable sin bloquear núcleo.",
+        "SoilGrids es estimación o perfil manual con fuente; no dependencia de consulta en vivo."
+      ],
+      "dependencies": "D1-2 define variables y periodo"
+    },
+    {
+      "code": "P6-5",
+      "role": "Persona 6",
+      "title": "Revisar boletín regional y emisora candidata",
+      "due": "Dom 08:30",
+      "deliverable": "Guion general y ficha de distribución propuesta.",
+      "acceptance": [
+        "Definir zona/comunidades, idioma y revisión del mensaje con el mismo análisis de rotación.",
+        "Sin acuerdo real, declarar boletín preparado sin emisión; el software no transmite ondas.",
+        "Contacto lo realiza un integrante; no inventar cobertura física ni datos personales."
+      ],
+      "dependencies": "P5-1 y D2-2"
+    },
+    {
+      "code": "P6-6",
+      "role": "Persona 6",
+      "title": "Completar proyecto, fuentes y declaración de IA",
+      "due": "Dom 10:00",
+      "deliverable": "Formulario listo para revisión y envío.",
+      "acceptance": [
+        "Fuentes NASA/NOAA, transformaciones, licencias de datos/voz/código y asistencia de IA.",
+        "Listado construido, simulado, no evaluado y pendiente con evidencias; no prometer validación humana ausente.",
+        "P4 revisa narrativa y hora; P5 prueba enlaces."
+      ],
+      "dependencies": "P6-3, P4 y entregables"
+    }
+  ]
+}

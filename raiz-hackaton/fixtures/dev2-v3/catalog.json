@@ -1,0 +1,56 @@
+{
+  "schema_version": "3.0",
+  "build_id": "fixture-dev2-v3-initial",
+  "mode": "fixture",
+  "generated_at": null,
+  "data_as_of": null,
+  "model_version": null,
+  "sources": [],
+  "assumptions": [
+    "Secuencias candidatas del alcance v3; no confirmadas en una parcela"
+  ],
+  "warnings": [
+    "FIXTURE: demostración estructural, no resultados NASA ni recomendaciones reales"
+  ],
+  "data": {
+    "analysis_point": {
+      "analysis_point_id": "oruro-pilot",
+      "region": "Oruro",
+      "latitude": null,
+      "longitude": null,
+      "location_status": "unconfirmed",
+      "missing_reason": "P6 debe confirmar el punto y su representatividad"
+    },
+    "rotations": [
+      {
+        "rotation_id": "papa-quinua-descanso",
+        "campaigns": [
+          "papa",
+          "quinua",
+          "descanso"
+        ],
+        "baseline_status": "assumed"
+      },
+      {
+        "rotation_id": "papa-quinua-haba",
+        "campaigns": [
+          "papa",
+          "quinua",
+          "haba"
+        ],
+        "baseline_status": "assumed"
+      },
+      {
+        "rotation_id": "papa-haba-descanso",
+        "campaigns": [
+          "papa",
+          "haba",
+          "descanso"
+        ],
+        "baseline_status": "assumed"
+      }
+    ],
+    "water_budgets": [],
+    "missing_reason": "Sin presupuestos precalculados; no habilitar controles"
+  }
+}
