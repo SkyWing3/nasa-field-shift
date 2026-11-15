@@ -1,0 +1,27 @@
+{
+ "schema_version": "3.0",
+ "build_id": "ejemplo-ui-sintetico",
+ "mode": "fixture",
+ "example_profile": "ui-sintetico",
+ "generated_at": null,
+ "data_as_of": null,
+ "model_version": null,
+ "sources": [],
+ "assumptions": [
+  "Secuencias candidatas del alcance v3; no confirmadas en una parcela",
+  "Rotación A (papa/quinua/descanso) es base SUPUESTA hasta que P6 confirme orden y riego"
+ ],
+ "warnings": [
+  "FIXTURE · DATOS DE EJEMPLO, NO NASA: cifras inventadas por Dev 3 solo para probar la interfaz. No son NASA POWER, ni ONI de NOAA, ni resultados de Dev 1."
+ ],
+ "data": {
+  "status": "fixture_only",
+  "method": "Ejemplo sintético de interfaz (Dev 3)",
+  "files": {
+   "data/catalog.json": null,
+   "data/climate.json": null,
+   "data/results.json": null
+  }
+ }
+}
+

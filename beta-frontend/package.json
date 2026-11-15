@@ -1,0 +1,29 @@
+{
+  "name": "raiz-beta-frontend",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Raíz · Dev 3: recorrido web que LEE el paquete JSON precalculado (no calcula ciencia).",
+  "scripts": {
+    "paquete": "node scripts/preparar-paquete.mjs",
+    "ejemplo": "python3 scripts/generar_ejemplo_ui.py",
+    "dev": "node scripts/preparar-paquete.mjs --si-falla-continuar && vite",
+    "build": "node scripts/preparar-paquete.mjs && vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 4173",
+    "test": "vitest run",
+    "test:integration": "node scripts/integracion.test.mjs"
+  },
+  "dependencies": {
+    "@fontsource/open-sans": "^5.3.0",
+    "@fontsource/playball": "^5.3.0",
+    "@fontsource/poppins": "^5.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.8"
+  }
+}
+
