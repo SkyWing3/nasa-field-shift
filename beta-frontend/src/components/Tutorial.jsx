@@ -84,7 +84,8 @@ export function Bienvenida({ abierto, datos, idioma, setIdioma, voz, setVoz, con
   const alternarVoz = () => {
     if (voz) { setVoz(false); lector.detener() } else { setVoz(true); lector.leer('bienvenida', lang) }
   }
-  const tieneMp3 = Boolean(datos.manifiesto?.archivos?.[lang]?.bienvenida)
+  const entrada = datos.manifiesto?.archivos?.[lang]?.bienvenida
+  const tieneMp3 = Boolean(entrada)
   return (
     <dialog ref={dialogo} className="bienvenida" aria-labelledby="bienvenida-titulo" aria-describedby="bienvenida-texto" lang={lang} translate="no"
       onCancel={(e) => { e.preventDefault(); alEmpezar(false) }}>
@@ -106,7 +107,7 @@ export function Bienvenida({ abierto, datos, idioma, setIdioma, voz, setVoz, con
         <div>
           <strong>{tx(ui.voz, lang)}</strong>
           <span>{tx(voz ? ui.voz_activada : ui.voz_desactivada, lang)}</span>
-          <small>{tieneMp3 ? tx(ui.aviso_audio, lang) : tx(ui.aviso_navegador, lang)}</small>
+          <small>{tieneMp3 ? `${tx(ui.aviso_audio, lang)} (${entrada.motor ?? 'Meta MMS'})` : tx(ui.aviso_navegador, lang)}</small>
         </div>
       </div>
       <label className="bienvenida-tutorial">
@@ -189,7 +190,8 @@ export function Recorrido({ datos, recorrido, idioma, voz, setVoz, lector, alTer
     else if (arriba > 300) posicion = { bottom: alto - foco.top + 18, left, width: anchoTarjeta, maxHeight: arriba }
     else posicion = { bottom: 24, right: 24, width: anchoTarjeta }
   }
-  const tieneMp3 = Boolean(datos.manifiesto?.archivos?.[lang]?.[paso.paso])
+  const entrada = datos.manifiesto?.archivos?.[lang]?.[paso.paso]
+  const tieneMp3 = Boolean(entrada)
   return (
     <div className="recorrido" translate="no" lang={lang}>
       <div className="recorrido-velo" aria-hidden="true" />
@@ -207,7 +209,7 @@ export function Recorrido({ datos, recorrido, idioma, voz, setVoz, lector, alTer
         <div className="recorrido-audio">
           <BotonVoz grande={false} voz={voz} alternar={() => { if (voz) { setVoz(false); lector.detener() } else { setVoz(true) } }} etiqueta={tx(ui.voz, lang)} estado={tx(voz ? ui.voz_activada : ui.voz_desactivada, lang)} />
           <button type="button" className="enlace" onClick={() => lector.leer(paso.paso, lang)}>{tx(ui.escuchar, lang)}</button>
-          <small>{tieneMp3 ? tx(ui.aviso_audio, lang) : tx(ui.aviso_navegador, lang)}</small>
+          <small>{tieneMp3 ? `${tx(ui.aviso_audio, lang)} (${entrada.motor ?? 'Meta MMS'})` : tx(ui.aviso_navegador, lang)}</small>
         </div>
         <footer>
           <button type="button" className="boton secundario" disabled={indice === 0} onClick={() => setIndice((i) => i - 1)}>← {tx(ui.anterior, lang)}</button>

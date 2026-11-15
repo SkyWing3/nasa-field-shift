@@ -37,7 +37,11 @@ export interface TutorialData {
 
 interface AudioManifest {
   readonly archivos: Readonly<
-    Record<string, Readonly<Record<string, { readonly archivo: string } | undefined>> | undefined>
+    Record<
+      string,
+      | Readonly<Record<string, { readonly archivo: string; readonly motor?: string } | undefined>>
+      | undefined
+    >
   >;
 }
 
@@ -57,6 +61,13 @@ export function ui(data: TutorialData, key: string, language: Language): string 
 
 export function audioFile(data: TutorialData, id: string, language: Language): string | null {
   return data.manifiesto?.archivos[language]?.[id]?.archivo ?? null;
+}
+
+/** Aviso bajo el audio: voz sintética y su motor (Meta MMS o ElevenLabs), o la voz del navegador. */
+export function audioNote(data: TutorialData, id: string, language: Language): string {
+  const entry = data.manifiesto?.archivos[language]?.[id];
+  if (entry === undefined) return ui(data, 'aviso_navegador', language);
+  return `${ui(data, 'aviso_audio', language)} (${entry.motor ?? 'Meta MMS'})`;
 }
 
 /** Texto leído en voz alta (el mismo que dicen los MP3). */

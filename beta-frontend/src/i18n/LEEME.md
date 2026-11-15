@@ -46,6 +46,13 @@ Para traducir con IA, se puede pegar el JSON completo en Claude con una instrucc
 - Bloques marcados con `lang="es"` o `translate="no"`.
 - Las alarmas: su título, texto y acción vienen traducidos en `public/alertas/alertas.json`, generado por `python -m raiz_data alarmas`. Para un idioma nuevo, hay que agregar sus frases en `raiz-hackaton/raiz_data/alarms.py` (plantillas `T`). Si faltan, se muestran en español.
 
+## Audio de la bienvenida y del tutorial
+
+- Español e inglés: ElevenLabs. Se generan con `python scripts/generar_audio_tutorial_elevenlabs.py`, desde `raiz-hackaton` y con `ELEVENLABS_API_KEY` en `raiz-hackaton/.env`.
+- Quechua, aymara y guaraní: Meta MMS. Se generan con `.venv-tts\Scripts\python scripts\generar_audio_tutorial.py`.
+- Portugués y francés: voz del navegador.
+- Los textos están en `content/tutorial/tutorial.json`. Todos los audios son voz sintética y requieren revisión de pares.
+
 ## «Otro idioma…»
 
 Para cualquier otro idioma sin archivo, el selector ofrece «Otro idioma…». Esa opción explica cómo usar el «Traducir» del navegador (en Chrome: clic derecho → Traducir). Es traducción automática del navegador, y el español sigue siendo la referencia.

@@ -4,7 +4,7 @@ import type { CSSProperties } from 'react';
 import { Icon } from '../components/Icon';
 import type { Language } from '../i18n';
 import styles from './Tutorial.module.css';
-import { audioFile, pick, ui } from './tutorialData';
+import { audioNote, pick, ui } from './tutorialData';
 import type { Reader, TutorialData } from './tutorialData';
 
 function cx(...names: (string | false | undefined)[]): string {
@@ -76,7 +76,6 @@ export function Welcome({
     }
   };
   const voiceState = ui(data, voice ? 'voz_activada' : 'voz_desactivada', language);
-  const hasMp3 = audioFile(data, 'bienvenida', language) !== null;
   return (
     <dialog
       ref={dialog}
@@ -129,7 +128,7 @@ export function Welcome({
         <div>
           <strong>{ui(data, 'voz', language)}</strong>
           <span>{voiceState}</span>
-          <small>{ui(data, hasMp3 ? 'aviso_audio' : 'aviso_navegador', language)}</small>
+          <small>{audioNote(data, 'bienvenida', language)}</small>
         </div>
       </div>
       <label className={styles.tutorialToggle}>
@@ -272,7 +271,6 @@ export function Tour({ data, tour, language, voice, onVoice, reader, onFinish }:
       position = { bottom: 24, right: 24, width: cardWidth };
     }
   }
-  const hasMp3 = audioFile(data, stop.paso, language) !== null;
   const voiceState = ui(data, voice ? 'voz_activada' : 'voz_desactivada', language);
   return (
     <div className={styles.tour} lang={language} data-testid="tour">
@@ -341,7 +339,7 @@ export function Tour({ data, tour, language, voice, onVoice, reader, onFinish }:
           >
             {ui(data, 'escuchar', language)}
           </button>
-          <small>{ui(data, hasMp3 ? 'aviso_audio' : 'aviso_navegador', language)}</small>
+          <small>{audioNote(data, stop.paso, language)}</small>
         </div>
         <footer className={styles.cardFooter}>
           <button

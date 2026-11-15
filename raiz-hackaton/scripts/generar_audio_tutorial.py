@@ -72,12 +72,14 @@ def main():
             mp3 = OUT / lang / f'{item_id}.mp3'
             if files.get(item_id, {}).get('sha256_texto') == digest and mp3.exists():
                 continue
+            if files.get(item_id, {}).get('motor') == 'ElevenLabs':
+                continue  # Voz de ElevenLabs (generar_audio_tutorial_elevenlabs.py): no se pisa con MMS.
             if voice is None:
                 print(f'Cargando voz {VOICES[lang]}…', flush=True)
                 voice = mms.Voice(VOICES[lang], SEED)
             dropped = voice.dropped(said)
             mms.to_mp3(voice.synthesize(said), mp3)
-            files[item_id] = {'archivo': f'{lang}/{item_id}.mp3', 'texto': text, 'texto_leido': said, 'sha256_texto': digest,
+            files[item_id] = {'archivo': f'{lang}/{item_id}.mp3', 'texto': text, 'texto_leido': said, 'sha256_texto': digest, 'motor': 'Meta MMS', 'modelo': VOICES[lang],
                               'duracion_s': round(mms.mp3_duration(mp3), 1), 'caracteres_omitidos': dropped}
             print(f'{lang}/{item_id}.mp3 · {files[item_id]["duracion_s"]} s' + (f' · omitidos {dropped}' if dropped else ''), flush=True)
     manifest['generado'] = datetime.now(timezone.utc).isoformat(timespec='seconds')

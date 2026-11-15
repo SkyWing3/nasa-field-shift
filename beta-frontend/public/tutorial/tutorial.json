@@ -5,7 +5,8 @@
     "es",
     "qu",
     "ay",
-    "gn"
+    "gn",
+    "en"
   ],
   "idiomas": [
     {
@@ -208,13 +209,13 @@
       "fr": "Voir le tutoriel"
     },
     "aviso_audio": {
-      "es": "Voz sintética (Meta MMS): requiere revisión de pares.",
-      "qu": "Máquina kunka (Meta MMS): masikuna qhawarinanku tiyan.",
-      "ay": "Máquina kunka (Meta MMS): masinakaw uñakipapxañapa.",
-      "gn": "Ñe'ẽ máquina (Meta MMS): irũnguéra ohecha va'erã.",
-      "en": "Synthetic voice (Meta MMS): needs peer review.",
-      "pt": "Voz sintética (Meta MMS): requer revisão por pares.",
-      "fr": "Voix de synthèse (Meta MMS) : doit être relue par des pairs."
+      "es": "Voz sintética: requiere revisión de pares.",
+      "qu": "Máquina kunka: masikuna qhawarinanku tiyan.",
+      "ay": "Máquina kunka: masinakaw uñakipapxañapa.",
+      "gn": "Ñe'ẽ máquina: irũnguéra ohecha va'erã.",
+      "en": "Synthetic voice: needs peer review.",
+      "pt": "Voz sintética: requer revisão por pares.",
+      "fr": "Voix de synthèse : doit être relue par des pairs."
     },
     "aviso_navegador": {
       "es": "Voz de tu navegador.",

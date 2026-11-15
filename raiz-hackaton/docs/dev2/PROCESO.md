@@ -342,3 +342,14 @@ python -m raiz_delivery publish --package build\package-real --site-root build\a
   - Respeta «reducir movimiento». En el móvil la tarjeta se muestra abajo.
 - **Enlace entre apps:** el 3D pasa `idioma`, `voz` y `tutorial=si` al beta-frontend, que arranca su propio recorrido si la persona lo pidió y no lo vio antes.
 - **Pruebas:** beta-frontend 15 unitarias (3 nuevas sobre el contenido del tutorial); 3D 179, con lint y tipos OK. Verificado en el navegador: bienvenida en los dos, recorrido en aymara (3D) y quechua (beta), y «Saltar».
+
+### 15-nov 11:00 · Simulación revertida y voces de ElevenLabs para español e inglés
+
+- **Simulación:** por decisión de la líder no se usa la versión remota de `simulacion/` (Raíz 2D como entrada, TerraLab en `/terralab.html`, motor `raiz.py`). El commit local `b2d12b8` la devuelve al estado de `3f04e30`. Se conservan `content/p6/`, la regla de `.gitignore` sobre el permiso del productor y el `README.md` de la raíz. Pruebas: frontend 180, backend 106.
+- **Voces:**
+  - `scripts/generar_audio_tutorial_elevenlabs.py` genera los 22 audios del tutorial en español e inglés con ElevenLabs (`eleven_multilingual_v2`, voces prediseñadas `EXAVITQu4vr4xnSDxMaL` para español y `21m00Tcm4TlvDq8ikWAM` para inglés, semilla 1234).
+  - La clave se lee de `ELEVENLABS_API_KEY` en `raiz-hackaton/.env` (ignorado por git). No se imprime ni se escribe en ningún archivo (comprobado).
+  - Quechua, aymara y guaraní siguen con Meta MMS. El generador MMS ya no pisa los audios de ElevenLabs.
+  - El manifiesto registra en cada audio su motor, modelo y voz. Las apps muestran «Voz sintética: requiere revisión de pares (ElevenLabs)» o «(Meta MMS)».
+  - El inglés ahora tiene MP3 propio en lugar de la voz del navegador.
+- **Verificado por internet:** en el 3D y en beta-frontend suenan es/en con ElevenLabs y qu con MMS, y el recorrido lee cada paso.
