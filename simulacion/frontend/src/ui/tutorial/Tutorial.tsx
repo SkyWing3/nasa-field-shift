@@ -277,7 +277,9 @@ export function Tour({ data, tour, language, voice, onVoice, reader, onFinish }:
       <div className={styles.veil} aria-hidden="true" />
       {focus === null ? null : (
         <div className={styles.focus} style={focus} aria-hidden="true">
-          <span className={styles.here}>👆 {ui(data, 'aqui', language)}</span>
+          <span className={cx(styles.here, focus.top < 48 && styles.hereBelow)}>
+            {ui(data, 'aqui', language)}
+          </span>
         </div>
       )}
       <section
@@ -314,7 +316,6 @@ export function Tour({ data, tour, language, voice, onVoice, reader, onFinish }:
         <p className={styles.label}>{ui(data, 'para_que', language)}</p>
         <p id="tour-purpose">{pick(step.para, language)}</p>
         <div className={styles.example}>
-          <span aria-hidden="true">💡</span>
           <div>
             <p className={styles.label}>{ui(data, 'ejemplo', language)}</p>
             <p>{pick(step.ejemplo, language)}</p>

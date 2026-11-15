@@ -154,7 +154,7 @@
 .recorrido-foco { position:fixed; border-radius:16px; box-shadow:0 0 0 4px #f2c94c, 0 0 0 9999px rgba(10,28,20,.68); transition:top .3s, left .3s, width .3s, height .3s; pointer-events:none; }
 .recorrido-foco::after { content:''; position:absolute; inset:-4px; border-radius:18px; border:3px solid #f2c94c; animation:foco-pulso 1.6s ease-out infinite; }
 @keyframes foco-pulso { 0% { opacity:1; transform:scale(1); } 100% { opacity:0; transform:scale(1.06); } }
-.recorrido-aqui { position:absolute; top:-18px; left:12px; padding:4px 12px; border-radius:999px; background:#f2c94c; color:#1d1a0e; font-weight:800; font-size:.85rem; letter-spacing:.02em; white-space:nowrap; box-shadow:0 4px 12px rgba(0,0,0,.25); }
+.recorrido-aqui { position:absolute; bottom:calc(100% + 12px); left:0; z-index:1; padding:4px 12px; border-radius:999px; background:#f2c94c; color:#1d1a0e; font-weight:800; font-size:.85rem; letter-spacing:.02em; white-space:nowrap; box-shadow:0 4px 12px rgba(0,0,0,.25); }
 .recorrido-tarjeta { position:fixed; z-index:1; max-height:calc(100dvh - 32px); overflow:auto; padding:20px 22px 18px; border-radius:20px; background:var(--surface); color:var(--tinta); box-shadow:0 24px 60px rgba(0,0,0,.35); outline:none; }
 .recorrido-tarjeta.movil { left:12px !important; right:12px !important; bottom:12px !important; top:auto !important; width:auto !important; max-height:62dvh; }
 .recorrido-tarjeta header { display:flex; justify-content:space-between; align-items:center; gap:10px; }
@@ -168,7 +168,8 @@
 .recorrido-tarjeta p { margin:0 0 10px; }
 .recorrido-etiqueta { margin:0 0 2px !important; font-size:.74rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--tinta-2); }
 .recorrido-ejemplo { display:flex; gap:10px; padding:12px 14px; margin:4px 0 12px; border-radius:14px; background:var(--prec-f); color:var(--prec-t); }
-.recorrido-ejemplo > span { font-size:1.4rem; line-height:1.2; }
+.recorrido-aqui.abajo { bottom:auto; top:calc(100% + 12px); }
+.recorrido-ejemplo { border-left:4px solid var(--prec-t); }
 .recorrido-ejemplo p:last-child { margin:0; }
 .recorrido-audio { display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px; margin:0 0 14px; }
 .recorrido-audio small { flex-basis:100%; font-size:.74rem; opacity:.8; }

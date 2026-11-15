@@ -195,7 +195,7 @@ export function Recorrido({ datos, recorrido, idioma, voz, setVoz, lector, alTer
   return (
     <div className="recorrido" translate="no" lang={lang}>
       <div className="recorrido-velo" aria-hidden="true" />
-      {foco && <div className="recorrido-foco" style={foco} aria-hidden="true"><span className="recorrido-aqui"><span aria-hidden="true">👆</span> {tx(ui.aqui, lang)}</span></div>}
+      {foco && <div className="recorrido-foco" style={foco} aria-hidden="true"><span className={`recorrido-aqui${foco.top < 48 ? ' abajo' : ''}`}>{tx(ui.aqui, lang)}</span></div>}
       <section ref={tarjeta} tabIndex={-1} className={`recorrido-tarjeta${movil ? ' movil' : ''}`} style={posicion} role="dialog" aria-modal="true" aria-labelledby="recorrido-titulo" aria-describedby="recorrido-para">
         <header>
           <span className="recorrido-contador">{tx(ui.paso, lang).replace('{n}', indice + 1).replace('{total}', pasos.length)}</span>
@@ -205,7 +205,7 @@ export function Recorrido({ datos, recorrido, idioma, voz, setVoz, lector, alTer
         <h2 id="recorrido-titulo">{tx(info.titulo, lang)}</h2>
         <p className="recorrido-etiqueta">{tx(ui.para_que, lang)}</p>
         <p id="recorrido-para">{tx(info.para, lang)}</p>
-        <div className="recorrido-ejemplo"><span aria-hidden="true">💡</span><div><p className="recorrido-etiqueta">{tx(ui.ejemplo, lang)}</p><p>{tx(info.ejemplo, lang)}</p></div></div>
+        <div className="recorrido-ejemplo"><div><p className="recorrido-etiqueta">{tx(ui.ejemplo, lang)}</p><p>{tx(info.ejemplo, lang)}</p></div></div>
         <div className="recorrido-audio">
           <BotonVoz grande={false} voz={voz} alternar={() => { if (voz) { setVoz(false); lector.detener() } else { setVoz(true) } }} etiqueta={tx(ui.voz, lang)} estado={tx(voz ? ui.voz_activada : ui.voz_desactivada, lang)} />
           <button type="button" className="enlace" onClick={() => lector.leer(paso.paso, lang)}>{tx(ui.escuchar, lang)}</button>
