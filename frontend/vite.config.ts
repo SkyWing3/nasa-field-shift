@@ -19,12 +19,20 @@ export default defineConfig({
       worldPublishedAssets(),
     ),
   ],
+
   define: {
     __APP_VERSION__: JSON.stringify(packageJson.version),
   },
   server: {
     port: 5173,
     strictPort: true,
+    allowedHosts: ['nasa-simulacion.los5furiosos.cloud'],
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:8000',
+        changeOrigin: true,
+      },
+    },
   },
   preview: {
     port: 4173,

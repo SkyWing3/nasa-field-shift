@@ -1,0 +1,6 @@
+campania,anio_inicio,fecha_inicio,fecha_fin,dias_esperados,dias_transcurridos,dias_validos_lluvia,dias_faltantes_transcurridos,completa,incluida_analisis,oni_ndj_c,fase_enso,nino_fuerte,lluvia_observada_mm,lluvia_campania_mm,causa_exclusion,normal_referencia_mm,anomalia_mm,anomalia_pct,menor_normal
+1982-83,1982,1982-11-01,1983-03-31,151,151,151,0,True,True,2.12,Niño,True,230.11,230.11,,364.8038,-134.6938,-36.9223,True
+1997-98,1997,1997-11-01,1998-03-31,151,151,151,0,True,True,2.37,Niño,True,219.77,219.77,,364.8038,-145.0338,-39.7567,True
+2009-10,2009,2009-11-01,2010-03-31,151,151,151,0,True,True,1.5,Niño,True,472.51,472.51,,364.8038,107.7062,29.5244,False
+2015-16,2015,2015-11-01,2016-03-31,152,152,152,0,True,True,2.59,Niño,True,234.9,234.9,,364.8038,-129.9038,-35.6092,True
+2023-24,2023,2023-11-01,2024-03-31,152,152,152,0,True,True,1.99,Niño,True,336.35,336.35,,364.8038,-28.4538,-7.7998,True

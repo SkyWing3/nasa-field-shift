@@ -165,3 +165,69 @@ class BlockReader:
         if len(result) < length:
             raise RangeSourceError("Lectura más allá del final del archivo")
         return result
+
+
+class BlobCache:
+    """Caché en disco de archivos completos (teselas vectoriales e imágenes), indexada por URL."""
+
+    def __init__(self, directory: Path) -> None:
+        self.directory = directory
+
+    def _path(self, key: str) -> Path:
+        digest = hashlib.sha256(key.encode()).hexdigest()
+        return self.directory / digest[:2] / digest
+
+    def get(self, key: str) -> bytes | None:
+        try:
+            return self._path(key).read_bytes()
+        except FileNotFoundError:
+            return None
+
+    def put(self, key: str, data: bytes) -> None:
+        path = self._path(key)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        handle, temporary = tempfile.mkstemp(dir=path.parent, prefix=".tmp-")
+        try:
+            with os.fdopen(handle, "wb") as file:
+                file.write(data)
+            os.replace(temporary, path)
+        except BaseException:
+            Path(temporary).unlink(missing_ok=True)
+            raise
+
+
+async def fetch_blob(
+    client: httpx2.AsyncClient,
+    url: str,
+    *,
+    cache: BlobCache | None,
+    offline: bool,
+    limiter: asyncio.Semaphore,
+    user_agent: str = DEFAULT_USER_AGENT,
+    accept_missing: bool = False,
+) -> bytes | None:
+    """Descarga un archivo completo con caché. ``None`` si no existe y ``accept_missing``."""
+    if cache is not None:
+        cached = cache.get(url)
+        if cached is not None:
+            # Un archivo vacío en caché marca un recurso inexistente (404/204).
+            return cached or None
+    if offline:
+        raise RangeSourceError(f"Sin conexión y sin datos en caché: {url}")
+    try:
+        async with limiter:
+            response = await client.get(url, headers={"User-Agent": user_agent})
+    except httpx2.TimeoutException as error:
+        raise RangeTimeoutError(f"Tiempo de espera agotado: {url}") from error
+    except httpx2.RequestError as error:
+        raise RangeSourceError(f"No se pudo conectar: {url}") from error
+    if response.status_code in (204, 404) and accept_missing:
+        if cache is not None:
+            cache.put(url, b"")
+        return None
+    if response.status_code != 200:
+        raise RangeSourceError(f"Respuesta {response.status_code}: {url}")
+    data = response.content
+    if cache is not None:
+        cache.put(url, data)
+    return data

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "status": "draft_incomplete_requires_p6_validation",
+  "source": "PARA_DEV1_correcciones.md, secciones 3 y 4",
+  "ready_for_simulation": false,
+  "producer_actual_sequence": null,
+  "rotations": [
+    {"id": "A", "sequence": null, "baseline_status": "scenario_not_producer_practice"},
+    {"id": "B", "sequence": null, "baseline_status": null},
+    {"id": "C", "sequence": null, "baseline_status": null}
+  ],
+  "start_position_default": 0,
+  "positions_proposed": [0, 1, 2],
+  "nine_case_evaluation": {
+    "task": "D1-5",
+    "case_count_proposed": 9,
+    "approval_status": "pending_leader_approval",
+    "enabled": false,
+    "requested_reports": ["decision_campaign_kpis", "full_cycle_kpis"],
+    "note": "La interfaz acepta start_position; no se ha implementado la ejecución ni la enumeración automática de los nueve casos"
+  }
+}

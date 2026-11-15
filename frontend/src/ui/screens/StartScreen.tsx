@@ -212,7 +212,7 @@ export function StartScreen({
             />
             <CheckRow
               name="Datos científicos NASA"
-              detail="Series meteorológicas y de suelo"
+              detail="Dato regional de la celda NASA POWER, no medición de la parcela. POWER no mide granizo."
               value="Fase posterior"
               tone="planned"
             />

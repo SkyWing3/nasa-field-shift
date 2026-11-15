@@ -33,6 +33,7 @@ class LandCoverClass(_CamelModel):
 class WorldDatasets(_CamelModel):
     elevation: DatasetMeta
     landcover: DatasetMeta
+    imagery: DatasetMeta
     landcover_classes: list[LandCoverClass]
     features: DatasetMeta
     features_live_enabled: bool
@@ -69,15 +70,19 @@ class RasterGrid(_CamelModel):
 
 class GeoFeature(_CamelModel):
     id: str
-    kind: Literal["road", "track", "path", "waterway", "water", "building", "landuse", "railway"]
+    kind: Literal[
+        "road", "track", "path", "waterway", "water", "building", "landuse", "railway", "place"
+    ]
     subtype: str
-    geometry_type: Literal["LineString", "Polygon"]
+    geometry_type: Literal["Point", "LineString", "Polygon"]
     coordinates: list[tuple[float, float]]
+    holes: list[list[tuple[float, float]]]
     tags: dict[str, str]
 
 
 class GeoFeatures(_CamelModel):
-    origin: Literal["snapshot", "overpass"]
+    origin: Literal["vectortiles", "snapshot", "overpass"]
+    zoom: int | None
     snapshot_id: str
     osm_timestamp: str | None
     fetched_at: str

@@ -15,6 +15,10 @@ DEFAULT_GAZETTEER_PATH = BACKEND_ROOT / "data" / "geonames" / "gazetteer.sqlite3
 DEFAULT_WORLD_DATA_DIR = BACKEND_ROOT / "data" / "world"
 DEFAULT_ELEVATION_URL = "https://opentopography.s3.sdsc.edu/raster/NASADEM/NASADEM_be"
 DEFAULT_LANDCOVER_URL = "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map"
+DEFAULT_VECTOR_TILES_URL = "https://tiles.openfreemap.org/planet"
+DEFAULT_IMAGERY_URL = (
+    "https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless_3857/default/g/{z}/{y}/{x}.jpg"
+)
 
 # Servidor de desarrollo de Vite (5173) y previsualización del build (`vite preview`, 4173).
 DEFAULT_DEV_CORS_ORIGINS: tuple[str, ...] = (
@@ -50,6 +54,9 @@ class Settings(BaseSettings):
     elevation_url: str = DEFAULT_ELEVATION_URL
     landcover_url: str = DEFAULT_LANDCOVER_URL
     world_offline: bool = False
+    # Elementos OSM de cualquier región (TileJSON de OpenMapTiles) e imagen satelital (ADR-043).
+    vector_tiles_url: str = DEFAULT_VECTOR_TILES_URL
+    imagery_url: str = DEFAULT_IMAGERY_URL
     # Overpass en vivo para regiones sin instantánea: desactivado salvo configuración explícita
     # (las instancias públicas no deben usarse como backend de una aplicación).
     overpass_url: str = ""
@@ -81,7 +88,7 @@ class Settings(BaseSettings):
             raise ValueError("TERRALAB_NOMINATIM_URL debe usar HTTPS")
         return value.rstrip("/")
 
-    @field_validator("elevation_url", "landcover_url")
+    @field_validator("elevation_url", "landcover_url", "vector_tiles_url", "imagery_url")
     @classmethod
     def _https_raster(cls, value: str) -> str:
         if not value.startswith("https://"):

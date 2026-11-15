@@ -1,0 +1,12 @@
+{
+  "archive": "/Users/franco/Documents/Personal/Proyectos/Nasa/docs/validaciones/obrajes-D1-2-privacidad-2026-11-14.zip",
+  "archive_bytes": 1191717,
+  "sha256": "2b75d03c73d9467b148280d0709e54e640a5a69a2f455615ecd25cb4fe135d57",
+  "files": 27,
+  "privacy_scan_all_archive_entries": "pass",
+  "raw_and_output_checksums": "pass",
+  "offline_regeneration_from_extracted_archive": "byte_identical_scientific_outputs",
+  "previous_private_archive": "removed",
+  "summary": "/Users/franco/Documents/Personal/Proyectos/Nasa/backend/data/power/obrajes/2026-11-14/RESUMEN_P6.md",
+  "every_archive_payload_checksum_verified": true
+}

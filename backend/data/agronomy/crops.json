@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "status": "draft_incomplete_requires_p6_validation",
+  "source": "PARA_DEV1_correcciones.md, secciones 3 y 5",
+  "ready_for_simulation": false,
+  "calendar": {
+    "sowing_months": [9, 10],
+    "harvest_month": 4,
+    "exact_sowing_date": null,
+    "exact_harvest_date": null,
+    "source": "producer_calendar_reported_by_p6"
+  },
+  "stage_duration_policy": {
+    "kind": "assumption",
+    "source": "assumption_fao56_t11",
+    "reference": "FAO Irrigation and Drainage Paper 56, Table 11",
+    "proportions": null,
+    "scaling_rule": "Escalar las proporciones validadas a las fechas de siembra y cosecha del productor",
+    "note": "Falta elegir la fila y adaptación de Tabla 11 por cultivo. Las etapas de Kc no determinan por sí solas una ventana precisa de floración."
+  },
+  "soil": {
+    "texture": "franco arcillo arenosa",
+    "available_water_m_per_m": {
+      "min": 0.14,
+      "max": 0.16,
+      "selected_value": null,
+      "kind": "assumption",
+      "source": "NRCS, rango de textura citado por P6; no medido en parcela"
+    },
+    "measured_depth_m": null,
+    "depth_policy": "Usar Zr del cultivo cuando esté disponible; no inventar profundidad de suelo"
+  },
+  "wind_exposure_threshold_m_s": {
+    "value": null,
+    "kind": "assumption",
+    "source": "pending_p6_validation"
+  },
+  "heavy_rainfall_threshold_mm_day": {
+    "value": null,
+    "kind": "assumption",
+    "source": "pending_p6_validation",
+    "caution": "P6 cita Blacutt et al. (2015): posible subestimación de lluvia >50 mm/día en Bolivia con MERRA-2. No interpretar este indicador como medición de extremos de la parcela."
+  },
+  "hail": {
+    "measured_by_power": false,
+    "kpi": null,
+    "ui_notice": "POWER no mide granizo"
+  },
+  "crops": [
+    {
+      "id": "papa",
+      "water_regime": "irrigated",
+      "water_sources": ["well", "rainfall"],
+      "central_water_kpi": "net_irrigation_required_mm",
+      "frost_exposure": {"stage": "flowering", "threshold_c": -2.5, "source": "reported_by_p6"},
+      "stage_duration_days": null,
+      "flowering_window": null,
+      "root_depth_m": null,
+      "crop_coefficients": null
+    },
+    {
+      "id": "haba",
+      "water_regime": "irrigated",
+      "water_sources": ["well", "rainfall"],
+      "central_water_kpi": "net_irrigation_required_mm",
+      "frost_exposure": {"stage": "flowering", "threshold_c": -1.0, "source": "reported_by_p6"},
+      "stage_duration_days": null,
+      "flowering_window": null,
+      "root_depth_m": null,
+      "crop_coefficients": null
+    },
+    {
+      "id": "quinua",
+      "water_regime": "rainfed",
+      "water_sources": ["rainfall"],
+      "central_water_kpi": null,
+      "frost_exposure": {
+        "stage": "anthesis",
+        "thresholds_c": [-4.0, -2.0],
+        "threshold_interpretation": null,
+        "source": "reported_by_p6",
+        "note": "Confirmar cómo usar ambos umbrales por variedad, etapa o severidad antes de calcular el KPI"
+      },
+      "stage_duration_days": null,
+      "flowering_window": null,
+      "root_depth_m": null,
+      "crop_coefficients": null
+    }
+  ],
+  "rest": {
+    "surface": "partial_cover_grazed_weeds",
+    "bare_soil": false,
+    "cover_factor": null,
+    "source": "producer_observation_reported_by_p6",
+    "note": "Falta el factor de cobertura parcial de la versión de crops.json referida por P6"
+  }
+}

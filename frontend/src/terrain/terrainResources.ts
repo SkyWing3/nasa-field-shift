@@ -59,9 +59,9 @@ export function geometryFromMesh(mesh: MeshData): BufferGeometry {
   return geometry;
 }
 
-function dataTexture(data: Uint8Array, size: number): DataTexture {
+function dataTexture(data: Uint8Array, size: number, srgb = false): DataTexture {
   const texture = new DataTexture(data, size, size, RGBAFormat, UnsignedByteType);
-  texture.colorSpace = NoColorSpace;
+  texture.colorSpace = srgb ? SRGBColorSpace : NoColorSpace;
   texture.wrapS = ClampToEdgeWrapping;
   texture.wrapT = ClampToEdgeWrapping;
   texture.magFilter = LinearFilter;
@@ -164,6 +164,7 @@ export function createTerrainResources(
 
   const splat = build.splat;
   const empty = new Uint8Array(4 * 4 * 4).fill(255);
+  const transparent = (): Uint8Array => new Uint8Array(4 * 4 * 4);
   const materialTextures: TerrainMaterialTextures = {
     albedoHeight: arrayTexture(
       textures.albedoHeight,
@@ -182,6 +183,7 @@ export function createTerrainResources(
     tileSizeM: textures.tileSizeM,
     weightsA: dataTexture(splat.weightsA, splat.resolution),
     weightsB: dataTexture(splat.weightsB, splat.resolution),
+    weightsC: dataTexture(splat.weightsC, splat.resolution),
     fieldInfo: dataTexture(splat.fieldInfo, splat.resolution),
     featureField:
       build.featureField === null
@@ -189,12 +191,22 @@ export function createTerrainResources(
         : dataTexture(build.featureField.data, build.featureField.resolution),
     contextWeightsA: dataTexture(build.contextSplat.weightsA, build.contextSplat.resolution),
     contextWeightsB: dataTexture(build.contextSplat.weightsB, build.contextSplat.resolution),
+    contextWeightsC: dataTexture(build.contextSplat.weightsC, build.contextSplat.resolution),
+    satelliteDetail:
+      build.satelliteDetail === null
+        ? dataTexture(transparent(), 4, true)
+        : dataTexture(build.satelliteDetail.data, build.satelliteDetail.resolution, true),
+    satelliteContext:
+      build.satelliteContext === null
+        ? dataTexture(transparent(), 4, true)
+        : dataTexture(build.satelliteContext.data, build.satelliteContext.resolution, true),
   };
   const options = {
     textures: materialTextures,
     detailSizeM: build.detail.sizeM,
     contextSizeM: build.context.sizeM,
     fieldAngleRad: build.mosaic.angleRad,
+    satelliteStrength: build.satelliteDetail === null && build.satelliteContext === null ? 0 : 1,
   };
   const detailMaterial = createTerrainMaterial({ ...options, isContext: false });
   const contextMaterial = createTerrainMaterial({ ...options, isContext: true });

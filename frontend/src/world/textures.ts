@@ -4,11 +4,11 @@
  * - `albedoHeight`: RGB = albedo (sRGB), A = altura del relieve (para mezclar por altura).
  * - `normalRoughAo`: RG = normal en espacio tangente, B = rugosidad, A = oclusión ambiental.
  *
- * Así el sombreador del terreno usa 2 texturas para 8 materiales. Se ejecuta en el worker
+ * Así el sombreador del terreno usa 2 texturas para los 10 materiales del bioma. Se ejecuta en el worker
  * (`createImageBitmap` + `OffscreenCanvas`) para no bloquear la interfaz.
  */
 import { type AssetCatalog, assetFileUrl } from '../assets';
-import { TERRAIN_LAYERS } from './splat.ts';
+import { type BiomeProfile, TERRAIN_ROLES } from './biome.ts';
 
 export interface TerrainTextureSet {
   readonly resolution: number;
@@ -30,17 +30,21 @@ export interface LayerUrls {
 
 export const FALLBACK_TILE_M = 2;
 
+/** Materiales del catálogo de cada capa del terreno para un bioma, en el orden de las capas. */
+export function biomeLayerIds(profile: BiomeProfile): string[] {
+  return TERRAIN_ROLES.map((role) => profile.layers[role]);
+}
+
 export function terrainLayerUrls(
   catalog: AssetCatalog,
   resolution: number,
+  layerIds: readonly string[],
   base?: string,
 ): LayerUrls[] {
-  return TERRAIN_LAYERS.map((layer) => {
-    const asset = catalog.assets.find((entry) => entry.id === layer.id);
+  return layerIds.map((id) => {
+    const asset = catalog.assets.find((entry) => entry.id === id);
     if (asset?.status !== 'available') {
-      throw new Error(
-        `Falta el material de terreno «${layer.id}» en el catálogo (ejecuta make assets)`,
-      );
+      throw new Error(`Falta el material de terreno «${id}» en el catálogo (ejecuta make assets)`);
     }
     // La versión más pequeña que no sea inferior a la resolución pedida; se reduce en el worker.
     const file = (role: string): string => {
@@ -49,12 +53,12 @@ export function terrainLayerUrls(
         .sort((a, b) => (a.width ?? 0) - (b.width ?? 0));
       const found = candidates[0];
       if (found === undefined) {
-        throw new Error(`Falta el mapa ${role} de ${layer.id} a ${String(resolution)} px o más`);
+        throw new Error(`Falta el mapa ${role} de ${id} a ${String(resolution)} px o más`);
       }
       return assetFileUrl(found.path, base);
     };
     return {
-      id: layer.id,
+      id,
       albedo: file('albedo'),
       normal: file('normal'),
       orm: file('orm'),

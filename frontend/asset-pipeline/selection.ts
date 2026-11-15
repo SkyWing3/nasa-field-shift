@@ -237,6 +237,97 @@ export const ASSET_SELECTION: readonly AssetSelection[] = [
     source: ph('sparse_grass'),
   }),
 
+  // Biomas (fase 04): suelos propios de altiplano, selva, llanos, zonas secas, bosques templados
+  // y nevados, elegidos tras revisar las miniaturas de Poly Haven (2026-11-14).
+  material({
+    id: 'withered_grass',
+    name: 'Pasto seco',
+    description: 'Pasto seco y ralo sobre suelo pardo; representa el pajonal del altiplano (ichu).',
+    category: 'terrain',
+    group: 'grass-ground',
+    source: ph('withered_grass'),
+  }),
+  material({
+    id: 'gravelly_sand',
+    name: 'Arena con grava',
+    description: 'Suelo arenoso con grava fina de zonas áridas y altas.',
+    category: 'terrain',
+    group: 'sand',
+    source: ph('gravelly_sand'),
+  }),
+  material({
+    id: 'rock_ground_02',
+    name: 'Suelo rocoso',
+    description: 'Suelo de roca fracturada y piedras de laderas altas.',
+    category: 'terrain',
+    group: 'stony-ground',
+    source: ph('rock_ground_02'),
+  }),
+  material({
+    id: 'red_laterite_soil_stones',
+    name: 'Suelo laterítico rojo',
+    description: 'Suelo rojo con piedras, típico de zonas tropicales.',
+    category: 'terrain',
+    group: 'agricultural-soil',
+    source: ph('red_laterite_soil_stones'),
+  }),
+  material({
+    id: 'red_dirt_mud_01',
+    name: 'Barro rojo',
+    description: 'Barro rojizo húmedo de caminos y orillas tropicales.',
+    category: 'terrain',
+    group: 'wet-soil',
+    source: ph('red_dirt_mud_01'),
+  }),
+  material({
+    id: 'mossy_rock',
+    name: 'Roca con musgo',
+    description: 'Roca cubierta de musgo de bosques húmedos.',
+    category: 'terrain',
+    group: 'stony-ground',
+    source: ph('mossy_rock'),
+  }),
+  material({
+    id: 'forest_leaves_02',
+    name: 'Hojarasca de bosque',
+    description: 'Suelo de bosque cubierto de hojas secas.',
+    category: 'terrain',
+    group: 'forest-floor',
+    source: ph('forest_leaves_02'),
+  }),
+  material({
+    id: 'forest_leaves_04',
+    name: 'Suelo de bosque de coníferas',
+    description: 'Suelo de bosque con acículas y hojas.',
+    category: 'terrain',
+    group: 'forest-floor',
+    source: ph('forest_leaves_04'),
+  }),
+  material({
+    id: 'cracked_red_ground',
+    name: 'Suelo rojo agrietado',
+    description: 'Suelo rojizo seco y agrietado de llanuras y zonas secas.',
+    category: 'terrain',
+    group: 'dry-soil',
+    source: ph('cracked_red_ground'),
+  }),
+  material({
+    id: 'grass_ground',
+    name: 'Pastizal',
+    description: 'Pasto denso con tierra visible de praderas y llanuras.',
+    category: 'terrain',
+    group: 'grass-ground',
+    source: ph('grass_ground'),
+  }),
+  material({
+    id: 'snow_02',
+    name: 'Nieve',
+    description: 'Nieve compacta de cumbres y glaciares.',
+    category: 'terrain',
+    group: 'snow',
+    source: ph('snow_02'),
+  }),
+
   // ── Vegetación ─────────────────────────────────────────────────────────────────────────────
   model(
     {
@@ -336,6 +427,43 @@ export const ASSET_SELECTION: readonly AssetSelection[] = [
       source: ph('dandelion_01'),
     },
     30_000,
+  ),
+
+  // Biomas (fase 04): vegetación propia de selva, llanos, valles, zonas secas y altas, y bosques
+  // de coníferas. Son especies representativas: el catálogo CC0 no tiene especies nativas exactas.
+  ...(
+    [
+      ['jacaranda_tree', 'Jacarandá', 'Árbol de copa amplia (Jacaranda), común en valles y llanuras de Sudamérica.', 'tree', 150_000],
+      ['island_tree_02', 'Árbol tropical de copa alta', 'Árbol de hoja ancha de tronco alto.', 'tree', 150_000],
+      ['island_tree_03', 'Árbol tropical de copa extendida', 'Árbol de hoja ancha de copa extendida.', 'tree', 150_000],
+      ['pachira_aquatica_01', 'Pachira', 'Pachira aquatica, árbol de zonas húmedas de Centro y Sudamérica.', 'tree', 80_000],
+      ['pine_tree_01', 'Pino', 'Conífera de bosques templados y plantaciones.', 'tree', 150_000],
+      ['fern_02', 'Helecho', 'Helecho de sotobosque húmedo.', 'shrub', 40_000],
+      ['calathea_orbifolia_01', 'Calathea', 'Calathea orbifolia, planta de sotobosque tropical nativa de Bolivia.', 'shrub', 40_000],
+      ['anthurium_botany_01', 'Anturio', 'Planta de sotobosque tropical de hoja grande.', 'shrub', 40_000],
+      ['shrub_01', 'Arbusto con flores', 'Arbusto de hoja pequeña con flores.', 'shrub', 30_000],
+      ['shrub_03', 'Arbusto de pradera', 'Arbusto bajo de praderas.', 'shrub', 30_000],
+      ['wild_rooibos_bush', 'Arbusto seco', 'Arbusto leñoso de zonas secas; representa la tola del altiplano.', 'shrub', 30_000],
+      ['searsia_lucida', 'Arbusto de matorral seco', 'Arbusto denso de matorral seco.', 'shrub', 30_000],
+      ['searsia_burchellii', 'Arbusto grande de zona seca', 'Arbusto grande de matorral seco.', 'shrub', 40_000],
+      ['didelta_spinosa', 'Arbusto espinoso', 'Arbusto bajo de hojas carnosas de zonas áridas.', 'shrub', 30_000],
+      ['grass_medium_02', 'Pasto alto', 'Mata de pasto alto de praderas y llanuras.', 'grass', 20_000],
+      ['namaqualand_boulder_03', 'Bloque de roca árida', 'Roca de zona árida.', 'rock', 40_000],
+      ['namaqualand_stones_01', 'Piedras de zona árida', 'Conjunto de piedras de suelos áridos.', 'rock', 40_000],
+      ['dead_tree_trunk_02', 'Tronco caído', 'Tronco seco caído en el suelo del bosque.', 'ground-debris', 30_000],
+    ] as const
+  ).map(([id, name, description, group, triangles]) =>
+    model(
+      {
+        id,
+        name,
+        description,
+        category: group === 'rock' || group === 'ground-debris' ? 'environment' : 'vegetation',
+        group,
+        source: ph(id),
+      },
+      triangles,
+    ),
   ),
 
   // ── Cultivos (sin recursos compatibles disponibles) ────────────────────────────────────────
@@ -635,6 +763,48 @@ export const ASSET_SELECTION: readonly AssetSelection[] = [
     },
     20_000,
   ),
+
+  // Edificaciones (fase 04): muros y techos para extruir las huellas de OSM.
+  material({
+    id: 'brick_wall_001',
+    name: 'Muro de ladrillo',
+    description: 'Muro de ladrillo visto.',
+    category: 'environment',
+    group: 'building-wall',
+    source: ph('brick_wall_001'),
+  }),
+  material({
+    id: 'beige_wall_001',
+    name: 'Muro revocado',
+    description: 'Muro con revoque claro.',
+    category: 'environment',
+    group: 'building-wall',
+    source: ph('beige_wall_001'),
+  }),
+  material({
+    id: 'corrugated_iron',
+    name: 'Calamina',
+    description: 'Chapa ondulada de techos.',
+    category: 'environment',
+    group: 'building-roof',
+    source: ph('corrugated_iron'),
+  }),
+  material({
+    id: 'clay_roof_tiles_02',
+    name: 'Teja de arcilla',
+    description: 'Tejado de teja de arcilla.',
+    category: 'environment',
+    group: 'building-roof',
+    source: ph('clay_roof_tiles_02'),
+  }),
+  material({
+    id: 'rough_concrete',
+    name: 'Hormigón rugoso',
+    description: 'Losa de hormigón para azoteas y techos planos.',
+    category: 'environment',
+    group: 'building-roof',
+    source: ph('rough_concrete'),
+  }),
 
   // ── Iluminación ────────────────────────────────────────────────────────────────────────────
   hdri({

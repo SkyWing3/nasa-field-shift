@@ -119,6 +119,7 @@ export interface WorldDatasets {
   readonly landcover: DatasetMeta;
   readonly landcoverClasses: readonly { readonly code: number; readonly label: string }[];
   readonly features: DatasetMeta;
+  readonly imagery: DatasetMeta;
   readonly featuresLiveEnabled: boolean;
   readonly offline: boolean;
 }
@@ -144,19 +145,33 @@ export interface RasterGrid {
 }
 
 export type GeoFeatureKind =
-  'road' | 'track' | 'path' | 'waterway' | 'water' | 'building' | 'landuse' | 'railway';
+  | 'road'
+  | 'track'
+  | 'path'
+  | 'waterway'
+  | 'water'
+  | 'building'
+  | 'landuse'
+  | 'railway'
+  | 'place';
+
+type Coordinate = readonly [number, number];
 
 export interface GeoFeature {
   readonly id: string;
   readonly kind: GeoFeatureKind;
   readonly subtype: string;
-  readonly geometryType: 'LineString' | 'Polygon';
-  readonly coordinates: readonly (readonly [number, number])[];
+  readonly geometryType: 'Point' | 'LineString' | 'Polygon';
+  readonly coordinates: readonly Coordinate[];
+  /** Agujeros de un polígono (p. ej. islas de un lago). */
+  readonly holes: readonly (readonly Coordinate[])[];
   readonly tags: Readonly<Record<string, string>>;
 }
 
 export interface GeoFeatures {
-  readonly origin: 'snapshot' | 'overpass';
+  readonly origin: 'vectortiles' | 'snapshot' | 'overpass';
+  /** Zoom de las teselas vectoriales (solo con origen `vectortiles`). */
+  readonly zoom: number | null;
   readonly snapshotId: string;
   readonly osmTimestamp: string | null;
   readonly fetchedAt: string;
@@ -173,7 +188,10 @@ const FEATURE_KINDS: readonly GeoFeatureKind[] = [
   'building',
   'landuse',
   'railway',
+  'place',
 ];
+const FEATURE_ORIGINS: readonly GeoFeatures['origin'][] = ['vectortiles', 'snapshot', 'overpass'];
+const GEOMETRY_TYPES: readonly GeoFeature['geometryType'][] = ['Point', 'LineString', 'Polygon'];
 
 function isDatasetMeta(value: unknown): value is DatasetMeta {
   return (
@@ -201,6 +219,7 @@ export function isWorldDatasets(value: unknown): value is WorldDatasets {
     isDatasetMeta(value.elevation) &&
     isDatasetMeta(value.landcover) &&
     isDatasetMeta(value.features) &&
+    isDatasetMeta(value.imagery) &&
     Array.isArray(value.landcoverClasses) &&
     value.landcoverClasses.every(
       (item) => isRecord(item) && isFiniteNumber(item.code) && typeof item.label === 'string',
@@ -236,7 +255,7 @@ export function isRasterGrid(value: unknown): value is RasterGrid {
   );
 }
 
-function isCoordinate(value: unknown): value is readonly [number, number] {
+function isCoordinate(value: unknown): value is Coordinate {
   return (
     Array.isArray(value) &&
     value.length === 2 &&
@@ -251,9 +270,11 @@ export function isGeoFeature(value: unknown): value is GeoFeature {
     typeof value.id === 'string' &&
     FEATURE_KINDS.includes(value.kind as GeoFeatureKind) &&
     typeof value.subtype === 'string' &&
-    (value.geometryType === 'LineString' || value.geometryType === 'Polygon') &&
+    GEOMETRY_TYPES.includes(value.geometryType as GeoFeature['geometryType']) &&
     Array.isArray(value.coordinates) &&
     value.coordinates.every(isCoordinate) &&
+    Array.isArray(value.holes) &&
+    value.holes.every((hole) => Array.isArray(hole) && hole.every(isCoordinate)) &&
     isRecord(value.tags) &&
     Object.values(value.tags).every((tag) => typeof tag === 'string')
   );
@@ -262,7 +283,8 @@ export function isGeoFeature(value: unknown): value is GeoFeature {
 export function isGeoFeatures(value: unknown): value is GeoFeatures {
   return (
     isRecord(value) &&
-    (value.origin === 'snapshot' || value.origin === 'overpass') &&
+    FEATURE_ORIGINS.includes(value.origin as GeoFeatures['origin']) &&
+    (value.zoom === null || Number.isInteger(value.zoom)) &&
     typeof value.snapshotId === 'string' &&
     isNullableString(value.osmTimestamp) &&
     typeof value.fetchedAt === 'string' &&

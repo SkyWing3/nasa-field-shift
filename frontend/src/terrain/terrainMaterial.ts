@@ -3,12 +3,15 @@
  * niebla e IBL del HDRI) con un sombreador de mezcla de materiales inyectado.
  *
  * Por fragmento:
- * 1. Pesos de las 8 capas desde los mapas de mezcla (detalle y contexto, con transición).
+ * 1. Pesos de las 10 capas del bioma desde los mapas de mezcla (detalle y contexto).
  * 2. Caminos, cauces y agua de OSM desde los campos de distancia (bordes nítidos con ruido).
  * 3. Se eligen las 3 capas con más peso y se muestrean (albedo+altura, normal+rugosidad+AO) con
  *    gradientes explícitos, a dos escalas para disimular la repetición.
  * 4. Mezcla por altura: en las transiciones aparece primero el material con más relieve (las
  *    piedras asoman entre la tierra), en lugar de un fundido uniforme.
+ * 5. Color real: la imagen Sentinel-2 cloudless 2016 tiñe los materiales (cerca conservan su
+ *    textura con el tono real del lugar; lejos se ve el color satelital). No se aplica dentro de
+ *    la región reservada para la granja, cuyos suelos se simulan.
  */
 import { type DataArrayTexture, type DataTexture, MeshStandardMaterial, type Texture } from 'three';
 
@@ -18,10 +21,15 @@ export interface TerrainMaterialTextures {
   readonly tileSizeM: Float32Array;
   readonly weightsA: DataTexture;
   readonly weightsB: DataTexture;
+  readonly weightsC: DataTexture;
   readonly fieldInfo: DataTexture;
   readonly featureField: DataTexture;
   readonly contextWeightsA: DataTexture;
   readonly contextWeightsB: DataTexture;
+  readonly contextWeightsC: DataTexture;
+  /** Color satelital (sRGB, alfa = cobertura) del detalle y del contexto. */
+  readonly satelliteDetail: DataTexture;
+  readonly satelliteContext: DataTexture;
 }
 
 export interface TerrainMaterialOptions {
@@ -30,6 +38,8 @@ export interface TerrainMaterialOptions {
   readonly contextSizeM: number;
   readonly fieldAngleRad: number;
   readonly isContext: boolean;
+  /** 0 sin imagen satelital. */
+  readonly satelliteStrength: number;
 }
 
 const VERTEX_PARS = /* glsl */ `
@@ -46,13 +56,18 @@ precision highp sampler2DArray;
 varying vec3 vTerrainWorld;
 uniform sampler2DArray tAlbedoHeight;
 uniform sampler2DArray tNormalRoughAo;
-uniform float uTile[8];
+uniform float uTile[10];
 uniform sampler2D tWeightsA;
 uniform sampler2D tWeightsB;
+uniform sampler2D tWeightsC;
 uniform sampler2D tFieldInfo;
 uniform sampler2D tFeatureField;
 uniform sampler2D tCtxWeightsA;
 uniform sampler2D tCtxWeightsB;
+uniform sampler2D tCtxWeightsC;
+uniform sampler2D tSatDetail;
+uniform sampler2D tSatContext;
+uniform float uSatStrength;
 uniform float uDetailSize;
 uniform float uContextSize;
 uniform float uFieldAngle;
@@ -88,9 +103,9 @@ vec3 terrainAverage(int layer) {
   return textureLod(tAlbedoHeight, vec3(0.5, 0.5, float(layer)), 12.0).rgb;
 }
 
-void terrainApply(inout float w[8], int layer, float amount) {
+void terrainApply(inout float w[10], int layer, float amount) {
   if (amount <= 0.0) return;
-  for (int i = 0; i < 8; i++) w[i] *= (1.0 - amount);
+  for (int i = 0; i < 10; i++) w[i] *= (1.0 - amount);
   w[layer] += amount;
 }
 
@@ -128,16 +143,23 @@ float terrainDetail = uIsContext > 0.5 ? 0.0
   : 1.0 - smoothstep(0.5 * uDetailSize - 300.0, 0.5 * uDetailSize - 5.0, terrainEdge);
 vec4 terrainWa = texture(tCtxWeightsA, terrainUvC);
 vec4 terrainWb = texture(tCtxWeightsB, terrainUvC);
+vec4 terrainWc = texture(tCtxWeightsC, terrainUvC);
 vec4 terrainField = vec4(0.0, 0.5, 1.0, 0.0);
 vec4 terrainDist = vec4(24.0);
+vec4 terrainSat = texture(tSatContext, terrainUvC);
 if (terrainDetail > 0.0) {
   terrainWa = mix(terrainWa, texture(tWeightsA, terrainUvD), terrainDetail);
   terrainWb = mix(terrainWb, texture(tWeightsB, terrainUvD), terrainDetail);
+  terrainWc = mix(terrainWc, texture(tWeightsC, terrainUvD), terrainDetail);
   terrainField = texture(tFieldInfo, terrainUvD);
   terrainDist = texture(tFeatureField, terrainUvD) * 32.0 - 8.0;
+  vec4 terrainSatD = texture(tSatDetail, terrainUvD);
+  float terrainSatMix = terrainDetail * terrainSatD.a;
+  terrainSat = vec4(mix(terrainSat.rgb, terrainSatD.rgb, terrainSatMix), max(terrainSat.a, terrainSatMix));
 }
-float terrainW[8] = float[8](terrainWa.x, terrainWa.y, terrainWa.z, terrainWa.w,
-                              terrainWb.x, terrainWb.y, terrainWb.z, terrainWb.w);
+float terrainW[10] = float[10](terrainWa.x, terrainWa.y, terrainWa.z, terrainWa.w,
+                                terrainWb.x, terrainWb.y, terrainWb.z, terrainWb.w,
+                                terrainWc.x, terrainWc.y);
 float terrainN1 = terrainNoise(terrainP * 0.8) - 0.5;
 float terrainN2 = terrainFbm(terrainP * 0.021);
 float terrainCamDist = length(vTerrainWorld - cameraPosition);
@@ -155,7 +177,7 @@ terrainApply(terrainW, 7, terrainPaved);
 // Las tres capas con más peso.
 int terrainI0 = 0; int terrainI1 = 1; int terrainI2 = 2;
 float terrainA0 = -1.0; float terrainA1 = -1.0; float terrainA2 = -1.0;
-for (int i = 0; i < 8; i++) {
+for (int i = 0; i < 10; i++) {
   float v = terrainW[i];
   if (v > terrainA0) { terrainA2 = terrainA1; terrainI2 = terrainI1; terrainA1 = terrainA0; terrainI1 = terrainI0; terrainA0 = v; terrainI0 = i; }
   else if (v > terrainA1) { terrainA2 = terrainA1; terrainI2 = terrainI1; terrainA1 = v; terrainI1 = i; }
@@ -184,9 +206,18 @@ terrainF0 /= terrainSum; terrainF1 /= terrainSum; terrainF2 /= terrainSum;
 
 vec3 terrainAlbedo = terrainAh0.rgb * terrainF0 + terrainAh1.rgb * terrainF1 + terrainAh2.rgb * terrainF2;
 // A distancia: color medio de las capas con variación de ruido de gran escala (sin repetición).
-vec3 terrainAvg = terrainAverage(terrainI0) * terrainF0 + terrainAverage(terrainI1) * terrainF1 + terrainAverage(terrainI2) * terrainF2;
-terrainAvg *= 0.86 + 0.28 * terrainFbm(terrainP * 0.09);
+vec3 terrainAvgRaw = terrainAverage(terrainI0) * terrainF0 + terrainAverage(terrainI1) * terrainF1 + terrainAverage(terrainI2) * terrainF2;
+vec3 terrainAvg = terrainAvgRaw * (0.86 + 0.28 * terrainFbm(terrainP * 0.09));
 terrainAlbedo = mix(terrainAlbedo, terrainAvg, terrainFar * 0.97);
+// Color real (Sentinel-2): se multiplica por la relación entre el color satelital y el color
+// medio de los materiales. Lejos, el resultado es el color satelital; cerca, la textura PBR con
+// el tono del lugar. Bajo el dosel (hojarasca) se atenúa cerca de la cámara: el satélite ve las
+// copas, no el suelo. Ni en la región reservada ni sobre el pavimento.
+float terrainReserved = (1.0 - smoothstep(-2.0, 2.0, terrainField.b * 32.0 - 8.0)) * terrainDetail;
+float terrainSatAmount = uSatStrength * terrainSat.a * (1.0 - terrainReserved) * (1.0 - 0.75 * terrainPaved);
+terrainSatAmount *= mix(0.8, 1.0, terrainFar) * (1.0 - 0.75 * terrainW[8] * (1.0 - terrainFar));
+vec3 terrainTint = clamp(terrainSat.rgb / max(terrainAvgRaw, vec3(0.015)), vec3(0.2), vec3(4.0));
+terrainAlbedo *= mix(vec3(1.0), terrainTint, terrainSatAmount);
 vec4 terrainNra = terrainNr0 * terrainF0 + terrainNr1 * terrainF1 + terrainNr2 * terrainF2;
 vec2 terrainNxy0 = transpose(terrainR0) * (terrainNr0.xy * 2.0 - 1.0);
 vec2 terrainNxy1 = transpose(terrainR1) * (terrainNr1.xy * 2.0 - 1.0);
@@ -200,8 +231,10 @@ float terrainCrop = terrainW[0] + terrainW[1];
 terrainAlbedo *= mix(1.0, 0.92 + 0.16 * terrainField.g, terrainCrop * terrainDetail);
 terrainAlbedo *= 0.88 + 0.24 * terrainN2;
 terrainAlbedo *= 1.0 - 0.22 * terrainBed;
-// Lámina de agua en cauces permanentes y masas de agua de OSM.
-terrainAlbedo = mix(terrainAlbedo, vec3(0.05, 0.055, 0.045), terrainWater);
+// Lámina de agua en cauces permanentes y masas de agua de OSM (con el color real del agua si
+// hay imagen satelital: ríos turbios de la Amazonía, lagos oscuros del altiplano).
+vec3 terrainWaterColor = mix(vec3(0.04, 0.05, 0.045), terrainSat.rgb * 0.8, 0.6 * terrainSat.a * uSatStrength);
+terrainAlbedo = mix(terrainAlbedo, terrainWaterColor, terrainWater);
 // Agua turbia de canal: brillo moderado (una rugosidad muy baja refleja el horizonte en blanco).
 terrainRough = mix(terrainRough, 0.32, terrainWater);
 terrainNxy = mix(terrainNxy, vec2(terrainN1 * 0.06, terrainNoise(terrainP * 2.3) * 0.06 - 0.03), terrainWater);
@@ -239,10 +272,15 @@ export function createTerrainMaterial(options: TerrainMaterialOptions): MeshStan
     uTile: { value: Array.from(textures.tileSizeM) },
     tWeightsA: { value: textures.weightsA },
     tWeightsB: { value: textures.weightsB },
+    tWeightsC: { value: textures.weightsC },
     tFieldInfo: { value: textures.fieldInfo },
     tFeatureField: { value: textures.featureField },
     tCtxWeightsA: { value: textures.contextWeightsA },
     tCtxWeightsB: { value: textures.contextWeightsB },
+    tCtxWeightsC: { value: textures.contextWeightsC },
+    tSatDetail: { value: textures.satelliteDetail },
+    tSatContext: { value: textures.satelliteContext },
+    uSatStrength: { value: options.satelliteStrength },
     uDetailSize: { value: options.detailSizeM },
     uContextSize: { value: options.contextSizeM },
     uFieldAngle: { value: options.fieldAngleRad },
@@ -260,7 +298,7 @@ export function createTerrainMaterial(options: TerrainMaterialOptions): MeshStan
       .replace('#include <normal_fragment_maps>', FRAGMENT_NORMAL)
       .replace('#include <aomap_fragment>', FRAGMENT_AO);
   };
-  material.customProgramCacheKey = () => 'terralab-terrain-v1';
+  material.customProgramCacheKey = () => 'terralab-terrain-v2';
   material.userData.terrainUniforms = uniforms;
   return material;
 }
@@ -272,9 +310,13 @@ export function terrainMaterialTextures(textures: TerrainMaterialTextures): Text
     textures.normalRoughAo,
     textures.weightsA,
     textures.weightsB,
+    textures.weightsC,
     textures.fieldInfo,
     textures.featureField,
     textures.contextWeightsA,
     textures.contextWeightsB,
+    textures.contextWeightsC,
+    textures.satelliteDetail,
+    textures.satelliteContext,
   ];
 }

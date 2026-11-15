@@ -337,3 +337,12 @@ Registro cronológico de fases completadas. Cada entrada incluye cambios, verifi
   - e2e solo en Chromium;
   - sin integración continua;
   - nada versionado.
+
+## D1-2 · Revisión por P6: privacidad y límites científicos
+
+- Se repitió POWER con el punto público de Obrajes, lat −17.83, lon −67.00; precisión de 0,01° y nota de privacidad en el manifiesto. Se retiran las coordenadas precisas y la georreferencia local del paquete y se sustituye el ZIP previo. El historial Git inspeccionado no contiene coincidencias de la ubicación privada.
+- Las seis series meteorológicas se mantienen idénticas y se conserva el resultado 4/5. La radiación solar cambia en 15.633 fechas de la reconsulta: se documenta en `rounding_comparison.json` y no se supone una ET0 idéntica.
+- La comparación de celda Obrajes–Oruro se registra como confirmada por P6, sin presentar como propia una comprobación que no se ejecutó. La UI aclara que POWER es un dato regional y no mide granizo.
+- Se crearon borradores `backend/data/agronomy/crops.json` y `rotations.json` a partir del mensaje de P6: `ready_for_simulation: false`, parámetros faltantes en `null`, supuestos identificados. Deben validarlos P6 o la líder.
+- Entrada del motor preparada con `start_position`; sin simulación ni enumeración de los nueve casos pendientes de aprobación. CHIRPS/P6-4 queda `unavailable`; D1-2b cancelado según P6.
+- Evidencia y entrega: `backend/data/power/obrajes/2026-11-14/RESUMEN_P6.md` y su paquete público de validación.

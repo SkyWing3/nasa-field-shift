@@ -15,6 +15,12 @@ describe('parseApiBaseUrl', () => {
     expect(parseApiBaseUrl('   ')).toBe(DEFAULT_API_BASE_URL);
   });
 
+  it('usa el mismo origen de la página al dejar la URL vacía o indicar la raíz', () => {
+    expect(loadAppConfig({} as ImportMetaEnv).apiBaseUrl).toBe('');
+    expect(parseApiBaseUrl('')).toBe('');
+    expect(parseApiBaseUrl('/')).toBe('');
+  });
+
   it('normaliza eliminando la barra final', () => {
     expect(parseApiBaseUrl('http://localhost:8000/')).toBe('http://localhost:8000');
     expect(parseApiBaseUrl('https://api.example.org/terralab/')).toBe(

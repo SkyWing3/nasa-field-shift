@@ -13,25 +13,29 @@ from app.data_sources.datasets import DatasetInfo
 from app.data_sources.raster import BBox
 
 FeatureKind = Literal[
-    "road", "track", "path", "waterway", "water", "building", "landuse", "railway"
+    "road", "track", "path", "waterway", "water", "building", "landuse", "railway", "place"
 ]
-GeometryType = Literal["LineString", "Polygon"]
+GeometryType = Literal["Point", "LineString", "Polygon"]
 
 OSM_INFO = DatasetInfo(
     id="openstreetmap",
     name="OpenStreetMap",
-    provider="Colaboradores de OpenStreetMap · Overpass API",
-    attribution="Caminos, agua y edificaciones: © OpenStreetMap contributors (ODbL)",
+    provider="Colaboradores de OpenStreetMap · teselas OpenMapTiles de OpenFreeMap",
+    attribution=(
+        "Caminos, agua, edificaciones y lugares: © OpenStreetMap contributors (ODbL) · "
+        "© OpenMapTiles · OpenFreeMap"
+    ),
     citation="OpenStreetMap contributors. https://www.openstreetmap.org",
     license="Open Database License (ODbL) 1.0",
     license_url="https://www.openstreetmap.org/copyright",
     source_url="https://www.openstreetmap.org",
     resolution_m=None,
     vertical_datum=None,
-    acquired="Instantánea con la fecha de los datos indicada",
+    acquired="Teselas con la fecha de los datos indicada",
     notes=(
-        "Datos colaborativos: la cobertura y la exactitud varían. No incluye cultivos ni "
-        "anchos medidos; el ancho de los caminos se estima por categoría."
+        "Datos colaborativos: la cobertura y la exactitud varían según la zona. No incluye "
+        "cultivos ni anchos medidos; el ancho de los caminos se estima por categoría y la altura "
+        "de los edificios sin etiqueta la estima OpenMapTiles."
     ),
 )
 
@@ -104,6 +108,8 @@ class OsmFeature:
     geometry_type: GeometryType
     coordinates: tuple[tuple[float, float], ...]  # (longitud, latitud)
     tags: dict[str, str]
+    #: Anillos interiores de un polígono (islas en un lago, patios en un edificio).
+    holes: tuple[tuple[tuple[float, float], ...], ...] = ()
 
 
 def overpass_query(bbox: BBox, timeout_s: int = 60) -> str:
@@ -214,6 +220,7 @@ def feature_to_json(feature: OsmFeature) -> dict[str, Any]:
         "subtype": feature.subtype,
         "geometryType": feature.geometry_type,
         "coordinates": [list(point) for point in feature.coordinates],
+        "holes": [[list(point) for point in hole] for hole in feature.holes],
         "tags": feature.tags,
     }
 
@@ -226,4 +233,7 @@ def feature_from_json(data: dict[str, Any]) -> OsmFeature:
         geometry_type=data["geometryType"],
         coordinates=tuple((float(lon), float(lat)) for lon, lat in data["coordinates"]),
         tags={str(k): str(v) for k, v in data["tags"].items()},
+        holes=tuple(
+            tuple((float(lon), float(lat)) for lon, lat in hole) for hole in data.get("holes", [])
+        ),
     )
