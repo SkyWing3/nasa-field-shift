@@ -19,16 +19,22 @@ export default defineConfig({
       worldPublishedAssets(),
     ),
   ],
+
   define: {
     __APP_VERSION__: JSON.stringify(packageJson.version),
   },
   server: {
     port: 5173,
     strictPort: true,
-    // Publicación por túnel de Cloudflare (subdominio del equipo).
-    allowedHosts: ['simulacion-nasa.los5furiosos.cloud'],
-    // Con VITE_API_BASE_URL=/ la API va por el mismo origen: local o por el túnel.
-    proxy: { '/api': 'http://127.0.0.1:8000' },
+    // Publicación por túnel de Cloudflare (subdominios del equipo).
+    allowedHosts: ['nasa-simulacion.los5furiosos.cloud', 'simulacion-nasa.los5furiosos.cloud'],
+    // La API va por el mismo origen (local o por el túnel): Vite reenvía /api a FastAPI.
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:8000',
+        changeOrigin: true,
+      },
+    },
   },
   preview: {
     port: 4173,
@@ -42,6 +48,14 @@ export default defineConfig({
     // mayor para detectar cualquier otro crecimiento (ver docs/DECISIONS.md, ADR-011 y ADR-033).
     chunkSizeWarningLimit: 1100,
     rolldownOptions: {
+      input: {
+        main: path.resolve(import.meta.dirname, 'index.html'),
+        // TerraLab 3D queda archivado en /terralab.html; Raíz 2D es la entrada principal.
+        terralab: path.resolve(import.meta.dirname, 'terralab.html'),
+        // Direcciones anteriores: redirigen a Raíz 2D (el prototipo de /raiz.html se retiró, ADR-043).
+        raiz: path.resolve(import.meta.dirname, 'raiz.html'),
+        creditos: path.resolve(import.meta.dirname, 'creditos.html'),
+      },
       output: {
         codeSplitting: {
           // Three.js cambia mucho menos que el código de la aplicación: en un chunk

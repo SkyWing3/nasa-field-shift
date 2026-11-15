@@ -1,0 +1,47 @@
+{
+  "browser": "Playwright Chromium; Browser plugin not available",
+  "captures": [
+    {
+      "file": "/Users/franco/Documents/Personal/Proyectos/Nasa/simulacion/docs/validaciones/P6-dev1-v3/raiz-escritorio.png",
+      "url": "http://localhost:5173/raiz.html",
+      "title": "Raíz · Rotaciones con datos NASA",
+      "width": 1440,
+      "height": 1000,
+      "overflow": 0
+    },
+    {
+      "file": "/Users/franco/Documents/Personal/Proyectos/Nasa/simulacion/docs/validaciones/P6-dev1-v3/creditos-escritorio.png",
+      "url": "http://localhost:5173/creditos.html",
+      "title": "Créditos y límites · Raíz",
+      "width": 1440,
+      "height": 1000,
+      "overflow": 0
+    },
+    {
+      "file": "/Users/franco/Documents/Personal/Proyectos/Nasa/simulacion/docs/validaciones/P6-dev1-v3/raiz-movil.png",
+      "url": "http://localhost:5173/raiz.html",
+      "title": "Raíz · Rotaciones con datos NASA",
+      "width": 390,
+      "height": 844,
+      "overflow": 0
+    },
+    {
+      "file": "/Users/franco/Documents/Personal/Proyectos/Nasa/simulacion/docs/validaciones/P6-dev1-v3/creditos-movil.png",
+      "url": "http://localhost:5173/creditos.html",
+      "title": "Créditos y límites · Raíz",
+      "width": 390,
+      "height": 844,
+      "overflow": 0
+    },
+    {
+      "file": "/Users/franco/Documents/Personal/Proyectos/Nasa/simulacion/docs/validaciones/P6-dev1-v3/raiz-movil-kpi.png",
+      "url": "http://localhost:5173/raiz.html",
+      "title": "Raíz · Rotaciones con datos NASA",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "note": "Tabla desplazada horizontalmente: columna de casos persistente y KPI visibles"
+    }
+  ],
+  "errors": []
+}

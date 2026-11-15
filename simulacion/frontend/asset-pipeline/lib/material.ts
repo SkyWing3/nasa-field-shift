@@ -192,11 +192,18 @@ export async function processMaterial(
       passed: Math.abs(normalR - 128) < 30 && Math.abs(normalG - 128) < 30 && normalB > 180,
       detail: `Medias RGB ${normalR.toFixed(0)}, ${normalG.toFixed(0)}, ${normalB.toFixed(0)} (esperado ≈128, ≈128, >180)`,
     },
-    {
-      name: 'Metalicidad ≈ 0 (terreno no metálico)',
-      passed: metalness < 25,
-      detail: `Media del canal B del ORM: ${metalness.toFixed(1)} / 255`,
-    },
+    // Los suelos no son metálicos; un techo de calamina sí puede serlo.
+    selection.group === 'building-roof'
+      ? {
+          name: 'Metalicidad registrada (techo: puede ser metálico)',
+          passed: true,
+          detail: `Media del canal B del ORM: ${metalness.toFixed(1)} / 255`,
+        }
+      : {
+          name: 'Metalicidad ≈ 0 (terreno no metálico)',
+          passed: metalness < 25,
+          detail: `Media del canal B del ORM: ${metalness.toFixed(1)} / 255`,
+        },
   ];
 
   return {

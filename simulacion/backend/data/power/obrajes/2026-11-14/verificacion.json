@@ -1,0 +1,29 @@
+{
+  "raw_and_output_checksums": "pass",
+  "all_daily_values_match_public_original_or_null": "pass",
+  "missing_values_preserved_as_null": 1098,
+  "independent_decimal_aggregation": "pass",
+  "coordinate_precision_deg": 0.01,
+  "backend_literal_coordinate_search": "empty_including_ignored_dependencies",
+  "handoff_unescaped_grep_false_positive_files": [
+    "backend/.venv/lib/python3.15/site-packages/idna/idnadata.py",
+    "backend/.venv/lib/python3.15/site-packages/pip/_vendor/idna/idnadata.py"
+  ],
+  "git_history_matching_commits": 0,
+  "complete_campaign_count": 45,
+  "partial_campaign_excluded": "2026-27",
+  "normal_reference_mm_decimal": "364.8038461538461538461538462",
+  "strong_campaigns_below_normal": 4,
+  "strong_campaign_count": 5,
+  "meteorological_series_unchanged_after_rounding": true,
+  "solar_series_unchanged_after_rounding": false,
+  "solar_different_days": 15633,
+  "domain_edge_case_tests_passed": 6,
+  "rotation_request_tests_passed": 4,
+  "agronomy_configs": "draft_incomplete_not_enabled",
+  "nine_cases": "not_implemented_pending_approval",
+  "chirps": "unavailable_D1-2b_cancelled",
+  "ruff_check": "pass",
+  "new_engine_contract_mypy": "pass",
+  "ui_notice_desktop_mobile": "pass"
+}

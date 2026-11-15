@@ -91,6 +91,7 @@ describe('búsqueda de lugares', () => {
       getElevation: vi.fn(),
       getLandCover: vi.fn(),
       getWorldFeatures: vi.fn(),
+      getImageryTile: vi.fn(),
     };
     const provider = createApiPlaceSearch(client);
     await expect(provider.availability()).rejects.toThrow(/No se pudo conectar/);

@@ -9,6 +9,7 @@ import type { GeneratedWorld } from '../world/generate.ts';
 import { buildWorld, createSceneFrame } from '../world/pipeline.ts';
 import { proceduralElevation, proceduralLandCover } from '../world/procedural.ts';
 import { WORLD_QUALITIES } from '../world/quality.ts';
+import { SPECIES } from '../world/vegetationSpecies.ts';
 import { describeTerrainPoint, nearestFeature } from './terrainQuery';
 
 const center = geoPoint(-17.551334, -65.861983);
@@ -36,6 +37,8 @@ const build = buildWorld(
     extent,
     quality: WORLD_QUALITIES.low,
     seed: 9,
+    biome: 'valley',
+    species: SPECIES,
     data: {
       elevation: proceduralElevation(extent.elevationBBox, 9, 2700),
       elevationOrigin: 'procedural',
@@ -43,6 +46,9 @@ const build = buildWorld(
       landCoverContext: proceduralLandCover(extent.landcoverContextBBox, 9, 1 / 1200),
       landCoverOrigin: 'procedural',
       features: [canal],
+      contextFeatures: null,
+      imageryDetail: null,
+      imageryContext: null,
     },
   },
   () => undefined,

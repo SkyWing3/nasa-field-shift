@@ -1,0 +1,349 @@
+{
+  "schema_version": "3.2-d1",
+  "build_id": "raiz-p6-v3-9fca0936a1d2",
+  "data_as_of": "2026-11-11",
+  "model_version": "fao56-balance-1",
+  "generated_at": null,
+  "mode": "downloaded",
+  "source": {
+    "agency": "NOAA CPC",
+    "product": "Oceanic Niño Index (ERSSTv5)",
+    "url": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
+    "downloaded_at_utc": "2026-11-15T00:56:21.551161+00:00",
+    "sha256": "118c563331335c8649cdc2677e6be7ae89d1259d901345fcddbc2857af280f7f",
+    "original_file": "simulacion/backend/data/power/obrajes/2026-11-14/oni_original.txt",
+    "classifier": "simulacion/scripts/power_d1_2.py"
+  },
+  "rule": {
+    "season": "NDJ del año inicial de la campaña (nov y–ene y+1)",
+    "nino_c": 0.5,
+    "nina_c": -0.5,
+    "strong_nino_c": 1.5,
+    "persistence": "ninguna adicional",
+    "campaign": "1 nov–31 mar; mínimo 140 días válidos de lluvia"
+  },
+  "groups": {
+    "Normal": 13,
+    "Niño": 15,
+    "Niña": 17,
+    "Niño fuerte": 5
+  },
+  "campaigns": [
+    {
+      "campaign": "1981-82",
+      "start_year": 1981,
+      "oni_ndj": -0.14,
+      "phase": "Normal",
+      "strong_nino": false
+    },
+    {
+      "campaign": "1982-83",
+      "start_year": 1982,
+      "oni_ndj": 2.12,
+      "phase": "Niño",
+      "strong_nino": true
+    },
+    {
+      "campaign": "1983-84",
+      "start_year": 1983,
+      "oni_ndj": -0.89,
+      "phase": "Niña",
+      "strong_nino": false
+    },
+    {
+      "campaign": "1984-85",
+      "start_year": 1984,
+      "oni_ndj": -1.06,
+      "phase": "Niña",
+      "strong_nino": false
+    },
+    {
+      "campaign": "1985-86",
+      "start_year": 1985,
+      "oni_ndj": -0.36,
+      "phase": "Normal",
+      "strong_nino": false
+    },
+    {
+      "campaign": "1986-87",
+      "start_year": 1986,
+      "oni_ndj": 1.21,
+      "phase": "Niño",
+      "strong_nino": false
+    },
+    {
+      "campaign": "1987-88",
+      "start_year": 1987,
+      "oni_ndj": 1.0,
+      "phase": "Niño",
+      "strong_nino": false
+    },
+    {
+      "campaign": "1988-89",
+      "start_year": 1988,
+      "oni_ndj": -1.85,
+      "phase": "Niña",
+      "strong_nino": false
+    },
+    {
+      "campaign": "1989-90",
+      "start_year": 1989,
+      "oni_ndj": -0.04,
+      "phase": "Normal",
+      "strong_nino": false
+    },
+    {
+      "campaign": "1990-91",
+      "start_year": 1990,
+      "oni_ndj": 0.34,
+      "phase": "Normal",
+      "strong_nino": false
+    },
+    {
+      "campaign": "1991-92",
+      "start_year": 1991,
+      "oni_ndj": 1.43,
+      "phase": "Niño",
+      "strong_nino": false
+    },
+    {
+      "campaign": "1992-93",
+      "start_year": 1992,
+      "oni_ndj": -0.05,
+      "phase": "Normal",
+      "strong_nino": false
+    },
+    {
+      "campaign": "1993-94",
+      "start_year": 1993,
+      "oni_ndj": 0.19,
+      "phase": "Normal",
+      "strong_nino": false
+    },
+    {
+      "campaign": "1994-95",
+      "start_year": 1994,
+      "oni_ndj": 0.97,
+      "phase": "Niño",
+      "strong_nino": false
+    },
+    {
+      "campaign": "1995-96",
+      "start_year": 1995,
+      "oni_ndj": -1.01,
+      "phase": "Niña",
+      "strong_nino": false
+    },
+    {
+      "campaign": "1996-97",
+      "start_year": 1996,
+      "oni_ndj": -0.41,
+      "phase": "Normal",
+      "strong_nino": false
+    },
+    {
+      "campaign": "1997-98",
+      "start_year": 1997,
+      "oni_ndj": 2.37,
+      "phase": "Niño",
+      "strong_nino": true
+    },
+    {
+      "campaign": "1998-99",
+      "start_year": 1998,
+      "oni_ndj": -1.47,
+      "phase": "Niña",
+      "strong_nino": false
+    },
+    {
+      "campaign": "1999-00",
+      "start_year": 1999,
+      "oni_ndj": -1.53,
+      "phase": "Niña",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2000-01",
+      "start_year": 2000,
+      "oni_ndj": -0.78,
+      "phase": "Niña",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2001-02",
+      "start_year": 2001,
+      "oni_ndj": -0.32,
+      "phase": "Normal",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2002-03",
+      "start_year": 2002,
+      "oni_ndj": 1.08,
+      "phase": "Niño",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2003-04",
+      "start_year": 2003,
+      "oni_ndj": 0.29,
+      "phase": "Normal",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2004-05",
+      "start_year": 2004,
+      "oni_ndj": 0.71,
+      "phase": "Niño",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2005-06",
+      "start_year": 2005,
+      "oni_ndj": -0.82,
+      "phase": "Niña",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2006-07",
+      "start_year": 2006,
+      "oni_ndj": 0.88,
+      "phase": "Niño",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2007-08",
+      "start_year": 2007,
+      "oni_ndj": -1.72,
+      "phase": "Niña",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2008-09",
+      "start_year": 2008,
+      "oni_ndj": -0.79,
+      "phase": "Niña",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2009-10",
+      "start_year": 2009,
+      "oni_ndj": 1.5,
+      "phase": "Niño",
+      "strong_nino": true
+    },
+    {
+      "campaign": "2010-11",
+      "start_year": 2010,
+      "oni_ndj": -1.48,
+      "phase": "Niña",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2011-12",
+      "start_year": 2011,
+      "oni_ndj": -0.92,
+      "phase": "Niña",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2012-13",
+      "start_year": 2012,
+      "oni_ndj": -0.03,
+      "phase": "Normal",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2013-14",
+      "start_year": 2013,
+      "oni_ndj": -0.11,
+      "phase": "Normal",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2014-15",
+      "start_year": 2014,
+      "oni_ndj": 0.8,
+      "phase": "Niño",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2015-16",
+      "start_year": 2015,
+      "oni_ndj": 2.59,
+      "phase": "Niño",
+      "strong_nino": true
+    },
+    {
+      "campaign": "2016-17",
+      "start_year": 2016,
+      "oni_ndj": -0.37,
+      "phase": "Normal",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2017-18",
+      "start_year": 2017,
+      "oni_ndj": -0.76,
+      "phase": "Niña",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2018-19",
+      "start_year": 2018,
+      "oni_ndj": 1.05,
+      "phase": "Niño",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2019-20",
+      "start_year": 2019,
+      "oni_ndj": 0.75,
+      "phase": "Niño",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2020-21",
+      "start_year": 2020,
+      "oni_ndj": -1.06,
+      "phase": "Niña",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2021-22",
+      "start_year": 2021,
+      "oni_ndj": -0.83,
+      "phase": "Niña",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2022-23",
+      "start_year": 2022,
+      "oni_ndj": -0.7,
+      "phase": "Niña",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2023-24",
+      "start_year": 2023,
+      "oni_ndj": 1.99,
+      "phase": "Niño",
+      "strong_nino": true
+    },
+    {
+      "campaign": "2024-25",
+      "start_year": 2024,
+      "oni_ndj": -0.43,
+      "phase": "Normal",
+      "strong_nino": false
+    },
+    {
+      "campaign": "2025-26",
+      "start_year": 2025,
+      "oni_ndj": -0.6,
+      "phase": "Niña",
+      "strong_nino": false
+    }
+  ],
+  "window_rule": "La fase de una ventana es la de su primera campaña; las otras dos conservan su clima histórico."
+}

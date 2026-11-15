@@ -1,5 +1,5 @@
 /** Recursos del catálogo que usa el mundo 3D (se publican en el build de producción). */
-import { TERRAIN_LAYERS } from './splat.ts';
+import { allBiomeAssetIds } from './biome.ts';
 import { vegetationAssetIds } from './vegetationSpecies.ts';
 
 export const WORLD_MATERIAL_RESOLUTION = 1024;
@@ -18,10 +18,11 @@ export function worldPublishedAssets(): {
   models: string[];
   hdris: string[];
 } {
+  const assets = allBiomeAssetIds();
   return {
-    materials: TERRAIN_LAYERS.map((layer) => layer.id),
+    materials: assets.materials,
     materialResolution: WORLD_MATERIAL_RESOLUTION,
-    models: vegetationAssetIds(),
+    models: [...new Set([...assets.models, ...vegetationAssetIds()])],
     hdris: [...WORLD_HDRIS],
   };
 }

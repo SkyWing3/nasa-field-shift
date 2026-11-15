@@ -47,6 +47,8 @@ select = [
     "RUF", # reglas propias de ruff
     "N",   # nombres PEP 8
 ]
+# Tipografía intencional en textos publicados en español: rangos (–), signo menos (−) y producto (×).
+allowed-confusables = ["–", "−", "×"]
 
 [tool.mypy]
 python_version = "3.12"

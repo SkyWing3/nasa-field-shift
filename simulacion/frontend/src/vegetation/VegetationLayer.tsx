@@ -41,7 +41,11 @@ export function VegetationLayer({
       impostors: Impostor[];
       instance: VegetationRenderer;
     } | null = null;
-    loadVegetationModels(catalog).then(
+    const rule = world.sources.biome.profile.vegetation;
+    loadVegetationModels(catalog, world.species, {
+      grass: rule.grassTint,
+      weed: rule.grassTint,
+    }).then(
       (vegetation) => {
         if (cancelled) {
           disposeVegetation(vegetation);
@@ -59,9 +63,12 @@ export function VegetationLayer({
           mosaic: build.mosaic,
           features: build.localFeatures,
           density: world.quality.vegetationDensity,
+          species: world.species,
+          vegetation: rule,
         };
         const impostors = vegetation.models.tree.map((model) => bakeImpostor(get().gl, model));
         const instance = new VegetationRenderer({
+          species: world.species,
           models: vegetation.models,
           far: build.far,
           impostors,

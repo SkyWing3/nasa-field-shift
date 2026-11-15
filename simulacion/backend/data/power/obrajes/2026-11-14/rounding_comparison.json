@@ -1,0 +1,87 @@
+{
+  "all_daily_series_unchanged_after_rounding": false,
+  "values_compared": 117257,
+  "parameter_differences": {
+    "PRECTOTCORR": {
+      "different_days": 0,
+      "first_changes": [],
+      "last_changes": [],
+      "max_abs_difference": 0
+    },
+    "T2M_MIN": {
+      "different_days": 0,
+      "first_changes": [],
+      "last_changes": [],
+      "max_abs_difference": 0
+    },
+    "T2M_MAX": {
+      "different_days": 0,
+      "first_changes": [],
+      "last_changes": [],
+      "max_abs_difference": 0
+    },
+    "WS2M": {
+      "different_days": 0,
+      "first_changes": [],
+      "last_changes": [],
+      "max_abs_difference": 0
+    },
+    "RH2M": {
+      "different_days": 0,
+      "first_changes": [],
+      "last_changes": [],
+      "max_abs_difference": 0
+    },
+    "ALLSKY_SFC_SW_DWN": {
+      "different_days": 15633,
+      "first_changes": [
+        [
+          "19840101",
+          20.58,
+          21.63
+        ],
+        [
+          "19840102",
+          23.97,
+          22.59
+        ],
+        [
+          "19840103",
+          22.99,
+          22.44
+        ]
+      ],
+      "last_changes": [
+        [
+          "20261108",
+          16.99,
+          8.07
+        ],
+        [
+          "20261109",
+          19.96,
+          21.75
+        ],
+        [
+          "20261110",
+          -999.0,
+          11.84
+        ]
+      ],
+      "max_abs_difference": 21.09
+    },
+    "T2M": {
+      "different_days": 0,
+      "first_changes": [],
+      "last_changes": [],
+      "max_abs_difference": 0
+    }
+  },
+  "previous_normal_reference_mm": 364.80384615384617,
+  "previous_strong_campaigns_below_normal": 4,
+  "previous_strong_campaign_count": 5,
+  "meteorological_series_unchanged_after_rounding": true,
+  "solar_series_unchanged_after_rounding": false,
+  "note": "Las seis series meteorológicas se mantienen idénticas. La radiación solar cambia en la reconsulta del punto público; no se debe afirmar que ET0 sería idéntica. POWER publica cada fuente en su malla nativa; no se atribuye la diferencia a una causa no verificada.",
+  "power_resolution_reference": "https://power.larc.nasa.gov/docs/methodology/"
+}

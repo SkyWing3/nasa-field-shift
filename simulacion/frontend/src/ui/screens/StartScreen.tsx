@@ -291,7 +291,7 @@ export function StartScreen({
             />
             <CheckRow
               name="Datos científicos NASA"
-              detail="Series meteorológicas y de suelo"
+              detail="Dato regional de la celda NASA POWER, no medición de la parcela. POWER no mide granizo."
               value="Fase posterior"
               tone="planned"
             />
@@ -333,6 +333,9 @@ export function StartScreen({
       ) : null}
       <footer className={styles.footer}>
         <span>TerraLab 3D · v{appVersion}</span>
+        <a className={styles.devLink} href="/">
+          Raíz · comparar nueve casos
+        </a>
         {import.meta.env.DEV ? (
           // Herramienta de desarrollo: no existe en el build de producción.
           <a className={styles.devLink} href="/asset-viewer.html">

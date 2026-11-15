@@ -2,18 +2,24 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="dark" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#edf0f5" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href="/raiz/fonts/alegreya-var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/raiz/fonts/alegreya-sans-400.woff2" as="font" type="font/woff2" crossorigin />
     <meta
       name="description"
-      content="TerraLab 3D: plataforma de simulación agrícola 3D para el apoyo a decisiones."
+      content="Raíz compara tres rotaciones de papa, quinua, haba y descanso para Obrajes (Oruro) con 45 campañas de datos NASA POWER y fases ONI de NOAA."
     />
-    <title>TerraLab 3D</title>
+    <title>Raíz · Rotar con evidencia</title>
   </head>
   <body>
     <div id="root"></div>
-    <noscript>TerraLab 3D necesita JavaScript habilitado.</noscript>
-    <script type="module" src="/src/main.tsx"></script>
+    <noscript
+      >Raíz necesita JavaScript para el recorrido. Los datos precalculados están en /raiz/data/ y el
+      boletín en /raiz/audio/.</noscript
+    >
+    <script type="module" src="/src/raiz2d/main.tsx"></script>
   </body>
 </html>

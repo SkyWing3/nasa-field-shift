@@ -30,7 +30,8 @@ from app.data_sources.osm.features import (
     overpass_query,
     parse_overpass,
 )
-from app.data_sources.raster import BBox
+from app.data_sources.osm.vectortiles import OPENFREEMAP_TILEJSON, VectorTileProvider
+from app.data_sources.raster import BBox, RangeSourceError
 
 SNAPSHOT_SCHEMA = 1
 MIN_INTERVAL_S = 10.0
@@ -69,7 +70,7 @@ class OsmSnapshot:
 
 @dataclass(frozen=True, slots=True)
 class FeatureResult:
-    origin: Literal["snapshot", "overpass"]
+    origin: Literal["vectortiles", "snapshot", "overpass"]
     snapshot: OsmSnapshot
     features: tuple[OsmFeature, ...]
 
@@ -203,23 +204,51 @@ def snapshot_id_for(bbox: BBox) -> str:
 
 
 class OsmFeatureProvider:
-    def __init__(self, store: OsmSnapshotStore, overpass: OverpassClient | None) -> None:
+    """Cadena de orígenes: teselas vectoriales de OpenFreeMap (cualquier región, con caché) →
+    instantánea local → Overpass si está configurado."""
+
+    def __init__(
+        self,
+        store: OsmSnapshotStore,
+        overpass: OverpassClient | None,
+        vector_tiles: VectorTileProvider | None = None,
+    ) -> None:
         self.store = store
         self.overpass = overpass
+        self.vector_tiles = vector_tiles
 
     @property
     def live_enabled(self) -> bool:
         return self.overpass is not None
 
-    async def features(self, bbox: BBox) -> FeatureResult:
-        snapshot = self.store.find(bbox)
-        if snapshot is not None:
-            selected = tuple(f for f in snapshot.features if intersects(f, bbox))
-            return FeatureResult("snapshot", snapshot, selected)
+    async def features(self, bbox: BBox, zoom: int = 14) -> FeatureResult:
+        vector_error: Exception | None = None
+        if self.vector_tiles is not None:
+            try:
+                result = await self.vector_tiles.features(bbox, zoom)
+            except (RangeSourceError, httpx2.HTTPError) as error:
+                vector_error = error
+            else:
+                snapshot = OsmSnapshot(
+                    id=f"openfreemap-z{result.zoom}",
+                    bbox=bbox,
+                    osm_timestamp=result.data_date,
+                    fetched_at=datetime.now(UTC).isoformat(timespec="seconds"),
+                    source_url=OPENFREEMAP_TILEJSON,
+                    features=tuple(result.features),
+                )
+                selected = tuple(f for f in result.features if intersects(f, bbox))
+                return FeatureResult("vectortiles", snapshot, selected)
+        stored = self.store.find(bbox)
+        if stored is not None:
+            selected = tuple(f for f in stored.features if intersects(f, bbox))
+            return FeatureResult("snapshot", stored, selected)
         if self.overpass is None:
+            detail = "" if vector_error is None else f" ({vector_error})"
             raise OsmUnavailableError(
-                "No hay una instantánea de OpenStreetMap para esta área y la consulta en vivo "
-                "está desactivada (TERRALAB_OVERPASS_URL)."
+                "No se pudieron obtener los elementos de OpenStreetMap para esta área"
+                + detail
+                + "."
             )
         if bbox.width > MAX_LIVE_BBOX_DEG or bbox.height > MAX_LIVE_BBOX_DEG:
             raise OsmUnavailableError("El área es demasiado grande para consultar Overpass.")

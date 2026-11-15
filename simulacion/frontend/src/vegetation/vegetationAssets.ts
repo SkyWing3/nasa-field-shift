@@ -23,10 +23,10 @@ import { type GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
 import { type AssetCatalog, assetFileUrl } from '../assets';
 import {
-  SPECIES,
   SPECIES_ORDER,
   type SpeciesId,
   type SpeciesModel,
+  type SpeciesSet,
 } from '../world/vegetationSpecies.ts';
 
 export interface VegetationPart {
@@ -133,11 +133,19 @@ export interface LoadedVegetation {
   readonly gltfs: readonly GLTF[];
 }
 
-export async function loadVegetationModels(catalog: AssetCatalog): Promise<LoadedVegetation> {
+/**
+ * Carga los modelos de las especies del bioma. `tints` multiplica el color de los materiales de
+ * una especie (p. ej. pajonal amarillento del altiplano frente a pasto verde de los llanos).
+ */
+export async function loadVegetationModels(
+  catalog: AssetCatalog,
+  species: SpeciesSet,
+  tints: Partial<Record<SpeciesId, readonly [number, number, number]>> = {},
+): Promise<LoadedVegetation> {
   const loader = new GLTFLoader();
   loader.setMeshoptDecoder(MeshoptDecoder);
   const assetIds = [
-    ...new Set(SPECIES_ORDER.flatMap((id) => SPECIES[id].models.map((m) => m.assetId))),
+    ...new Set(SPECIES_ORDER.flatMap((id) => species[id].models.map((m) => m.assetId))),
   ];
   const loaded = new Map<string, GLTF>();
   await Promise.all(
@@ -146,12 +154,28 @@ export async function loadVegetationModels(catalog: AssetCatalog): Promise<Loade
     }),
   );
   const models = {} as Record<SpeciesId, VegetationModel[]>;
+  const tinted = new Set<Material>();
   for (const id of SPECIES_ORDER) {
-    models[id] = SPECIES[id].models.map((model) => {
+    const tint = tints[id];
+    models[id] = species[id].models.map((model) => {
       const gltf = loaded.get(model.assetId);
       const extracted = gltf === undefined ? null : extractModel(gltf, model);
       if (extracted === null) {
         throw new Error(`El modelo ${model.assetId} no contiene la variante ${model.variant}`);
+      }
+      if (tint !== undefined) {
+        for (const level of extracted.lods) {
+          for (const part of level) {
+            if (tinted.has(part.material) || !(part.material instanceof MeshStandardMaterial))
+              continue;
+            part.material.color.setRGB(
+              part.material.color.r * tint[0],
+              part.material.color.g * tint[1],
+              part.material.color.b * tint[2],
+            );
+            tinted.add(part.material);
+          }
+        }
       }
       return extracted;
     });

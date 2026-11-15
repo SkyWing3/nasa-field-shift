@@ -286,6 +286,12 @@ export async function processModel(
   if (original.triangles > selection.lod0MaxTriangles) {
     const meshes = new Set(meshNodesOf(lod0).flatMap((node) => node.getMesh() ?? []));
     simplifyMeshes(meshes, selection.lod0MaxTriangles / original.triangles, LOD_ERROR[0]);
+    // Segunda pasada si el simplificador se quedó por encima del presupuesto (costuras de UV y
+    // bordes bloqueados en modelos muy densos), con más tolerancia de error.
+    const after = countSubtree(lod0).triangles;
+    if (after > selection.lod0MaxTriangles) {
+      simplifyMeshes(meshes, (selection.lod0MaxTriangles * 0.97) / after, LOD_ERROR[0] * 2);
+    }
   }
 
   // 3. Niveles adicionales a partir del LOD0, con texturas y materiales compartidos.

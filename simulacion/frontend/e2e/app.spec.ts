@@ -53,7 +53,7 @@ async function analyzeCanvas(page: Page, canvas: Locator) {
 test.describe('Pantalla inicial', () => {
   test('muestra la marca, el estado del sistema y conecta con la API real', async ({ page }) => {
     const errors = trackPageErrors(page);
-    await page.goto('/');
+    await page.goto('/terralab.html');
 
     await expect(page.getByRole('heading', { level: 1, name: 'TerraLab 3D' })).toBeVisible();
     await expect(page.getByTestId('check-graphics')).toContainText('WebGL 2');
@@ -74,7 +74,7 @@ test.describe('Pantalla inicial', () => {
     await page.route('**/api/health', (route) =>
       route.fulfill({ status: 503, body: 'Service Unavailable' }),
     );
-    await page.goto('/');
+    await page.goto('/terralab.html');
 
     const apiCheck = page.getByTestId('check-api');
     await expect(apiCheck).toContainText('Sin conexión');
@@ -91,7 +91,7 @@ test.describe('Pantalla inicial', () => {
 test.describe('Espacio de trabajo', () => {
   test('React Three Fiber renderiza la escena provisional', async ({ page }) => {
     const errors = trackPageErrors(page);
-    await page.goto('/');
+    await page.goto('/terralab.html');
     await page.getByRole('button', { name: 'Abrir el laboratorio (escena provisional)' }).click();
 
     const viewport = page.getByTestId('scene-viewport');
@@ -118,7 +118,7 @@ test.describe('Espacio de trabajo', () => {
   });
 
   test('muestra estados vacíos en lugar de datos inventados', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/terralab.html');
     await page.getByRole('button', { name: 'Abrir el laboratorio (escena provisional)' }).click();
 
     await expect(page.getByTestId('simulation-notice')).toHaveText('Sin simulación activa');
@@ -141,7 +141,7 @@ test.describe('Espacio de trabajo', () => {
 
   test('se adapta a pantallas estrechas sin desbordamiento horizontal', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
-    await page.goto('/');
+    await page.goto('/terralab.html');
     await page.getByRole('button', { name: 'Abrir el laboratorio (escena provisional)' }).click();
     await expect(page.getByTestId('scene-viewport')).toHaveAttribute('data-scene-status', 'ready', {
       timeout: 20_000,
