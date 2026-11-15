@@ -1,0 +1,395 @@
+{
+ "generado_desde": "datos/raw (sin red)",
+ "senamhi": {
+  "filas": [
+   {
+    "periodo": "2025-12",
+    "observado_mm": 115.6,
+    "normal_mm": 56.7,
+    "archivo": "senamhi-resumen-mensual/resumen-2025-12.pdf",
+    "cita": "la estación de Oruro – Ciudad registró valores significativamente por encima de su normal, superando los 115.6 mm. frente a una media de 56.7 mm.",
+    "power_mm": 82.8,
+    "power_normal_1991_2020_mm": 71.2,
+    "anomalia_senamhi_pct": 104,
+    "anomalia_power_pct": 16,
+    "mismo_signo": true,
+    "sha256_archivo": "9695e760cbb02ace763fda9630921e0a69672d45b3c161a8c550ae89c581064c"
+   },
+   {
+    "periodo": "2026-01",
+    "observado_mm": 142.3,
+    "normal_mm": 98.5,
+    "archivo": "senamhi-resumen-mensual/resumen-2026-01.pdf",
+    "cita": "la estación de Oruro – Ciudad registró valores significativamente por encima de su normal de 98.5 mm, registrando 142.3 mm",
+    "power_mm": 100.0,
+    "power_normal_1991_2020_mm": 96.4,
+    "anomalia_senamhi_pct": 44,
+    "anomalia_power_pct": 4,
+    "mismo_signo": true,
+    "sha256_archivo": "f4409f3990345327d413994cafe07abbfb77549eee8af16da69231accf241d78"
+   },
+   {
+    "periodo": "2025-11..2026-01",
+    "observado_mm": 306.7,
+    "normal_mm": 182.0,
+    "archivo": "senamhi-resumen-mensual/resumen-2026-01.pdf",
+    "cita": "la estación de Oruro - Ciudad, que acumuló 306.7 mm frente a una normal de 182.0 mm",
+    "power_mm": 216.2,
+    "power_normal_1991_2020_mm": 199.1,
+    "anomalia_senamhi_pct": 69,
+    "anomalia_power_pct": 9,
+    "mismo_signo": true,
+    "sha256_archivo": "f4409f3990345327d413994cafe07abbfb77549eee8af16da69231accf241d78"
+   },
+   {
+    "periodo": "2026-03",
+    "observado_mm": 90.6,
+    "normal_mm": 53.9,
+    "archivo": "senamhi-resumen-mensual/resumen-2026-03.pdf",
+    "cita": "la estación de Oruro – Ciudad ... llegando a registrar 90.6 mm, a su vez, sobrepasó su respectivo valor normal de 53.9 mm",
+    "power_mm": 65.5,
+    "power_normal_1991_2020_mm": 53.6,
+    "anomalia_senamhi_pct": 68,
+    "anomalia_power_pct": 22,
+    "mismo_signo": true,
+    "sha256_archivo": "f8a24cd2d4dc55be4773899ac850c2b6b0dc222f5e7b62437c08d3ca16616d74"
+   },
+   {
+    "periodo": "2026-01..2026-03",
+    "observado_mm": 263.9,
+    "normal_mm": 237.0,
+    "archivo": "senamhi-resumen-mensual/resumen-2026-03.pdf",
+    "cita": "la estación de Oruro - Ciudad, que acumuló 263.9 mm frente a una normal de 237.0 mm",
+    "power_mm": 191.9,
+    "power_normal_1991_2020_mm": 228.7,
+    "anomalia_senamhi_pct": 11,
+    "anomalia_power_pct": -16,
+    "mismo_signo": false,
+    "sha256_archivo": "f8a24cd2d4dc55be4773899ac850c2b6b0dc222f5e7b62437c08d3ca16616d74"
+   },
+   {
+    "periodo": "2026-04",
+    "observado_mm": 33.8,
+    "normal_mm": 14.5,
+    "archivo": "senamhi-resumen-mensual/resumen-2026-04.pdf",
+    "cita": "La Paz – El Alto y Oruro – Ciudad ... 64.4 mm y 33.8 mm, superando sus respectivas normales de 34.1 mm y 14.5 mm",
+    "power_mm": 12.4,
+    "power_normal_1991_2020_mm": 16.1,
+    "anomalia_senamhi_pct": 133,
+    "anomalia_power_pct": -23,
+    "mismo_signo": false,
+    "sha256_archivo": "a26441a887084237b9222ae6acb8844c980075bede1e359b0824f4cdd9dd111e"
+   }
+  ],
+  "factores_mensuales": {
+   "11": {
+    "senamhi_normal_mm": 26.8,
+    "power_normal_mm": 31.5,
+    "factor": 0.851
+   },
+   "12": {
+    "senamhi_normal_mm": 56.7,
+    "power_normal_mm": 71.2,
+    "factor": 0.797
+   },
+   "1": {
+    "senamhi_normal_mm": 98.5,
+    "power_normal_mm": 96.4,
+    "factor": 1.021
+   },
+   "2": {
+    "senamhi_normal_mm": 84.6,
+    "power_normal_mm": 78.6,
+    "factor": 1.076
+   },
+   "3": {
+    "senamhi_normal_mm": 53.9,
+    "power_normal_mm": 53.6,
+    "factor": 1.005
+   },
+   "4": {
+    "senamhi_normal_mm": 14.5,
+    "power_normal_mm": 16.1,
+    "factor": 0.901
+   }
+  },
+  "resumen": {
+   "normal_nov_mar_senamhi_mm": 320.5,
+   "normal_nov_mar_power_mm": 331.3,
+   "sesgo_power_pct": 3,
+   "coincidencia_signo": "4/6 periodos con anomalía del mismo signo"
+  }
+ },
+ "ine": {
+  "papa": {
+   "campanas": "1983-2024",
+   "n": 41,
+   "spearman_etrel_vs_anomalia_rendimiento": 0.25,
+   "tendencia_kg_ha_por_ano": -1.9,
+   "campanas_mas_secas_simuladas": [
+    {
+     "campana": 1991,
+     "etrel": 0.23,
+     "anomalia_rendimiento_kg_ha": -847
+    },
+    {
+     "campana": 2022,
+     "etrel": 0.24,
+     "anomalia_rendimiento_kg_ha": -1337
+    },
+    {
+     "campana": 2003,
+     "etrel": 0.32,
+     "anomalia_rendimiento_kg_ha": 567
+    },
+    {
+     "campana": 1988,
+     "etrel": 0.32,
+     "anomalia_rendimiento_kg_ha": -708
+    },
+    {
+     "campana": 1989,
+     "etrel": 0.33,
+     "anomalia_rendimiento_kg_ha": -99
+    }
+   ],
+   "interpretacion": "coherente (más agua simulada ↔ mejor rendimiento)",
+   "nota_calidad": "Sin valores repetidos entre años consecutivos",
+   "limite": "Rendimiento departamental (todo Oruro), no de la celda; incluye riego, variedades y heladas"
+  },
+  "quinua": {
+   "campanas": "1983-2024",
+   "n": 41,
+   "spearman_etrel_vs_anomalia_rendimiento": 0.42,
+   "tendencia_kg_ha_por_ano": 5.1,
+   "campanas_mas_secas_simuladas": [
+    {
+     "campana": 1991,
+     "etrel": 0.26,
+     "anomalia_rendimiento_kg_ha": -144
+    },
+    {
+     "campana": 2022,
+     "etrel": 0.27,
+     "anomalia_rendimiento_kg_ha": -224
+    },
+    {
+     "campana": 1988,
+     "etrel": 0.36,
+     "anomalia_rendimiento_kg_ha": -121
+    },
+    {
+     "campana": 2003,
+     "etrel": 0.37,
+     "anomalia_rendimiento_kg_ha": -12
+    },
+    {
+     "campana": 1989,
+     "etrel": 0.38,
+     "anomalia_rendimiento_kg_ha": -19
+    }
+   ],
+   "interpretacion": "coherente (más agua simulada ↔ mejor rendimiento)",
+   "nota_calidad": "1 pares de años consecutivos con rendimiento idéntico: posibles valores estimados o arrastrados",
+   "limite": "Rendimiento departamental (todo Oruro), no de la celda; incluye riego, variedades y heladas"
+  },
+  "haba": {
+   "campanas": "1983-2024",
+   "n": 41,
+   "spearman_etrel_vs_anomalia_rendimiento": 0.02,
+   "tendencia_kg_ha_por_ano": -0.1,
+   "campanas_mas_secas_simuladas": [
+    {
+     "campana": 1991,
+     "etrel": 0.23,
+     "anomalia_rendimiento_kg_ha": -88
+    },
+    {
+     "campana": 2022,
+     "etrel": 0.23,
+     "anomalia_rendimiento_kg_ha": -31
+    },
+    {
+     "campana": 1998,
+     "etrel": 0.3,
+     "anomalia_rendimiento_kg_ha": 131
+    },
+    {
+     "campana": 1988,
+     "etrel": 0.3,
+     "anomalia_rendimiento_kg_ha": -56
+    },
+    {
+     "campana": 2023,
+     "etrel": 0.32,
+     "anomalia_rendimiento_kg_ha": -51
+    }
+   ],
+   "interpretacion": "débil o nula: el rendimiento departamental depende de superficie, variedades, heladas y estimación administrativa",
+   "nota_calidad": "Sin valores repetidos entre años consecutivos",
+   "limite": "Rendimiento departamental (todo Oruro), no de la celda; incluye riego, variedades y heladas"
+  }
+ },
+ "eventos": [
+  {
+   "campana": 1982,
+   "tipo": "sequía",
+   "fuente": "Sequía regional del Niño 1982–83 en el Altiplano (documentada en Garreaud y Aceituno 2001, Journal of Climate)",
+   "url": "https://journals.ametsoc.org/view/journals/clim/14/12/1520-0442_2001_014_2779_irvots_2.0.co_2.xml",
+   "lluvia_nov_mar_power_mm": 230,
+   "percentil_lluvia": 13,
+   "etrel_papa_secano": 0.31,
+   "dias_tmin_menor_igual_-2C_nov_mar": 1,
+   "coincide": true,
+   "veredicto": "coincide; sequía: lluvia nov–mar en el tercio más seco"
+  },
+  {
+   "campana": 2015,
+   "tipo": "sequía",
+   "fuente": "Mongabay (sep-2016): «La sequía más fuerte de los últimos 25 años»; Los Tiempos: Belén de Andamarca (Oruro) sin lluvias desde fines de 2015",
+   "url": "https://es.mongabay.com/2016/09/sequia-pueblos_indigenas-desastres_ambientales-bolivia-medio_ambiente/",
+   "lluvia_nov_mar_power_mm": 235,
+   "percentil_lluvia": 16,
+   "etrel_papa_secano": 0.37,
+   "dias_tmin_menor_igual_-2C_nov_mar": 1,
+   "coincide": true,
+   "veredicto": "coincide; sequía: lluvia nov–mar en el tercio más seco"
+  },
+  {
+   "campana": 2022,
+   "tipo": "sequía",
+   "fuente": "Los Tiempos (2023): «Más de 34 mil familias sufren por sequía en Oruro; pierden sus cultivos y ganado», segundo año consecutivo",
+   "url": "https://www.lostiempos.com/node/611400",
+   "lluvia_nov_mar_power_mm": 193,
+   "percentil_lluvia": 7,
+   "etrel_papa_secano": 0.24,
+   "dias_tmin_menor_igual_-2C_nov_mar": 2,
+   "coincide": true,
+   "veredicto": "coincide; sequía: lluvia nov–mar en el tercio más seco"
+  },
+  {
+   "campana": 2023,
+   "tipo": "helada/sequía",
+   "fuente": "Los Tiempos (25-jul-2024): heladas, granizo y sequía; 100 municipios en emergencia, Oruro con 275 ha afectadas",
+   "url": "https://www.lostiempos.com/actualidad/pais/20240725/cerca-33-mil-familias-pierden-sus-cultivos-heladas-sequia",
+   "lluvia_nov_mar_power_mm": 336,
+   "percentil_lluvia": 56,
+   "etrel_papa_secano": 0.4,
+   "dias_tmin_menor_igual_-2C_nov_mar": 0,
+   "coincide": false,
+   "veredicto": "no coincide; sequía: lluvia en percentil 56, no en el tercio más seco; helada: POWER (celda ~50 km) no registra Tmin ≤ −2 °C; subestima heladas locales"
+  },
+  {
+   "campana": 2025,
+   "tipo": "helada",
+   "fuente": "Correo del Sur (28-jun-2026): heladas con pérdidas de hasta 90 % de papa en cinco municipios del altiplano de La Paz y Oruro",
+   "url": "https://correodelsur.com/sociedad/20260628/heladas-causan-perdidas-de-hasta-90-de-cultivos.html",
+   "lluvia_nov_mar_power_mm": 308,
+   "percentil_lluvia": 40,
+   "etrel_papa_secano": null,
+   "dias_tmin_menor_igual_-2C_nov_mar": 0,
+   "coincide": false,
+   "veredicto": "no coincide; helada: POWER (celda ~50 km) no registra Tmin ≤ −2 °C; subestima heladas locales"
+  }
+ ],
+ "calendario": {
+  "fuente": "Calendario de un productor de Obrajes, Soracachi (P6-1, 14-nov-2026); antes: literatura boliviana (UCB, calendario aymara)",
+  "filas": [
+   {
+    "cultivo": "papa",
+    "siembra_modelo": "01/10",
+    "epoca_siembra_productor": "01/09–31/10",
+    "cosecha_modelo": "14/04",
+    "meses_cosecha_productor": [
+     4
+    ],
+    "coincide": true
+   },
+   {
+    "cultivo": "quinua",
+    "siembra_modelo": "15/10",
+    "epoca_siembra_productor": "01/09–30/11",
+    "cosecha_modelo": "13/04",
+    "meses_cosecha_productor": [
+     2,
+     3,
+     4
+    ],
+    "coincide": true
+   },
+   {
+    "cultivo": "haba",
+    "siembra_modelo": "01/09",
+    "epoca_siembra_productor": "01/07–31/10",
+    "cosecha_modelo": "28/02",
+    "meses_cosecha_productor": [
+     1,
+     2,
+     3
+    ],
+    "coincide": true
+   }
+  ]
+ },
+ "merra2": {
+  "n_campanas": 43,
+  "spearman": 0.9,
+  "interpretacion": "coherente",
+  "nota": "MERRA-2 comparte la lluvia de entrada con POWER: confirma la física del balance, no la lluvia"
+ },
+ "nino_fuerte_4de5": {
+  "frase_p6": "4 de 5 Niños fuertes desde 1981 tuvieron menos lluvia nov–mar que el promedio de las campañas Normales",
+  "normal_mm": 365,
+  "n_normal": 13,
+  "medias_por_fase_mm": {
+   "Normal": 365,
+   "Niño": 305,
+   "Niña": 340
+  },
+  "n_por_fase": {
+   "Normal": 13,
+   "Niño": 15,
+   "Niña": 17
+  },
+  "nino_fuerte": [
+   {
+    "campana": "1982-83",
+    "oni_ndj": 2.12,
+    "lluvia_mm": 230,
+    "desvio_pct": -37,
+    "bajo_normal": true
+   },
+   {
+    "campana": "1997-98",
+    "oni_ndj": 2.37,
+    "lluvia_mm": 220,
+    "desvio_pct": -40,
+    "bajo_normal": true
+   },
+   {
+    "campana": "2009-10",
+    "oni_ndj": 1.5,
+    "lluvia_mm": 473,
+    "desvio_pct": 30,
+    "bajo_normal": false
+   },
+   {
+    "campana": "2015-16",
+    "oni_ndj": 2.59,
+    "lluvia_mm": 235,
+    "desvio_pct": -36,
+    "bajo_normal": true
+   },
+   {
+    "campana": "2023-24",
+    "oni_ndj": 1.99,
+    "lluvia_mm": 336,
+    "desvio_pct": -8,
+    "bajo_normal": true
+   }
+  ],
+  "resultado": "4 de 5",
+  "reproduce_p6": true,
+  "nota": "Frecuencia histórica de una sola fuente (NASA POWER, celda regional), n = 5. No es probabilidad ni pronóstico; 2023-24 quedó apenas bajo la normal."
+ }
+}

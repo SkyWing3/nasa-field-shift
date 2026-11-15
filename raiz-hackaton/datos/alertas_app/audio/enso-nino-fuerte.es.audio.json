@@ -1,0 +1,23 @@
+{
+  "texto_sha256": "625053176160f5b2af395bbd8cb2a420dc32e4184668e81975a590878391967c",
+  "texto_hablado": "El Niño fuerte está en curso. El océano Pacífico está dos coma cinco °C más caliente que lo normal. En cuatro de cinco Niños fuertes desde mil novecientos ochenta y uno, aquí llovió menos de lo normal entre noviembre y marzo. Planifique el agua de riego y, antes de sembrar, converse con su técnico.",
+  "duracion_s": 22.788,
+  "velocidad": 1.0,
+  "rms": 3726.701,
+  "voz": {
+    "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+    "name": "facebook/mms-tts-spa",
+    "language": "es",
+    "model_revision": "833b96c0278c85cf09776d565ba8f1cb2819f7ec",
+    "seed": 1234,
+    "speaking_rate": 1.0,
+    "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+  },
+  "licencia": {
+    "status": "licensed",
+    "spdx": "CC-BY-NC-4.0",
+    "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+    "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+  },
+  "revision_escucha": "pendiente"
+}

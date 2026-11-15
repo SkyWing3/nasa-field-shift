@@ -1,0 +1,112 @@
+{
+ "alert_id": "incendio-2026-11-14-b1bcfa59",
+ "creada": "2026-11-15T00:19:13-04:00",
+ "estado": "pendiente_aprobacion",
+ "aprobada_por": null,
+ "aprobada_en": null,
+ "difusion": "no_difundida",
+ "tipo": "incendio",
+ "nivel": "precaucion",
+ "fecha_evento": "2026-11-14",
+ "zonas": [
+  {
+   "localidad": "Oruro",
+   "focos": 4,
+   "distancia_min_km": 57.3,
+   "direccion": "norte"
+  },
+  {
+   "localidad": "Andamarca",
+   "focos": 1,
+   "distancia_min_km": 69.9,
+   "direccion": "norte"
+  }
+ ],
+ "evidencia": [
+  {
+   "lat": -17.4912,
+   "lon": -67.28884,
+   "fecha": "2026-11-13",
+   "hora_utc": "1842",
+   "satelite": "N20",
+   "confianza": "nominal",
+   "frp_mw": "10.09",
+   "archivo": "20261115T0418Z-firms-viirs-noaa20-24h.csv",
+   "cercana": {
+    "localidad": "Oruro",
+    "distancia_km": 57.3,
+    "direccion": "norte",
+    "poblacion": 208684
+   }
+  },
+  {
+   "lat": -17.48927,
+   "lon": -67.28841,
+   "fecha": "2026-11-13",
+   "hora_utc": "1842",
+   "satelite": "N20",
+   "confianza": "nominal",
+   "frp_mw": "6.88",
+   "archivo": "20261115T0418Z-firms-viirs-noaa20-24h.csv",
+   "cercana": {
+    "localidad": "Oruro",
+    "distancia_km": 57.5,
+    "direccion": "norte",
+    "poblacion": 208684
+   }
+  },
+  {
+   "lat": -17.39977,
+   "lon": -67.27406,
+   "fecha": "2026-11-14",
+   "hora_utc": "0552",
+   "satelite": "N20",
+   "confianza": "nominal",
+   "frp_mw": "0.69",
+   "archivo": "20261115T0418Z-firms-viirs-noaa20-24h.csv",
+   "cercana": {
+    "localidad": "Oruro",
+    "distancia_km": 66.4,
+    "direccion": "norte",
+    "poblacion": 208684
+   }
+  },
+  {
+   "lat": -17.21801,
+   "lon": -67.6049,
+   "fecha": "2026-11-14",
+   "hora_utc": "1823",
+   "satelite": "N20",
+   "confianza": "low",
+   "frp_mw": "3.81",
+   "archivo": "20261115T0418Z-firms-viirs-noaa20-24h.csv",
+   "cercana": {
+    "localidad": "Oruro",
+    "distancia_km": 99.8,
+    "direccion": "noroeste",
+    "poblacion": 208684
+   }
+  },
+  {
+   "lat": -18.18867,
+   "lon": -67.73421,
+   "fecha": "2026-11-13",
+   "hora_utc": "1253",
+   "satelite": "T",
+   "confianza": "56",
+   "frp_mw": "14.87",
+   "archivo": "20261115T0418Z-firms-modis-24h.csv",
+   "cercana": {
+    "localidad": "Andamarca",
+    "distancia_km": 69.9,
+    "direccion": "norte",
+    "poblacion": 0
+   }
+  }
+ ],
+ "n_evidencias": 5,
+ "fuente": "NASA FIRMS (LANCE)",
+ "confirmar_con": "Defensa Civil (VIDECI) y bomberos forestales",
+ "texto": "Aviso preliminar de Raíz para el departamento de Oruro. Satélites de la NASA detectaron 5 focos de calor el 14 de noviembre de 2026, cerca de: Oruro (4 focos, a 57 km al norte), Andamarca (1 foco, a 70 km al norte). Puede tratarse de una quema o de un incendio. Si está en la zona, no haga quemas, aleje al ganado del humo y avise a Defensa Civil si el fuego avanza. Información satelital pendiente de confirmación oficial. Fuente: NASA FIRMS.",
+ "regla": "Focos FIRMS (VIIRS NOAA-20 / MODIS) a ≤30 km de una localidad o dentro del departamento"
+}

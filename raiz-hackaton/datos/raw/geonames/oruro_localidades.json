@@ -1,0 +1,96 @@
+{
+ "source": "GeoNames cities500 (CC BY 4.0), filtrado BO.05 Oruro",
+ "origin_sha256": "4f7cc85d0236ceabcec74692fd36e03e30fe6c7bfca72241528fb7e1710c0320",
+ "places": [
+  {
+   "geonameid": 3909234,
+   "name": "Oruro",
+   "lat": -17.97153,
+   "lon": -67.0932,
+   "population": 208684,
+   "elevation": 3885,
+   "admin2": ""
+  },
+  {
+   "geonameid": 3914839,
+   "name": "Huanuni",
+   "lat": -18.289,
+   "lon": -66.83583,
+   "population": 15492,
+   "elevation": 3963,
+   "admin2": ""
+  },
+  {
+   "geonameid": 3921355,
+   "name": "Challapata",
+   "lat": -18.90208,
+   "lon": -66.77048,
+   "population": 8016,
+   "elevation": 3732,
+   "admin2": ""
+  },
+  {
+   "geonameid": 3910971,
+   "name": "Machacamarca",
+   "lat": -18.17251,
+   "lon": -67.02099,
+   "population": 2044,
+   "elevation": 3728,
+   "admin2": ""
+  },
+  {
+   "geonameid": 3907685,
+   "name": "Poopó",
+   "lat": -18.37978,
+   "lon": -66.96896,
+   "population": 1720,
+   "elevation": 3711,
+   "admin2": ""
+  },
+  {
+   "geonameid": 3902504,
+   "name": "Totoral",
+   "lat": -18.4957,
+   "lon": -66.87397,
+   "population": 1645,
+   "elevation": 3900,
+   "admin2": ""
+  },
+  {
+   "geonameid": 3918611,
+   "name": "Curahuara de Carangas",
+   "lat": -17.84265,
+   "lon": -68.40877,
+   "population": 1613,
+   "elevation": 3977,
+   "admin2": ""
+  },
+  {
+   "geonameid": 3915061,
+   "name": "Huachacalla",
+   "lat": -18.79298,
+   "lon": -68.26157,
+   "population": 0,
+   "elevation": 3753,
+   "admin2": "11184250"
+  },
+  {
+   "geonameid": 3923984,
+   "name": "Andamarca",
+   "lat": -18.77934,
+   "lon": -67.50753,
+   "population": 0,
+   "elevation": 3751,
+   "admin2": ""
+  },
+  {
+   "geonameid": 8354631,
+   "name": "Cruz de Machacamarca",
+   "lat": -18.88395,
+   "lon": -68.41989,
+   "population": 0,
+   "elevation": 3726,
+   "admin2": ""
+  }
+ ]
+}

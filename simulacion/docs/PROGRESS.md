@@ -337,3 +337,48 @@ Registro cronológico de fases completadas. Cada entrada incluye cambios, verifi
   - e2e solo en Chromium;
   - sin integración continua;
   - nada versionado.
+
+---
+
+## Integración con Raíz · botón «Comparar rotaciones» · 2026-11-15
+
+**Cambios** (decisión v3.2 del equipo: el 3D es la entrada y el comparador de Raíz es la demo)
+- Pantalla inicial: enlace «Comparar rotaciones» (componente nuevo `ButtonLink`, con el estilo de `Button`) que abre en otra pestaña el comparador publicado: https://morning-violet-efd4.mila-eloc.workers.dev/releases/raiz-oruro-power-20261111-v1/. No necesita WebGL.
+- Configurable con `VITE_RAIZ_COMPARADOR_URL` (validada como https; por defecto, el comparador publicado). Documentado en `frontend/.env.example`.
+- `.button` sin subrayado, para que los enlaces con aspecto de botón se vean igual.
+
+**Verificación**
+- `tsc -b` sin errores; ESLint `--max-warnings=0` sin incidencias; Vitest: 24 archivos y 174 pruebas pasan (2 nuevas en `env.test.ts`).
+- Prettier sin diferencias de formato en los archivos tocados. Los avisos que quedan son solo por saltos de línea CRLF del checkout en Windows.
+- En el navegador (dev 5174): el enlace está presente, con `target=_blank` y `rel=noopener noreferrer`, y apunta al comparador.
+- No se ejecutaron las pruebas e2e de Playwright.
+
+## Corrección para Windows · nomenclátor GeoNames · 2026-11-15
+
+**Problema:** `make geodata` dejaba `gazetteer.tmp` y fallaba con `PermissionError` (WinError 32) al renombrarlo. Sin nomenclátor, la búsqueda por nombre respondía «El nomenclátor local no está generado».
+- Causa: `with sqlite3.connect()` confirma los cambios pero no cierra la conexión, y Windows no permite renombrar un archivo abierto. En macOS sí lo permite, por eso no aparecía allí.
+- Corrección: `contextlib.closing` en `geonames_build.build_database`, y también en `gazetteer.search` para que la API no bloquee el archivo al regenerarlo.
+
+**Verificación:**
+- Nomenclátor regenerado en Windows: 237 125 lugares.
+- `GET /api/geocoding/search?q=Oruro` devuelve Oruro, Huanuni, Challapata…
+- Ruff, formato y mypy sin incidencias; pytest: 106 pruebas pasan.
+
+**En Windows, sin make:**
+- API: `backend\.venv\Scripts\python -m uvicorn app.main:app --app-dir backend --port 8000`
+- Frontend: `npm --prefix frontend run dev` (puerto 5173, el que el backend acepta por CORS)
+- Nomenclátor: `cd backend` y luego `.venv\Scripts\python -m app.data_sources.geocoding.geonames_build`
+
+## 15-nov · Alarmas de Raíz e idiomas en la pantalla inicial
+
+- Panel `AlertsPanel` en la pantalla inicial. Lee `public/alertas/alertas.json`, generado por `python -m raiz_data alarmas --publicar` en raiz-hackaton.
+- El nivel se indica con texto además del color. Cada alarma trae audio en español (voz sintética, requiere revisión de pares) y su fuente.
+- Selector de idioma español/quechua/aymara (`src/ui/i18n.ts`), guardado en localStorage. Quechua y aymara son traducción automática con IA, sin revisión de hablantes, y la pantalla lo avisa.
+- Verificación: vitest 177 pruebas, eslint y tsc sin errores.
+
+## 15-nov · Bienvenida, lectura en voz alta y tutorial
+
+- `src/ui/tutorial/` (`Tutorial.tsx`, `tutorialData.ts`, `Tutorial.module.css`). La primera visita, sin idioma configurado, abre la bienvenida: idioma, botón redondo de altavoz, interruptor de tutorial y «Empezar».
+- El recorrido resalta 6 paradas con `data-tour`: idioma, ubicación, laboratorio, comparar, alarmas y estado. Cada una dice para qué sirve y da un ejemplo, y se puede saltar en cualquier momento.
+- Audios es/qu/ay/gn en `public/tutorial/audio/`: voz sintética Meta MMS, requieren revisión de pares. Textos en `public/tutorial/tutorial.json`, cuya fuente es `content/tutorial/tutorial.json`.
+- «Comparar rotaciones» pasa `idioma`, `voz` y `tutorial` al beta-frontend.

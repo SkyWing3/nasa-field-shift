@@ -1,0 +1,157 @@
+{
+  "gdacs/20261115T0418Z-gdacs-rss.xml": {
+    "source_id": "gdacs",
+    "url": "https://www.gdacs.org/xml/rss.xml",
+    "queried_at": "2026-11-15T04:18:29+00:00",
+    "sha256": "9bb88b8d485425971fb3d1c4d5706cc5f6e76bbbcc111d854026ac484a091842",
+    "bytes": 743099
+  },
+  "geonames/oruro_localidades.json": {
+    "source_id": "geonames",
+    "url": "https://download.geonames.org/export/dump/cities500.zip",
+    "queried_at": "copia local de simulacion/backend/data/geonames/source",
+    "sha256": "534dce82e53c6d126a43ba2d647a75a89274f83da291575e79e266d5447e397e",
+    "bytes": 1797
+  },
+  "ine-estadisticas-agricolas/ine_produccion_invierno_t_2012_2025.xlsx": {
+    "source_id": "ine-estadisticas-agricolas",
+    "url": "https://nube.ine.gob.bo/index.php/s/DNFbjMZIJiqKFSL/download",
+    "queried_at": "2026-11-15T04:12:56+00:00",
+    "sha256": "7ab4f5907b149eeee0438bbf9151b3957038bb084c83d086afd28684208746da",
+    "bytes": 156877
+  },
+  "ine-estadisticas-agricolas/ine_produccion_t_1984_2025.xlsx": {
+    "source_id": "ine-estadisticas-agricolas",
+    "url": "https://nube.ine.gob.bo/index.php/s/sDryAo3LRxEvQcr/download",
+    "queried_at": "2026-11-15T04:13:39+00:00",
+    "sha256": "929f2b6450ca2851befe4c3d6e93ce76c6257545c8e50f29b39abc7327a2a5e1",
+    "bytes": 349151
+  },
+  "ine-estadisticas-agricolas/ine_rendimiento_kg_ha_1984_2025.xlsx": {
+    "source_id": "ine-estadisticas-agricolas",
+    "url": "https://nube.ine.gob.bo/index.php/s/heefZ2fZlqIIMik/download",
+    "queried_at": "2026-11-15T04:12:53+00:00",
+    "sha256": "c67c44f7172eed6371003d8ccd49ef47b6627ac6ef45a91a335cb59a9311d700",
+    "bytes": 324474
+  },
+  "ine-estadisticas-agricolas/ine_superficie_ha_1984_2025.xlsx": {
+    "source_id": "ine-estadisticas-agricolas",
+    "url": "https://nube.ine.gob.bo/index.php/s/6kBAE1i0Ys4tF0U/download",
+    "queried_at": "2026-11-15T04:12:47+00:00",
+    "sha256": "79fe8b4826dee82acd1a32fb5325a5460ddf58b20e7cefaeec579f898bdaf6ed",
+    "bytes": 364034
+  },
+  "isric-soilgrids/soilgrids_oruro.json": {
+    "source_id": "isric-soilgrids",
+    "url": "https://rest.isric.org/soilgrids/v2.0/properties/query?lon=-67.0&lat=-17.83&property=clay&property=sand&property=silt&property=soc&property=bdod&property=wv0010&property=wv0033&property=wv1500&depth=0-5cm&depth=5-15cm&depth=15-30cm&depth=30-60cm&depth=60-100cm&value=mean&value=Q0.05&value=Q0.95",
+    "queried_at": "2026-11-15T05:36:01+00:00",
+    "sha256": "ad321e6812a69727e70ebb5f0d9207a551cba581e104aefd8809118825dc715f",
+    "bytes": 6218
+  },
+  "nasa-firms/20261115T0418Z-firms-modis-24h.csv": {
+    "source_id": "nasa-firms",
+    "url": "https://firms.modaps.eosdis.nasa.gov/data/active_fire/modis-c6.1/csv/MODIS_C6_1_South_America_24h.csv",
+    "queried_at": "2026-11-15T04:18:24+00:00",
+    "sha256": "207fea35020886bba76b2f468b5709b150c6d065904503763d1ee9f54b1b199d",
+    "bytes": 376869
+  },
+  "nasa-firms/20261115T0418Z-firms-viirs-noaa20-24h.csv": {
+    "source_id": "nasa-firms",
+    "url": "https://firms.modaps.eosdis.nasa.gov/data/active_fire/noaa-20-viirs-c2/csv/J1_VIIRS_C2_South_America_24h.csv",
+    "queried_at": "2026-11-15T04:18:23+00:00",
+    "sha256": "ca4bcffda2dd6a9366693b9198b2f9bc30ffbca990ee013576496ab2854fab21",
+    "bytes": 1229476
+  },
+  "nasa-power-daily/power_daily_oruro.json": {
+    "source_id": "nasa-power-daily",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MAX%2CT2M_MIN%2CT2MDEW%2CRH2M%2CQV2M%2CPRECTOTCORR%2CWS2M%2CWS2M_MAX%2CALLSKY_SFC_SW_DWN%2CCLRSKY_SFC_SW_DWN%2CPS%2CGWETTOP%2CGWETROOT%2CGWETPROF%2CTS&community=AG&longitude=-67.0&latitude=-17.83&start=19810101&end=20261111&format=JSON&time-standard=LST",
+    "queried_at": "2026-11-15T05:30:59+00:00",
+    "sha256": "58b0e40b6f9d93dfc9dc93e08668ae3523d7db2b1d5208221c3477a6fc035752",
+    "bytes": 4372743
+  },
+  "nasa-power-daily/power_reciente_alarmas.json": {
+    "source_id": "nasa-power-daily",
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M%2CT2M_MAX%2CT2M_MIN%2CT2MDEW%2CRH2M%2CQV2M%2CPRECTOTCORR%2CWS2M%2CWS2M_MAX%2CALLSKY_SFC_SW_DWN%2CCLRSKY_SFC_SW_DWN%2CPS%2CGWETTOP%2CGWETROOT%2CGWETPROF%2CTS&community=AG&longitude=-67.0&latitude=-17.83&start=19810101&end=20261114&format=JSON&time-standard=LST",
+    "queried_at": "2026-11-15T12:06:30+00:00",
+    "sha256": "6a41fea9ece7d691f0af56dd86090f6c905a15c9daf35502305ecebcba68d94e",
+    "bytes": 4373581,
+    "uso": "solo alarmas (datos recientes); no es el original del paquete"
+  },
+  "noaa-cpc-oni/oni.ascii.txt": {
+    "source_id": "noaa-cpc-oni",
+    "url": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
+    "queried_at": "2026-11-15T12:06:31+00:00",
+    "sha256": "118c563331335c8649cdc2677e6be7ae89d1259d901345fcddbc2857af280f7f",
+    "bytes": 23050
+  },
+  "senamhi-prediccion-oruro/prediccion-oruro-DEF-2024-2025.pdf": {
+    "source_id": "senamhi-prediccion-oruro",
+    "url": "https://senamhi.gob.bo/meteorologia/boletines/tendencias/2024/12_BOLETIN_PREDICCION_DEF_2024-2025_ORURO.pdf",
+    "queried_at": "2026-11-15T04:04:36+00:00",
+    "sha256": "c21dcb21d150c15c139f1cec80d6dcbfde336697973841c167c0e18006d5f6d1",
+    "bytes": 2998447
+  },
+  "senamhi-prediccion-oruro/prediccion-oruro-NDE-2024.pdf": {
+    "source_id": "senamhi-prediccion-oruro",
+    "url": "https://senamhi.gob.bo/meteorologia/boletines/tendencias/2024/11_BOLETIN_PREDICCION_NDE%202024_ORURO.pdf",
+    "queried_at": "2026-11-15T04:04:34+00:00",
+    "sha256": "9bc18cb8b5ce842bac728024f2c473868230bcb7e9523f264ace7d39831f4d6a",
+    "bytes": 2989264
+  },
+  "senamhi-resumen-mensual/resumen-2024-12.pdf": {
+    "source_id": "senamhi-resumen-mensual",
+    "url": "https://senamhi.gob.bo/climatologia/2024/12%20RESUMEN%20CLIMATICO%20DICIEMBRE%202024.pdf",
+    "queried_at": "2026-11-15T04:04:21+00:00",
+    "sha256": "3fa9e14e288e6dd2078a0bd55d9a461afb7a749d192b0bafb101012d450b57c7",
+    "bytes": 3880571
+  },
+  "senamhi-resumen-mensual/resumen-2025-10.pdf": {
+    "source_id": "senamhi-resumen-mensual",
+    "url": "https://senamhi.gob.bo/climatologia/2025/10_RESUMEN_CLIM%C3%81TICO_OCTUBRE_2025.pdf",
+    "queried_at": "2026-11-15T04:04:23+00:00",
+    "sha256": "4607ea42407436cbc0cbf71ea19c5f5a5a7a09b7b21c5141a30edc322a07b012",
+    "bytes": 3426316
+  },
+  "senamhi-resumen-mensual/resumen-2025-11.pdf": {
+    "source_id": "senamhi-resumen-mensual",
+    "url": "https://senamhi.gob.bo/climatologia/2025/11_RESUMEN_CLIM%C3%81TICO_NOVIEMBRE_2025.pdf",
+    "queried_at": "2026-11-15T04:04:25+00:00",
+    "sha256": "d178268fc4ceb90a42f2ec07c405b538653d5ff2ae3067cbe869725804f068fe",
+    "bytes": 4387398
+  },
+  "senamhi-resumen-mensual/resumen-2025-12.pdf": {
+    "source_id": "senamhi-resumen-mensual",
+    "url": "https://senamhi.gob.bo/climatologia/2025/12_RESUMEN_CLIM%C3%81TICO_DICIEMBRE_2025.pdf",
+    "queried_at": "2026-11-15T04:04:27+00:00",
+    "sha256": "9695e760cbb02ace763fda9630921e0a69672d45b3c161a8c550ae89c581064c",
+    "bytes": 3714527
+  },
+  "senamhi-resumen-mensual/resumen-2026-01.pdf": {
+    "source_id": "senamhi-resumen-mensual",
+    "url": "https://senamhi.gob.bo/climatologia/2026/01%20RESUMEN%20CLIM%C3%81TICO%20ENERO%202026.pdf",
+    "queried_at": "2026-11-15T04:04:29+00:00",
+    "sha256": "f4409f3990345327d413994cafe07abbfb77549eee8af16da69231accf241d78",
+    "bytes": 3675202
+  },
+  "senamhi-resumen-mensual/resumen-2026-03.pdf": {
+    "source_id": "senamhi-resumen-mensual",
+    "url": "https://senamhi.gob.bo/climatologia/2026/03%20RESUMEN%20CLIM%C3%81TICO%20MARZO%202026.pdf",
+    "queried_at": "2026-11-15T04:04:31+00:00",
+    "sha256": "f8a24cd2d4dc55be4773899ac850c2b6b0dc222f5e7b62437c08d3ca16616d74",
+    "bytes": 4201168
+  },
+  "senamhi-resumen-mensual/resumen-2026-04.pdf": {
+    "source_id": "senamhi-resumen-mensual",
+    "url": "https://senamhi.gob.bo/climatologia/2026/04%20RESUMEN%20CLIM%C3%81TICO%20ABRIL%202026.pdf",
+    "queried_at": "2026-11-15T04:04:32+00:00",
+    "sha256": "a26441a887084237b9222ae6acb8844c980075bede1e359b0824f4cdd9dd111e",
+    "bytes": 4120963
+  },
+  "usgs-sismos/20261115T0418Z-usgs-2.5-semana.geojson": {
+    "source_id": "usgs-sismos",
+    "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojson",
+    "queried_at": "2026-11-15T04:18:24+00:00",
+    "sha256": "06939f54cc429c00ae2224475eb2781f75ac38d958af7eb957eeb08549b8a301",
+    "bytes": 230243
+  }
+}

@@ -1,0 +1,136 @@
+{
+ "issued_at": "2026-11-15T02:46:38-04:00",
+ "valid_until": "2026-12-31T23:59:59-04:00",
+ "review_status": "approved",
+ "reviewer": "P5 (contenido, comprensión y pruebas) y P6 (agronomía y fuentes)",
+ "reviewed_at": "2026-11-14T23:55:00-04:00",
+ "review_evidence": "content/actas/P5-2_acta_revision_audio.pdf; decisiones v3.2 de la líder (plan-equipo.json)",
+ "limits_messages": [
+  {
+   "id": "lim_zona",
+   "text": "Estos datos son de toda la zona (unos 50 km), no de su chacra. Compárelos con lo que usted ve en su parcela."
+  },
+  {
+   "id": "lim_granizo",
+   "text": "El granizo no se puede medir con estos datos. Si en su zona graniza seguido, téngalo en cuenta aparte."
+  },
+  {
+   "id": "lim_suelo",
+   "text": "El suelo no fue medido: usamos un valor típico para tierra \"medio arcillosa arenosa\", como la describió un productor de Obrajes."
+  },
+  {
+   "id": "lim_no_orden",
+   "text": "Raíz no le dice qué sembrar. Le muestra cómo les fue a estas opciones en años pasados. La decisión es suya y de su técnico."
+  },
+  {
+   "id": "sin_datos_fuente",
+   "text": "No pudimos comparar con una segunda fuente de lluvia. Este resultado usa solo datos de la NASA (POWER)."
+  }
+ ],
+ "limits_messages_origin": "Texto exacto de las plantillas P5-1 (communications_templates.json)",
+ "regional_bulletin_text": "Mensaje para las comunidades de Soracachi.\nRevisamos 45 años de datos de la NASA sobre lluvia y heladas en esta zona.\nEn los años del Niño fuerte, cuatro de cada cinco veces llovió menos de lo normal entre noviembre y marzo.\nLa helada en la floración puede dañar la papa y el haba. El granizo no lo podemos medir con estos datos.\nEsto no es una orden ni una promesa de cosecha: es la experiencia de años pasados.\nAntes de decidir qué sembrar y dónde regar, converse con su técnico y con su comunidad.\nProyecto Raíz, con datos de NASA POWER y NOAA.",
+ "credits_markdown": "# P6-6 · Fuentes, licencias y declaración de IA (borrador 14-nov, 22:10)\n\nEsto va en la página del proyecto (Space Apps) y en la sección \"Créditos\" de la app. Estado: COMPLETO (14-nov, 23:15).\n\n## 1. Datos usados (lo que alimenta el cálculo)\n| Dato | Fuente | Uso en Raíz | Licencia / condición | Cita |\n| --- | --- | --- | --- | --- |\n| Lluvia, Tmin, Tmax, viento, humedad, radiación diarias desde 1981 | **NASA POWER** (Daily API, comunidad AG; reanálisis MERRA-2) | Lluvia y helada por campaña; KPIs | Acceso libre; pide citar NASA POWER | NASA Langley Research Center POWER Project, consultado el 14-nov-2026: https://power.larc.nasa.gov |\n| Elevación del punto | **NASADEM** (NASA) | Contexto del punto (3809 m) | Dominio público (NASA) | https://doi.org/10.5067/MEASURES/NASADEM/NASADEM_HGT.001 |\n| Fases Niño, Niña y Normal | **NOAA CPC ONI** (`oni.ascii.txt`) | Clasificar campañas | Dominio público (gobierno de EE. UU.) | https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt |\n| Coeficientes de cultivo, etapas, raíces | **FAO-56** (Allen et al. 1998), Tablas 11, 12 y 22 | Demanda de agua por cultivo | Publicación FAO; se cita | Allen, R.G. et al. (1998) *Crop evapotranspiration*, FAO Irrigation and Drainage Paper 56 |\n| Agua disponible por textura | **USDA NRCS** | Suelo \"franco arcillo arenoso\" (no medido) | Dominio público | NRCS, Soil Survey Manual / tablas de AWC |\n| Calendario, riego y pérdidas | **Productor de Obrajes** (comunicación personal, 14-nov-2026) | Calendario, escenarios, límites | Autorización escrita por WhatsApp (14-nov-2026, 22:41) para usar su audio, sus frases y su testimonio sin nombre | `permiso_productor.png` |\n\n**Fuente intentada y no usada:** CHIRPS v2 (UCSB/USGS), por una serie incompleta en el espejo NOAA ERDDAP; queda `unavailable` (ver P6-4).\n\n## 2. Literatura citada en afirmaciones\n- **Chen, P.M. y Li, P.H. (1980).** *Plant Physiology*: tolerancia a la helada de la papa (−2,5 °C).\n- **Garcia, M. et al. (2003).** Kc de la quinua, en *Agricultural Water Management*.\n- **Jacobsen, S.-E. et al.:** resistencia de la quinua a la helada según la etapa.\n- **CIREN:** ficha de haba (helada en floración).\n- **Remote Sensing (2024):** CHIRPS e IMERG en Bolivia.\n- **Maina y Kumar (2025),** *J. Hydrometeorology*; **Birkel et al. (2022),** *Earth and Space Science*; **Blacutt et al. (2015),** *Atmospheric Research*: desempeño de MERRA-2 en los Andes y Bolivia.\n- **NOAA CPC, ENSO Diagnostic Discussion (12-nov-2026):** solo como contexto y solo si la líder lo aprueba.\n\nLa lista completa con enlaces está en `registro_fuentes_afirmaciones.md` y `crops.json` (`sources`).\n\n## 3. Software y modelos\n| Herramienta | Uso | Licencia |\n| --- | --- | --- |\n| Meta **MMS-TTS** (`facebook/mms-tts-spa`, `facebook/mms-tts-quz`) | Voz sintética del boletín | **CC-BY-NC-4.0** (confirmado en Hugging Face, 14-nov): uso no comercial con atribución. https://creativecommons.org/licenses/by-nc/4.0/legalcode.txt |\n| Python, pandas, requests, transformers, Google Colab | Descarga, cálculo y audio | Software libre (BSD, Apache 2.0) |\n| FastAPI (backend) | API y cálculo | MIT |\n| React (frontend) | Página web (prototipo; luego será la app) | MIT |\n\n## 4. Declaración de uso de IA (texto para pegar)\n> Usamos asistentes de IA generativa (Claude de Anthropic, ChatGPT y Codex de OpenAI, y Gemini de Google) para: buscar y resumir literatura, redactar borradores de textos y del boletín, y escribir y depurar código en Python. Todas las cifras del proyecto salen de datos descargados de NASA POWER y NOAA y de cálculos reproducidos por dos integrantes del equipo; ninguna cifra fue generada por IA. Las frases en quechua fueron leídas y grabadas por un hablante de la comunidad, sin correcciones. La voz en español del boletín es sintética (Meta MMS-TTS). Las frases en quechua las grabó con su voz un productor de la comunidad, con su autorización escrita..\n\n## 5. Límites declarados (van en la app y en el speech)\n- **Datos regionales:** los datos de POWER son de una celda de unos 50 km, no una medición de la parcela.\n- **Muestra pequeña:** el \"4 de 5\" es una frecuencia histórica con n = 5, no un pronóstico.\n- **Granizo:** no se mide con estos datos.\n- **Suelo:** no se midió; su retención de agua es genérica por textura.\n- **Validación:** sin contraste con estación ni con una segunda fuente satelital (P6-4 `unavailable`).\n- **Uso:** no reemplaza al técnico agrícola; no promete rendimiento ni dinero.\n\n## Checklist antes de las 10:00\n- ✅ Captura del permiso del productor (`permiso_productor.png`).\n- ✅ Licencia de MMS confirmada (CC-BY-NC-4.0).\n- ✅ Quechua: leído y grabado por el productor.\n- ✅ Voz: español sintético; quechua del productor.\n- ✅ IA: Claude, ChatGPT, Codex y Gemini. ✅ Framework: FastAPI (backend) + React (frontend), ambos MIT.\n\n## 6. Fuentes de verificación (no alimentan el cálculo)\n- **SENAMHI Bolivia**, resúmenes climáticos mensuales (estación Oruro – Ciudad): contraste mensual de lluvia con NASA POWER.\n- **INE Bolivia**, estadísticas agrícolas por campaña (rendimiento, superficie y producción de Oruro, 1984–2025): corroboración de años secos.\n- **Prensa que cita a VIDECI** (Los Tiempos, Mongabay, Correo del Sur): sequías y heladas reportadas.\n- **ISRIC SoilGrids 2.0** (CC BY 4.0): referencia de suelo; en Obrajes da 106 mm/m frente a los 150 mm/m de la descripción local, que es la que se usa.\n- **NASA MERRA-2 GWETROOT** (vía POWER): comparación con la humedad del suelo simulada.\n\nDetalle y resultados de la verificación: `raiz-hackaton/docs/datos/RESULTADOS.md`.\n",
+ "message_templates": [
+  {
+   "id": "cmp_decision",
+   "text_es": "En años {fase} como este, comparamos {n_casos} formas de rotar su parcela. Este año tendría {cultivo_decision}. Revise las opciones con su técnico: ninguna es una orden.",
+   "reviewed_by": "P6"
+  },
+  {
+   "id": "cmp_ciclo",
+   "text_es": "Mirando las tres campañas juntas ({cultivo_y} → {cultivo_y1} → {cultivo_y2}), esta opción quedó {posicion_ranking} de {n_casos}. El orden puede no cambiar al mover las prioridades.",
+   "reviewed_by": "P6"
+  },
+  {
+   "id": "cmp_empate",
+   "text_es": "Estas opciones dieron resultados casi iguales. Decida con lo que conoce de su tierra: agua del pozo, semilla y trabajo disponible.",
+   "reviewed_by": "P6"
+  },
+  {
+   "id": "agua_riego",
+   "text_es": "En años {fase} pasados, {cultivo} necesitó en promedio {riego_mm} mm de riego por campaña ({riego_m3ha} m³ por hectárea). Revise si su pozo alcanza.",
+   "reviewed_by": "P6"
+  },
+  {
+   "id": "agua_secano",
+   "text_es": "La quinua crece con lluvia. En años {fase} pasados tuvo {dias_estres} días con poca agua por campaña. Converse con su técnico si eso le preocupa.",
+   "reviewed_by": "P6"
+  },
+  {
+   "id": "agua_presupuesto",
+   "text_es": "Con un límite de {presupuesto_mm} mm de riego, esta opción {cumple|no_cumple} el agua que pide el cultivo en {ventanas_ok} de {ventanas_validas} años parecidos.",
+   "reviewed_by": "P6"
+  },
+  {
+   "id": "cob_planificada",
+   "text_es": "Con esta rotación, el suelo queda cubierto {cobertura_pct} % del tiempo, según el calendario. Es un cálculo de manejo, no una foto del satélite.",
+   "reviewed_by": "P6"
+  },
+  {
+   "id": "cob_descubierto",
+   "text_es": "Con esta opción, el suelo quedó descubierto {dias_lluvia} días con lluvia fuerte y {dias_viento} días con viento fuerte. Cubrirlo con rastrojo o pasto lo protege.",
+   "reviewed_by": "P6"
+  },
+  {
+   "id": "cob_descanso",
+   "text_es": "Un descanso con maleza o rastrojo no es suelo pelado: protege más. Cuide que los animales no lo dejen sin nada de cobertura.",
+   "reviewed_by": "P6"
+  },
+  {
+   "id": "helada_floracion",
+   "text_es": "En años {fase} pasados, durante la floración de {cultivo} hubo en promedio {dias_helada} noches más frías de {umbral_c} °C en la zona. Es historia, no un aviso para hoy.",
+   "reviewed_by": "P6"
+  },
+  {
+   "id": "lim_zona",
+   "text_es": "Estos datos son de toda la zona (unos 50 km), no de su chacra. Compárelos con lo que usted ve en su parcela.",
+   "reviewed_by": "P6"
+  },
+  {
+   "id": "lim_granizo",
+   "text_es": "El granizo no se puede medir con estos datos. Si en su zona graniza seguido, téngalo en cuenta aparte.",
+   "reviewed_by": "P6"
+  },
+  {
+   "id": "lim_muestra",
+   "text_es": "Este resultado sale de {n} años parecidos. Con tan pocos años, tómelo como una referencia y no como algo seguro.",
+   "reviewed_by": "P6"
+  },
+  {
+   "id": "lim_muestra_baja",
+   "text_es": "Hay solo {n} años parecidos en los datos. No alcanza para sacar una conclusión: no mostramos comparación para este caso.",
+   "reviewed_by": "P6"
+  },
+  {
+   "id": "lim_suelo",
+   "text_es": "El suelo no fue medido: usamos un valor típico para tierra \"medio arcillosa arenosa\", como la describió un productor de Obrajes.",
+   "reviewed_by": "P6"
+  },
+  {
+   "id": "lim_no_orden",
+   "text_es": "Raíz no le dice qué sembrar. Le muestra cómo les fue a estas opciones en años pasados. La decisión es suya y de su técnico.",
+   "reviewed_by": "P6"
+  },
+  {
+   "id": "sin_datos_kpi",
+   "text_es": "No hay datos suficientes para calcular esto ({motivo}). Preferimos no mostrar un número antes que inventarlo.",
+   "reviewed_by": "P6"
+  },
+  {
+   "id": "sin_datos_fuente",
+   "text_es": "No pudimos comparar con una segunda fuente de lluvia. Este resultado usa solo datos de la NASA (POWER).",
+   "reviewed_by": "P6"
+  },
+  {
+   "id": "sin_datos_archivo",
+   "text_es": "Este archivo no está disponible ahora. Pruebe más tarde o pida la ficha impresa a su técnico.",
+   "reviewed_by": "P6"
+  },
+  {
+   "id": "vencido",
+   "text_es": "Estos resultados se calcularon el {fecha_build} con datos hasta {fecha_datos}. Pueden haber datos más nuevos: consulte la versión actual antes de decidir.",
+   "reviewed_by": "P6"
+  }
+ ],
+ "message_templates_source": "content/communications_templates.json (P5-1, revisado por P6)"
+}

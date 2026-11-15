@@ -1,0 +1,436 @@
+{
+ "schema_version": "3.0",
+ "build_id": "raiz-oruro-power-20261111-v1",
+ "mode": "simulated",
+ "generated_at": "2026-11-15T06:43:55+00:00",
+ "data_as_of": "2026-11-11T23:59:59-04:00",
+ "model_version": "raiz-agua-1.0 (balance diario FAO-56, un depósito)",
+ "sources": [
+  {
+   "source_id": "isric-soilgrids",
+   "agency": "ISRIC – World Soil Information",
+   "product": "SoilGrids 2.0 (textura, carbono, densidad y contenido de agua a 33 y 1500 kPa)",
+   "version": "2.0",
+   "url": "https://rest.isric.org/soilgrids/v2.0/properties/query?lon=-67.0&lat=-17.83&property=clay&property=sand&property=silt&property=soc&property=bdod&property=wv0010&property=wv0033&property=wv1500&depth=0-5cm&depth=5-15cm&depth=15-30cm&depth=30-60cm&depth=60-100cm&value=mean&value=Q0.05&value=Q0.95",
+   "queried_at": "2026-11-15T05:36:01+00:00",
+   "period": {
+    "start": "2020-01-01",
+    "end": "2020-12-31"
+   },
+   "spatial_resolution": "250 m",
+   "temporal_resolution": "estática",
+   "units": {
+    "wv0033": "10-2 cm³/cm³",
+    "wv1500": "10-2 cm³/cm³",
+    "clay": "%",
+    "sand": "%"
+   },
+   "qa": "Media de predicción 250 m, con cuantiles 5 % y 95 %; producto estático (versión 2.0, 2020)",
+   "original": "raw/isric-soilgrids/soilgrids_oruro.json",
+   "sha256": "ad321e6812a69727e70ebb5f0d9207a551cba581e104aefd8809118825dc715f",
+   "bytes": 6218,
+   "license": "CC BY 4.0"
+  }
+ ],
+ "assumptions": [
+  "Punto de datos en la parcela de un productor de Obrajes (P6-1); el clima es una celda NASA POWER de ~50 km, no una medición de la parcela",
+  "Calendario del productor (P6) con fecha central de cada ventana; las secuencias son escenarios de comparación, no su práctica (P6-1)",
+  "Kc de papa y haba de FAO-56; Kc de quinua de García et al. (2003); umbrales de helada por etapa de P6-2; otros valores marcados como supuesto",
+  "FAO-56 Penman-Monteith no está calibrado sobre 3000 m (García et al. 2003); ET0 puede estar sobrestimada",
+  "POWER es una celda de ~50 km: suaviza lluvias convectivas, ráfagas y heladas locales"
+ ],
+ "warnings": [
+  "Evaluación histórica simulada; no es pronóstico ni observación de parcela",
+  "No cuantifica rendimiento, ingresos ni erosión en toneladas",
+  "Revisión agronómica humana pendiente (P6)",
+  "Granizo: es la segunda causa de pérdida según el productor y NO se puede modelar con NASA POWER (P6-1)",
+  "Los umbrales de helada son de temperatura de la planta; POWER da aire a 2 m en una celda de ~50 km",
+  "El productor riega papa y haba con pozo: el riego neto requerido indica la presión sobre el pozo en años secos"
+ ],
+ "data": {
+  "analysis_point": {
+   "analysis_point_id": "oruro-pilot",
+   "region": "Oruro",
+   "latitude": -17.83,
+   "longitude": -67.0,
+   "location_status": "regional_point",
+   "label": "Obrajes, Soracachi (Paria), Cercado, Oruro: parcela de un productor (coordenadas redondeadas a 0,01°)",
+   "representativeness": "Punto de datos en la parcela de un productor de Obrajes (P6-1). El clima viene de una celda NASA POWER de ~50 km que también contiene la ciudad de Oruro y las estaciones SENAMHI: NO es una medición de la parcela.",
+   "elevation_nasadem_m": 3809.0,
+   "power_cell_elevation_m": 3976.34,
+   "coordinate_precision_deg": 0.01,
+   "source": "content/point.json (P6-1, 14-nov-2026)"
+  },
+  "rotations": [
+   {
+    "rotation_id": "papa-quinua-descanso",
+    "campaigns": [
+     "papa",
+     "quinua",
+     "descanso"
+    ],
+    "baseline_status": "assumed"
+   },
+   {
+    "rotation_id": "papa-quinua-haba",
+    "campaigns": [
+     "papa",
+     "quinua",
+     "haba"
+    ],
+    "baseline_status": "assumed"
+   },
+   {
+    "rotation_id": "papa-haba-descanso",
+    "campaigns": [
+     "papa",
+     "haba",
+     "descanso"
+    ],
+    "baseline_status": "assumed"
+   }
+  ],
+  "cases": [
+   {
+    "case_id": "A-1",
+    "rotation_id": "papa-quinua-descanso",
+    "position_id": 1,
+    "campaigns": [
+     "papa",
+     "quinua",
+     "descanso"
+    ],
+    "decision_crop": "papa"
+   },
+   {
+    "case_id": "A-2",
+    "rotation_id": "papa-quinua-descanso",
+    "position_id": 2,
+    "campaigns": [
+     "quinua",
+     "descanso",
+     "papa"
+    ],
+    "decision_crop": "quinua"
+   },
+   {
+    "case_id": "A-3",
+    "rotation_id": "papa-quinua-descanso",
+    "position_id": 3,
+    "campaigns": [
+     "descanso",
+     "papa",
+     "quinua"
+    ],
+    "decision_crop": "descanso"
+   },
+   {
+    "case_id": "B-1",
+    "rotation_id": "papa-quinua-haba",
+    "position_id": 1,
+    "campaigns": [
+     "papa",
+     "quinua",
+     "haba"
+    ],
+    "decision_crop": "papa"
+   },
+   {
+    "case_id": "B-2",
+    "rotation_id": "papa-quinua-haba",
+    "position_id": 2,
+    "campaigns": [
+     "quinua",
+     "haba",
+     "papa"
+    ],
+    "decision_crop": "quinua"
+   },
+   {
+    "case_id": "B-3",
+    "rotation_id": "papa-quinua-haba",
+    "position_id": 3,
+    "campaigns": [
+     "haba",
+     "papa",
+     "quinua"
+    ],
+    "decision_crop": "haba"
+   },
+   {
+    "case_id": "C-1",
+    "rotation_id": "papa-haba-descanso",
+    "position_id": 1,
+    "campaigns": [
+     "papa",
+     "haba",
+     "descanso"
+    ],
+    "decision_crop": "papa"
+   },
+   {
+    "case_id": "C-2",
+    "rotation_id": "papa-haba-descanso",
+    "position_id": 2,
+    "campaigns": [
+     "haba",
+     "descanso",
+     "papa"
+    ],
+    "decision_crop": "haba"
+   },
+   {
+    "case_id": "C-3",
+    "rotation_id": "papa-haba-descanso",
+    "position_id": 3,
+    "campaigns": [
+     "descanso",
+     "papa",
+     "haba"
+    ],
+    "decision_crop": "descanso"
+   }
+  ],
+  "periods": [
+   {
+    "period_id": "1981-2000",
+    "start_campaign_year": 1981,
+    "end_campaign_year": 2000,
+    "label": "Histórico 1981–2000"
+   },
+   {
+    "period_id": "2001-2025",
+    "start_campaign_year": 2001,
+    "end_campaign_year": 2025,
+    "label": "Reciente 2001–2025"
+   }
+  ],
+  "water_budgets": [
+   {
+    "water_budget_id": "secano",
+    "net_limit_mm": 0,
+    "label": "Secano: sin riego (situación más común en Oruro)"
+   }
+  ],
+  "soil_profiles": [
+   {
+    "soil_profile_id": "soilgrids-0-60cm",
+    "nature": "map_estimate",
+    "label": "SoilGrids 2.0, promedio 0–60 cm",
+    "theta_fc": 0.272,
+    "theta_wp": 0.166,
+    "taw_mm_per_m": 106,
+    "clay_pct": 31.9,
+    "sand_pct": 37.9,
+    "silt_pct": 30.3,
+    "source_id": "isric-soilgrids",
+    "method": "Media ponderada por espesor de wv0033 (capacidad de campo) y wv1500 (punto de marchitez) hasta 60 cm"
+   },
+   {
+    "soil_profile_id": "local-obrajes",
+    "nature": "scenario_assumption",
+    "label": "Descripción del productor (P6): franco arcillo arenoso",
+    "theta_fc": 0.3,
+    "theta_wp": 0.15,
+    "taw_mm_per_m": 150,
+    "source": "content/soils.json alt-local-1: textura del productor + rango genérico NRCS 0,14–0,16 m/m (no medido)",
+    "method": "Agua disponible = punto medio del rango NRCS (0,15 m/m)"
+   }
+  ],
+  "limits": [
+   "Granizo: es la segunda causa de pérdida según el productor y NO se puede modelar con NASA POWER (P6-1)",
+   "Los umbrales de helada son de temperatura de la planta; POWER da aire a 2 m en una celda de ~50 km",
+   "El productor riega papa y haba con pozo: el riego neto requerido indica la presión sobre el pozo en años secos"
+  ],
+  "crops": {
+   "papa": {
+    "sowing": [
+     10,
+     1
+    ],
+    "stages": [
+     39,
+     45,
+     65,
+     46
+    ],
+    "kc": [
+     0.5,
+     1.15,
+     0.75
+    ],
+    "root_m": 0.5,
+    "p": 0.35,
+    "frost_flowering_c": -2.5,
+    "frost_lethal_c": -2.5,
+    "cover_max": 0.8,
+    "sources": {
+     "kc": "Allen et al. (1998) FAO-56, https://www.fao.org/3/x0490e/x0490e00.htm Tabla 12 (papa)",
+     "root_m": "Allen et al. (1998) FAO-56, https://www.fao.org/3/x0490e/x0490e00.htm Tabla 22 (0,4–0,6 m)",
+     "p": "Allen et al. (1998) FAO-56, https://www.fao.org/3/x0490e/x0490e00.htm Tabla 22",
+     "sowing": "Calendario de un productor de Obrajes, Soracachi (P6-1, content/crops.json, 14-nov-2026): siembra sep–oct → 1-oct",
+     "stages": "Calendario de un productor de Obrajes, Soracachi (P6-1, content/crops.json, 14-nov-2026): cosecha abr → 195 d (P6: 180–210 d)",
+     "frost": "Chen y Li (1980) vía P6-2: −2,5 °C (planta sin aclimatar; no es el aire a 2 m)",
+     "cover_max": "SUPUESTO de demostración; revisar con P6/INIAF"
+    }
+   },
+   "quinua": {
+    "sowing": [
+     10,
+     15
+    ],
+    "stages": [
+     26,
+     53,
+     64,
+     37
+    ],
+    "kc": [
+     0.5,
+     1.0,
+     0.7
+    ],
+    "root_m": 0.8,
+    "p": 0.55,
+    "frost_flowering_c": -2.0,
+    "frost_lethal_c": -8.0,
+    "cover_max": 0.7,
+    "sources": {
+     "kc": "García, Raes y Jacobsen (2003), Agricultural Water Management 60(2):119-134 (lisímetro, Altiplano boliviano)",
+     "root_m": "SUPUESTO de demostración; revisar con P6/INIAF (P6: referencia máx. 1,5 m, no calibrada)",
+     "p": "Cultivo tolerante a sequía; SUPUESTO de demostración; revisar con P6/INIAF",
+     "sowing": "Calendario de un productor de Obrajes, Soracachi (P6-1, content/crops.json, 14-nov-2026): siembra sep–nov → 15-oct",
+     "stages": "Calendario de un productor de Obrajes, Soracachi (P6-1, content/crops.json, 14-nov-2026): cosecha feb–abr → 180 d (P6: 150–210 d)",
+     "frost": "Jacobsen et al. (2000) vía P6-2: −8 °C en 2 hojas; antesis −2 °C (susceptible, se usa el conservador) a −4 °C (tolerante)",
+     "cover_max": "SUPUESTO de demostración; revisar con P6/INIAF"
+    }
+   },
+   "haba": {
+    "sowing": [
+     9,
+     1
+    ],
+    "stages": [
+     21,
+     48,
+     69,
+     42
+    ],
+    "kc": [
+     0.5,
+     1.15,
+     0.3
+    ],
+    "root_m": 0.6,
+    "p": 0.45,
+    "frost_flowering_c": -1.0,
+    "frost_lethal_c": -5.0,
+    "cover_max": 0.8,
+    "sources": {
+     "kc": "Allen et al. (1998) FAO-56, https://www.fao.org/3/x0490e/x0490e00.htm Tabla 12 (haba, grano seco)",
+     "root_m": "Allen et al. (1998) FAO-56, https://www.fao.org/3/x0490e/x0490e00.htm Tabla 22 (0,5–0,7 m)",
+     "p": "Allen et al. (1998) FAO-56, https://www.fao.org/3/x0490e/x0490e00.htm Tabla 22",
+     "sowing": "Calendario de un productor de Obrajes, Soracachi (P6-1, content/crops.json, 14-nov-2026): siembra jul–oct → 1-sep",
+     "stages": "Calendario de un productor de Obrajes, Soracachi (P6-1, content/crops.json, 14-nov-2026): cosecha ene–mar → 180 d (P6: 150–210 d)",
+     "frost": "CIREN (haba) y Valdivia (2002) vía P6-2: floración −1 °C, hoja letal −5 °C",
+     "cover_max": "SUPUESTO de demostración; revisar con P6/INIAF"
+    }
+   }
+  },
+  "fallow": {
+   "kc": 0.3,
+   "root_m": 0.3,
+   "p": 0.5,
+   "cover": 0.25,
+   "source": "Descanso con maleza y pastoreo de animales de vecinos (productor, P6-1): cobertura parcial, no suelo desnudo. Valor 25 % SUPUESTO de demostración; revisar con P6/INIAF"
+  },
+  "residue": {
+   "kc": 0.25,
+   "cover": 0.1,
+   "source": "Rastrojo tras la cosecha hasta el 31-jul; SUPUESTO de demostración; revisar con P6/INIAF"
+  },
+  "thresholds": {
+   "erosive_rain_mm": {
+    "value": 12.7,
+    "source": "Umbral de lluvia erosiva de Wischmeier y Smith (1978), USLE/RUSLE"
+   },
+   "bare_cover_fraction": {
+    "value": 0.3,
+    "source": "Cobertura <30 % se considera suelo expuesto (umbral usual en conservación de suelos); SUPUESTO de demostración; revisar con P6/INIAF"
+   },
+   "erosive_wind_ms": {
+    "value": 6.0,
+    "source": "Viento máximo diario a 2 m (POWER WS2M_MAX) ≥6 m/s, ~percentil 90 en Oruro; POWER suaviza ráfagas; SUPUESTO de demostración; revisar con P6/INIAF"
+   },
+   "stress_ks": {
+    "value": 0.5,
+    "source": "Día de estrés severo si Ks < 0,5 (FAO-56 ec. 84: la transpiración cae a menos de la mitad); umbral SUPUESTO de demostración; revisar con P6/INIAF"
+   },
+   "curve_number": {
+    "value": 75,
+    "source": "Escorrentía SCS, número de curva 75 (cultivo en hileras, suelo grupo B/C); SUPUESTO de demostración; revisar con P6/INIAF"
+   },
+   "pass_stress_fraction": {
+    "value": 0.3,
+    "source": "Regla de cumplimiento: estrés severo en ≤30 % de los días de cultivo (en secano el Altiplano tiene déficit casi todo el ciclo, por eso se mide el severo); SUPUESTO de demostración; revisar con P6/INIAF"
+   },
+   "pass_thermal_days": {
+    "value": 5,
+    "source": "Regla de cumplimiento: ≤5 días de helada dañina; SUPUESTO de demostración; revisar con P6/INIAF"
+   },
+   "pass_bare_rain_days": {
+    "value": 5,
+    "source": "Regla de cumplimiento: ≤5 días de lluvia erosiva con suelo expuesto; SUPUESTO de demostración; revisar con P6/INIAF"
+   }
+  },
+  "enso_rule": {
+   "index": "ONI (NOAA CPC, ERSSTv5)",
+   "season": "NDJ del año de la campaña de decisión (nov y – ene y+1)",
+   "thresholds": {
+    "Niño": "ONI ≥ +0,5 (incluye los fuertes)",
+    "Niño fuerte": "ONI ≥ +1,5",
+    "Niña": "ONI ≤ −0,5",
+    "Normal": "−0,5 < ONI < +0,5"
+   },
+   "persistence": "Se usa solo el trimestre NDJ (pico típico); no se exige la persistencia de 5 trimestres de la definición oficial",
+   "note": "Solo la primera campaña de la ventana se clasifica; las otras dos conservan su clima histórico real. ONI no equivale a Niño 1+2."
+  },
+  "et0": {
+   "method": "FAO-56 Penman-Monteith (ec. 6) con ea del punto de rocío; Hargreaves calibrada por mes si falta radiación",
+   "hargreaves_monthly_factors": {
+    "1": 1.011,
+    "2": 1.015,
+    "3": 1.053,
+    "4": 1.124,
+    "5": 1.225,
+    "6": 1.289,
+    "7": 1.312,
+    "8": 1.252,
+    "9": 1.179,
+    "10": 1.126,
+    "11": 1.099,
+    "12": 1.04
+   }
+  },
+  "ranking_rule": {
+   "weights": {
+    "water_stress_days": 0.3,
+    "net_irrigation_requirement_mm": 0.2,
+    "thermal_exposure_days": 0.15,
+    "bare_rain_exposure_days": 0.15,
+    "bare_wind_exposure_days": 0.1,
+    "planned_coverage_pct": 0.1
+   },
+   "directions": {
+    "water_stress_days": "minimize",
+    "net_irrigation_requirement_mm": "minimize",
+    "thermal_exposure_days": "minimize",
+    "bare_rain_exposure_days": "minimize",
+    "bare_wind_exposure_days": "minimize",
+    "planned_coverage_pct": "maximize"
+   },
+   "scope": "cycle_kpis",
+   "min_windows": 3
+  }
+ }
+}

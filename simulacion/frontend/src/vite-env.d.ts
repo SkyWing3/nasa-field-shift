@@ -4,6 +4,7 @@ interface ImportMetaEnv {
   readonly VITE_API_BASE_URL?: string;
   readonly VITE_BASEMAP_STYLE_URL?: string;
   readonly VITE_SATELLITE_TILES_URL?: string;
+  readonly VITE_RAIZ_COMPARADOR_URL?: string;
 }
 
 interface ImportMeta {

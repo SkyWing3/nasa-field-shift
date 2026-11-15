@@ -1,0 +1,48 @@
+{
+ "alert_id": "sismo-2026-11-11-3ac7b7a1",
+ "creada": "2026-11-15T00:19:13-04:00",
+ "estado": "pendiente_aprobacion",
+ "aprobada_por": null,
+ "aprobada_en": null,
+ "difusion": "no_difundida",
+ "tipo": "sismo",
+ "nivel": "informativa",
+ "fecha_evento": "2026-11-11T16:45:04.390000-04:00",
+ "zonas": [
+  {
+   "localidad": "Cruz de Machacamarca",
+   "distancia_km": 130.2,
+   "direccion": "suroeste",
+   "poblacion": 0
+  },
+  {
+   "localidad": "Huachacalla",
+   "distancia_km": 149.3,
+   "direccion": "suroeste",
+   "poblacion": 0
+  },
+  {
+   "localidad": "Andamarca",
+   "distancia_km": 216.0,
+   "direccion": "suroeste",
+   "poblacion": 0
+  }
+ ],
+ "n_evidencias": 1,
+ "evidencia": [
+  {
+   "id": "us7000txni",
+   "magnitud": 4.5,
+   "lugar_usgs": "41 km SSE of Camiña, Chile",
+   "lat": -19.6783,
+   "lon": -69.3312,
+   "profundidad_km": 112.957,
+   "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000txni",
+   "archivo": "20261115T0418Z-usgs-2.5-semana.geojson"
+  }
+ ],
+ "fuente": "USGS",
+ "confirmar_con": "Observatorio San Calixto y VIDECI",
+ "texto": "Aviso preliminar de Raíz. Se registró un sismo de magnitud 4.5 el 11 de noviembre de 2026 a las 16:45, hora de Bolivia, a 130 kilómetros al suroeste de Cruz de Machacamarca, a 113 kilómetros de profundidad. Revise viviendas, canales de riego, pozos y estanques. Información del Servicio Geológico de Estados Unidos, pendiente de confirmación del Observatorio San Calixto.",
+ "regla": "M ≥ 3,5 a ≤50 km, M ≥ 4,5 a ≤150 km o M ≥ 5,5 a ≤300 km de una localidad de Oruro"
+}

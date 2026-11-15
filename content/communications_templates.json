@@ -1,0 +1,207 @@
+{
+ "schema": "communications_templates_v1",
+ "templates": [
+  {
+   "id": "cmp_decision",
+   "text_es": "En años {fase} como este, comparamos {n_casos} formas de rotar su parcela. Este año tendría {cultivo_decision}. Revise las opciones con su técnico: ninguna es una orden.",
+   "placeholders": [
+    "cultivo_decision",
+    "fase",
+    "n_casos"
+   ],
+   "words": 26,
+   "reviewed_by": "P6",
+   "build_id": null
+  },
+  {
+   "id": "cmp_ciclo",
+   "text_es": "Mirando las tres campañas juntas ({cultivo_y} → {cultivo_y1} → {cultivo_y2}), esta opción quedó {posicion_ranking} de {n_casos}. El orden puede no cambiar al mover las prioridades.",
+   "placeholders": [
+    "cultivo_y",
+    "cultivo_y1",
+    "cultivo_y2",
+    "n_casos",
+    "posicion_ranking"
+   ],
+   "words": 25,
+   "reviewed_by": "P6",
+   "build_id": null
+  },
+  {
+   "id": "cmp_empate",
+   "text_es": "Estas opciones dieron resultados casi iguales. Decida con lo que conoce de su tierra: agua del pozo, semilla y trabajo disponible.",
+   "placeholders": [],
+   "words": 21,
+   "reviewed_by": "P6",
+   "build_id": null
+  },
+  {
+   "id": "agua_riego",
+   "text_es": "En años {fase} pasados, {cultivo} necesitó en promedio {riego_mm} mm de riego por campaña ({riego_m3ha} m³ por hectárea). Revise si su pozo alcanza.",
+   "placeholders": [
+    "cultivo",
+    "fase",
+    "riego_m3ha",
+    "riego_mm"
+   ],
+   "words": 23,
+   "reviewed_by": "P6",
+   "build_id": null
+  },
+  {
+   "id": "agua_secano",
+   "text_es": "La quinua crece con lluvia. En años {fase} pasados tuvo {dias_estres} días con poca agua por campaña. Converse con su técnico si eso le preocupa.",
+   "placeholders": [
+    "dias_estres",
+    "fase"
+   ],
+   "words": 25,
+   "reviewed_by": "P6",
+   "build_id": null
+  },
+  {
+   "id": "agua_presupuesto",
+   "text_es": "Con un límite de {presupuesto_mm} mm de riego, esta opción {cumple|no_cumple} el agua que pide el cultivo en {ventanas_ok} de {ventanas_validas} años parecidos.",
+   "placeholders": [
+    "cumple",
+    "presupuesto_mm",
+    "ventanas_ok",
+    "ventanas_validas"
+   ],
+   "words": 23,
+   "reviewed_by": "P6",
+   "build_id": null
+  },
+  {
+   "id": "cob_planificada",
+   "text_es": "Con esta rotación, el suelo queda cubierto {cobertura_pct} % del tiempo, según el calendario. Es un cálculo de manejo, no una foto del satélite.",
+   "placeholders": [
+    "cobertura_pct"
+   ],
+   "words": 24,
+   "reviewed_by": "P6",
+   "build_id": null
+  },
+  {
+   "id": "cob_descubierto",
+   "text_es": "Con esta opción, el suelo quedó descubierto {dias_lluvia} días con lluvia fuerte y {dias_viento} días con viento fuerte. Cubrirlo con rastrojo o pasto lo protege.",
+   "placeholders": [
+    "dias_lluvia",
+    "dias_viento"
+   ],
+   "words": 25,
+   "reviewed_by": "P6",
+   "build_id": null
+  },
+  {
+   "id": "cob_descanso",
+   "text_es": "Un descanso con maleza o rastrojo no es suelo pelado: protege más. Cuide que los animales no lo dejen sin nada de cobertura.",
+   "placeholders": [],
+   "words": 23,
+   "reviewed_by": "P6",
+   "build_id": null
+  },
+  {
+   "id": "helada_floracion",
+   "text_es": "En años {fase} pasados, durante la floración de {cultivo} hubo en promedio {dias_helada} noches más frías de {umbral_c} °C en la zona. Es historia, no un aviso para hoy.",
+   "placeholders": [
+    "cultivo",
+    "dias_helada",
+    "fase",
+    "umbral_c"
+   ],
+   "words": 29,
+   "reviewed_by": "P6",
+   "build_id": null
+  },
+  {
+   "id": "lim_zona",
+   "text_es": "Estos datos son de toda la zona (unos 50 km), no de su chacra. Compárelos con lo que usted ve en su parcela.",
+   "placeholders": [],
+   "words": 23,
+   "reviewed_by": "P6",
+   "build_id": null
+  },
+  {
+   "id": "lim_granizo",
+   "text_es": "El granizo no se puede medir con estos datos. Si en su zona graniza seguido, téngalo en cuenta aparte.",
+   "placeholders": [],
+   "words": 19,
+   "reviewed_by": "P6",
+   "build_id": null
+  },
+  {
+   "id": "lim_muestra",
+   "text_es": "Este resultado sale de {n} años parecidos. Con tan pocos años, tómelo como una referencia y no como algo seguro.",
+   "placeholders": [
+    "n"
+   ],
+   "words": 20,
+   "reviewed_by": "P6",
+   "build_id": null
+  },
+  {
+   "id": "lim_muestra_baja",
+   "text_es": "Hay solo {n} años parecidos en los datos. No alcanza para sacar una conclusión: no mostramos comparación para este caso.",
+   "placeholders": [
+    "n"
+   ],
+   "words": 20,
+   "reviewed_by": "P6",
+   "build_id": null
+  },
+  {
+   "id": "lim_suelo",
+   "text_es": "El suelo no fue medido: usamos un valor típico para tierra \"medio arcillosa arenosa\", como la describió un productor de Obrajes.",
+   "placeholders": [],
+   "words": 21,
+   "reviewed_by": "P6",
+   "build_id": null
+  },
+  {
+   "id": "lim_no_orden",
+   "text_es": "Raíz no le dice qué sembrar. Le muestra cómo les fue a estas opciones en años pasados. La decisión es suya y de su técnico.",
+   "placeholders": [],
+   "words": 25,
+   "reviewed_by": "P6",
+   "build_id": null
+  },
+  {
+   "id": "sin_datos_kpi",
+   "text_es": "No hay datos suficientes para calcular esto ({motivo}). Preferimos no mostrar un número antes que inventarlo.",
+   "placeholders": [
+    "motivo"
+   ],
+   "words": 16,
+   "reviewed_by": "P6",
+   "build_id": null
+  },
+  {
+   "id": "sin_datos_fuente",
+   "text_es": "No pudimos comparar con una segunda fuente de lluvia. Este resultado usa solo datos de la NASA (POWER).",
+   "placeholders": [],
+   "words": 18,
+   "reviewed_by": "P6",
+   "build_id": null
+  },
+  {
+   "id": "sin_datos_archivo",
+   "text_es": "Este archivo no está disponible ahora. Pruebe más tarde o pida la ficha impresa a su técnico.",
+   "placeholders": [],
+   "words": 17,
+   "reviewed_by": "P6",
+   "build_id": null
+  },
+  {
+   "id": "vencido",
+   "text_es": "Estos resultados se calcularon el {fecha_build} con datos hasta {fecha_datos}. Pueden haber datos más nuevos: consulte la versión actual antes de decidir.",
+   "placeholders": [
+    "fecha_build",
+    "fecha_datos"
+   ],
+   "words": 22,
+   "reviewed_by": "P6",
+   "build_id": null
+  }
+ ]
+}

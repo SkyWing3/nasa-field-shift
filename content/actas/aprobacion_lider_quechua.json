@@ -1,0 +1,10 @@
+{
+  "decision": "Incluir el audio en quechua (boletin_qu_productor.mp3) en el MVP con la etiqueta indicada en el acta P5-2",
+  "estado": "aprobado",
+  "aprobado_por": "Líder del equipo",
+  "fecha": "2026-11-15T02:21:16-04:00",
+  "via": "Confirmación escrita de la líder en la sesión de trabajo con el asistente (respuesta «Sí, aprobado»)",
+  "acta_relacionada": "content/actas/P5-2_acta_revision_audio.pdf",
+  "etiqueta_obligatoria": "Leído y grabado por un productor de la comunidad (sin nombre, con su autorización). El audio incluye repeticiones breves propias del habla.",
+  "audio_sha256": "0d6086174b51a5c3e613b9433f09fa98c8f25503c6f75b48873868784ec1d87c"
+}

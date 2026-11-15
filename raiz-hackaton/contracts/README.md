@@ -1,7 +1,7 @@
-# Raíz · contrato del MVP integrado v3
+# Raíz · contrato del MVP integrado v3.1
 
 Especificación para implementar; estos archivos no son resultados agrícolas ya
-construidos. Plan: `plan-equipo.json`, versión `2026-11-14-altiplano-fusion-v3`.
+construidos. Plan: `plan-equipo.json`, versión `2026-11-14-altiplano-fusion-v3.1`.
 Zona horaria de presentación: America/La_Paz.
 
 ## Alcance y responsables
@@ -11,7 +11,7 @@ Zona horaria de presentación: America/La_Paz.
 - Papa, quinua, haba y descanso. Secuencias de tres campañas anuales: base
   candidata papa/quinua/descanso; alternativas papa/quinua/haba y papa/haba/descanso.
   `baseline_status: assumed` hasta confirmar orden en una parcela y riego.
-- D1: descarga, QA, ONI, clima, balance y resultados. D2 (Franco): validar/publicar
+- D1: descarga, QA, ONI, clima, balance y resultados. D2 (Nicole): validar/publicar
   paquetes, ficha, mensajes, audio y radio. D3: controles y accesibilidad.
   P6: agronomía y fuentes; P5: contenido/pruebas; P4: formato/hora y entrega.
 - Procesamiento por lotes, JSON precalculado y servidor estático HTTPS.
@@ -75,8 +75,9 @@ ventana de ONI antes de clasificar; no equivale a Niño 1+2 ni predicción agrí
    seco tres veces ni suponer ENSO persistente. Mostrar campañas y regla usada.
 
 Nov–mar cruza el año civil. Cada ventana exige tres campañas consecutivas completas.
-Las tres secuencias comienzan en fase declarada, con idéntica meteorología, suelo
-y manejo comparable. Excluir ventanas que crucen periodos de comparación y
+Cada secuencia se evalúa en sus tres posiciones cíclicas (nueve casos).
+Declarar la posición y el cultivo de decisión, con meteorología, suelo,
+inicialización hídrica y manejo comparables; no exigir papa en todos los inicios. Excluir ventanas que crucen periodos de comparación y
 registrar motivo. Mostrar ventanas válidas y campañas únicas: ventanas solapadas
 no son independientes. Muestra insuficiente: no concluir robustez; sin ventanas:
 KPI/ranking `null` con motivo. No forzar un ranking diferente para la demo.
@@ -89,9 +90,10 @@ fuente/método. Un calendario aportado no confirma el orden en la misma parcela.
 
 ## Resultados y controles
 
-Cada registro contiene `result_id`, `build_id`, punto, secuencia, `period_id`,
+Cada registro contiene `result_id`, `build_id`, punto, secuencia, `position_id`, `case_id`, `decision_crop`, `period_id`,
 `enso_initial_phase`, ventanas y n, `water_budget_id`, suelo, calendario, fase
-inicial, residuos, KPI por ventana/agregado, fuente/método/unidad y exclusiones.
+inicial, residuos, `decision_kpis` para la campaña y y `cycle_kpis` para y/y+1/y+2,
+KPI por ventana/agregado, fuente/método/unidad y exclusiones.
 
 El catálogo enumera presupuestos ya calculados. Secano se usa solo si procede;
 valores hipotéticos adicionales son entradas, no límites agronómicos oficiales.
@@ -134,15 +136,15 @@ representativa, no declarar validación de campo.
 
 ## Ficha, texto, audio y radio
 
-Ficha/audio se enlazan a `result_id`, `build_id`, periodo, escenario inicial,
-presupuesto y secuencia. Texto/audio expresan lo mismo. Sin audio coincidente,
+Ficha/audio se enlazan a `result_id`, `build_id`, periodo, ENSO de decisión,
+presupuesto, secuencia, posición y caso. Distinguir KPI de decisión y ciclo. Texto/audio expresan lo mismo. Sin audio coincidente,
 mostrar no disponible o resumen general claramente identificado; no reproducir
 mensaje de otro escenario como específico.
 
 Separar fecha de datos de `issued_at` y `valid_until`: vigencia editorial, no
 horizonte meteorológico. Español revisado; otros idiomas fuera si no hay hablante
 y revisión agronómica. Licencia de voz registrada. Reproducción al pulsar, texto
-equivalente y descarga real. Ficha imprimible con tres opciones, selección, n,
+equivalente y descarga real. Ficha imprimible con tres secuencias y sus posiciones (9 casos), selección, cultivo de decisión, n,
 suelo, presupuesto, reglas, fuentes y límites; impresión nativa suficiente.
 
 Boletín regional general de hasta 60 s con zona, fuente, fecha y vigencia editorial.
@@ -163,3 +165,52 @@ impresión y audio. No hay formulario agrícola ni sincronización offline.
 Meta interna domingo 10:30–11:00 Bolivia frente al cierre local de 12:00 indicado
 en la fusión, por confirmar por P4; adelantar si organización exige antes. Se
 retira el cronograma de entrega a las 22:00/23:59.
+
+## Corrección integrada P6 · v3.1 · 14-nov-2026 19:10
+
+El documento `correcciones_raiz_v3_compacto.md` modifica el plan principal:
+
+- A: papa/quinua/descanso; quinua/descanso/papa; descanso/papa/quinua.
+- B: papa/quinua/haba; quinua/haba/papa; haba/papa/quinua.
+- C: papa/haba/descanso; haba/descanso/papa; descanso/papa/haba.
+
+Son tres secuencias por tres posiciones, nueve casos; no nueve secuencias nuevas.
+Catálogo/rotations.json debe enumerar posición, caso y cultivo de decisión.
+D1/D2/D3 acuerdan los valores de IDs; estos campos no prueban que el adaptador
+inicial de fixtures ya soporte el nuevo paquete científico.
+
+Campaña y = nov y–mar y+1. Ventana = y, y+1, y+2 completas; última decisión
+y=2023 con datos hasta 2026-11-10. Se requieren datos hasta marzo de 2026 para
+la campaña 2025; 2026 parcial no se inventa ni se presenta como campaña futura.
+Mantener los periodos y exclusiones comparables; documentar por año de campaña.
+
+Fase de decisión: ONI NDJ, YR=y, Niño >=0,5, Niña <=-0,5, Normal entre umbrales.
+La clasificación operativa por campaña no reemplaza la definición de evento
+con persistencia. y+1/y+2 conservan su clima histórico. Niño fuerte: ONI >=1,5.
+El n=5 comunicado por P6 se recalcula para el punto y las ventanas válidas;
+mostrar n de ventanas y campañas únicas, sin conclusión si n<3.
+No mezclar KPI de campaña con KPI de ciclo en un ranking. La web muestra el
+cultivo de decisión, sus KPI y n; debajo, el ciclo del caso seleccionado.
+
+### Contexto y cifra histórica
+
+Se permite citar pronóstico estacional NOAA/IRI como contexto externo fechado,
+no como pronóstico agrícola de Raíz. IRI Quick Look 19-oct-2026 y NOAA CPC
+12-nov-2026 consultados el 14-nov; ver enlaces en la página del plan.
+No implica sequía asegurada en Oruro ni habilita pronósticos propios a 24 horas.
+Niño 1+2 no es ONI; la anomalía >+5 °C corresponde al informe IRI de octubre,
+no a una medición agrícola ni necesariamente a la última lectura disponible.
+
+P6 informa cuaderno `prueba_descarte_oruro.ipynb`; aún no está en esta copia.
+D1 reproduce con punto final P6-1. Punto preliminar reportado: ciudad de Oruro
+(-17,97; -67,11), sin atribuirlo a finca validada. Método de la estadística:
+POWER AG diario PRECTOTCORR/T2M_MIN 1981-01-01..2026-11-10, lluvia nov–mar,
+excluir menos de 140 días válidos; ONI NDJ. Normal = media de campañas Normales.
+El filtro >=140 días solo aplica a esa reproducción; el modelo sigue exigiendo
+campañas completas. Normal 365 mm (n=13), cinco episodios y promedios del informe
+son reportados, no reproducidos aquí. P4 usa «4 de 5» solo tras reproducción
+final y lo llama frecuencia histórica con n=5, nunca probabilidad.
+
+D1 + D3: nueve casos antes de Sáb 23:30. P6 → P4: afirmaciones/pitch Sáb 21:00.
+P6 → D1: cuaderno/reproducción Sáb 21:00. No se declara implementado el cálculo
+por haber actualizado el plan.

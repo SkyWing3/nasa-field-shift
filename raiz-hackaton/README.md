@@ -1,12 +1,29 @@
 # Raíz · Centro de coordinación del hackatón
 
-Página en español con el enunciado traducido, el plan integrado v3 y el tablero compartido. La fusión y las mejoras están adoptadas en el contenido principal, el alcance, las fichas y las tareas; no son anexos con alcances alternativos.
+## Desarrollo Dev 2 · Nicole
 
-## Plan vigente v3
+La base inicial de publicación agrícola vive en `raiz_delivery/`, separada del
+servidor de coordinación. Para retomar el trabajo, leer
+[`docs/dev2/CONTINUAR.md`](docs/dev2/CONTINUAR.md); el plan y la bitácora están en
+[`docs/dev2/PROCESO.md`](docs/dev2/PROCESO.md). Comprobación ejecutable:
+
+```sh
+python scripts/check_dev2.py
+```
+
+Esta primera versión trabaja **solo con fixtures sin métricas científicas**.
+Prepara JSON, mensajes y fichas; informa audio y boletín ausentes. No incluye
+datos NASA/NOAA reales, FastAPI, MP3 ni hosting HTTPS. El paquete real y las
+revisiones D1/P5/P6/D3 siguen pendientes. La copia de trabajo no incluye la
+base activa del tablero original.
+
+Página en español con el enunciado traducido, el plan integrado v3.1 y el tablero compartido. La fusión y las mejoras están adoptadas en el contenido principal, el alcance, las fichas y las tareas; no son anexos con alcances alternativos.
+
+## Plan vigente v3.1
 
 - Una zona piloto en Oruro; confirmar punto, orden de cultivos en una parcela y riego con el productor.
-- Tres secuencias de tres campañas anuales: papa/quinua/descanso, papa/quinua/haba y papa/haba/descanso. Son candidatas hasta confirmación local.
-- NASA POWER descargado + ONI de NOAA. Comparación histórica/reciente y clasificación ENSO de la campaña inicial como ejes distintos.
+- Tres secuencias de tres campañas anuales: papa/quinua/descanso, papa/quinua/haba y papa/haba/descanso. Cada una se evalúa en tres posiciones cíclicas: nueve casos. Son candidatas hasta confirmación local.
+- NASA POWER descargado + ONI NDJ de NOAA. Comparación histórica/reciente y ENSO de la campaña de decisión como ejes distintos; KPI de esa campaña y del ciclo separados. Niño fuerte con n visible, sin conclusión si n<3.
 - Agua, estrés, cobertura, exposición térmica, suelo descubierto coincidente con lluvia/viento, robustez y calidad de evidencia. Sensibilidad entre fuentes cuando haya contraste utilizable; si no, declararla no evaluada.
 - Resultados JSON precalculados; web accesible, ficha imprimible, audio español y boletín regional MP3. FastAPI solo si ya está integrado; no dependencia nueva.
 - Fuera: Santa Cruz, MODIS obligatorio, pronóstico/corrección a 24 h, «¿Acertamos?», observaciones comunitarias, SQLite agrícola, Telegram y modo offline.
@@ -56,6 +73,29 @@ Cualquier persona que acceda puede leer el contenido y modificar las tareas. Est
 
 Las tareas se guardan en el servidor, no en cada navegador. La exportación JSON permite descargar una copia; no hay importación en esta versión. El contenido informativo funciona como HTML estático, pero el tablero requiere `server.py`.
 
-El reto es «Field Shift: Adapting Farms with NASA Data» (NASA Space Apps 2026). La integración del 14 de noviembre de 2026 usa la propuesta de fusión y el informe de observaciones críticas; sus cifras ENSO no reproducidas y puntuaciones estimadas no se adoptan como evidencia verificada. El calendario aportado por el productor se distingue de la secuencia y el riego aún por confirmar.
+El reto es «Field Shift: Adapting Farms with NASA Data» (NASA Space Apps 2026). La integración del 14 de noviembre de 2026 usa la propuesta de fusión y el informe de observaciones críticas; las correcciones P6 del 14-nov 19:10 se integran en v3.1. El pronóstico NOAA/IRI se cita solo como contexto externo con fecha/fuente. La cifra 4 de 5 queda condicionada a reproducción D1 del cuaderno con el punto final; no es probabilidad. Las puntuaciones estimadas no son evidencia ni notas oficiales. El calendario aportado por el productor se distingue de la secuencia y el riego aún por confirmar.
 
 Este repositorio sigue siendo el centro de coordinación: no calcula todavía recomendaciones agrícolas ni publica los JSON/MP3 previstos en el contrato. La base SQLite y `/api/tasks` organizan al equipo; retirar SQLite agrícola del MVP no implica eliminar el tablero.
+
+## Correcciones P6 incorporadas · v3.1
+
+El HTML servido (`dist/index.html`), la copia autocontenida (`raiz.html`),
+`plan-equipo.json`, las fichas exportables y `contracts/README.md` comparten las
+correcciones: nueve casos cíclicos, contexto externo con fuentes fechadas y
+reproducción pendiente de «4 de 5». Véase `docs/actualizacion-plan-v3.1.md`.
+La base inicial Dev 2 sigue siendo fixture de tres registros sin métricas;
+no implementa aún los nueve casos científicos del plan actualizado.
+
+### Servidor de coordinación en Windows
+
+Desde esta carpeta: `python server.py --host 127.0.0.1 --port 8787`.
+Abrir http://127.0.0.1:8787. Para un túnel temporal en otra terminal:
+
+```powershell
+cloudflared tunnel --url http://127.0.0.1:8787
+```
+
+La instancia preparada en esta sesión usa la copia de trabajo actualizada,
+con snapshot consistente del tablero original. Se preservaron IDs, responsables
+y estados; se actualizaron títulos por código y se guardó la revisión anterior
+para trazabilidad. El proyecto original no fue sobrescrito.

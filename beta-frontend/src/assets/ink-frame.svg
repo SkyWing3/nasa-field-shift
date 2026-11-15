@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 180" preserveAspectRatio="none">
+  <!-- Marco original de Raíz. Trazos secos, sin alterar ni filtrar el contenido. -->
+  <g fill="none" stroke="#3c3835" stroke-linecap="square" stroke-linejoin="miter">
+    <path stroke-width="1.8" d="M3 3 122 3.5 246 2.8 397 3.1 396.5 64 397 177 244 176.5 105 177 3.1 176.7 3.5 91Z"/>
+    <path stroke-width=".6" opacity=".8" d="M6.7 6.5 131 6.3 264 6.9 393.4 6.5 393 84 393.6 173 274 173.4 136 173 6.6 173.4 7 92Z"/>
+    <path stroke-width=".6" opacity=".6" d="m13 1 66 .5M329 178l56-.7M1 39l.4 57"/>
+  </g>
+</svg>

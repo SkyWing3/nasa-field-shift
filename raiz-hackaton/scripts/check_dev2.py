@@ -6,21 +6,27 @@ import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from uuid import uuid4
 
 ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--audio-assets', help='Catálogo/MP3 existentes y verificados; no sintetiza voz')
 args = parser.parse_args()
-build_step = ['-m', 'raiz_delivery', 'build', '--input', 'fixtures/dev2-v31', '--output', 'build/package-v31-final']
+# Cada verificación trabaja en su propio sitio: nunca cambia el puntero de la
+# publicación real ni reusa paquetes generados con una versión vieja del código.
+run_root = ROOT / 'build' / 'checks' / uuid4().hex
+package_path = str(run_root / 'package')
+site_path = str(run_root / 'site')
+build_step = ['-m', 'raiz_delivery', 'build', '--input', 'fixtures/dev2-v31', '--output', package_path]
 if args.audio_assets:
     build_step += ['--audio-assets', args.audio_assets]
 steps = [
     ['-m', 'compileall', '-q', 'raiz_delivery', 'scripts', 'tests'],
     ['-m', 'unittest', 'discover', '-s', 'tests', '-v'],
-    ['-m', 'raiz_delivery', 'analyze', '--input', 'fixtures/dev2-v31', '--output', 'build/input-quality.json'],
+    ['-m', 'raiz_delivery', 'analyze', '--input', 'fixtures/dev2-v31', '--output', str(run_root / 'input-quality.json')],
     build_step,
-    ['-m', 'raiz_delivery', 'check', '--package', 'build/package-v31-final'],
-    ['-m', 'raiz_delivery', 'publish', '--package', 'build/package-v31-final', '--site-root', 'build/agricultural-site'],
+    ['-m', 'raiz_delivery', 'check', '--package', package_path],
+    ['-m', 'raiz_delivery', 'publish', '--package', package_path, '--site-root', site_path],
 ]
 records = []
 for step in steps:

@@ -141,8 +141,11 @@ def _validate_translation(item, message, communications, root, *, bulletin=False
     require(item.get('text_sha256') == text_sha256(item.get('text')), 'El audio no corresponde al texto traducido')
     path, duration = _file_checks(item, root, bulletin=bulletin)
     translation = item.get('translation')
-    require(isinstance(translation, dict) and translation.get('method') in ('machine', 'human'), 'Procedencia de traducción requerida')
-    if translation['method'] == 'machine':
+    require(isinstance(translation, dict) and translation.get('method') in ('machine', 'human', 'human_recording'), 'Procedencia de traducción requerida')
+    if translation['method'] == 'human_recording':
+        require(isinstance(translation.get('reader'), str) and bool(translation['reader']), 'Grabación humana sin lector declarado')
+        require(isinstance(item.get('note'), str) and bool(item['note'].strip()), 'Grabación humana sin nota obligatoria')
+    elif translation['method'] == 'machine':
         require(isinstance(translation.get('model'), str) and bool(translation['model']), 'Traducción automática sin modelo declarado')
     else:
         require(isinstance(translation.get('translator'), str) and bool(translation['translator']), 'Traducción humana sin traductor declarado')

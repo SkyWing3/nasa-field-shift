@@ -1,0 +1,411 @@
+{
+  "schema_version": "1.0",
+  "build_id": "raiz-oruro-power-20261111-v1",
+  "mode": "simulated",
+  "items": [
+    {
+      "kind": "message",
+      "communication_id": "message-p2001-2025.nino-fuerte.secano.A-1",
+      "result_id": "p2001-2025.nino-fuerte.secano.A-1",
+      "case_id": "A-1",
+      "build_id": "raiz-oruro-power-20261111-v1",
+      "source_pcm_rms": 3753.497,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-spa",
+        "language": "es",
+        "model_revision": "833b96c0278c85cf09776d565ba8f1cb2819f7ec",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [
+        "w",
+        "³"
+      ],
+      "text_sha256": "2d96e22c8a33697be8f36d4926f974fc9aa3f539877afd910cd12e99344e5460",
+      "spoken_text_sha256": "b37f44c7197d2dfcbb32b93fec8c48835c05d7fedcced69a4d6f2c7cebd99b60",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "path": "audio/p2001-2025.nino-fuerte.secano.A-1.mp3",
+      "sha256": "4ba2f294e0747b39c236e2538bad25508982376d663e49292a59a23722ba0903",
+      "bytes": 478224,
+      "duration_seconds": 79.704
+    },
+    {
+      "kind": "message",
+      "communication_id": "message-p2001-2025.nino-fuerte.secano.A-2",
+      "result_id": "p2001-2025.nino-fuerte.secano.A-2",
+      "case_id": "A-2",
+      "build_id": "raiz-oruro-power-20261111-v1",
+      "source_pcm_rms": 3832.481,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-spa",
+        "language": "es",
+        "model_revision": "833b96c0278c85cf09776d565ba8f1cb2819f7ec",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [
+        "w"
+      ],
+      "text_sha256": "6f684e47118e6d5ae9caaf49a75d9fa3c65b5fe79731e9e38708fed07b20ed5a",
+      "spoken_text_sha256": "2d400278b2a9cb060ca3444cf7130cba24e38fe73829c804ed7ad4131635db17",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "path": "audio/p2001-2025.nino-fuerte.secano.A-2.mp3",
+      "sha256": "8f4d6bdcf046ef3b4497b51d3fda4c22f3f2acc451419ff507db69af5f38c856",
+      "bytes": 470664,
+      "duration_seconds": 78.444
+    },
+    {
+      "kind": "message",
+      "communication_id": "message-p2001-2025.nino-fuerte.secano.A-3",
+      "result_id": "p2001-2025.nino-fuerte.secano.A-3",
+      "case_id": "A-3",
+      "build_id": "raiz-oruro-power-20261111-v1",
+      "source_pcm_rms": 3804.144,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-spa",
+        "language": "es",
+        "model_revision": "833b96c0278c85cf09776d565ba8f1cb2819f7ec",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [
+        "w"
+      ],
+      "text_sha256": "81e6b2c7cf1a111efc1a3aa97c170702f6ce1054b88da81956ca8560fe17b35f",
+      "spoken_text_sha256": "c85185d8819d41ab9ba1050608c0d4d93777ffb8deae6eef242d479e846c98e6",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "path": "audio/p2001-2025.nino-fuerte.secano.A-3.mp3",
+      "sha256": "f7c7ca114e65947d253d88892bf646fc3b76930b651b15a1f191c4f3f18623df",
+      "bytes": 359208,
+      "duration_seconds": 59.868
+    },
+    {
+      "kind": "message",
+      "communication_id": "message-p2001-2025.nino-fuerte.secano.B-1",
+      "result_id": "p2001-2025.nino-fuerte.secano.B-1",
+      "case_id": "B-1",
+      "build_id": "raiz-oruro-power-20261111-v1",
+      "source_pcm_rms": 3737.42,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-spa",
+        "language": "es",
+        "model_revision": "833b96c0278c85cf09776d565ba8f1cb2819f7ec",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [
+        "w",
+        "³"
+      ],
+      "text_sha256": "d4b3b77ff989d9f6ae3d34758f15038f3aaedb25dd354f3f547a5e26ff461efa",
+      "spoken_text_sha256": "1cec914f83f4f56ea50f49d543e9aae3ba0354d24361be2bcf7ef0507563d57b",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "path": "audio/p2001-2025.nino-fuerte.secano.B-1.mp3",
+      "sha256": "e46f35103bfcb3ebc74c6696c7ab0625931088462407753631121c5703bd5ebc",
+      "bytes": 478440,
+      "duration_seconds": 79.74
+    },
+    {
+      "kind": "message",
+      "communication_id": "message-p2001-2025.nino-fuerte.secano.B-2",
+      "result_id": "p2001-2025.nino-fuerte.secano.B-2",
+      "case_id": "B-2",
+      "build_id": "raiz-oruro-power-20261111-v1",
+      "source_pcm_rms": 3797.518,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-spa",
+        "language": "es",
+        "model_revision": "833b96c0278c85cf09776d565ba8f1cb2819f7ec",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [
+        "w"
+      ],
+      "text_sha256": "4a679540cb1833b2c68c0794ba18f13af6d0db1d99c8f4df387602d70f625053",
+      "spoken_text_sha256": "db3f154f8efbae4adfd9aa6c379ba67ff9af1ade4fe8e50403cbe784ac172b30",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "path": "audio/p2001-2025.nino-fuerte.secano.B-2.mp3",
+      "sha256": "0ed3eaf0137384367ed0c1d1e39cbb6ecd1b8bb1a308e10ba1fe2748fe8871e9",
+      "bytes": 470448,
+      "duration_seconds": 78.408
+    },
+    {
+      "kind": "message",
+      "communication_id": "message-p2001-2025.nino-fuerte.secano.B-3",
+      "result_id": "p2001-2025.nino-fuerte.secano.B-3",
+      "case_id": "B-3",
+      "build_id": "raiz-oruro-power-20261111-v1",
+      "source_pcm_rms": 3740.673,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-spa",
+        "language": "es",
+        "model_revision": "833b96c0278c85cf09776d565ba8f1cb2819f7ec",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [
+        "w",
+        "³"
+      ],
+      "text_sha256": "390564683d169f48087de05ff8ffca4dd82dc766a1820690218e3452008320e5",
+      "spoken_text_sha256": "6fe46689dc7df6a47d6e78a0c8818039e2416ca0c7b8b71e6428e579e91cbdd3",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "path": "audio/p2001-2025.nino-fuerte.secano.B-3.mp3",
+      "sha256": "afa8dd45055528f38090bdffec9dd4f6019536d47e0be3675700e769f2c8868d",
+      "bytes": 464832,
+      "duration_seconds": 77.472
+    },
+    {
+      "kind": "message",
+      "communication_id": "message-p2001-2025.nino-fuerte.secano.C-1",
+      "result_id": "p2001-2025.nino-fuerte.secano.C-1",
+      "case_id": "C-1",
+      "build_id": "raiz-oruro-power-20261111-v1",
+      "source_pcm_rms": 3745.917,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-spa",
+        "language": "es",
+        "model_revision": "833b96c0278c85cf09776d565ba8f1cb2819f7ec",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [
+        "w",
+        "³"
+      ],
+      "text_sha256": "fbc35a01600e6fdf36ceb85441c588206931f66f7be3f9af896a4b1414d4e78d",
+      "spoken_text_sha256": "412e1167aef653aaa234d4b5981dedaccc1e0ea2ae22f740e6e52b2520f57d64",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "path": "audio/p2001-2025.nino-fuerte.secano.C-1.mp3",
+      "sha256": "c03716ed50655cad1bc60be3b16c72728757954e98124492bfb2d56e60031793",
+      "bytes": 477360,
+      "duration_seconds": 79.56
+    },
+    {
+      "kind": "message",
+      "communication_id": "message-p2001-2025.nino-fuerte.secano.C-2",
+      "result_id": "p2001-2025.nino-fuerte.secano.C-2",
+      "case_id": "C-2",
+      "build_id": "raiz-oruro-power-20261111-v1",
+      "source_pcm_rms": 3722.361,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-spa",
+        "language": "es",
+        "model_revision": "833b96c0278c85cf09776d565ba8f1cb2819f7ec",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [
+        "w",
+        "³"
+      ],
+      "text_sha256": "120c201f8bc6849cc3d5c1948debe11a615ec50d23ee341f371858e67578f275",
+      "spoken_text_sha256": "c096cd9a1b50bf90cc8a62d466d69ef04e1b5f11dd2270e3c7d38f0b682c46f6",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "path": "audio/p2001-2025.nino-fuerte.secano.C-2.mp3",
+      "sha256": "05f3f3fbc2b218395223af33c9349133b683db84aa0e7371bf760f52980cb421",
+      "bytes": 464184,
+      "duration_seconds": 77.364
+    },
+    {
+      "kind": "message",
+      "communication_id": "message-p2001-2025.nino-fuerte.secano.C-3",
+      "result_id": "p2001-2025.nino-fuerte.secano.C-3",
+      "case_id": "C-3",
+      "build_id": "raiz-oruro-power-20261111-v1",
+      "source_pcm_rms": 3788.98,
+      "voice": {
+        "provider": "Meta MMS-TTS vía Hugging Face (ejecución local)",
+        "name": "facebook/mms-tts-spa",
+        "language": "es",
+        "model_revision": "833b96c0278c85cf09776d565ba8f1cb2819f7ec",
+        "seed": 1234,
+        "speaking_rate": 1.0,
+        "encoder": "LAME (lameenc) MP3 48 kbps mono 16 kHz"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Modelos Meta MMS/NLLB publicados con CC BY-NC 4.0 (licencia leída en la ficha de Hugging Face el 2026-11-14). Uso no comercial con atribución a Meta. Si el proyecto pasa a uso comercial, sustituir la voz."
+      },
+      "dropped_characters": [
+        "w"
+      ],
+      "text_sha256": "19a9dba5251f121b31c9ff8fd81778dc545dcf9bb571bc4218988687b9bd7e1f",
+      "spoken_text_sha256": "b4c07decb883723ed967554e547480fbfca2715388832883554ccd1505ec9285",
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "path": "audio/p2001-2025.nino-fuerte.secano.C-3.mp3",
+      "sha256": "d31962a882c8c63e4cfaff73154f9db2261a9dbde727b1c9acb05391693ca1b1",
+      "bytes": 358776,
+      "duration_seconds": 59.796
+    },
+    {
+      "kind": "regional_bulletin",
+      "communication_id": "regional-bulletin",
+      "result_id": null,
+      "case_id": null,
+      "build_id": "raiz-oruro-power-20261111-v1",
+      "path": "audio/regional-bulletin.mp3",
+      "sha256": "307625bcd4c5f38b88bd92f6a8d10bf907c88c86a4833baa5e0a579ceb1a4107",
+      "bytes": 139869,
+      "duration_seconds": 46.584,
+      "text_sha256": "9e4ae1bd02b2945420cff78bbb95399ddb222b0385f363a8502ff5d3508648d1",
+      "voice": {
+        "provider": "Meta MMS-TTS",
+        "name": "facebook/mms-tts-spa",
+        "language": "es"
+      },
+      "license": {
+        "status": "licensed",
+        "spdx": "CC-BY-NC-4.0",
+        "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "notes": "Meta MMS-TTS; uso no comercial con atribución"
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "P5 (acta P5-2)",
+        "reviewed_at": "2026-11-14T23:55:00-04:00"
+      }
+    },
+    {
+      "kind": "bulletin_translation",
+      "communication_id": "regional-bulletin",
+      "result_id": null,
+      "case_id": null,
+      "build_id": "raiz-oruro-power-20261111-v1",
+      "path": "audio/regional-bulletin.que.mp3",
+      "sha256": "0d6086174b51a5c3e613b9433f09fa98c8f25503c6f75b48873868784ec1d87c",
+      "bytes": 788315,
+      "duration_seconds": 49.266939,
+      "language": "que",
+      "language_name": "Quechua (voz de un productor de Obrajes)",
+      "text": "Soracachi ayllukunapaq willakuy.\nNiño watakunapiqa, kaypi pisillata paran.\nPichqa sinchi Niño watakunamanta, tawapi pisillata pararqa.\nQasaqa papata, hawastawan t'ikasqa kaqtin waqllichinman.\nImata tarpunaykita manaraq akllaspa, técnicoykiwan rimariy.",
+      "text_sha256": "4e517b9101c206b68f22e5cf343eceb49bc265942241aaea8cac400ba2685748",
+      "source_text_sha256": "9e4ae1bd02b2945420cff78bbb95399ddb222b0385f363a8502ff5d3508648d1",
+      "note": "Leído y grabado por un productor de la comunidad (sin nombre, con su autorización). El audio incluye repeticiones breves propias del habla.",
+      "translation": {
+        "method": "human_recording",
+        "reader": "Un productor de Obrajes, hablante de quechua (sin nombre, con autorización escrita)",
+        "text_author": "P6 (5 frases del boletín), leídas sin correcciones"
+      },
+      "voice": {
+        "provider": "Grabación humana (WhatsApp, 14-nov-2026)",
+        "name": "Productor de Obrajes (anónimo)",
+        "language": "que"
+      },
+      "license": {
+        "status": "licensed",
+        "url": "https://github.com/SkyWing3/nasa-field-shift/blob/main/content/nota_productor.md",
+        "notes": "Autorización escrita del productor (14-nov-2026 22:41): uso sin nombre y sin fines de lucro, con opción de retiro"
+      },
+      "speaker_review": {
+        "status": "approved",
+        "reviewer": "P5 (acta P5-2) y la líder",
+        "reviewed_at": "2026-11-15T02:21:16-04:00"
+      }
+    }
+  ],
+  "nota": "Decisión v3.2: español (MMS) + quechua del productor; sin aymara ni quechua sintético"
+}

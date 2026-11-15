@@ -4,7 +4,7 @@ import { findPreset, formatArea, formatDegrees } from '../geo';
 import { detectWebGLSupport } from '../scene';
 import { useAppStore, useSiteStore } from '../state';
 import { ErrorBoundary, ErrorState, LoadingIndicator, StartScreen } from '../ui';
-import { APP_VERSION, refreshApiHealth } from './services';
+import { APP_VERSION, appConfig, refreshApiHealth } from './services';
 import { useApiHealthMonitor } from './useApiHealthMonitor';
 import { WorkspaceScreen } from './WorkspaceScreen';
 
@@ -75,6 +75,9 @@ export function App() {
             name: saved.name,
             area: formatArea(saved.region.widthM * saved.region.lengthM),
             center: `${formatDegrees(saved.region.center.latitude, 4)}, ${formatDegrees(saved.region.center.longitude, 4)}`,
+            latitude: saved.region.center.latitude,
+            longitude: saved.region.center.longitude,
+            areaHa: (saved.region.widthM * saved.region.lengthM) / 10_000,
           },
     [saved],
   );
@@ -128,6 +131,7 @@ export function App() {
       onContinue={openFarm}
       onEnter={enterWorkspace}
       onRetryApi={retryApi}
+      comparatorUrl={appConfig.comparatorUrl}
     />
   );
 }

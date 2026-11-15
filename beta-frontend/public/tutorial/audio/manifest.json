@@ -1,0 +1,573 @@
+{
+ "archivos": {
+  "es": {
+   "bienvenida": {
+    "archivo": "es/bienvenida.mp3",
+    "texto": "Te damos la bienvenida a Raíz. Elige tu idioma. Con el botón del altavoz, la aplicación te lee los pasos en voz alta. Si quieres, te mostramos un tutorial corto.",
+    "texto_leido": "Te damos la bienvenida a Raíz. Elige tu idioma. Con el botón del altavoz, la aplicación te lee los pasos en voz alta. Si quieres, te mostramos un tutorial corto.",
+    "sha256_texto": "9216a0891456622be473385e850f0ba2ef0244e9f9e6544a88609168e3e2197e",
+    "duracion_s": 9.7,
+    "motor": "ElevenLabs",
+    "modelo": "eleven_multilingual_v2",
+    "voz": "EXAVITQu4vr4xnSDxMaL",
+    "estado": "requiere_revision_de_pares"
+   },
+   "idioma": {
+    "archivo": "es/idioma.mp3",
+    "texto": "Cambia el idioma. Elige en qué idioma quieres leer la aplicación. Por ejemplo: Elige Runasimi para leer en quechua.",
+    "texto_leido": "Cambia el idioma. Elige en qué idioma quieres leer la aplicación. Por ejemplo: Elige Runasimi para leer en quechua.",
+    "sha256_texto": "913201acfed0af797ddeac0cf8861de5795e4f8fe63d04e98c11fe2fe488dc0a",
+    "duracion_s": 8.4,
+    "motor": "ElevenLabs",
+    "modelo": "eleven_multilingual_v2",
+    "voz": "EXAVITQu4vr4xnSDxMaL",
+    "estado": "requiere_revision_de_pares"
+   },
+   "alarmas": {
+    "archivo": "es/alarmas.mp3",
+    "texto": "Señales de esta semana. Avisos con datos de la NASA y la NOAA sobre lluvia, heladas y El Niño. Puedes leerlos o escucharlos. Por ejemplo: Si dice que El Niño fuerte está en curso, planifica el agua de riego con tu técnico.",
+    "texto_leido": "Señales de esta semana. Avisos con datos de la NASA y la NOAA sobre lluvia, heladas y El Niño. Puedes leerlos o escucharlos. Por ejemplo: Si dice que El Niño fuerte está en curso, planifica el agua de riego con tu técnico.",
+    "sha256_texto": "b87ff21959a36c0a36b5e1e2c3ee1972258a2eb3a750a046b7c4118e0060884e",
+    "duracion_s": 15.2,
+    "motor": "ElevenLabs",
+    "modelo": "eleven_multilingual_v2",
+    "voz": "EXAVITQu4vr4xnSDxMaL",
+    "estado": "requiere_revision_de_pares"
+   },
+   "escenario": {
+    "archivo": "es/escenario.mp3",
+    "texto": "Elige tu escenario. Elige qué años quieres mirar y qué tipo de año: normal, El Niño o La Niña. Por ejemplo: Elige El Niño para ver cómo les fue a las rotaciones en años de El Niño.",
+    "texto_leido": "Elige tu escenario. Elige qué años quieres mirar y qué tipo de año: normal, El Niño o La Niña. Por ejemplo: Elige El Niño para ver cómo les fue a las rotaciones en años de El Niño.",
+    "sha256_texto": "2e4b03f09e8ba4208d017de0d92b9d059a283628eb7dde053f4dc6e57e593fd0",
+    "duracion_s": 13.9,
+    "motor": "ElevenLabs",
+    "modelo": "eleven_multilingual_v2",
+    "voz": "EXAVITQu4vr4xnSDxMaL",
+    "estado": "requiere_revision_de_pares"
+   },
+   "casos": {
+    "archivo": "es/casos.mp3",
+    "texto": "Compara las rotaciones. Cada tarjeta es una forma de rotar tu parcela durante tres años, con el agua que necesitó y los días de helada. Por ejemplo: A-1 es papa, luego quinua, luego descanso. Pulsa Ver detalles para ver más.",
+    "texto_leido": "Compara las rotaciones. Cada tarjeta es una forma de rotar tu parcela durante tres años, con el agua que necesitó y los días de helada. Por ejemplo: A-1 es papa, luego quinua, luego descanso. Pulsa Ver detalles para ver más.",
+    "sha256_texto": "a2f1e256c7a54b30b6b3c11c0ba68b1e1b3f9a2a5246c4198db282d8a9b5c548",
+    "duracion_s": 18.3,
+    "motor": "ElevenLabs",
+    "modelo": "eleven_multilingual_v2",
+    "voz": "EXAVITQu4vr4xnSDxMaL",
+    "estado": "requiere_revision_de_pares"
+   },
+   "secciones": {
+    "archivo": "es/secciones.mp3",
+    "texto": "Clima, suelo y ficha. En estas pestañas ves el clima de antes y de ahora, el suelo y la ficha para imprimir o escuchar. Por ejemplo: En Ficha y audio puedes imprimir el resultado y llevarlo a tu técnico.",
+    "texto_leido": "Clima, suelo y ficha. En estas pestañas ves el clima de antes y de ahora, el suelo y la ficha para imprimir o escuchar. Por ejemplo: En Ficha y audio puedes imprimir el resultado y llevarlo a tu técnico.",
+    "sha256_texto": "d1cced63ab0575d8faff4deb426e66a29a0a1e50b3ea6a514e02cda26e5ac603",
+    "duracion_s": 15.4,
+    "motor": "ElevenLabs",
+    "modelo": "eleven_multilingual_v2",
+    "voz": "EXAVITQu4vr4xnSDxMaL",
+    "estado": "requiere_revision_de_pares"
+   },
+   "simulacion": {
+    "archivo": "es/simulacion.mp3",
+    "texto": "Simulación 3D. Abre el laboratorio 3D para preparar una parcela y probar rotaciones. Por ejemplo: Busca Oruro en el mapa y mira tu parcela en 3D.",
+    "texto_leido": "Simulación 3D. Abre el laboratorio 3D para preparar una parcela y probar rotaciones. Por ejemplo: Busca Oruro en el mapa y mira tu parcela en 3D.",
+    "sha256_texto": "50e2e0d23e3e9e9dda7e013f745856c09a83d160dbb11c6f55cecdb9115f4b3a",
+    "duracion_s": 11.6,
+    "motor": "ElevenLabs",
+    "modelo": "eleven_multilingual_v2",
+    "voz": "EXAVITQu4vr4xnSDxMaL",
+    "estado": "requiere_revision_de_pares"
+   },
+   "ubicacion": {
+    "archivo": "es/ubicacion.mp3",
+    "texto": "Elige dónde está tu chacra. Busca tu comunidad en el mapa del mundo o marca tu parcela. Por ejemplo: Escribe Soracachi y marca el lugar de tu parcela.",
+    "texto_leido": "Elige dónde está tu chacra. Busca tu comunidad en el mapa del mundo o marca tu parcela. Por ejemplo: Escribe Soracachi y marca el lugar de tu parcela.",
+    "sha256_texto": "24633a5478e356bc752ae4e502516e23491e58fed6880318dfdc622dd22366f9",
+    "duracion_s": 11.3,
+    "motor": "ElevenLabs",
+    "modelo": "eleven_multilingual_v2",
+    "voz": "EXAVITQu4vr4xnSDxMaL",
+    "estado": "requiere_revision_de_pares"
+   },
+   "laboratorio": {
+    "archivo": "es/laboratorio.mp3",
+    "texto": "Abre el laboratorio. Entra a la escena 3D para preparar el suelo, sembrar y regar. Por ejemplo: Prueba sembrar papa y mira cómo cambia la parcela.",
+    "texto_leido": "Abre el laboratorio. Entra a la escena 3D para preparar el suelo, sembrar y regar. Por ejemplo: Prueba sembrar papa y mira cómo cambia la parcela.",
+    "sha256_texto": "30e9a762993342a9e6b1bf2df671ebe24571eed0624ede9eb4a7807d4de85011",
+    "duracion_s": 10.7,
+    "motor": "ElevenLabs",
+    "modelo": "eleven_multilingual_v2",
+    "voz": "EXAVITQu4vr4xnSDxMaL",
+    "estado": "requiere_revision_de_pares"
+   },
+   "comparar": {
+    "archivo": "es/comparar.mp3",
+    "texto": "Compara rotaciones. Abre Raíz con 45 años de datos de la NASA ya calculados. No necesita 3D. Por ejemplo: Compara papa, quinua y descanso en años de El Niño.",
+    "texto_leido": "Compara rotaciones. Abre Raíz con 45 años de datos de la NASA ya calculados. No necesita 3D. Por ejemplo: Compara papa, quinua y descanso en años de El Niño.",
+    "sha256_texto": "a6a04f64d2ec0e6ba5f28d567271787d23099642ad67461d244eef003fa017d2",
+    "duracion_s": 12.2,
+    "motor": "ElevenLabs",
+    "modelo": "eleven_multilingual_v2",
+    "voz": "EXAVITQu4vr4xnSDxMaL",
+    "estado": "requiere_revision_de_pares"
+   },
+   "estado": {
+    "archivo": "es/estado.mp3",
+    "texto": "Estado del sistema. Muestra si el mapa 3D y el servidor funcionan. Por ejemplo: Si dice Sin conexión, la búsqueda por nombre no funciona, pero puedes usar el mapa.",
+    "texto_leido": "Estado del sistema. Muestra si el mapa 3D y el servidor funcionan. Por ejemplo: Si dice Sin conexión, la búsqueda por nombre no funciona, pero puedes usar el mapa.",
+    "sha256_texto": "0f60f47381f963d129022deb031103967fbc4cfdf6362aa4b1b52ff8e96c8710",
+    "duracion_s": 12.2,
+    "motor": "ElevenLabs",
+    "modelo": "eleven_multilingual_v2",
+    "voz": "EXAVITQu4vr4xnSDxMaL",
+    "estado": "requiere_revision_de_pares"
+   }
+  },
+  "qu": {
+   "bienvenida": {
+    "archivo": "qu/bienvenida.mp3",
+    "texto": "Raízman allinlla hamuy. Simiykita akllay. Altavoz botónwan, aplicaciónqa kunkawan ñawinchasunki. Munaspaqa, huk tutorialta rikuchisqayki.",
+    "texto_leido": "Raízman allinlla hamuy. Simiykita akllay. Altavoz botónwan, aplicaciónqa kunkawan ñawinchasunki. Munaspaqa, huk tutorialta rikuchisqayki.",
+    "sha256_texto": "ae4454609aaf86b3684e14ad545dbcf777e1835ad617f6ea147ce60989b74bb3",
+    "duracion_s": 14.8,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "idioma": {
+    "archivo": "qu/idioma.mp3",
+    "texto": "Simita tikray. Ima simipi aplicaciónta ñawinchayta munasqaykita akllay. Kay hina: Runasimita akllay, runasimipi ñawinchanaykipaq.",
+    "texto_leido": "Simita tikray. Ima simipi aplicaciónta ñawinchayta munasqaykita akllay. Kay hina: Runasimita akllay, runasimipi ñawinchanaykipaq.",
+    "sha256_texto": "b2dea761fc01b82be1b383f6fdf8e98e29630a84e13e6fa3d1351d6baa93f10a",
+    "duracion_s": 13.4,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "alarmas": {
+    "archivo": "qu/alarmas.mp3",
+    "texto": "Kay semanapi willakuykuna. NASA, NOAA willakuykunawan para, qasa, El Niñomanta willakuykuna. Ñawinchayta utaq uyariyta atinki. Kay hina: Sinchi Niño kachkan nispaqa, técnicoykiwan qarpana yakuta yuyaykuy.",
+    "texto_leido": "Kay semanapi willakuykuna. nasa, noa willakuykunawan para, qasa, El Niñomanta willakuykuna. Ñawinchayta utaq uyariyta atinki. Kay hina: Sinchi Niño kachkan nispaqa, técnicoykiwan qarpana yakuta yuyaykuy.",
+    "sha256_texto": "14560081724f469c7b988cb6c308975e1bfcae97cc3ed10f19dcf8a5cd7e9269",
+    "duracion_s": 19.0,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "escenario": {
+    "archivo": "qu/escenario.mp3",
+    "texto": "Akllanaykita akllay. Ima watakunata qhawayta munasqaykita akllay: normal, El Niño utaq La Niña. Kay hina: El Niñota akllay, El Niño watakunapi tarpuy muyuykuna imayna rirqa chayta qhawanaykipaq.",
+    "texto_leido": "Akllanaykita akllay. Ima watakunata qhawayta munasqaykita akllay: normal, El Niño utaq La Niña. Kay hina: El Niñota akllay, El Niño watakunapi tarpuy muyuykuna imayna rirqa chayta qhawanaykipaq.",
+    "sha256_texto": "3c2a78e09f4ea04ba60e9f1d6a7315e2d83931d5f2c571b7b74777f5ac160b25",
+    "duracion_s": 17.5,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "casos": {
+    "archivo": "qu/casos.mp3",
+    "texto": "Tarpuy muyuykunata tupachiy. Sapa tarjetaqa kimsa watapi chakraykita muyuchinapaq huk ñanmi, munasqan yakuwan, qasa p'unchawkunawan. Kay hina: A-1 nisqaqa papa, chaymanta kinuwa, chaymanta samay. Aswanta qhaway nisqata ñit'iy.",
+    "texto_leido": "Tarpuy muyuykunata tupachiy. Sapa tarjetaqa kimsa watapi chakraykita muyuchinapaq huk ñanmi, munasqan yakuwan, qasa p'unchawkunawan. Kay hina: A uno nisqaqa papa, chaymanta kinuwa, chaymanta samay. Aswanta qhaway nisqata ñit'iy.",
+    "sha256_texto": "19bc2345e1ca7484237d459a537c07fab2fc0e6a5e6649bee12af08cdf64d36d",
+    "duracion_s": 21.7,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "secciones": {
+    "archivo": "qu/secciones.mp3",
+    "texto": "Pacha, allpa, qillqa. Kay pestañakunapi ñawpaq kunan pachata, allpata, imprimínapaq uyarinapaq qillqatapas rikunki. Kay hina: Qillqa, uyarina nisqapi tukuyta imprimiyta, técnicoykiman apaytapas atinki.",
+    "texto_leido": "Pacha, allpa, qillqa. Kay pestañakunapi ñawpaq kunan pachata, allpata, imprimínapaq uyarinapaq qillqatapas rikunki. Kay hina: Qillqa, uyarina nisqapi tukuyta imprimiyta, técnicoykiman apaytapas atinki.",
+    "sha256_texto": "492079bd6689db043afb146858a01eb6e708ce0e8533294e39a6938af436666b",
+    "duracion_s": 17.2,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "simulacion": {
+    "archivo": "qu/simulacion.mp3",
+    "texto": "3D chakra. 3D yachana wasita kichay, huk chakrata wakichinaykipaq, tarpuy muyuykunata pruebanaykipaq. Kay hina: Mapapi Orurota maskay, chakraykita 3Dpi qhaway.",
+    "texto_leido": "tres de chakra. tres de yachana wasita kichay, huk chakrata wakichinaykipaq, tarpuy muyuykunata pruebanaykipaq. Kay hina: Mapapi Orurota maskay, chakraykita tres depi qhaway.",
+    "sha256_texto": "ad84a6ace38bf8b124ac2a5f08a465f6ee1a7d2fc2d966f1ea65de278a72b8ed",
+    "duracion_s": 15.7,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "ubicacion": {
+    "archivo": "qu/ubicacion.mp3",
+    "texto": "Chakraykipa maypi kasqanta akllay. Ayllaykita pacha mapapi maskay, utaq chakraykita unanchay. Kay hina: Soracachi nispa qillqay, chakraykipa kasqanta unanchay.",
+    "texto_leido": "Chakraykipa maypi kasqanta akllay. Ayllaykita pacha mapapi maskay, utaq chakraykita unanchay. Kay hina: Soracachi nispa qillqay, chakraykipa kasqanta unanchay.",
+    "sha256_texto": "c6fc458e6b54b427e6c5280c00e05f7b521faf0e8eafa4cb93dda6d07261ebd3",
+    "duracion_s": 16.7,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "laboratorio": {
+    "archivo": "qu/laboratorio.mp3",
+    "texto": "Yachana wasita kichay. 3D rikuchiyman yaykuy, allpata wakichinaykipaq, tarpunaykipaq, qarpanaykipaq. Kay hina: Papata tarpuyta pruebay, chakra imayna tikrakusqanta qhaway.",
+    "texto_leido": "Yachana wasita kichay. tres de rikuchiyman yaykuy, allpata wakichinaykipaq, tarpunaykipaq, qarpanaykipaq. Kay hina: Papata tarpuyta pruebay, chakra imayna tikrakusqanta qhaway.",
+    "sha256_texto": "79922adba0e26d4bb975d98c533f669c9c8bac41d7915b7a3fa530979568d9a0",
+    "duracion_s": 16.6,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "comparar": {
+    "archivo": "qu/comparar.mp3",
+    "texto": "Tarpuy muyuykunata tupachiy. Raízta kichay, NASA 45 wata willakuykunawan, ñam yupasqa. Mana 3D necesitanchu. Kay hina: El Niño watakunapi papata, kinuwata, samaytawan tupachiy.",
+    "texto_leido": "Tarpuy muyuykunata tupachiy. Raízta kichay, nasa cuarenta y cinco wata willakuykunawan, ñam yupasqa. Mana tres de necesitanchu. Kay hina: El Niño watakunapi papata, kinuwata, samaytawan tupachiy.",
+    "sha256_texto": "781773ab6312e96f83784d12e3504129ac3035c5df18d6336e08c5001a7aed33",
+    "duracion_s": 18.8,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "estado": {
+    "archivo": "qu/estado.mp3",
+    "texto": "Sistemapa kaynin. 3D mapa, servidorpas llamk'achkanchu chayta rikuchin. Kay hina: Sin conexión nispaqa, sutiwan maskayqa mana llamk'anchu, mapata ichaqa llamk'achiyta atinki.",
+    "texto_leido": "Sistemapa kaynin. tres de mapa, servidorpas llamk'achkanchu chayta rikuchin. Kay hina: Sin conexión nispaqa, sutiwan maskayqa mana llamk'anchu, mapata ichaqa llamk'achiyta atinki.",
+    "sha256_texto": "37bddbc79b2269316e573cacc846c6b80ab5529c814d0983c2db873e8ebabb0a",
+    "duracion_s": 18.3,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   }
+  },
+  "ay": {
+   "bienvenida": {
+    "archivo": "ay/bienvenida.mp3",
+    "texto": "Raíz ukar aski jutawi. Arum ajllim. Altavoz botónampix, aplicaciónax kunkampiw liyt'arapxätam. Munstaxa, mä jisk'a tutorial uñacht'ayapxsma.",
+    "texto_leido": "Raíz ukar aski jutawi. Arum ajllim. Altavoz botónampix, aplicaciónax kunkampiw liyt'arapxätam. Munstaxa, mä jisk'a tutorial uñacht'ayapxsma.",
+    "sha256_texto": "9754f90da3a18377aa62b2bd2a0761625c588d44e7aa25b40bf380613f0bc0dd",
+    "duracion_s": 13.6,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "idioma": {
+    "archivo": "ay/idioma.mp3",
+    "texto": "Aru mayjt'ayma. Kuna arunsa aplicación liyiñ munta, uk ajllim. Akham: Aymar aru ajllim, aymar arun liyiñataki.",
+    "texto_leido": "Aru mayjt'ayma. Kuna arunsa aplicación liyiñ munta, uk ajllim. Akham: Aymar aru ajllim, aymar arun liyiñataki.",
+    "sha256_texto": "63b6bfe3b4b27006fe5f1f7abe57b85c53c47ecbf156e4169e29c0f01100b308",
+    "duracion_s": 11.1,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "alarmas": {
+    "archivo": "ay/alarmas.mp3",
+    "texto": "Aka semanan yatiyawinaka. NASA, NOAA yatiyawinakampi jallu, juyphi, El Niño tuqit yatiyawinaka. Liyiñaw jan ukax ist'añaw puedisma. Akham: Ch'amani Niño utji sistixa, técnicomampi qarpañ uma amuyt'asim.",
+    "texto_leido": "Aka semanan yatiyawinaka. nasa, noa yatiyawinakampi jallu, juyphi, El Niño tuqit yatiyawinaka. Liyiñaw jan ukax ist'añaw puedisma. Akham: Ch'amani Niño utji sistixa, técnicomampi qarpañ uma amuyt'asim.",
+    "sha256_texto": "3eff974bf7eeceb9c6bf0586e6c0f9e19e69b068f5571214e7f76be4040fac4c",
+    "duracion_s": 19.4,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "escenario": {
+    "archivo": "ay/escenario.mp3",
+    "texto": "Ajllitam ajllim. Kuna maranaksa uñjañ munta uk ajllim: normal, El Niño jan ukax La Niña. Akham: El Niño ajllim, El Niño maranakan yapu muyunakax kunjams sarnaqäna uk uñjañataki.",
+    "texto_leido": "Ajllitam ajllim. Kuna maranaksa uñjañ munta uk ajllim: normal, El Niño jan ukax La Niña. Akham: El Niño ajllim, El Niño maranakan yapu muyunakax kunjams sarnaqäna uk uñjañataki.",
+    "sha256_texto": "c900b042533b13d7b3347c1bc4f0bbdd17bfd1b382373662c296d52dc03e885d",
+    "duracion_s": 15.4,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "casos": {
+    "archivo": "ay/casos.mp3",
+    "texto": "Yapu muyunak chikachma. Sapa tarjetax kimsa maran yapum muyuyañatak mä thakhiwa, munat umampi, juyphi urunakampi. Akham: A-1 ukax ch'uqi, ukat jupha, ukat samaña. Juk'amp uñjaña ch'iqt'am.",
+    "texto_leido": "Yapu muyunak chikachma. Sapa tarjetax kimsa maran yapum muyuyañatak mä thakhiwa, munat umampi, juyphi urunakampi. Akham: A uno ukax ch'uqi, ukat jupha, ukat samaña. Juk'amp uñjaña ch'iqt'am.",
+    "sha256_texto": "00140322e9df87c262979429569d8d148936c0551e5d111f72b35ac088d39227",
+    "duracion_s": 17.6,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "secciones": {
+    "archivo": "ay/secciones.mp3",
+    "texto": "Pacha, uraqi, qillqata. Aka pestañanakan nayra jichha pacha, uraqi, imprimiñatak ist'añatak qillqatsa uñjta. Akham: Qillqata, ist'aña ukan tukuy imprimiñaw, técnicomar apañaw puedisma.",
+    "texto_leido": "Pacha, uraqi, qillqata. Aka pestañanakan nayra jichha pacha, uraqi, imprimiñatak ist'añatak qillqatsa uñjta. Akham: Qillqata, ist'aña ukan tukuy imprimiñaw, técnicomar apañaw puedisma.",
+    "sha256_texto": "3b95062bb6a700f69546c37b392afb504a267d7335411575829e76801be082cb",
+    "duracion_s": 16.3,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "simulacion": {
+    "archivo": "ay/simulacion.mp3",
+    "texto": "3D yapu. 3D yatxatañ uta jist'aram, mä yapu wakichañataki, yapu muyunak yant'añataki. Akham: Mapan Oruro thaqhma, yapum 3Dn uñjma.",
+    "texto_leido": "tres de yapu. tres de yatxatañ uta jist'aram, mä yapu wakichañataki, yapu muyunak yant'añataki. Akham: Mapan Oruro thaqhma, yapum tres den uñjma.",
+    "sha256_texto": "e44fbaa8e4aec0b72b5e1c3efb4e04d99d9645ae57749339dae3be2742e55889",
+    "duracion_s": 12.9,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "ubicacion": {
+    "archivo": "ay/ubicacion.mp3",
+    "texto": "Yapuman kawkinkis ajllim. Ayllum uraqpacha mapan thaqhma, jan ukax yapum chimpuntam. Akham: Soracachi qillqt'am, yapuman kawkinkis chimpuntam.",
+    "texto_leido": "Yapuman kawkinkis ajllim. Ayllum uraqpacha mapan thaqhma, jan ukax yapum chimpuntam. Akham: Soracachi qillqt'am, yapuman kawkinkis chimpuntam.",
+    "sha256_texto": "27951722d42c316e1afba735649fc27e16d2eb54f14ccf67e50e3f81e8c8ccd4",
+    "duracion_s": 12.0,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "laboratorio": {
+    "archivo": "ay/laboratorio.mp3",
+    "texto": "Yatxatañ uta jist'aram. 3D uñacht'äwir mantam, uraqi wakichañataki, yapuchañataki, qarpañataki. Akham: Ch'uqi yapuchañ yant'am, yapux kunjams mayjt'i uk uñjma.",
+    "texto_leido": "Yatxatañ uta jist'aram. tres de uñacht'äwir mantam, uraqi wakichañataki, yapuchañataki, qarpañataki. Akham: Ch'uqi yapuchañ yant'am, yapux kunjams mayjt'i uk uñjma.",
+    "sha256_texto": "3ba8af6ba57ad0b826216454317be4847ef70da0a0e7b61a0a98f9380e1a76d2",
+    "duracion_s": 15.4,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "comparar": {
+    "archivo": "ay/comparar.mp3",
+    "texto": "Yapu muyunak chikachma. Raíz jist'aram, NASA 45 mara yatiyawinakampi, niya jakhutawa. Janiw 3D munkiti. Akham: El Niño maranakan ch'uqi, jupha, samaña chikachma.",
+    "texto_leido": "Yapu muyunak chikachma. Raíz jist'aram, nasa cuarenta y cinco mara yatiyawinakampi, niya jakhutawa. Janiw tres de munkiti. Akham: El Niño maranakan ch'uqi, jupha, samaña chikachma.",
+    "sha256_texto": "f6fffd183cff890a1cbaa2d5e3903dedb582109af7757c1ae935de87c49fcb53",
+    "duracion_s": 18.5,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "estado": {
+    "archivo": "ay/estado.mp3",
+    "texto": "Sistema kunjamaski. 3D mapa, servidorasa irnaqaskiti uk uñacht'ayi. Akham: Sin conexión sistixa, sutimp thaqhañax janiw irnaqkiti, ukampis mapa apnaqañaw puedisma.",
+    "texto_leido": "Sistema kunjamaski. tres de mapa, servidorasa irnaqaskiti uk uñacht'ayi. Akham: Sin conexión sistixa, sutimp thaqhañax janiw irnaqkiti, ukampis mapa apnaqañaw puedisma.",
+    "sha256_texto": "5632cd09edb7739343de89587b6c1b4080b998fed336f2ce2c5710845c70b799",
+    "duracion_s": 15.8,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   }
+  },
+  "gn": {
+   "bienvenida": {
+    "archivo": "gn/bienvenida.mp3",
+    "texto": "Eg̃uahẽporãite Raíz-pe. Eiporavo ne ñe'ẽ. Altavoz botón ndive, aplicación omoñe'ẽta ndéve hatãme. Reipotáramo, rohechaukáta peteĩ tutorial mbykymi.",
+    "texto_leido": "Eg̃uahẽporãite Raíz pe. Eiporavo ne ñe'ẽ. Altavoz botón ndive, aplicación omoñe'ẽta ndéve hatãme. Reipotáramo, rohechaukáta peteĩ tutorial mbykymi.",
+    "sha256_texto": "9c8bc9dca0fc9d484bc9cf93b4b8c6d13955deb88ddd95c022ce981e6755e20a",
+    "duracion_s": 13.3,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "idioma": {
+    "archivo": "gn/idioma.mp3",
+    "texto": "Emoambue ñe'ẽ. Eiporavo mba'e ñe'ẽme remoñe'ẽse aplicación. Techapyrãrõ: Eiporavo Avañe'ẽ remoñe'ẽ hag̃ua guaraníme.",
+    "texto_leido": "Emoambue ñe'ẽ. Eiporavo mba'e ñe'ẽme remoñe'ẽse aplicación. Techapyrãrõ: Eiporavo Avañe'ẽ remoñe'ẽ hag̃ua guaraníme.",
+    "sha256_texto": "6f54f52fed53d0e531630bcbfa51876a4d63d18e6355cb6c3a3c096dc61b9934",
+    "duracion_s": 11.9,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "alarmas": {
+    "archivo": "gn/alarmas.mp3",
+    "texto": "Ko semana marandu. Marandu NASA ha NOAA mba'ekuaa reheve ama, ro'y ha El Niño rehegua. Ikatu remoñe'ẽ térã rehendu. Techapyrãrõ: He'írõ El Niño mbarete oikoha, eñembosako'i y ñemboyrã ne técnico ndive.",
+    "texto_leido": "Ko semana marandu. Marandu nasa ha noa mba'ekuaa reheve ama, ro'y ha El Niño rehegua. Ikatu remoñe'ẽ térã rehendu. Techapyrãrõ: He'írõ El Niño mbarete oikoha, eñembosako'i y ñemboyrã ne técnico ndive.",
+    "sha256_texto": "3d3bccbe84e7ec8fe810cc67d6337817247d1e9cb95ec54f2c3cac3a77e36126",
+    "duracion_s": 18.3,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "escenario": {
+    "archivo": "gn/escenario.mp3",
+    "texto": "Eiporavo nde rembiaporã. Eiporavo mba'e arypa rehechase: jepivegua, El Niño térã La Niña. Techapyrãrõ: Eiporavo El Niño rehecha hag̃ua mba'éichapa oho ñemitỹ jere El Niño arýpe.",
+    "texto_leido": "Eiporavo nde rembiaporã. Eiporavo mba'e arypa rehechase: jepivegua, El Niño térã La Niña. Techapyrãrõ: Eiporavo El Niño rehecha hag̃ua mba'éichapa oho ñemitỹ jere El Niño arýpe.",
+    "sha256_texto": "005c4c24c65b7ede2f13437f4cdba44e6a7f059f14149199f4cb6d6b2d0d77ed",
+    "duracion_s": 15.2,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "casos": {
+    "archivo": "gn/casos.mp3",
+    "texto": "Embojoja ñemitỹ jere. Peteĩteĩ tarjeta ha'e peteĩ tape remitỹ jere hag̃ua nekokue mbohapy ary, y oikotevẽva'ekue ha ára ro'ýva ndive. Techapyrãrõ: A-1 ha'e papa, upéi kinúa, upéi pytu'u. Ejopy Ehechave.",
+    "texto_leido": "Embojoja ñemitỹ jere. Peteĩteĩ tarjeta ha'e peteĩ tape remitỹ jere hag̃ua nekokue mbohapy ary, y oikotevẽva'ekue ha ára ro'ýva ndive. Techapyrãrõ: A uno ha'e papa, upéi kinúa, upéi pytu'u. Ejopy Ehechave.",
+    "sha256_texto": "8bca96c2dc133ce45d7ca3b3be7511118f312e8cd90ae203fa09aea002e5c068",
+    "duracion_s": 20.2,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "secciones": {
+    "archivo": "gn/secciones.mp3",
+    "texto": "Ára, yvy ha kuatia. Ko pestaña-kuérape rehecha ára yma ha ko'ág̃agua, yvy ha kuatia remboheta térã rehendu hag̃ua. Techapyrãrõ: Kuatia ha ñe'ẽ-pe ikatu remboheta tembiapo ha regueraha ne técnico-pe.",
+    "texto_leido": "Ára, yvy ha kuatia. Ko pestaña kuérape rehecha ára yma ha ko'ág̃agua, yvy ha kuatia remboheta térã rehendu hag̃ua. Techapyrãrõ: Kuatia ha ñe'ẽ pe ikatu remboheta tembiapo ha regueraha ne técnico pe.",
+    "sha256_texto": "5adf37b2730d35339139fba0a5ec1ae0b52f440451ac5b4efee85c59792dcdc5",
+    "duracion_s": 15.2,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "simulacion": {
+    "archivo": "gn/simulacion.mp3",
+    "texto": "Simulación 3D. Eipe'a ñemoha'ãnga renda 3D embosako'i hag̃ua peteĩ kokue ha eha'ã hag̃ua ñemitỹ jere. Techapyrãrõ: Eheka Oruro mapape ha ehecha nekokue 3D-pe.",
+    "texto_leido": "Simulación tres de. Eipe'a ñemoha'ãnga renda tres de embosako'i hag̃ua peteĩ kokue ha eha'ã hag̃ua ñemitỹ jere. Techapyrãrõ: Eheka Oruro mapape ha ehecha nekokue tres de pe.",
+    "sha256_texto": "4c24f641a775f5a5fa698d3e32316d2b63394763489d71ffddcb1bca2f13df5f",
+    "duracion_s": 15.5,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "ubicacion": {
+    "archivo": "gn/ubicacion.mp3",
+    "texto": "Eiporavo moõpa oĩ nekokue. Eheka ne táva yvy mapape térã ehechauka nekokue. Techapyrãrõ: Ehai Soracachi ha ehechauka moõpa oĩ nekokue.",
+    "texto_leido": "Eiporavo moõpa oĩ nekokue. Eheka ne táva yvy mapape térã ehechauka nekokue. Techapyrãrõ: Ehai Soracachi ha ehechauka moõpa oĩ nekokue.",
+    "sha256_texto": "7565ed8bc1f4a674a01d72253a0042c97a6bbcaf2d8c4546889526d7b536ba4f",
+    "duracion_s": 12.9,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "laboratorio": {
+    "archivo": "gn/laboratorio.mp3",
+    "texto": "Eipe'a ñemoha'ãnga renda. Eike 3D-pe embosako'i hag̃ua yvy, emitỹ ha emboy hag̃ua. Techapyrãrõ: Eha'ã emitỹ papa ha ehecha mba'éichapa oñemoambue nekokue.",
+    "texto_leido": "Eipe'a ñemoha'ãnga renda. Eike tres de pe embosako'i hag̃ua yvy, emitỹ ha emboy hag̃ua. Techapyrãrõ: Eha'ã emitỹ papa ha ehecha mba'éichapa oñemoambue nekokue.",
+    "sha256_texto": "ab21bce74ebb0d924685da88a4e871d890f649af3b56b22107bbec3e474a86a3",
+    "duracion_s": 14.0,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "comparar": {
+    "archivo": "gn/comparar.mp3",
+    "texto": "Embojoja ñemitỹ jere. Eipe'a Raíz NASA 45 ary mba'ekuaa ndive, oñembohasáma. Noikotevẽi 3D. Techapyrãrõ: Embojoja papa, kinúa ha pytu'u El Niño arýpe.",
+    "texto_leido": "Embojoja ñemitỹ jere. Eipe'a Raíz nasa cuarenta y cinco ary mba'ekuaa ndive, oñembohasáma. Noikotevẽi tres de. Techapyrãrõ: Embojoja papa, kinúa ha pytu'u El Niño arýpe.",
+    "sha256_texto": "d3862e8e6792c3a1d4eb8dc723f007176b0177d931afcee21e9271f96aed1b7e",
+    "duracion_s": 17.4,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   },
+   "estado": {
+    "archivo": "gn/estado.mp3",
+    "texto": "Sistema reko. Ohechauka mapa 3D ha servidor omba'apópa. Techapyrãrõ: He'írõ Sin conexión, jeheka térape ndoikói, ha katu ikatu reipuru mapa.",
+    "texto_leido": "Sistema reko. Ohechauka mapa tres de ha servidor omba'apópa. Techapyrãrõ: He'írõ Sin conexión, jeheka térape ndoikói, ha katu ikatu reipuru mapa.",
+    "sha256_texto": "2efafc1412116c720dc1ddded2e957130a1ea8417e2684f713269d02c18d7278",
+    "duracion_s": 13.3,
+    "caracteres_omitidos": [],
+    "motor": "Meta MMS"
+   }
+  },
+  "en": {
+   "bienvenida": {
+    "archivo": "en/bienvenida.mp3",
+    "texto": "Welcome to Raíz. Choose your language. With the speaker button, the app reads the steps aloud. If you like, we'll show you a short tutorial.",
+    "texto_leido": "Welcome to Raíz. Choose your language. With the speaker button, the app reads the steps aloud. If you like, we'll show you a short tutorial.",
+    "sha256_texto": "7c74348b370d70eff388df4b3bc87f1ddc25d9945eb3a5a52b2837c60e313019",
+    "duracion_s": 10.0,
+    "motor": "ElevenLabs",
+    "modelo": "eleven_multilingual_v2",
+    "voz": "21m00Tcm4TlvDq8ikWAM",
+    "estado": "requiere_revision_de_pares"
+   },
+   "idioma": {
+    "archivo": "en/idioma.mp3",
+    "texto": "Change the language. Choose the language you want to read the app in. For example: Choose English to read in English.",
+    "texto_leido": "Change the language. Choose the language you want to read the app in. For example: Choose English to read in English.",
+    "sha256_texto": "0faad34daed0e6143a2028be08fd94a1ac9d74386a06f1bb732c7f0cac51e79b",
+    "duracion_s": 7.5,
+    "motor": "ElevenLabs",
+    "modelo": "eleven_multilingual_v2",
+    "voz": "21m00Tcm4TlvDq8ikWAM",
+    "estado": "requiere_revision_de_pares"
+   },
+   "alarmas": {
+    "archivo": "en/alarmas.mp3",
+    "texto": "This week's signals. Alerts with NASA and NOAA data on rain, frost and El Niño. You can read them or listen to them. For example: If it says a strong El Niño is under way, plan your irrigation water with your technician.",
+    "texto_leido": "This week's signals. Alerts with NASA and NOAA data on rain, frost and El Niño. You can read them or listen to them. For example: If it says a strong El Niño is under way, plan your irrigation water with your technician.",
+    "sha256_texto": "bb4ae76580cd0468e8e5b1a4eda00f50455f10e4e5a42d54ffb2587bf742e400",
+    "duracion_s": 14.6,
+    "motor": "ElevenLabs",
+    "modelo": "eleven_multilingual_v2",
+    "voz": "21m00Tcm4TlvDq8ikWAM",
+    "estado": "requiere_revision_de_pares"
+   },
+   "escenario": {
+    "archivo": "en/escenario.mp3",
+    "texto": "Choose your scenario. Choose which years to look at and the type of year: normal, El Niño or La Niña. For example: Choose El Niño to see how the rotations did in El Niño years.",
+    "texto_leido": "Choose your scenario. Choose which years to look at and the type of year: normal, El Niño or La Niña. For example: Choose El Niño to see how the rotations did in El Niño years.",
+    "sha256_texto": "3416ad6161185cb2fe7212eb8aa8d3fe8dca96d5795e7a5218a9b85aed48c613",
+    "duracion_s": 13.2,
+    "motor": "ElevenLabs",
+    "modelo": "eleven_multilingual_v2",
+    "voz": "21m00Tcm4TlvDq8ikWAM",
+    "estado": "requiere_revision_de_pares"
+   },
+   "casos": {
+    "archivo": "en/casos.mp3",
+    "texto": "Compare the rotations. Each card is one way to rotate your plot over three years, with the water it needed and the frost days. For example: A-1 is potato, then quinoa, then fallow. Tap Show details to see more.",
+    "texto_leido": "Compare the rotations. Each card is one way to rotate your plot over three years, with the water it needed and the frost days. For example: A-1 is potato, then quinoa, then fallow. Tap Show details to see more.",
+    "sha256_texto": "4d72d30da55e4a7559fc8243d8aec7f3dbd51e72b00a15e1a520f95b0681b779",
+    "duracion_s": 16.3,
+    "motor": "ElevenLabs",
+    "modelo": "eleven_multilingual_v2",
+    "voz": "21m00Tcm4TlvDq8ikWAM",
+    "estado": "requiere_revision_de_pares"
+   },
+   "secciones": {
+    "archivo": "en/secciones.mp3",
+    "texto": "Climate, soil and sheet. In these tabs you see the climate before and now, the soil, and the sheet to print or listen to. For example: In Sheet and audio you can print the result and take it to your technician.",
+    "texto_leido": "Climate, soil and sheet. In these tabs you see the climate before and now, the soil, and the sheet to print or listen to. For example: In Sheet and audio you can print the result and take it to your technician.",
+    "sha256_texto": "d56f443d7119ec6034309c31b0b378d57397cad858cb7429f01f6117594cf506",
+    "duracion_s": 16.0,
+    "motor": "ElevenLabs",
+    "modelo": "eleven_multilingual_v2",
+    "voz": "21m00Tcm4TlvDq8ikWAM",
+    "estado": "requiere_revision_de_pares"
+   },
+   "simulacion": {
+    "archivo": "en/simulacion.mp3",
+    "texto": "3D simulation. Open the 3D lab to prepare a plot and try out rotations. For example: Find Oruro on the map and see your plot in 3D.",
+    "texto_leido": "3D simulation. Open the 3D lab to prepare a plot and try out rotations. For example: Find Oruro on the map and see your plot in 3D.",
+    "sha256_texto": "a90e29acc377317d74096e93f7fe074029f9d43f80c6a4d249b5160eb91aa7b7",
+    "duracion_s": 11.1,
+    "motor": "ElevenLabs",
+    "modelo": "eleven_multilingual_v2",
+    "voz": "21m00Tcm4TlvDq8ikWAM",
+    "estado": "requiere_revision_de_pares"
+   },
+   "ubicacion": {
+    "archivo": "en/ubicacion.mp3",
+    "texto": "Choose where your farm is. Find your community on the world map or mark your plot. For example: Type Soracachi and mark where your plot is.",
+    "texto_leido": "Choose where your farm is. Find your community on the world map or mark your plot. For example: Type Soracachi and mark where your plot is.",
+    "sha256_texto": "1042ff554c44b49aeaca37176a3f18849638ab90aef22b7aca0f2febc0870575",
+    "duracion_s": 12.6,
+    "motor": "ElevenLabs",
+    "modelo": "eleven_multilingual_v2",
+    "voz": "21m00Tcm4TlvDq8ikWAM",
+    "estado": "requiere_revision_de_pares"
+   },
+   "laboratorio": {
+    "archivo": "en/laboratorio.mp3",
+    "texto": "Open the lab. Enter the 3D scene to prepare the soil, sow and irrigate. For example: Try sowing potato and watch how the plot changes.",
+    "texto_leido": "Open the lab. Enter the 3D scene to prepare the soil, sow and irrigate. For example: Try sowing potato and watch how the plot changes.",
+    "sha256_texto": "6de95b73daabee17263ce5570ddd7b6fb340a52d8652cdb7fea8681997a24388",
+    "duracion_s": 9.2,
+    "motor": "ElevenLabs",
+    "modelo": "eleven_multilingual_v2",
+    "voz": "21m00Tcm4TlvDq8ikWAM",
+    "estado": "requiere_revision_de_pares"
+   },
+   "comparar": {
+    "archivo": "en/comparar.mp3",
+    "texto": "Compare rotations. Opens Raíz with 45 years of NASA data, already calculated. No 3D needed. For example: Compare potato, quinoa and fallow in El Niño years.",
+    "texto_leido": "Compare rotations. Opens Raíz with 45 years of NASA data, already calculated. No 3D needed. For example: Compare potato, quinoa and fallow in El Niño years.",
+    "sha256_texto": "c9ca677de01f11e3f555914168ab5903e417c39b013974a67de54d267a0f7393",
+    "duracion_s": 13.8,
+    "motor": "ElevenLabs",
+    "modelo": "eleven_multilingual_v2",
+    "voz": "21m00Tcm4TlvDq8ikWAM",
+    "estado": "requiere_revision_de_pares"
+   },
+   "estado": {
+    "archivo": "en/estado.mp3",
+    "texto": "System status. Shows whether the 3D map and the server are working. For example: If it says Offline, search by name won't work, but you can use the map.",
+    "texto_leido": "System status. Shows whether the 3D map and the server are working. For example: If it says Offline, search by name won't work, but you can use the map.",
+    "sha256_texto": "f6bed346d8cd6357cc8c922018cd8960756b7465e6707ffd1364ec1c3ccce617",
+    "duracion_s": 11.0,
+    "motor": "ElevenLabs",
+    "modelo": "eleven_multilingual_v2",
+    "voz": "21m00Tcm4TlvDq8ikWAM",
+    "estado": "requiere_revision_de_pares"
+   }
+  }
+ },
+ "schema": "raiz-tutorial-audio-v1",
+ "estado": "requiere_revision_de_pares",
+ "aviso": "Voz sintética Meta MMS (CC BY-NC 4.0). Textos en quechua, aymara y guaraní: traducción automática con IA. Requieren revisión de pares antes de difundir.",
+ "modelos": {
+  "es": "facebook/mms-tts-spa",
+  "qu": "facebook/mms-tts-quh",
+  "ay": "facebook/mms-tts-ayr",
+  "gn": "facebook/mms-tts-grn"
+ },
+ "semilla": 1234,
+ "generado": "2026-11-15T14:16:52+00:00",
+ "motores": {
+  "ElevenLabs": {
+   "modelo": "eleven_multilingual_v2",
+   "idiomas": [
+    "en",
+    "es"
+   ]
+  }
+ }
+}
